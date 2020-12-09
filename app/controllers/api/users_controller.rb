@@ -1,10 +1,19 @@
 class Api::UsersController < ApplicationController
+  before_action :require_current_user!, except: [:create]
+
   def index
     @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
+
+    # if @user.id !== current_user.id
+    #     render json: { errors: "You cannot view another user's information" }, status: 401
+    # else
+    #     render :show
+    # end
+
   end
 
   def create
