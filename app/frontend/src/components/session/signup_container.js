@@ -1,6 +1,4 @@
 import { connect } from 'react-redux'
-import { createNewUser } from '../../redux/actions/session'
-import { loginUser, logoutUser } from '../../util/session'
 import signupForm from './signup_form'
 import {
     createNewUser,
