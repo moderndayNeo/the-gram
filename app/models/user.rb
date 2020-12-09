@@ -1,19 +1,19 @@
 class User < ApplicationRecord
-  attr_reader :password
-
+  
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 254 }
   validates :bio, length: { maximum: 150 }
-  validates :password_digest, presence: true
-  validates :password, length: { minimum: 6, allow_nil: true, message: "Password must be at least 6 characters long" }
+  validates :password_digest, presence: { message: 'Password can\t be blank' }
+  validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
-
+  
   after_initialize :ensure_session_token
-
+  
   has_one_attached :photo
-
-
+  
+  attr_reader :password
+  
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return user if user && user.is_password?(password)
@@ -31,6 +31,7 @@ class User < ApplicationRecord
   end
 
   def password=(password)
+    @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 
