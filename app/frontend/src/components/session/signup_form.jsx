@@ -34,12 +34,12 @@ class SignupForm extends Component {
     render() {
         return (
             <div>
-
+                <h2>Sign Up</h2>
                 <form>
                     <input type="text" onChange={this.updateValue("username")} value={this.state.username} placeholder="username" />
                     <input type="password" onChange={this.updateValue("password")} value={this.state.password} placeholder="password" />
 
-                    <input type="submit" value="Sign In" onClick={this.handleSubmit} />
+                    <input type="submit" value="Sign Up" onClick={this.handleSubmit} />
                 </form>
             </div>
         );
