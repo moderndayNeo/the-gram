@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class SessionForm extends Component {
+class SignupForm extends Component {
     constructor(props) {
         super(props);
 
@@ -16,15 +17,15 @@ export default class SessionForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        // dispatch request to sign in user on the backend
-        // then attach current_user's ID to redux store
-        // then redirect
+        this.props.createNewUser(this.state)
+            .then(() => this.props.history.push('/'));
+
     }
 
     updateValue(type) {
         return e => (
             this.setState({
-                [type]: e.currentTarget.value
+                [type]: e.target.value
             })
         );
     }
@@ -44,3 +45,5 @@ export default class SessionForm extends Component {
         );
     }
 }
+
+export default withRouter(SignupForm);
