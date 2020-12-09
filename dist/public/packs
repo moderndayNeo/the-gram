@@ -619,7 +619,7 @@ var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 // CONCATENATED MODULE: ./app/frontend/src/root.jsx
 
 function Root() {
-  return /*#__PURE__*/react_default.a.createElement("div", null, "Root Component");
+  return /*#__PURE__*/react_default.a.createElement("div", null, "Hello Adam, the-gram is live!");
 }
 // CONCATENATED MODULE: ./app/frontend/packs/index.jsx
 

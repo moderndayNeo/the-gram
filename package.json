@@ -10,13 +10,23 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "axios": "^0.21.0",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5"
+  },
+  "engines": {
+    "node": "12.14.0",
+    "npm": "6.14.8"
   },
   "scripts": {
-    "dev": "foreman start -f Procfile.dev"
+    "dev": "foreman start -f Procfile.dev",
+    "postinstall": "webpack --mode=production"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "redux-logger": "^3.0.6"
   }
 }
