@@ -9,10 +9,12 @@ class Api::SessionsController < ApplicationController
       render json: { errors: ["User not found"] }, status: 404
     else
       login_user!(user)
-      render json: { success: ["Successfully logged in"] }, status: 200
+      render json: { success: ["Successfully signed in"] }, status: 200
     end
   end
 
   def destroy
+    logout_current_user!
+    render json: { success: ["Successfully signed out"] }, status: 200
   end
 end
