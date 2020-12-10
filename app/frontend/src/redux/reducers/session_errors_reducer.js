@@ -1,9 +1,6 @@
 // import { RECEIVE_SESSION_ERRORS } from '../actions/session_actions'
 
-const defaultState = {
-    session: [],
-    login: [],
-}
+const defaultState = []
 
 export default (state = defaultState, action) => {
     Object.freeze(state)
