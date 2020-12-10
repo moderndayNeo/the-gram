@@ -38,22 +38,28 @@ class SignupForm extends Component {
     render() {
         return (
             <div>
+                {
+                    this.props.errors.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))
+                }
+
                 <h2>Sign Up</h2>
                 <form>
                     <input type="text" onChange={this.updateValue("username")} value={this.state.username} placeholder="username" />
-        <br/>                  
+                    <br />
                     <input type="password" onChange={this.updateValue("password")} value={this.state.password} placeholder="password" />
 
-        <br/>                  
+                    <br />
                     <input type="text" onChange={this.updateValue("name")} value={this.state.name} placeholder="name" />
-        <br/>                  
+                    <br />
                     <input type="text" onChange={this.updateValue("bio")} value={this.state.bio} placeholder="bio" />
-        <br/>                  
+                    <br />
                     <input type="text" onChange={this.updateValue("email")} value={this.state.email} placeholder="email" />
-        <br/>                  
+                    <br />
 
                     <input type="submit" value="Sign Up" onClick={this.handleSubmit} />
-        <br/>                  
+                    <br />
                 </form>
             </div>
         );

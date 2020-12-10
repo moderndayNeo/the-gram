@@ -2,8 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 export default function Home() {
-    const name = useSelector(state => state.session.name);
-    const id = useSelector(state => state.session.id);
+
+    const name = useSelector(state => state.session.name)
+    const id = useSelector(state => state.session.id)
 
     return (
         <div>

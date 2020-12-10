@@ -4,8 +4,12 @@ import {
     createNewUser,
 } from '../../redux/actions/session'
 
+const mapStateToProps = state => ({
+    errors: state.errors.session
+})
+
 const mapDispatchToProps = (dispatch) => ({
     createNewUser: (formUser) => dispatch(createNewUser(formUser)),
 })
 
-export default connect(null, mapDispatchToProps)(signupForm)
+export default connect(mapStateToProps, mapDispatchToProps)(signupForm)
