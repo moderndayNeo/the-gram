@@ -21,7 +21,6 @@ export default function App() {
 
             <ProtectedRoute exact path="/" component={Home} />
             <AuthRoute exact path="/signup" component={SignupContainer} />
-            {/* <AuthRoute exact path="/login" component={LoginContainer} /> */}
             <AuthRoute exact path="/login" component={LoginForm} />
 
         </div>
