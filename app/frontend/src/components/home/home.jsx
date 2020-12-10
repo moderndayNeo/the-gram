@@ -8,7 +8,6 @@ export default function Home() {
     const dispatch = useDispatch();
 
     const name = useSelector(state => state.session.name)
-    const id = useSelector(state => state.session.id)
 
     return (
         <div>

@@ -18,7 +18,6 @@ export default function App() {
             <hr/>
             <img className="main-logo" src={theGramLogo} alt=""/>
 
-
             <ProtectedRoute exact path="/" component={Home} />
             <AuthRoute exact path="/signup" component={SignupContainer} />
             <AuthRoute exact path="/login" component={LoginContainer} />

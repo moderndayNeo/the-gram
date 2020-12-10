@@ -7462,11 +7462,16 @@ var signup_form_SignupForm = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      username: 'omar',
-      password: 'thewire',
-      bio: 'great actor',
-      email: 'omar@example.com',
-      name: 'Omar'
+      username: '',
+      password: '',
+      bio: '',
+      email: '',
+      name: '' // username: 'omar',
+      // password: 'thewire',
+      // bio: 'great actor',
+      // email: 'omar@example.com',
+      // name: 'Omar'
+
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateValue = _this.updateValue.bind(_assertThisInitialized(_this));
@@ -7496,7 +7501,12 @@ var signup_form_SignupForm = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("h2", null, "Sign Up"), /*#__PURE__*/react_default.a.createElement("form", null, /*#__PURE__*/react_default.a.createElement("input", {
+      var errors = this.props.errors;
+      return /*#__PURE__*/react_default.a.createElement("div", null, errors.map(function (error, idx) {
+        return /*#__PURE__*/react_default.a.createElement("li", {
+          key: idx
+        }, error);
+      }), /*#__PURE__*/react_default.a.createElement("h2", null, "Sign Up"), /*#__PURE__*/react_default.a.createElement("form", null, /*#__PURE__*/react_default.a.createElement("input", {
         type: "text",
         onChange: this.updateValue("username"),
         value: this.state.username,
@@ -7562,10 +7572,42 @@ var session_loginUser = function loginUser(user) {
 var session_logoutUser = function logoutUser() {
   return axios_request('delete', '/api/session');
 };
-// CONCATENATED MODULE: ./app/frontend/src/redux/actions/session.js
+// CONCATENATED MODULE: ./app/frontend/src/redux/actions/session_actions.js
 
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+var session_actions_createNewUser = function createNewUser(user) {
+  return function (dispatch) {
+    return session_createUser(user).then(function (user) {
+      return dispatch(receiveCurrentUser(user));
+    });
+  };
+}; // cant create new user, we want these errors to appear on signup form
+// we want to capture these errors in state, then display them on the signup page if they exist
+// note, errors always comes back from the server as an array
+
+var session_actions_loginUser = function loginUser(user) {
+  return function (dispatch) {
+    return session_loginUser(user).then(function (user) {
+      return dispatch(receiveCurrentUser(user));
+    });
+  };
+};
+var session_actions_logoutUser = function logoutUser() {
+  return function (dispatch) {
+    session_logoutUser().then(function () {
+      return dispatch(logoutCurrentUser());
+    });
+  };
+};
+
+var receiveSessionErrors = function receiveSessionErrors(errors) {
+  return {
+    type: RECEIVE_SESSION_ERRORS,
+    errors: errors
+  };
+};
 
 var receiveCurrentUser = function receiveCurrentUser(user) {
   return {
@@ -7579,43 +7621,26 @@ var logoutCurrentUser = function logoutCurrentUser() {
     type: LOGOUT_CURRENT_USER
   };
 };
-
-var session_createNewUser = function createNewUser(user) {
-  return function (dispatch) {
-    return session_createUser(user).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
-    });
-  };
-}; // .fail((errors) => console.log(errors))
-
-var actions_session_loginUser = function loginUser(user) {
-  return function (dispatch) {
-    return session_loginUser(user).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
-    });
-  };
-};
-var actions_session_logoutUser = function logoutUser() {
-  return function (dispatch) {
-    session_logoutUser().then(function () {
-      return dispatch(logoutCurrentUser());
-    });
-  };
-};
 // CONCATENATED MODULE: ./app/frontend/src/components/session/signup_container.js
 
 
 
 
+var signup_container_mapStateToProps = function mapStateToProps(state) {
+  return {
+    errors: state.errors.session
+  };
+};
+
 var signup_container_mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createNewUser: function createNewUser(formUser) {
-      return dispatch(session_createNewUser(formUser));
+      return dispatch(session_actions_createNewUser(formUser));
     }
   };
 };
 
-/* harmony default export */ var signup_container = (connect_connect(null, signup_container_mapDispatchToProps)(signup_form));
+/* harmony default export */ var signup_container = (connect_connect(signup_container_mapStateToProps, signup_container_mapDispatchToProps)(signup_form));
 // CONCATENATED MODULE: ./app/frontend/src/components/session/login_form.jsx
 function login_form_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { login_form_typeof = function _typeof(obj) { return typeof obj; }; } else { login_form_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return login_form_typeof(obj); }
 
@@ -7707,9 +7732,7 @@ var login_form_Loginform = /*#__PURE__*/function (_Component) {
   return Loginform;
 }(react["Component"]);
 
-/* harmony default export */ var login_form = (withRouter(login_form_Loginform)); // user signs in
-// redurect to homepage
-// index should take current user id from rails backend (bootstrapped to window) and store it
+/* harmony default export */ var login_form = (withRouter(login_form_Loginform));
 // CONCATENATED MODULE: ./app/frontend/src/components/session/login_container.js
 
 
@@ -7718,7 +7741,7 @@ var login_form_Loginform = /*#__PURE__*/function (_Component) {
 var login_container_mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     loginUser: function loginUser(formUser) {
-      return dispatch(actions_session_loginUser(formUser));
+      return dispatch(session_actions_loginUser(formUser));
     }
   };
 };
@@ -7727,85 +7750,91 @@ var login_container_mapDispatchToProps = function mapDispatchToProps(dispatch) {
 // CONCATENATED MODULE: ./app/frontend/src/components/home/home.jsx
 
 
+
+
 function Home() {
+  var dispatch = useDispatch();
   var name = useSelector_useSelector(function (state) {
     return state.session.name;
   });
-  var id = useSelector_useSelector(function (state) {
-    return state.session.id;
-  });
-  return /*#__PURE__*/react_default.a.createElement("div", null, "Home", /*#__PURE__*/react_default.a.createElement("h3", null, name), /*#__PURE__*/react_default.a.createElement("h3", null, id));
-}
-/*
-receiveCurrentUser action
-- sessions reducer responds to it
-- users reducer also responds to it, and stores the user info
-*/
-// CONCATENATED MODULE: ./app/frontend/src/components/app.jsx
-function app_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { app_typeof = function _typeof(obj) { return typeof obj; }; } else { app_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return app_typeof(obj); }
-
-function app_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function app_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function app_createClass(Constructor, protoProps, staticProps) { if (protoProps) app_defineProperties(Constructor.prototype, protoProps); if (staticProps) app_defineProperties(Constructor, staticProps); return Constructor; }
-
-function app_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) app_setPrototypeOf(subClass, superClass); }
-
-function app_setPrototypeOf(o, p) { app_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return app_setPrototypeOf(o, p); }
-
-function app_createSuper(Derived) { var hasNativeReflectConstruct = app_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = app_getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = app_getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return app_possibleConstructorReturn(this, result); }; }
-
-function app_possibleConstructorReturn(self, call) { if (call && (app_typeof(call) === "object" || typeof call === "function")) { return call; } return app_assertThisInitialized(self); }
-
-function app_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function app_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function app_getPrototypeOf(o) { app_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return app_getPrototypeOf(o); }
-
-
-
-
-
-
-
-var app_App = /*#__PURE__*/function (_Component) {
-  app_inherits(App, _Component);
-
-  var _super = app_createSuper(App);
-
-  function App() {
-    app_classCallCheck(this, App);
-
-    return _super.apply(this, arguments);
-  }
-
-  app_createClass(App, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(Link, {
-        to: "/signup"
-      }, "Sign Up"), /*#__PURE__*/react_default.a.createElement(Link, {
-        to: "/login"
-      }, "Login"), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
-        exact: true,
-        path: "/",
-        component: Home
-      }), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
-        path: "/signup",
-        component: signup_container
-      }), /*#__PURE__*/react_default.a.createElement(react_router_Route, {
-        path: "/login",
-        component: login_container
-      }));
+  return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("h3", null, "Welcome, ", name, "!"), /*#__PURE__*/react_default.a.createElement("button", {
+    onClick: function onClick() {
+      return dispatch(session_actions_logoutUser());
     }
-  }]);
+  }, "Log Out"));
+}
+// CONCATENATED MODULE: ./app/frontend/src/util/route_util.js
 
-  return App;
-}(react["Component"]);
 
 
+
+var route_util_mapStateToProps = function mapStateToProps(state) {
+  return {
+    loggedIn: Boolean(state.session.id)
+  };
+};
+
+var route_util_Auth = function Auth(_ref) {
+  var Component = _ref.component,
+      path = _ref.path,
+      loggedIn = _ref.loggedIn;
+  return /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    path: path,
+    render: function render(props) {
+      return loggedIn ? /*#__PURE__*/react_default.a.createElement(Redirect, {
+        to: "/"
+      }) : /*#__PURE__*/react_default.a.createElement(Component, props);
+    }
+  });
+};
+
+var route_util_Protected = function Protected(_ref2) {
+  var Component = _ref2.component,
+      path = _ref2.path,
+      loggedIn = _ref2.loggedIn;
+  return /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    path: path,
+    render: function render(props) {
+      return loggedIn ? /*#__PURE__*/react_default.a.createElement(Component, props) : /*#__PURE__*/react_default.a.createElement(Redirect, {
+        to: "/signup"
+      });
+    }
+  });
+};
+
+var AuthRoute = withRouter(connect_connect(route_util_mapStateToProps)(route_util_Auth));
+var ProtectedRoute = withRouter(connect_connect(route_util_mapStateToProps)(route_util_Protected));
+// CONCATENATED MODULE: ./app/frontend/src/components/app.jsx
+
+
+
+
+
+ // import theGramLogo from '../../../assets/images/the-gram-logo.png'
+
+function App() {
+  return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(Link, {
+    to: "/signup"
+  }, "Sign Up"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Link, {
+    to: "/login"
+  }, "Login"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("img", {
+    className: "main-logo",
+    src: "https://images.unsplash.com/photo-1593642533144-3d62aa4783ec?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80",
+    alt: ""
+  }), /*#__PURE__*/react_default.a.createElement(ProtectedRoute, {
+    exact: true,
+    path: "/",
+    component: Home
+  }), /*#__PURE__*/react_default.a.createElement(AuthRoute, {
+    exact: true,
+    path: "/signup",
+    component: signup_container
+  }), /*#__PURE__*/react_default.a.createElement(AuthRoute, {
+    exact: true,
+    path: "/login",
+    component: login_container
+  }));
+}
 // CONCATENATED MODULE: ./app/frontend/src/root.jsx
 
 
@@ -7816,7 +7845,7 @@ var root_Root = function Root(_ref) {
   var store = _ref.store;
   return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(components_Provider, {
     store: store
-  }, /*#__PURE__*/react_default.a.createElement(react_router_dom_HashRouter, null, /*#__PURE__*/react_default.a.createElement(app_App, null))));
+  }, /*#__PURE__*/react_default.a.createElement(react_router_dom_HashRouter, null, /*#__PURE__*/react_default.a.createElement(App, null))));
 };
 
 /* harmony default export */ var src_root = (root_Root);
@@ -7836,21 +7865,40 @@ var thunk = function thunk(_ref) {
 };
 
 /* harmony default export */ var store_thunk = (thunk);
-// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/session.js
+// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/users_reducer.js
+function users_reducer_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _nullSession = {
-  currentUser: null
-};
-/* harmony default export */ var session = (function () {
+
+/* harmony default export */ var users_reducer = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case RECEIVE_CURRENT_USER:
+      return Object.assign({}, state, users_reducer_defineProperty({}, action.user.data.id, action.user.data));
+
+    default:
+      return state;
+  }
+});
+// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/entities_reducer.js
+
+
+/* harmony default export */ var entities_reducer = (combineReducers({
+  users: users_reducer
+}));
+// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/session_reducer.js
+
+var _nullSession = {};
+/* harmony default export */ var session_reducer = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullSession;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      return Object.assign({}, {
-        currentUser: action.user.data
-      });
+      return Object.assign({}, action.user.data);
 
     case LOGOUT_CURRENT_USER:
       return _nullSession;
@@ -7859,14 +7907,36 @@ var _nullSession = {
       return state;
   }
 });
-// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/root.js
+// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/session_errors_reducer.js
+// import { RECEIVE_SESSION_ERRORS } from '../actions/session_actions'
+var defaultState = [];
+/* harmony default export */ var session_errors_reducer = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    // case RECEIVE_SESSION_ERRORS:
+    // return Object.assign({}, action.errors)
+    default:
+      return state;
+  }
+});
+// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/errors_reducer.js
 
 
-/* harmony default export */ var reducers_root = (combineReducers({
-  // entities:
-  session: session // errors
-  // ui
+/* harmony default export */ var errors_reducer = (combineReducers({
+  session: session_errors_reducer
+}));
+// CONCATENATED MODULE: ./app/frontend/src/redux/reducers/root_reducer.js
 
+
+
+
+/* harmony default export */ var root_reducer = (combineReducers({
+  entities: entities_reducer,
+  session: session_reducer,
+  errors: errors_reducer
 }));
 // CONCATENATED MODULE: ./app/frontend/src/redux/store/store.js
 
@@ -7879,46 +7949,44 @@ if (false) { var _require, logger; }
 
 var store_configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return createStore(reducers_root, preloadedState, composeEnhancers(applyMiddleware.apply(void 0, middlewares)));
+  return createStore(root_reducer, preloadedState, composeEnhancers(applyMiddleware.apply(void 0, middlewares)));
 };
 
 /* harmony default export */ var store_store = (store_configureStore);
 // CONCATENATED MODULE: ./app/frontend/packs/index.jsx
+function packs_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  var preloadedState = undefined;
+  var store;
 
   if (window.currentUser) {
-    preloadedState = {
-      session: Object.values(window.currentUser)[0]
+    var preloadedState = {
+      entities: {
+        users: packs_defineProperty({}, window.currentUser.id, window.currentUser)
+      },
+      session: {
+        id: window.currentUser.id
+      }
     };
+    store = store_store(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = store_store();
   }
 
-  var store = store_store(preloadedState);
   window.createUser = session_createUser;
-  window.loginUser = session_loginUser;
-  window.logoutUser = session_logoutUser;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   var root = document.getElementById('root');
   react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(src_root, {
     store: store
   }), root);
-}); // createUser({
-//   name: 'omar',
-//   username: 'omarlittle',
-//   email: 'omar@example.com',
-//   password: 'thewire'
-// })
-// loginUser({
-//   username: 'arnie85',
-//   password: 'mrolympia85'
-// }).then(success => console.log(success))
-// logoutUser().then(res => console.log(res))
+});
 
 /***/ })
 /******/ ]);
