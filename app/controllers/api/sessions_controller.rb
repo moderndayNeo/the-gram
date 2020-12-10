@@ -1,15 +1,15 @@
 class Api::SessionsController < ApplicationController
   def create
-    user = User.find_by_credentials(
+    @user = User.find_by_credentials(
       params[:username],
       params[:password]
     )
 
-    if user.nil?
+    if @user.nil?
       render json: { errors: ["User not found"] }, status: 404
     else
-      login_user!(user)
-      render json: { success: ["Successfully signed in"] }, status: 200
+      login_user!(@user)
+      render :show
     end
   end
 
