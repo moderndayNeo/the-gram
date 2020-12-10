@@ -6,11 +6,16 @@ class SignupForm extends Component {
         super(props);
 
         this.state = {
-            username: 'omar',
-            password: 'thewire',
-            bio: 'great actor',
-            email: 'omar@example.com',
-            name: 'Omar'
+            username: '',
+            password: '',
+            bio: '',
+            email: '',
+            name: ''
+            // username: 'omar',
+            // password: 'thewire',
+            // bio: 'great actor',
+            // email: 'omar@example.com',
+            // name: 'Omar'
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);

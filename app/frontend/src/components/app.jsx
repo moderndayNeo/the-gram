@@ -5,6 +5,7 @@ import LoginContainer from './session/login_container';
 import { logoutUser } from '../redux/actions/session_actions';
 import Home from './home/home';
 import { useDispatch } from 'react-redux';
+import { AuthRoute, ProtectedRoute } from '../util/route_util'
 
 export default function App() {
 
@@ -15,9 +16,9 @@ export default function App() {
             <Link to="/signup">Sign Up</Link>
             <Link to="/login">Login</Link>
             <button onClick={() => dispatch(logoutUser())}>Log Out</button>
-            <Route path="/" component={Home} />
-            <Route path="/signup" component={SignupContainer} />
-            <Route path="/login" component={LoginContainer} />
+            <ProtectedRoute path="/" component={Home} />
+            <AuthRoute exact path="/signup" component={SignupContainer} />
+            <AuthRoute exact path="/login" component={LoginContainer} />
         </div>
     );
 }
