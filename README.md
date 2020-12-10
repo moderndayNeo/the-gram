@@ -1,3 +1,5 @@
+![logo](https://github.com/moderndayNeo/the-gram/blob/master/app/assets/images/the-gram-logo.png)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
