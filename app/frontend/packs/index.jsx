@@ -9,20 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (window.currentUser) {
     preloadedState = {
-      session: {
-        currentUser: window.currentUser
-      }
+      session: Object.values(window.currentUser)[0]
     };
   }
+  
+  const store = configureStore(preloadedState);
+
 
   window.createUser = createUser;
   window.loginUser = loginUser;
   window.logoutUser = logoutUser;
+  window.getState = store.getState
+  window.dispatch = store.dispatch
 
-  const store = configureStore(preloadedState);
-
+  
   const root = document.getElementById('root');
-
   ReactDOM.render(<Root store={store} />, root);
 
 });
@@ -40,3 +41,4 @@ document.addEventListener('DOMContentLoaded', () => {
 //   username: 'arnie85',
 //   password: 'mrolympia85'
 // }).then(success => console.log(success))
+
