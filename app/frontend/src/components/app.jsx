@@ -13,7 +13,9 @@ export default function App() {
         <div>
 
             <Link to="/signup">Sign Up</Link>
+            <br/>
             <Link to="/login">Login</Link>
+            <hr/>
             <img className="main-logo" src={theGramLogo} alt=""/>
 
 
