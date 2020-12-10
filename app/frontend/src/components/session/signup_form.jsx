@@ -7,7 +7,10 @@ class SignupForm extends Component {
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            bio: 'great actor',
+            email: 'omar@example.com',
+            name: 'Omar'
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,9 +20,10 @@ class SignupForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
+        console.log(this.state);
+
         this.props.createNewUser(this.state)
             .then(() => this.props.history.push('/'));
-
     }
 
     updateValue(type) {
@@ -37,9 +41,19 @@ class SignupForm extends Component {
                 <h2>Sign Up</h2>
                 <form>
                     <input type="text" onChange={this.updateValue("username")} value={this.state.username} placeholder="username" />
+        <br/>                  
                     <input type="password" onChange={this.updateValue("password")} value={this.state.password} placeholder="password" />
 
+        <br/>                  
+                    <input type="text" onChange={this.updateValue("name")} value={this.state.name} placeholder="name" />
+        <br/>                  
+                    <input type="text" onChange={this.updateValue("bio")} value={this.state.bio} placeholder="bio" />
+        <br/>                  
+                    <input type="text" onChange={this.updateValue("email")} value={this.state.email} placeholder="email" />
+        <br/>                  
+
                     <input type="submit" value="Sign Up" onClick={this.handleSubmit} />
+        <br/>                  
                 </form>
             </div>
         );

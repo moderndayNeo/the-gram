@@ -12,17 +12,16 @@ const logoutCurrentUser = () => ({
     type: LOGOUT_CURRENT_USER,
 })
 
-export const createNewUser = (formUser) => (dispatch) => {
-    SessionAPIUtil.createUser(formUser)
-        .then((user) => dispatch(receiveCurrentUser(user)))
-        .fail((errors) => console.log(errors))
-}
+export const createNewUser = (user) => (dispatch) =>
+    SessionAPIUtil.createUser(user).then((user) =>
+        dispatch(receiveCurrentUser(user))
+    )
+// .fail((errors) => dispatch(receiveErrors(errors)))  - create errors reducer
 
-export const loginUser = (user) => (dispatch) => {
+export const loginUser = (user) => (dispatch) =>
     SessionAPIUtil.loginUser(user).then((user) =>
         dispatch(receiveCurrentUser(user))
     )
-}
 
 export const logoutUser = () => (dispatch) => {
     SessionAPIUtil.logoutUser().then(() => dispatch(logoutCurrentUser()))

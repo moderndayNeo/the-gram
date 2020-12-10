@@ -22,6 +22,14 @@ u2 = User.create(
     password: 'spacex'
 )
 
+u3 = User.create(
+    name: 'omar',
+    username: 'omarlittle',
+    bio: nil,
+    email: 'omar@example.com',
+    password: 'thewire'
+)
+
 # u2 = User.new(
 #     name: 'elon',
 #     username: 'elonmusk',
