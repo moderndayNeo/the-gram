@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import SignupContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
-import { logoutUser } from '../redux/actions/session';
+import { logoutUser } from '../redux/actions/session_actions';
 import Home from './home/home';
 import { useDispatch } from 'react-redux';
 
