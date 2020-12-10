@@ -12,16 +12,8 @@ export default function Home() {
 
     return (
         <div>
-            Home
             <h3>Welcome, {name}!</h3>
             <button onClick={() => dispatch(logoutUser())}>Log Out</button>
         </div>
     );
 }
-
-
-/*
-receiveCurrentUser action
-- sessions reducer responds to it
-- users reducer also responds to it, and stores the user info
-*/

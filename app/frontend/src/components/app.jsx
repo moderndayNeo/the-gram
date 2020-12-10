@@ -4,14 +4,18 @@ import SignupContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
 import Home from './home/home';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import theGramLogo from '../../../assets/images/the-gram-logo.png'
 
 export default function App() {
 
 
     return (
         <div>
+
             <Link to="/signup">Sign Up</Link>
             <Link to="/login">Login</Link>
+            <img className="main-logo" src={theGramLogo} alt=""/>
+
 
             <ProtectedRoute exact path="/" component={Home} />
             <AuthRoute exact path="/signup" component={SignupContainer} />

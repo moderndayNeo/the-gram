@@ -8,7 +8,6 @@ export default (state = {}, action) => {
             return Object.assign({}, state, {
                 [action.user.data.id]: action.user.data,
             })
-        // check this
 
         default:
             return state
