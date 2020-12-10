@@ -23,7 +23,7 @@ export default function LoginForm() {
 
     return (
         <div>
-            <h2>Sign In</h2>
+            <h2>Sign Up</h2>
             <form>
                 <input type="text" value={info.username} placeholder="username" onChange={updateValue("username")} />
                 <br />
