@@ -25,8 +25,6 @@ class SignupForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        console.log(this.state);
-
         this.props.createNewUser(this.state)
             .then(() => this.props.history.push('/'));
     }

@@ -7777,8 +7777,10 @@ var route_util_mapStateToProps = function mapStateToProps(state) {
 var route_util_Auth = function Auth(_ref) {
   var Component = _ref.component,
       path = _ref.path,
-      loggedIn = _ref.loggedIn;
+      loggedIn = _ref.loggedIn,
+      exact = _ref.exact;
   return /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    exact: exact,
     path: path,
     render: function render(props) {
       return loggedIn ? /*#__PURE__*/react_default.a.createElement(Redirect, {
@@ -7791,8 +7793,10 @@ var route_util_Auth = function Auth(_ref) {
 var route_util_Protected = function Protected(_ref2) {
   var Component = _ref2.component,
       path = _ref2.path,
-      loggedIn = _ref2.loggedIn;
+      loggedIn = _ref2.loggedIn,
+      exact = _ref2.exact;
   return /*#__PURE__*/react_default.a.createElement(react_router_Route, {
+    exact: exact,
     path: path,
     render: function render(props) {
       return loggedIn ? /*#__PURE__*/react_default.a.createElement(Component, props) : /*#__PURE__*/react_default.a.createElement(Redirect, {
@@ -7817,11 +7821,7 @@ function App() {
     to: "/signup"
   }, "Sign Up"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Link, {
     to: "/login"
-  }, "Login"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("img", {
-    className: "main-logo",
-    src: "https://images.unsplash.com/photo-1593642533144-3d62aa4783ec?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80",
-    alt: ""
-  }), /*#__PURE__*/react_default.a.createElement(ProtectedRoute, {
+  }, "Login"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(ProtectedRoute, {
     exact: true,
     path: "/",
     component: Home
