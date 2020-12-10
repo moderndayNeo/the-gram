@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class Loginform extends Component {
+class Loginform extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            username: '',
-            password: ''
+            username: 'arnie85',
+            password: 'mrolympia85'
         };
 
         this.updateValue = this.updateValue.bind(this);
@@ -23,7 +24,7 @@ export default class Loginform extends Component {
         e.preventDefault();
 
         this.props.loginUser(this.state)
-            .then(() => console.log('User successfully logged in'));
+            .then(() => this.props.history.push('/'));
     }
 
 
@@ -41,3 +42,5 @@ export default class Loginform extends Component {
         );
     }
 }
+
+export default withRouter(Loginform);
