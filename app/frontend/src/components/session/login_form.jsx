@@ -46,9 +46,3 @@ class Loginform extends Component {
 export default withRouter(Loginform);
 
 
-
-// user signs in
-// redurect to homepage
-// index should take current user id from rails backend (bootstrapped to window) and store it
-
-

@@ -5,22 +5,19 @@ import configureStore from '../src/redux/store/store';
 import { createUser } from '../src/util/session';
 
 document.addEventListener('DOMContentLoaded', () => {
-  let preloadedState = undefined;
-
+  let store;
   if (window.currentUser) {
-    preloadedState = {
+    const preloadedState = {
       entities: {
-        users: {},
-        posts: {},
-        comments: {},
-        likes: {}
+        users: { [window.currentUser.id]: window.currentUser }
       },
-      session: window.currentUser,
-      errors: {},
+      session: { id: window.currentUser.id }
     };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = configureStore();
   }
-
-  const store = configureStore(preloadedState);
 
   window.createUser = createUser;
   window.getState = store.getState;

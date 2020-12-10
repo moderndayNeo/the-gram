@@ -39,12 +39,6 @@ class SignupForm extends Component {
         let { errors } = this.props;
         return (
             <div>
-                {/* {
-                    errors.length > 0 &&
-                    <div><p>Errors:</p>
-                        {errors.map((error, idx) => (<li key={idx}>{error}</li>))}
-                    </div>
-                } */}
                 {errors.map((error, idx) => (<li key={idx}>{error}</li>))}
 
                 <h2>Sign Up</h2>
