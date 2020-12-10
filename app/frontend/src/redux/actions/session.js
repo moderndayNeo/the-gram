@@ -15,7 +15,8 @@ const logoutCurrentUser = () => ({
 export const createNewUser = (user) => (dispatch) =>
     SessionAPIUtil.createUser(user)
         .then((user) => dispatch(receiveCurrentUser(user)))
-        // .fail((errors) => console.log(errors))
+        .fail((errors) => dispatch(receiveSessionErrors(errors)))
+
 
 export const loginUser = (user) => (dispatch) =>
     SessionAPIUtil.loginUser(user).then((user) =>

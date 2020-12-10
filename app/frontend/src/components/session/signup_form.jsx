@@ -36,13 +36,16 @@ class SignupForm extends Component {
 
 
     render() {
+        let { errors } = this.props;
         return (
             <div>
-                {
-                    this.props.errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))
-                }
+                {/* {
+                    errors.length > 0 &&
+                    <div><p>Errors:</p>
+                        {errors.map((error, idx) => (<li key={idx}>{error}</li>))}
+                    </div>
+                } */}
+                {errors.map((error, idx) => (<li key={idx}>{error}</li>))}
 
                 <h2>Sign Up</h2>
                 <form>
