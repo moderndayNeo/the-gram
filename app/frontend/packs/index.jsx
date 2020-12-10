@@ -42,3 +42,4 @@ document.addEventListener('DOMContentLoaded', () => {
 //   password: 'mrolympia85'
 // }).then(success => console.log(success))
 
+// logoutUser().then(res => console.log(res))
