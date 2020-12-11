@@ -46,9 +46,9 @@ class SignupForm extends Component {
 
                 <h2>Sign Up</h2>
                 <form>
-                    <input type="text" onChange={this.updateValue("username")} value={this.state.username} placeholder="username" />
+                    <input type="text" onChange={this.updateValue("username")} value={this.state.username} placeholder="Username" />
                     <br />
-                    <input type="password" onChange={this.updateValue("password")} value={this.state.password} placeholder="password" />
+                    <input type="password" onChange={this.updateValue("password")} value={this.state.password} placeholder="Password" />
 
                     <br />
                     <input type="text" onChange={this.updateValue("name")} value={this.state.name} placeholder="name" />
