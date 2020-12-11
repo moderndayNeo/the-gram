@@ -8,7 +8,7 @@ import SignupPage from './session/signup/SignupPage'
 export default function App() {
 
     return (
-        <div>
+        <div className="app">
             {/* <img className="main-logo" src={window.mainLogoUrl} alt="" /> */}
             {/* <Link to="/signup">Sign Up</Link> */}
             <br />

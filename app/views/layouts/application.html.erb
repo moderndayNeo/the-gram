@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>TheGram</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= javascript_pack_tag "application" %>
-    <% if logged_in? %>
+<html lang="en">
+  <html>
+    <head>
+      <title>The Gram</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      <%= stylesheet_link_tag "application", media: "all" %>
+      <%= javascript_pack_tag "application" %>
+      <% if logged_in? %>
+        <script type="text/javascript">
+          window.currentUser =
+            <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+        </script>
+      <% end %>
+    </head>
+    <body>
+      <%= yield %>
       <script type="text/javascript">
-        window.currentUser =
-          <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+        window.mainLogoUrl = "<%= image_url('the-gram-logo.png') %>"
+        window.loginPageImgUrl = "<%= image_url('screenshots/login_page.png') %>"
       </script>
-    <% end %>
-  </head>
-  <body>
-    <%= yield %>
-    <script type="text/javascript">
-      window.mainLogoUrl = "<%= image_url('the-gram-logo.png') %>"
-      window.loginPageImgUrl = "<%= image_url('screenshots/login_page.png') %>"
-    </script>
-  </body>
-</html>
+    </body>
+  </html>
