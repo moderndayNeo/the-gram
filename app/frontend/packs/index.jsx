@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore();
   }
 
-  window.createUser = createUser;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.axiosGetRequest = axiosGetRequest;

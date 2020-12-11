@@ -488,10 +488,16 @@ if (false) { var throwOnDirectAccess, ReactIs; } else {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(31);
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
-var reactIs = __webpack_require__(6);
+var reactIs = __webpack_require__(7);
 
 /**
  * Copyright 2015, Yahoo! Inc.
@@ -595,7 +601,7 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -629,7 +635,7 @@ if (true) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -641,8 +647,8 @@ if (true) {
 
 
 /***/ }),
-/* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -666,12 +672,6 @@ var result = Object(_ponyfill_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13), __webpack_require__(30)(module)))
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(31);
 
 /***/ }),
 /* 10 */
@@ -3507,7 +3507,7 @@ var react = __webpack_require__(0);
 var react_default = /*#__PURE__*/__webpack_require__.n(react);
 
 // EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(5);
+var react_dom = __webpack_require__(6);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js
@@ -4593,7 +4593,7 @@ var path_to_regexp = __webpack_require__(11);
 var path_to_regexp_default = /*#__PURE__*/__webpack_require__.n(path_to_regexp);
 
 // EXTERNAL MODULE: ./node_modules/react-is/index.js
-var react_is = __webpack_require__(6);
+var react_is = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -4611,7 +4611,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 // EXTERNAL MODULE: ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
-var hoist_non_react_statics_cjs = __webpack_require__(4);
+var hoist_non_react_statics_cjs = __webpack_require__(5);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // CONCATENATED MODULE: ./node_modules/react-router/esm/react-router.js
@@ -6120,7 +6120,7 @@ function shallowEqual(objA, objB) {
   return true;
 }
 // EXTERNAL MODULE: ./node_modules/symbol-observable/es/index.js
-var es = __webpack_require__(8);
+var es = __webpack_require__(9);
 
 // CONCATENATED MODULE: ./node_modules/redux/es/redux.js
 
@@ -7423,33 +7423,77 @@ var useSelector_useSelector = /*#__PURE__*/createSelectorHook();
 setBatch(react_dom["unstable_batchedUpdates"]);
 
 // EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__(9);
+var axios = __webpack_require__(4);
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
-// CONCATENATED MODULE: ./app/frontend/src/util/axios_request.js
+// CONCATENATED MODULE: ./app/frontend/src/util/axios_requests.js
 
 var token = document.querySelector('[name=csrf-token]').content;
 axios_default.a.defaults.headers.common['X-CSRF-TOKEN'] = token;
-/* harmony default export */ var axios_request = (function (method, url) {
-  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+var axios_requests_axiosGetRequest = function axiosGetRequest(url) {
+  var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   return axios_default()({
-    method: method,
+    method: 'get',
+    url: url,
+    params: data
+  });
+};
+var axios_requests_axiosPostRequest = function axiosPostRequest(url) {
+  var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  return axios_default()({
+    method: 'post',
     url: url,
     data: data
   });
-});
-// CONCATENATED MODULE: ./app/frontend/src/util/session.js
+};
+var axios_requests_axiosPutRequest = function axiosPutRequest(url) {
+  var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  return axios_default()({
+    method: 'put',
+    url: url,
+    data: data
+  });
+};
+var axios_requests_axiosDeleteRequest = function axiosDeleteRequest(url) {
+  var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  return axios_default()({
+    method: 'delete',
+    url: url,
+    data: data
+  });
+};
+/*
+Example GET request:
+axiosGetRequest('/api/users', { min_id: 3 }).then(res => console.log(res))
+    
+Example POST request:
+axiosPostRequest('/api/users', {
+    user: {
+        name: 'omar',
+        username: 'omarlittle',
+        email: 'omar@example.com',
+        password: 'thewire',
+    },
+}).then(res => console.log(res))
 
-var session_createUser = function createUser(user) {
-  return axios_request('post', '/api/users', {
+Example PUT request:
+axiosPutRequest(`/api/users/${10}`, { user: { name: 'ANOTHER NAME' }}).then(res => console.log(res))
+
+Example DELETE request:
+axiosDeleteRequest(`/api/users/${11}`).then(res => console.log(res))
+*/
+// CONCATENATED MODULE: ./app/frontend/src/util/session_api_util.js
+
+var session_api_util_createUser = function createUser(user) {
+  return axios_requests_axiosPostRequest('/api/users', {
     user: user
   });
 };
-var session_loginUser = function loginUser(user) {
-  return axios_request('post', '/api/session', user);
+var session_api_util_loginUser = function loginUser(user) {
+  return axios_requests_axiosPostRequest('/api/session', user);
 };
-var session_logoutUser = function logoutUser() {
-  return axios_request('delete', '/api/session');
+var session_api_util_logoutUser = function logoutUser() {
+  return axios_requests_axiosDeleteRequest('/api/session');
 };
 // CONCATENATED MODULE: ./app/frontend/src/redux/actions/session_actions.js
 
@@ -7458,7 +7502,7 @@ var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 var session_actions_createNewUser = function createNewUser(user) {
   return function (dispatch) {
-    return session_createUser(user).then(function (user) {
+    return session_api_util_createUser(user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     });
   };
@@ -7468,14 +7512,14 @@ var session_actions_createNewUser = function createNewUser(user) {
 
 var session_actions_loginUser = function loginUser(user) {
   return function (dispatch) {
-    return session_loginUser(user).then(function (user) {
+    return session_api_util_loginUser(user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     });
   };
 };
 var session_actions_logoutUser = function logoutUser() {
   return function (dispatch) {
-    session_logoutUser().then(function () {
+    session_api_util_logoutUser().then(function () {
       return dispatch(logoutCurrentUser());
     });
   };
@@ -7561,8 +7605,6 @@ var route_util_Protected = function Protected(_ref2) {
 
 var AuthRoute = withRouter(connect_connect(route_util_mapStateToProps)(route_util_Auth));
 var ProtectedRoute = withRouter(connect_connect(route_util_mapStateToProps)(route_util_Protected));
-// CONCATENATED MODULE: ./app/frontend/src/assets/the-gram-logo.png
-/* harmony default export */ var the_gram_logo = (__webpack_require__.p + "7edac915b270b5c64877da169be1c39d.png");
 // CONCATENATED MODULE: ./app/frontend/src/components/session/login_form_hook.jsx
 function login_form_hook_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -7704,7 +7746,7 @@ function signup_form_hook_LoginForm() {
 
 
  // import logo from '../../../assets/images/the-gram-logo.png'
-
+// import logo from '../assets/the-gram-logo.png';
 
 
 
@@ -7713,11 +7755,7 @@ function App() {
     to: "/signup"
   }, "Sign Up"), /*#__PURE__*/react_default.a.createElement("br", null), /*#__PURE__*/react_default.a.createElement(Link, {
     to: "/login"
-  }, "Login"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement("img", {
-    className: "main-logo",
-    src: the_gram_logo,
-    alt: ""
-  }), /*#__PURE__*/react_default.a.createElement(ProtectedRoute, {
+  }, "Login"), /*#__PURE__*/react_default.a.createElement("hr", null), /*#__PURE__*/react_default.a.createElement(ProtectedRoute, {
     exact: true,
     path: "/",
     component: Home
@@ -7875,9 +7913,12 @@ document.addEventListener('DOMContentLoaded', function () {
     store = store_store();
   }
 
-  window.createUser = session_createUser;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
+  window.axiosGetRequest = axios_requests_axiosGetRequest;
+  window.axiosPostRequest = axios_requests_axiosPostRequest;
+  window.axiosPutRequest = axios_requests_axiosPutRequest;
+  window.axiosDeleteRequest = axios_requests_axiosDeleteRequest;
   var root = document.getElementById('root');
   react_dom_default.a.render( /*#__PURE__*/react_default.a.createElement(src_root, {
     store: store
