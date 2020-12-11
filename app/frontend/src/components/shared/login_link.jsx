@@ -5,7 +5,7 @@ export default function LoginLink() {
     return (
         <section className="login-link">
             <p>Have an account?</p>
-            <Link to="">Log In</Link>
+            <Link to="/login">Log In</Link>
         </section>
     )
 }
