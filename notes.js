@@ -87,6 +87,4 @@ npm uninstall file-loader
 delete package.lock.json
 git push heroku master 
 trying
-
-
  */
