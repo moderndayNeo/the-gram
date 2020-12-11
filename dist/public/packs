@@ -4588,7 +4588,7 @@ function createMemoryHistory(props) {
 // EXTERNAL MODULE: ./node_modules/mini-create-react-context/dist/esm/index.js
 var esm = __webpack_require__(10);
 
-// EXTERNAL MODULE: ./node_modules/react-router/node_modules/path-to-regexp/index.js
+// EXTERNAL MODULE: ./node_modules/path-to-regexp/index.js
 var path_to_regexp = __webpack_require__(11);
 var path_to_regexp_default = /*#__PURE__*/__webpack_require__.n(path_to_regexp);
 
@@ -7745,8 +7745,6 @@ function signup_form_hook_LoginForm() {
 
 
 
- // import logo from '../../../assets/images/the-gram-logo.png'
-// import logo from '../assets/the-gram-logo.png';
 
 
 

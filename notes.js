@@ -87,4 +87,13 @@ npm uninstall file-loader
 delete package.lock.json
 git push heroku master 
 trying
+
+try: 
+delete node modules
+delete p.l.json
+npm i
+gaa
+gc
+git push heroku fileloader:master
+
  */
