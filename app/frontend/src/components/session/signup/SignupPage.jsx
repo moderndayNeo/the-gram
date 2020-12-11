@@ -6,9 +6,9 @@ import LoginLink from '../../shared/login_link'
 
 export default function SignupPage() {
     return (
-        <div>
+        <div className="signup-page">
             <MainLogo />
-            <p>Sign up to see photos and videos from your friends.</p>
+            <p className="subtext">Sign up to see photos and videos from your friends.</p>
             <SignupForm />
 
         <TermsAndConditions />
