@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Root from '../src/root';
 import configureStore from '../src/redux/store/store';
 import { createUser } from '../src/util/session';
+import { axiosGetRequest, axiosPostRequest, axiosPutRequest, axiosDeleteRequest } from '../src/util/axios_requests';
+import axiosRequest from '../src/util/axios_request'
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -22,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.createUser = createUser;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
+  window.axiosGetRequest = axiosGetRequest;
+  window.axiosPostRequest = axiosPostRequest;
+  window.axiosPutRequest = axiosPutRequest;
+  window.axiosDeleteRequest = axiosDeleteRequest;
+  window.axiosRequest = axiosRequest
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);

@@ -7,13 +7,13 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    render :show
 
     # if @user.id !== current_user.id
     #     render json: { errors: "You cannot view another user's information" }, status: 401
     # else
     #     render :show
     # end
-
   end
 
   def create
@@ -38,6 +38,8 @@ class Api::UsersController < ApplicationController
   end
 
   def destroy
+    # use 'user.destroy'  instead of 'user.delete'
+    # 'user.destroy' will destroy the object, and also any :dependents
     @user = User.find(params[:id])
 
     if !@user
@@ -56,6 +58,4 @@ class Api::UsersController < ApplicationController
       .require(:user)
       .permit(:name, :username, :password, :email, :bio, :photo)
   end
-
-
 end

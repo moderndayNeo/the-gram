@@ -1,7 +1,7 @@
-import axiosRequest from './axios_request'
+import { axiosGetRequest, axiosPostRequest, axiosPutRequest, axiosDeleteRequest } from './axios_requests';
 
-export const createUser = (user) => axiosRequest('post', '/api/users', {user})
+export const createUser = (user) => axiosPostRequest('/api/users', {user})
 
-export const loginUser = (user) => axiosRequest('post', '/api/session', user)
+export const loginUser = (user) => axiosPostRequest('/api/session', user)
 
-export const logoutUser = () => axiosRequest('delete', '/api/session')
+export const logoutUser = () => axiosDeleteRequest('/api/session')
