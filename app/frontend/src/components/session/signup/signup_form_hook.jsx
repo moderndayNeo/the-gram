@@ -31,7 +31,8 @@ export default function LoginForm() {
                 <br />
                 <input className="grey-input" type="password" value={info.password} placeholder="password" onChange={updateValue("password")} />
                 <br />
-                <input type="submit" onClick={(e) => handleSubmit(e)} value="Login" />
+                <button className="blue-button" onClick={() => this.handleSubmit}>Sign Up</button>
+
             </form>
     );
 }
