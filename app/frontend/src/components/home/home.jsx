@@ -10,7 +10,6 @@ export default function Home() {
     const currentUserId = useSelector(state => state.session.id);
     const currentUser = useSelector(state => state.entities.users[currentUserId]);
     const userImageUrl = currentUser.image_url;
-    console.log(currentUser);
 
     return (
         <div>
@@ -20,6 +19,7 @@ export default function Home() {
                 <img src={userImageUrl} alt="user" />
             }
             <button onClick={() => dispatch(logoutUser())}>Log Out</button>
+
         </div>
     );
 }
