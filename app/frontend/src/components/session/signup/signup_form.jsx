@@ -21,6 +21,8 @@ export default function LoginForm() {
         };
     };
 
+    // disable button unless all forms filled in and conditions satisfied
+
     return (
             <form className="signup-form">
                 <input className="grey-input" type="text" value={info.email} placeholder="Email" onChange={updateValue("email")} />
