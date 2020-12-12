@@ -10,6 +10,12 @@ import UnfilledHeartIcon from './icons/unfilled-heart-icon.jsx';
 import UnfilledHomeIcon from './icons/unfilled-home-icon'
 import UnfilledCompassIcon from './icons/unfilled-compass-icon'
 import UnfilledNewPostIcon from './icons/unfilled-new-post-icon'
+import UnfilledCameraIcon from './icons/unfilled-camera-icon'
+import UnfilledPaperPlaneIcon from './icons/unfilled-paper-plane-icon'
+import UnfilledCommentIcon from './icons/unfilled-comment-icon'
+import UnfilledSaveIcon from './icons/unfilled-save-icon'
+import Chevron from './icons/chevron'
+import ThreeDotsIcon from './icons/three-dots-icon'
 
 export default function SignupPage() {
     return (
@@ -25,6 +31,12 @@ export default function SignupPage() {
             <UnfilledHomeIcon />
             <UnfilledCompassIcon />
             <UnfilledNewPostIcon />
+            <UnfilledCameraIcon />
+            <UnfilledPaperPlaneIcon />
+            <UnfilledCommentIcon /> 
+            <UnfilledSaveIcon />
+            <Chevron />
+            <ThreeDotsIcon />
             <AppLinks />
         </div>
     );
