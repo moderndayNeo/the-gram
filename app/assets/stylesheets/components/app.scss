@@ -19,7 +19,7 @@ body {
     height: 100%;
     width: 100%;
     padding: 5px;
-    margin: 10px auto;
+    margin: 5px auto;
     font-weight: 600;
 }
 
@@ -35,9 +35,10 @@ body {
     border-radius: 4px;
     outline: none;
     background-color: #fafafa;
-    padding: 4px 9px;
-    margin: 6px 0;
+    padding: 3px 9px;
+    margin: 3px 0;
     line-height: 30px;
+    font-size: 13px;
 }
 
 .auth-form {

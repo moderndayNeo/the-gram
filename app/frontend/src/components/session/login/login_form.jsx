@@ -19,7 +19,7 @@ export default function LoginForm() {
     };
 
     return (
-        <form className="auth-form">
+        <form className="auth-form login-form">
             <input
                 className="grey-input"
                 type="text"

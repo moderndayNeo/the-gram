@@ -10,9 +10,9 @@ export default function LoginPage() {
     return (
         <div className="auth-page login-page">
             <MainLogo />
-            <GuestLoginButton />
-            <OrSeparator />
             <LoginForm />
+            <OrSeparator />
+            <GuestLoginButton />
             <SignupLoginLink text="Don't have an account?" linkText="Sign up" href="/signup" />
             <AppLinks />
         </div>
