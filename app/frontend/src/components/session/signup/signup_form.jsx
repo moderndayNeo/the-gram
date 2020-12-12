@@ -31,7 +31,7 @@ export default function LoginForm() {
                 <br />
                 <input className="grey-input" type="text" value={info.username} placeholder="Username" onChange={updateValue("username")} />
                 <br />
-                <input className="grey-input" type="password" value={info.password} placeholder="password" onChange={updateValue("password")} />
+                <input className="grey-input" type="password" value={info.password} placeholder="Password" onChange={updateValue("password")} />
                 <br />
                 <button className="blue-button" onClick={(e) => handleSubmit(e)}>Sign Up</button>
             </form>
