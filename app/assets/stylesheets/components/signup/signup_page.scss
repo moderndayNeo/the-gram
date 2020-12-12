@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 12%;
+    border: 1px solid red;
 
     .subtext {
         color: rgba(var(--f52,142,142,142),1);
@@ -11,6 +13,6 @@
         margin: 0 40px 10px;
         text-align: center;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
+        width: 100%;
     }
 }

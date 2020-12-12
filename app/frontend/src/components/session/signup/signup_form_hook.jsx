@@ -22,20 +22,16 @@ export default function LoginForm() {
     };
 
     return (
-        <div>
-            <form>
-                <input type="text" value={info.username} placeholder="username" onChange={updateValue("username")} />
+            <form className="signup-form">
+                <input className="grey-input" type="text" value={info.email} placeholder="Email" onChange={updateValue("email")} />
                 <br />
-                <input type="text" value={info.name} placeholder="name" onChange={updateValue("name")} />
+                <input className="grey-input" type="text" value={info.name} placeholder="Full Name" onChange={updateValue("name")} />
                 <br />
-                <input type="password" value={info.password} placeholder="password" onChange={updateValue("password")} />
+                <input className="grey-input" type="text" value={info.username} placeholder="Username" onChange={updateValue("username")} />
                 <br />
-                <input type="text" value={info.email} placeholder="email" onChange={updateValue("email")} />
-                <br />
-                <input type="text" value={info.bio} placeholder="bio" onChange={updateValue("bio")} />
+                <input className="grey-input" type="password" value={info.password} placeholder="password" onChange={updateValue("password")} />
                 <br />
                 <input type="submit" onClick={(e) => handleSubmit(e)} value="Login" />
             </form>
-        </div>
     );
 }
