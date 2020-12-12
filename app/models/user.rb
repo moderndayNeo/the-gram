@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
-  # has_one_attached :photo, dependent: :destroy
+  has_one_attached :photo
 
   attr_reader :password
 
