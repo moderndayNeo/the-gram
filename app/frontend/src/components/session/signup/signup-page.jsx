@@ -8,7 +8,7 @@ import GuestLoginButton from '../../shared/guest-login-button';
 
 export default function SignupPage() {
     return (
-        <div className="signup-page">
+        <div className="auth-page signup-page">
             <MainLogo />
             <p className="subtext">Sign up to see photos and videos from your friends.</p>
             <GuestLoginButton />

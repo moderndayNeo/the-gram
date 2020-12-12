@@ -22,3 +22,11 @@ body {
     margin: 10px auto;
     font-weight: 600;
 }
+
+
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12%;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser } from '../../redux/actions/session_actions';
+import { loginUser } from '../../../redux/actions/session_actions';
 
 export default function LoginForm() {
     const [info, setInfo] = useState({

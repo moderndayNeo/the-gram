@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './home/home';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import LoginForm from './session/login_form';
+import LoginPage from './session/login/login_page'
 import SignupPage from './session/signup/signup-page';
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
         <div className="app">
             <ProtectedRoute exact path="/" component={Home} />
             <AuthRoute exact path="/signup" component={SignupPage} />
-            <AuthRoute exact path="/login" component={LoginForm} />
+            <AuthRoute exact path="/login" component={LoginPage} />
         </div>
     );
 }
