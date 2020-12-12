@@ -19,27 +19,27 @@ export default function LoginForm() {
     };
 
     return (
-        <div>
-            <h2>Log In</h2>
-            <form>
-                <input
-                    type="text"
-                    value={info.username}
-                    placeholder="username"
-                    onChange={updateValue("username")}
-                    autoComplete="username"
-                />
-                <br />
-                <input
-                    type="password"
-                    value={info.password}
-                    placeholder="password"
-                    onChange={updateValue("password")}
-                    autoComplete="password"
-                />
-                <br />
-                <input type="submit" onClick={(e) => handleSubmit(e)} value="Login" />
-            </form>
-        </div>
+        <form className="auth-form">
+            <input
+                className="grey-input"
+                type="text"
+                value={info.username}
+                placeholder="Username"
+                onChange={updateValue("username")}
+                autoComplete="username"
+            />
+            <br />
+            <input
+                className="grey-input"
+                type="password"
+                value={info.password}
+                placeholder="Password"
+                onChange={updateValue("password")}
+                autoComplete="password"
+            />
+            <br />
+            <button className="blue-button" onClick={(e) => handleSubmit(e)}>Log In</button>
+
+        </form>
     );
 }

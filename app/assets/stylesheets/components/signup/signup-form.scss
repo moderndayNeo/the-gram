@@ -1,26 +1,8 @@
 .signup-form {
-    width: 100%;
-    text-align: center;
-
-    input {
-        width: 100%;
-    }
-
-}
-
-
-.grey-input, .white-input {
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
-    outline: none;
-    background-color: #fafafa;
-    padding: 4px 9px;
-    margin: 6px 0;
-    line-height: 30px;
 }
 
 .signup-terms {
-    color: rgba(var(--f52,142,142,142),1);
+    color: rgba(var(--f52, 142, 142, 142), 1);
     font-size: 12px;
     text-align: center;
     letter-spacing: 0.1px;
@@ -28,5 +10,4 @@
     span {
         font-weight: bold;
     }
-
 }

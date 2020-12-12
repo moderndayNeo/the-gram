@@ -23,10 +23,28 @@ body {
     font-weight: 600;
 }
 
-
 .auth-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 12%;
+}
+
+.grey-input, .white-input {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fafafa;
+    padding: 4px 9px;
+    margin: 6px 0;
+    line-height: 30px;
+}
+
+.auth-form {
+    width: 100%;
+    text-align: center;
+
+    input {
+        width: 100%;
+    }
 }
