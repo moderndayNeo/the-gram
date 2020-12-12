@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { axiosPutRequest } from '../../util/axios_requests';
 
-export default function ImageForm() {
+export default function ImageForm({ currentUserId }) {
     const [photoUrl, setPhotoUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
 
@@ -23,8 +24,11 @@ export default function ImageForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // const formData = new FormData()
-        // formData.append()
+        const formData = new FormData();
+        formData.append('user[photo]', photoFile);
+
+        axiosPutRequest(`/api/users/${currentUserId}`, formData)
+            .then(() => console.log('success'));
 
     };
 

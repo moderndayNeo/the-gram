@@ -21,7 +21,7 @@ export default function Home() {
                 <img src={userImageUrl} alt="user" />
             }
 
-            <ImageForm />
+            <ImageForm currentUserId={currentUserId} />
         </div>
     );
 }
