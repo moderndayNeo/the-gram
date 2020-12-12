@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/actions/session_actions';
 import { useDispatch } from 'react-redux';
+import ImageForm from '../user/image_form';
 
 
 export default function Home() {
@@ -13,13 +14,14 @@ export default function Home() {
 
     return (
         <div>
+            <button onClick={() => dispatch(logoutUser())}>Log Out</button>
             <h3>Welcome, {currentUser.name}!</h3>
             {
                 userImageUrl &&
                 <img src={userImageUrl} alt="user" />
             }
-            <button onClick={() => dispatch(logoutUser())}>Log Out</button>
 
+            <ImageForm />
         </div>
     );
 }
