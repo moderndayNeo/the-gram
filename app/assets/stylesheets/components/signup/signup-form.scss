@@ -23,3 +23,15 @@
     margin: 6px 0;
     line-height: 30px;
 }
+
+.signup-terms {
+    color: rgba(var(--f52,142,142,142),1);
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 0.1px;
+
+    span {
+        font-weight: bold;
+    }
+
+}
