@@ -3,6 +3,7 @@ import SignupForm from './signup_form';
 import MainLogo from '../../shared/main_logo';
 import SignupTerms from './signup-terms'
 import LoginLink from '../../shared/login_link';
+import AppLinks from '../../shared/app_links'
 
 export default function SignupPage() {
     return (
@@ -12,6 +13,7 @@ export default function SignupPage() {
             <SignupForm />
             <SignupTerms />
             <LoginLink />
+            <AppLinks />
         </div>
     );
 }
