@@ -30,9 +30,9 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    # if @user.username == "guest"
-      # return render json: ["The guest account cannot be edited"], status: 401
-    # end
+    if @user.username == "guest"
+      return render json: ["The guest account cannot be edited"], status: 401
+    end
 
     if @user.update!(user_params)
       render :show
