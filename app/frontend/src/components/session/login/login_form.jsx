@@ -3,8 +3,8 @@ import { loginUser } from '../../../redux/actions/session_actions';
 
 export default function LoginForm() {
     const [info, setInfo] = useState({
-        username: 'arnie85',
-        password: 'mrolympia85'
+        username: '',
+        password: ''
     });
 
     const handleSubmit = e => {
