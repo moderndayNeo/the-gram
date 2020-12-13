@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createNewUser } from '../../../redux/actions/session_actions';
 
-export default function LoginForm() {
+export default function SignupForm() {
     const [info, setInfo] = useState({
         name: '',
         username: '',
@@ -22,6 +22,7 @@ export default function LoginForm() {
     };
 
     // disable button unless all forms filled in and conditions satisfied
+
 
     return (
             <form className="auth-form signup-form">
