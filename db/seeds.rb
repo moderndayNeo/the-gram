@@ -30,3 +30,13 @@ u3 = User.create(
     password: 'thewire'
 )
 
+u3 = User.create(
+    name: 'guest',
+    username: 'guest',
+    bio: nil,
+    email: 'guest@example.com',
+    password: 'guestaccount'
+)
+
+
+

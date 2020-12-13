@@ -30,6 +30,10 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
+    if @user.username == "guest"
+      return render json: ["The guest account cannot be edited"], status: 401
+    end
+
     if @user.update!(user_params)
       render :show
     else
@@ -41,6 +45,11 @@ class Api::UsersController < ApplicationController
     # use 'user.destroy'  instead of 'user.delete'
     # 'user.destroy' will destroy the object, and also any :dependents
     @user = User.find(params[:id])
+
+    if @user.username == "guest"
+      return render json: ["The guest account cannot be deleted"], status: 401
+    end
+    # Note, need to seed data before adding this condition.
 
     if !@user
       render json: { errors: ["User not found"] }, status: 404

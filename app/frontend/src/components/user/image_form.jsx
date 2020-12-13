@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { axiosPutRequest } from '../../util/axios_requests';
+import { updateUser } from '../../redux/actions/session_actions';
+import { useDispatch } from 'react-redux';
+import UserErrors from '../shared/user_errors';
 
 export default function ImageForm({ currentUserId }) {
     const [photoUrl, setPhotoUrl] = useState('');
@@ -21,15 +23,15 @@ export default function ImageForm({ currentUserId }) {
         }
     };
 
+    const dispatch = useDispatch();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
         formData.append('user[photo]', photoFile);
 
-        axiosPutRequest(`/api/users/${currentUserId}`, formData)
-            .then(() => console.log('success'));
-
+        dispatch(updateUser(currentUserId, formData));
     };
 
     const preview = photoUrl ? <img src={photoUrl} alt="" /> : null;
@@ -44,6 +46,7 @@ export default function ImageForm({ currentUserId }) {
 
                 <button onClick={(e) => handleSubmit(e)}>Upload Image</button>
             </form>
+            <UserErrors />
         </div>
     );
 }
