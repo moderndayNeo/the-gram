@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 import { logoutUser } from '../../redux/actions/session_actions';
 import { useDispatch } from 'react-redux';
 import ImageForm from '../user/image_form';
-import AllPosts from '../posts/all_posts';
+import Feed from '../posts/feed';
 import PostForm from '../posts/post_form';
 import HomeTopNav from './home_top_nav'
 import BottomNav from '../shared/bottom_nav'
+
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -17,12 +18,11 @@ export default function Home() {
 
 
     const currentUserShowPage = () => <div>
-        <button onClick={() => dispatch(logoutUser())}>Log Out</button>
-        <h3>Welcome, {currentUser.name}!</h3>
-        {userImageUrl && <img className="user-image" src={userImageUrl} alt="user" />}
-        <ImageForm currentUserId={currentUserId} />
-        <AllPosts />
-        <PostForm />
+        {/* <button onClick={() => dispatch(logoutUser())}>Log Out</button> */}
+        {/* <ImageForm currentUserId={currentUserId} /> */}
+        <Feed />
+        {/* <PostForm /> */}
+
 
     </div>;
 
@@ -34,9 +34,10 @@ export default function Home() {
         <section>
             <HomeTopNav />
         {
-
         currentUser ? currentUserShowPage() : loadingComponent()
         }
+
+
         <BottomNav />
         </section>
     );
