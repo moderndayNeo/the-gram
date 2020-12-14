@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import ImageForm from '../user/image_form';
 import AllPosts from '../posts/all_posts';
 import PostForm from '../posts/post_form';
+import HomeTopNav from './home_top_nav'
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -28,7 +29,13 @@ export default function Home() {
 
 
     return (
+        <section>
+            <HomeTopNav />
+        {
+
         currentUser ? currentUserShowPage() : loadingComponent()
+        }
+        </section>
     );
 }
 
