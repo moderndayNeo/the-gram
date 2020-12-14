@@ -7,7 +7,7 @@ import {
 
 export const createPost = (post) => axiosPostRequest(`/api/posts`, post)
 
-export const getPosts = () => axiosGetRequest(`/api/posts`)
+export const fetchPosts = () => axiosGetRequest(`/api/posts`)
 // export const getFeedPosts = () => axiosGetRequest(`/api/posts`, { type: 'feed'})
 // export const getDiscoverPosts = () => axiosGetRequest(`/api/posts`, { type: 'discover'})
 
