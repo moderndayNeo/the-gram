@@ -15,7 +15,7 @@ export default function Home() {
             <HomeTopNav />
             <button onClick={() => dispatch(logoutUser())}>Log Out</button>
             <Feed />
-            <BottomNav />
+            <BottomNav currentUser={currentUser} />
         </section>
     );
 }
