@@ -12,16 +12,20 @@ export default function Home() {
     const currentUser = useSelector(state => state.entities.users[currentUserId]);
     const userImageUrl = currentUser.image_url;
 
-    return (
-        <div>
-            <button onClick={() => dispatch(logoutUser())}>Log Out</button>
-            <h3>Welcome, {currentUser.name}!</h3>
-            {
-                userImageUrl &&
-                <img src={userImageUrl} alt="user" />
-            }
+    const currentUserShowPage = () => <div>
+        <button onClick={() => dispatch(logoutUser())}>Log Out</button>
+        <h3>Welcome, {currentUser.name}!</h3>
+        {
+            userImageUrl &&
+            <img src={userImageUrl} alt="user" />
+        }
 
-            <ImageForm currentUserId={currentUserId} />
-        </div>
+        <ImageForm currentUserId={currentUserId} />
+    </div>;
+
+    const loadingComponent = () => <div>Loading...</div>;
+
+    return (
+        currentUser ? currentUserShowPage() : loadingComponent()
     );
 }
