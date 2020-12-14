@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   validates :author_id, presence: true
   validates :caption, length: { maximum: 2200 }
+  validates :photo, attached: true
+
+  has_one_attached :photo
 
   belongs_to :author,
              class_name: :User,
@@ -20,5 +23,4 @@ class Post < ApplicationRecord
 
   has_many :hashtags, through: :taggings, source: :hashtag
 
-  has_one_attached :photo
 end

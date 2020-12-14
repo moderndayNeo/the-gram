@@ -24,8 +24,7 @@ class Api::PostsController < ApplicationController
       return render json: ["Only the post's creator can edit a post"], status: 401
     end
 
-    if @post.update_attributes(post_params)
-      # does update attributes save the object?
+    if @post.update_attributes(post_params) # use update_attributes. It will return false if unsuccessful, or save it if successful
       render :show
     else
       render json: @post.errors.full_messages, status: 422
