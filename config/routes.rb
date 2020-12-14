@@ -3,11 +3,10 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
 
     resources :users, only: [:index, :show, :update, :create, :destroy] do
-      resources :posts, only: [:create, :update, :destroy]
       resources :follows, only: [:create, :destroy]
     end
 
-    resources :posts, only: [:index, :show] do
+    resources :posts, only: [:create, :index, :show, :update, :destroy] do
       resources :likes, only: [:create, :destroy]
       resources :saves, only: [:create, :destroy]
     end
@@ -23,4 +22,3 @@ Rails.application.routes.draw do
 
   root "static_pages#root"
 end
-
