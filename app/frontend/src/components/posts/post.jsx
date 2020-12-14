@@ -39,7 +39,19 @@ const PostImage = ({ imageUrl }) => {
 const PostFooter = () => {
     return (
         <div className="post-footer">
+            <FooterIcons />
             Footer
         </div>
     );
 };
+
+const FooterIcons = () => (
+    <div className="footer-icons">
+        <div className="icons-left">
+            {icons.unfilledHeart}
+            {icons.comment}
+            {icons.paperPlane}
+        </div>
+        {icons.unfilledSave}
+    </div>
+);

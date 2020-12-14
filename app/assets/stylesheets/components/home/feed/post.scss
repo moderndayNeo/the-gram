@@ -29,6 +29,20 @@
     .post-footer {
         width: 100%;
         height: 185px;
+        padding: 0 16px;
+        margin-top: 4px;
         border: 1px solid red;
+
+        .footer-icons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .icons-left {
+                display: flex;
+                justify-content: space-between;
+                width: 30%;
+            }
+        }
     }
 }

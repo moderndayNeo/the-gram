@@ -5,7 +5,7 @@ import Post from './post';
 export default function Feed() {
 
     // const posts = useSelector(state => Object.values(state.entities.posts));
-    const posts = [{ id: 1, author_id: 1, caption: 'Example post', author_username: 'arnie85', image_url: window.waterfallImg }];
+    const posts = [{ id: 1, author_id: 1, caption: 'Example post', author_username: 'arnie85', image_url: window.elephantImg }];
 
     return (
         <ul className="feed">
