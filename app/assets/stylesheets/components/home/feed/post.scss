@@ -37,12 +37,18 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
+            padding: 8px 0;
 
             .icons-left {
                 display: flex;
                 justify-content: space-between;
                 width: 30%;
             }
+
+        }
+
+        .post-likes {
+            font-weight: bold;
         }
     }
 }

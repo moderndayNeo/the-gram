@@ -40,6 +40,7 @@ const PostFooter = () => {
     return (
         <div className="post-footer">
             <FooterIcons />
+            <div className="post-likes">135 likes</div>
             Footer
         </div>
     );
@@ -55,3 +56,4 @@ const FooterIcons = () => (
         {icons.unfilledSave}
     </div>
 );
+
