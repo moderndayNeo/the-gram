@@ -44,7 +44,7 @@ export default function ImageForm({ currentUserId }) {
                 <input type="file" onChange={(e) => handleUpload(e)} />
                 {preview}
 
-                <button onClick={(e) => handleSubmit(e)}>Upload Image</button>
+                <button disabled={photoFile ? false : true} onClick={(e) => handleSubmit(e)}>Upload Image</button>
             </form>
             <UserErrors />
         </div>
