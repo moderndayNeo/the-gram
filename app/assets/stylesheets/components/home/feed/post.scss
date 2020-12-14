@@ -1,4 +1,7 @@
 .post {
+    width: 100%;
+    // border: 1px solid red;
+
     .post-header {
         width: 100%;
         height: 60px;
@@ -6,16 +9,26 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 16px;
-        border: 1px solid red;
+        // border: 1px solid red;
 
         p {
             width: 80%;
             text-align: left;
             font-weight: bold;
         }
-
- 
     }
 
-}
+    .image-container {
+        // border: 1px solid red;
 
+        .post-image {
+            width: 100%;
+        }
+    }
+
+    .post-footer {
+        width: 100%;
+        height: 185px;
+        border: 1px solid red;
+    }
+}
