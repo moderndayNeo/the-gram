@@ -44,11 +44,23 @@
                 justify-content: space-between;
                 width: 30%;
             }
-
         }
 
         .post-likes {
             font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .caption-and-comments {
+            .author {
+                font-weight: bold;
+                margin: 0;
+            }
+            
+            p {
+                display: inline;
+
+            }
         }
     }
 }

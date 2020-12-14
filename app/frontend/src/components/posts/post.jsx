@@ -3,7 +3,7 @@ import UserAvatar from '../shared/user_avatar';
 import icons from '../shared/icons/svg-icons';
 import { useSelector } from 'react-redux';
 
-export default function Post({ post: { id, author_id, image_url } }) {
+export default function Post({ post: { id, author_id, image_url, caption } }) {
     const author = useSelector(state => state.entities.users[author_id]);
     const authorImage = author.image_url;
 
@@ -11,7 +11,7 @@ export default function Post({ post: { id, author_id, image_url } }) {
         <article className="post">
             <PostHeader author={author.username} authorImage={authorImage} />
             <PostImage id={id} imageUrl={image_url} />
-            <PostFooter />
+            <PostFooter author={author.username} caption={caption} />
         </article>
     );
 }
@@ -36,12 +36,12 @@ const PostImage = ({ imageUrl }) => {
     );
 };
 
-const PostFooter = () => {
+const PostFooter = ({ author, caption }) => {
     return (
         <div className="post-footer">
             <FooterIcons />
             <div className="post-likes">135 likes</div>
-            Footer
+            <CaptionAndComments author={author} caption={caption} />
         </div>
     );
 };
@@ -57,3 +57,12 @@ const FooterIcons = () => (
     </div>
 );
 
+const CaptionAndComments = ({ author, caption }) => (
+    <div className="caption-and-comments">
+        <div className="caption">
+            <span className="author">{author}</span>
+            <p> {caption}</p>
+        </div>
+
+    </div>
+);
