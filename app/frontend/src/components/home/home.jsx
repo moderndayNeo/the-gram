@@ -6,6 +6,7 @@ import ImageForm from '../user/image_form';
 import AllPosts from '../posts/all_posts';
 import PostForm from '../posts/post_form';
 import HomeTopNav from './home_top_nav'
+import BottomNav from '../shared/bottom_nav'
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function Home() {
     const loadingComponent = () => <div>Loading...</div>;
 
 
+
     return (
         <section>
             <HomeTopNav />
@@ -35,6 +37,7 @@ export default function Home() {
 
         currentUser ? currentUserShowPage() : loadingComponent()
         }
+        <BottomNav />
         </section>
     );
 }
