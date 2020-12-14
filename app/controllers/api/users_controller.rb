@@ -2,11 +2,12 @@ class Api::UsersController < ApplicationController
   # before_action :require_current_user!, except: [:create]
 
   def index
-    @users = User.all
+    @users = User.all.includes(:posts)
   end
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts
     render :show
 
     # if @user.id !== current_user.id

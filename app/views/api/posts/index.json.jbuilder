@@ -1,7 +1,1 @@
-json.posts do
-  @posts.each do |post|
-    json.set! post.id do
-      json.partial! "post", post: post
-    end
-  end
-end
+json.partial! 'posts', posts: @posts
