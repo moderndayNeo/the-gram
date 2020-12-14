@@ -6,7 +6,7 @@ export default function CurrentUserAvatar() {
     const imageUrl = useSelector(state => state.entities.users[currentUserId].image_url);
 
     return (
-        <img src={imageUrl || window.noAvatarImg} alt="user avatar"/>
+        <img className="user-avatar" src={imageUrl || window.noAvatarImg} alt="user avatar"/>
     );
 }
 

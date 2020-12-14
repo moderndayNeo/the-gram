@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.all.includes(:author)
     # The Feed (posts by current_user, people they follow, hashtags they follow, ordered by creation date)
   end
 

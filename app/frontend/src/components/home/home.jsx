@@ -21,7 +21,4 @@ export default function Home() {
 }
 
 
-
-
-
 const loadingComponent = () => <div>Loading...</div>;

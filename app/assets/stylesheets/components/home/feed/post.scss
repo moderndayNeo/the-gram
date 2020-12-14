@@ -1,0 +1,25 @@
+.post {
+    .post-header {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+        border: 1px solid red;
+
+        p {
+            width: 80%;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+    }
+
+}
+

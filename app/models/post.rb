@@ -22,4 +22,8 @@ class Post < ApplicationRecord
   #          dependent: :destroy
 
   # has_many :hashtags, through: :taggings, source: :hashtag
+
+  def author_username
+    self.author.username
+  end
 end
