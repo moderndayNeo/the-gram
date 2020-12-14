@@ -17,7 +17,7 @@ export default function Home() {
         <h3>Welcome, {currentUser.name}!</h3>
         {
             userImageUrl &&
-            <img src={userImageUrl} alt="user" />
+            <img className="user-image" src={userImageUrl} alt="user" />
         }
 
         <ImageForm currentUserId={currentUserId} />
