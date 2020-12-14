@@ -6,7 +6,7 @@ export default (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_CURRENT_USER:
             return Object.assign({}, state, {
-                [action.user.data.id]: action.user.data,
+                [action.user.id]: action.user,
             })
 
         default:
