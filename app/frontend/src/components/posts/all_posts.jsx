@@ -6,15 +6,15 @@ export default function AllPosts() {
     const posts = useSelector(state => Object.values(state.entities.posts));
 
     return (
-        <div>
+        <ul>
             {
                 posts.map(post => (
                     <li key={post.id}>
                         <p>Id: {post.id}</p>
-                        <p>Content: {post.content}</p>
+                        <p>Caption: {post.caption}</p>
                     </li>
                 ))
             }
-        </div>
+        </ul>
     );
 }
