@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import icons from './icons/svg-icons';
 import UserAvatar from './user_avatar';
 import { useLocation, useHistory, Link } from 'react-router-dom';
@@ -19,15 +19,20 @@ export default function BottomNav({ currentUser }) {
 
         if (file) {
             reader.readAsDataURL(file);
-            return history.push({
-                pathname: "/create/style",
-                state: { photoFile, photoUrl }
-            });
         } else {
             setPhotoUrl('');
             setPhotoFile(null);
         }
     };
+
+    useEffect(() => {
+        if (photoFile && photoUrl) {
+            history.push({
+                pathname: "/create/style",
+                state: { photoFile, photoUrl }
+            });
+        }
+    }, [photoUrl, photoFile]);
 
     return (
         <nav className="bottom-nav">
