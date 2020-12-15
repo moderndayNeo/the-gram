@@ -20,6 +20,7 @@ export const receivePost = (post) => ({
 
 export const createPost = (post) => (dispatch) =>
     PostsAPIUtil.createPost(post)
+        // .then(res => console.log(res))
         .then(({data: {post}}) => dispatch(receivePost(post)))
         .catch((errors) => dispatch(receivePostErrors(errors)))
 

@@ -10,8 +10,8 @@ export default (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_POSTS:
             return Object.assign({}, state, action.posts)
-            
-            case RECEIVE_POST:
+
+        case RECEIVE_POST:
             return Object.assign({}, state, action.post)
 
         default:
