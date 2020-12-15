@@ -20,13 +20,12 @@
     <body>
       <%= yield %>
       <script type="text/javascript">
-        window.mainLogoUrl = "<%= image_url('the-gram-logo.png') %>"
-        window.loginPageImgUrl = "<%= image_url('screenshots/login_page.png') %>"
-        window.appStoreLinkImg = "<%= image_url('app-store-download-link.png') %>"
-        window.playStoreLinkImg = "<%= image_url('play-store-download-link.png') %>"
-        window.placeholderImg = "<%= image_url('placeholder-img.jpeg') %>"
-        window.noAvatarImg = "<%= image_url('icons/no_avatar.jpg') %>"
+        window.mainLogoUrl = "<%= asset_url('the-gram-logo.png') %>"
+        window.loginPageImgUrl = "<%= asset_url('screenshots/login_page.png') %>"
+        window.appStoreLinkImg = "<%= asset_url('app-store-download-link.png') %>"
+        window.playStoreLinkImg = "<%= asset_url('play-store-download-link.png') %>"
+        window.placeholderImg = "<%= asset_url('placeholder-img.jpeg') %>"
+        window.noAvatarImg = "<%= asset_url('icons/no_avatar.jpg') %>"
       </script>
     </body>
   </html>
-

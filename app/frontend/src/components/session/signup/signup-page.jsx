@@ -13,7 +13,7 @@ export default function SignupPage() {
         <div className="auth-page signup-page">
             <MainLogo />
             <p className="subtext">Sign up to see photos and videos from your friends.</p>
-            {/* <img src={window.elephant} alt=""/> */}
+            <img src={window.placeholderImg} alt=""/>
 
             <GuestLoginButton />
             <OrSeparator />
