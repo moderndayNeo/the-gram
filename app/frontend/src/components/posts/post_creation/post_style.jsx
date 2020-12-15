@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import icons from '../../shared/icons/svg-icons';
 
@@ -8,7 +8,9 @@ export default function PostStyle() {
     return (
         <div className="post-style">
             <PostStyleHeader />
-            {/* <img src={location.state.photoUrl} alt="post photo"/> */}
+            <img src={location.state ? location.state.photoUrl : window.placeholderImg} alt="post photo" />
+
+            <PostStyleFooter />
         </div>
     );
 }
@@ -25,3 +27,14 @@ const PostStyleHeader = () => (
         </Link>
     </header>
 );
+
+const PostStyleFooter = () => {
+    const [selected, setSelected] = useState('filter');
+
+    return (
+        <footer>
+            <button onClick={() => setSelected('filter')} className={selected === 'filter' ? "selected" : null}>Filter</button>
+            <button onClick={() => setSelected('edit')} className={selected === 'edit' ? "selected" : null}>Edit</button>
+        </footer>
+    );
+};
