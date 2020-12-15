@@ -1,0 +1,9 @@
+.post-details {
+    header {
+        border-bottom: 1px solid var(--light-grey);
+
+        svg {
+            transform: rotate(-90deg);
+        }
+    }
+}
