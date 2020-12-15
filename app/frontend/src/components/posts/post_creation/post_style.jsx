@@ -4,22 +4,17 @@ import icons from '../../shared/icons/svg-icons';
 
 export default function PostStyle() {
     const location = useLocation();
-    const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg
-    const photoFile = location.state ? location.state.photoFile : null
-    console.log(photoFile)
-    console.log(photoUrl)
+    const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
+    const photoFile = location.state ? location.state.photoFile : null;
 
     return (
         <div className="post-style">
             <PostStyleHeader photoFile={photoFile} photoUrl={photoUrl} />
-            {/* <img src={photoUrl} alt="post photo" /> */}
-            <img src={window.placeholderImg} alt="post photo" />
-
+            <img src={photoUrl} alt="post photo" />
             <PostStyleFooter />
         </div>
     );
 }
-
 
 const PostStyleHeader = ({ photoFile, photoUrl }) => (
     <header>

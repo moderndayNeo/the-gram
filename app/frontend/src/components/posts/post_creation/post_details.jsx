@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 export default function PostDetails() {
     const location = useLocation();
-    const postImageUrl = location.state ? location.state.photoUrl : window.placeholderImg;
-    const postImageFile = location.state ? location.state.photoFile : null;
+    const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
+    const photoFile = location.state ? location.state.photoFile : null;
     const currentUserId = useSelector((state) => state.session.id);
     const currentUser = useSelector(
         (state) => state.entities.users[currentUserId]
@@ -15,16 +15,21 @@ export default function PostDetails() {
 
     return (
         <div className="post-details">
-            <PostDetailsHeader />
-            <Caption userImage={currentUser.imageUrl} postImageUrl={postImageUrl} />
+            <PostDetailsHeader photoFile={photoFile} photoUrl={photoUrl} />
+            <Caption userImage={currentUser.imageUrl} photoUrl={photoUrl} />
         </div>
     );
 }
 
-
-const PostDetailsHeader = () => (
+const PostDetailsHeader = ({ photoFile, photoUrl }) => (
     <header>
-        <Link to="/create/style">
+        <Link to={{
+            pathname: '/create/style',
+            state: {
+                photoUrl,
+                photoFile
+            }
+        }}>
             {icons.chevron}
         </Link>
         <h3>New Post</h3>
@@ -35,10 +40,10 @@ const PostDetailsHeader = () => (
     </header>
 );
 
-const Caption = ({ userImage, postImageUrl }) => (
+const Caption = ({ userImage, photoUrl }) => (
     <section className="caption">
         <UserAvatar imageUrl={userImage} />
         <textarea placeholder="Write a caption..."></textarea>
-        <img className="post-image" src={postImageUrl} alt="" />
+        <img className="post-image" src={photoUrl} alt="" />
     </section>
 );
