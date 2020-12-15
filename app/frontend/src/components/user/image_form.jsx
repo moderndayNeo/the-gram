@@ -6,6 +6,7 @@ import UserErrors from '../shared/user_errors';
 export default function ImageForm({ currentUserId }) {
     const [photoUrl, setPhotoUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
+        const dispatch = useDispatch();
 
     const handleUpload = (e) => {
         const reader = new FileReader();
@@ -22,8 +23,6 @@ export default function ImageForm({ currentUserId }) {
             setPhotoFile(null);
         }
     };
-
-    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
