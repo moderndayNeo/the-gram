@@ -3,11 +3,11 @@ import { createNewUser } from '../../../redux/actions/session_actions';
 
 export default function SignupForm() {
     const [info, setInfo] = useState({
-        name: 'guest4',
-        username: 'guest4',
-        bio: 'guest4',
+        name: '',
+        username: '',
+        bio: '',
         password: '',
-        email: 'guest4'
+        email: ''
     });
 
     const handleSubmit = e => {
