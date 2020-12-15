@@ -47,6 +47,8 @@ export default function BottomNav({ currentUser }) {
                 id="file-upload"
                 type="file"
                 onChange={(e) => handleUpload(e)}
+                multiple={false}
+                accept=".jpg, .jpeg, .png, .pdf"
             />
 
 
