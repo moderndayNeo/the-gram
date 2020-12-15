@@ -21,6 +21,10 @@ body {
     padding: 5px;
     margin: 5px auto;
     font-weight: 600;
+
+    &:disabled {
+        opacity: 0.3;
+    }
 }
 
 .auth-page {

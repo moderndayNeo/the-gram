@@ -7,36 +7,35 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 u1 = User.create(
-    name: 'arnie',
-    username: 'arnie85',
-    bio: nil,
-    email: 'arnie@example.com',
-    password: 'mrolympia85'
+  name: "arnie",
+  username: "arnie85",
+  bio: nil,
+  email: "arnie@example.com",
+  password: "mrolympia85",
 )
 
 u2 = User.create(
-    name: 'elon',
-    username: 'elonmusk',
-    bio: nil,
-    email: 'elon@example.com',
-    password: 'spacex'
+  name: "elon",
+  username: "elonmusk",
+  bio: nil,
+  email: "elon@example.com",
+  password: "spacex",
 )
 
 u3 = User.create(
-    name: 'omar',
-    username: 'omarlittle',
-    bio: nil,
-    email: 'omar@example.com',
-    password: 'thewire'
+  name: "omar",
+  username: "omarlittle",
+  bio: nil,
+  email: "omar@example.com",
+  password: "thewire",
 )
 
-u3 = User.create(
-    name: 'guest',
-    username: 'guest',
-    bio: nil,
-    email: 'guest@example.com',
-    password: 'guestaccount'
+p1 = Post.create(
+  author_id: 1,
+  caption: "Arnie post",
 )
 
-
-
+p2 = Post.create(
+  author_id: 1,
+  caption: "Winning mr olympia",
+)

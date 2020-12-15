@@ -19,15 +19,14 @@ export const loginUser = (user) => (dispatch) =>
         })
         .catch((errors) => dispatch(receiveSessionErrors(errors)))
 
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = () => (dispatch) =>
     SessionAPIUtil.logoutUser().then(() => dispatch(logoutCurrentUser()))
-}
 
-export const updateUser = (userId, formData) => (dispatch) => {
+export const updateUser = (userId, formData) => (dispatch) =>
     SessionAPIUtil.updateUser(userId, formData)
         .then((user) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receiveUserErrors(errors)))
-}
+
 // update this
 
 const receiveSessionErrors = (errors) => ({

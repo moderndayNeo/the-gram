@@ -16,6 +16,6 @@ class Api::SessionsController < ApplicationController
 
   def destroy
     logout_current_user!
-    render json: { success: ["Successfully signed out"] }, status: 200
+    render json: ["Successfully signed out"], status: 200
   end
 end
