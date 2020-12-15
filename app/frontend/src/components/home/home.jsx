@@ -11,7 +11,7 @@ export default function Home() {
     const currentUser = useSelector(state => state.entities.users[currentUserId]);
 
     return (
-        <section>
+        <section className="home">
             <HomeTopNav />
             <button onClick={() => dispatch(logoutUser())}>Log Out</button>
             <Feed />

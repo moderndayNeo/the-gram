@@ -7,6 +7,9 @@
     padding: 0 16px;
     align-items: center;
     border-bottom: 1px solid var(--light-grey);
+    position: fixed;
+    top: 0;
+    z-index: 2;
 
     .main-logo {
         height: 35px;

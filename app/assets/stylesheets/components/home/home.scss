@@ -1,5 +1,16 @@
-.feed {
-    // width: 100%;
-    // margin: 0;
-    padding: 0;
+.home {
+    height: 100%;
+    position: relative;
+
+    .feed {
+        padding: 0;
+        overflow: scroll;
+        position: absolute;
+        top: 44px;
+    }
+
+    button {
+        position: absolute;
+        top: 44px;
+    }
 }

@@ -28,7 +28,7 @@ export default function PostDetails() {
     return (
         <div className="post-details">
             <PostDetailsHeader photoFile={photoFile} photoUrl={photoUrl} submitPost={submitPost} />
-            <Caption userImage={currentUser.imageUrl} photoUrl={photoUrl} setCaption={setCaption} caption={caption} />
+            <Caption userImage={currentUser.image_url} photoUrl={photoUrl} setCaption={setCaption} caption={caption} />
         </div>
     );
 }
