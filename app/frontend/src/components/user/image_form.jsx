@@ -38,8 +38,6 @@ export default function ImageForm({ currentUserId }) {
 
     return (
         <div>
-            <h2>Upload Image</h2>
-
             <form>
                 <input type="file" onChange={(e) => handleUpload(e)} />
                 {preview}
