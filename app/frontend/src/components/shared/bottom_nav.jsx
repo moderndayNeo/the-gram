@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import icons from './icons/svg-icons';
 import UserAvatar from './user_avatar';
 import { useLocation, useHistory, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export default function BottomNav({ currentUser }) {
+export default function BottomNav() {
+    const currentUserId = useSelector(state => state.session.id);
+    const currentUser = useSelector(state => state.entities.users[currentUserId]);
+
     const location = useLocation();
     const history = useHistory();
     const [photoUrl, setPhotoUrl] = useState('');
@@ -61,9 +65,9 @@ export default function BottomNav({ currentUser }) {
             {icons.unfilledHeart}
             {/* </Link> */}
 
-            {/* <Link to={`/${currentUser.username}`}> */}
-            <UserAvatar imageUrl={currentUser.image_url} />
-            {/* </Link> */}
+            <Link to={`/${currentUser.username}`}>
+                <UserAvatar imageUrl={currentUser.image_url} />
+            </Link>
         </nav>
     );
 }
