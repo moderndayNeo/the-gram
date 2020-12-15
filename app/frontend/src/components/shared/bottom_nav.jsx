@@ -3,10 +3,12 @@ import icons from './icons/svg-icons';
 import UserAvatar from './user_avatar';
 import { useLocation, useHistory, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import stateSelectors  from '../../util/state_selectors';
+
 
 export default function BottomNav() {
-    const currentUserId = useSelector(state => state.session.id);
-    const currentUser = useSelector(state => state.entities.users[currentUserId]);
+    const currentUser = useSelector(stateSelectors.currentUser())
+
 
     const location = useLocation();
     const history = useHistory();

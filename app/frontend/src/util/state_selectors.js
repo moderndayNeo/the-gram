@@ -1,11 +1,4 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-
-export default ({userProp}) => {
-    const currentUserId = useSelector((state) => state.session.id)
-    const currentUser = useSelector(
-        (state) => state.entities.users[currentUserId]
-    )
-
-    return <p>{currentUser[userProp]}</p>
+export default {
+    currentUserId: () => (state) => state.session.id,
+    currentUser: () => (state) => state.entities.users[state.session.id],
 }
