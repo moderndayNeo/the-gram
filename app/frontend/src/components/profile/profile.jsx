@@ -9,6 +9,7 @@ export default function Profile() {
                 {/* <CoreInfo /> */}
                 {/* <Stats /> */}
                 {/* <PostCollections /> */}
+                
             </main>
 
             <BottomNav />
