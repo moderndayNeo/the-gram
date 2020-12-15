@@ -8,7 +8,6 @@ export default function PostDetails() {
     const location = useLocation();
     const postImageUrl = location.state ? location.state.photoUrl : window.placeholderImg;
     const postImageFile = location.state ? location.state.photoFile : null;
-    console.log(location);
     const currentUserId = useSelector((state) => state.session.id);
     const currentUser = useSelector(
         (state) => state.entities.users[currentUserId]
@@ -17,7 +16,7 @@ export default function PostDetails() {
     return (
         <div className="post-details">
             <PostDetailsHeader />
-            <Caption userImage={currentUser.imageUrl} />
+            <Caption userImage={currentUser.imageUrl} postImageUrl={postImageUrl} />
         </div>
     );
 }
@@ -37,9 +36,9 @@ const PostDetailsHeader = () => (
 );
 
 const Caption = ({ userImage, postImageUrl }) => (
-    <section>
+    <section className="caption">
         <UserAvatar imageUrl={userImage} />
-        <input type="text" placeholder="Write a caption..." />
-        <img src={postImageUrl} alt="" />
+        <textarea placeholder="Write a caption..."></textarea>
+        <img className="post-image" src={postImageUrl} alt="" />
     </section>
 );
