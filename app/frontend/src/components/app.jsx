@@ -4,8 +4,13 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import LoginPage from './session/login/login_page'
 import SignupPage from './session/signup/signup-page';
 import PostStyle from './posts/post_creation/post_style'
+import BottomNav from './shared/bottom_nav';
+import {useLocation } from 'react-router-dom'
+
 
 export default function App() {
+const lcoation = useLocation()
+// console.log(location.pathname)
 
     return (
         <div className="app">
@@ -13,6 +18,7 @@ export default function App() {
             <AuthRoute exact path="/login" component={LoginPage} />
             <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute exact path="/create/style" component={PostStyle} />
+            {/* <BottomNav /> */}
         </div>
     );
 }
