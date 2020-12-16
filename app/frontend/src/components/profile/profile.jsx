@@ -8,10 +8,11 @@ import UserAvatar from '../shared/user_avatar';
 
 export default function Profile() {
     const currentUser = useSelector(stateSelectors.currentUser());
+    const allPosts = useSelector(stateSelectors.allPosts());
     const { userId } = useParams();
 
     if (currentUser.id == userId) {
-        return <OwnProfile user={currentUser} />;
+        return <OwnProfile user={currentUser} posts={allPosts} />;
     }
     else {
         return <ForeignProfile />;
@@ -19,7 +20,7 @@ export default function Profile() {
 }
 
 
-const OwnProfile = ({ user }) => {
+const OwnProfile = ({ user, posts }) => {
     return (
         <div className="own-profile">
             <ProfileHeader user={user} />
@@ -27,7 +28,7 @@ const OwnProfile = ({ user }) => {
                 <ImageAndName user={user} />
                 <Bio user={user} />
                 <Stats user={user} />
-                <PostCollections user={user} ownProfile={true} />
+                <PostCollections user={user} ownProfile={true} posts={posts} />
             </main>
 
             Own Profile
@@ -109,21 +110,23 @@ const Stats = () => {
     );
 };
 
-const PostCollections = ({ user, ownProfile }) => {
+const PostCollections = ({ user, ownProfile, posts }) => {
+    const [selected, setSelected] = useState('posts');
 
     return (
         <div className="post-collections">
-            <PostSelectorButtons ownProfile={ownProfile} />
-            {/* <SelectedPosts /> */}
+            <PostSelectorButtons
+                ownProfile={ownProfile}
+                selected={selected}
+                setSelected={setSelected} />
+            <SelectedPosts
+                posts={posts}
+                selected={selected} />
         </div>
     );
 };
 
-const PostSelectorButtons = ({ ownProfile }) => {
-    const [selected, setSelected] = useState('posts');
-    console.log(selected)
-
-
+const PostSelectorButtons = ({ ownProfile, selected, setSelected }) => {
     return (
         <ul className="post-selector-buttons">
             <li className="selector" onClick={() => setSelected('posts')}>
@@ -134,9 +137,9 @@ const PostSelectorButtons = ({ ownProfile }) => {
             </li>
             {
                 ownProfile &&
-            <li className="selector" onClick={() => setSelected('saved')}>
-                {selected === 'saved' ? icons.profileSavedBlue : icons.profileSavedGrey}
-            </li>
+                <li className="selector" onClick={() => setSelected('saved')}>
+                    {selected === 'saved' ? icons.profileSavedBlue : icons.profileSavedGrey}
+                </li>
             }
             <li className="selector" onClick={() => setSelected('tagged')}>
                 {selected === 'tagged' ? icons.profileTaggedBlue : icons.profileTaggedGrey}
@@ -145,3 +148,36 @@ const PostSelectorButtons = ({ ownProfile }) => {
         </ul>
     );
 };
+
+const SelectedPosts = ({ posts, selected }) => {
+    console.log(selected);
+
+    return (
+        <article className="selected-posts">
+            {['posts', 'saved', 'tagged'].includes(selected) ?
+                <GridView posts={posts} /> :
+                <FeedView posts={posts} />
+            }
+        </article>
+    );
+};
+
+
+const GridView = ({ posts }) => (
+    <div className="grid-view">
+        {
+            posts.map(post => (
+                <a href={`/posts/${post.id}`}>
+                    <img src={post.image_url} alt="post" />
+                </a>
+            ))
+        }
+
+    </div>
+);
+
+const FeedView = ({ posts }) => (
+    <ul>
+        Feed View
+    </ul>
+);

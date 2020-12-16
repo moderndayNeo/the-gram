@@ -11,4 +11,17 @@
             width: 24px;
         }
     }
+
+    .selected-posts {
+
+        .grid-view {
+            display: grid;
+            grid-gap: 3px;
+            grid-template-columns: minmax(0, 223px) minmax(0, 223px) minmax(0, 223px) ;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
 }
