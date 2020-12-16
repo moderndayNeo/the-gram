@@ -9,8 +9,8 @@ import stateSelectors from '../../util/state_selectors';
 export default function BottomNav() {
     const currentUser = useSelector(stateSelectors.currentUser());
     const location = useLocation();
-    const pathname = location.pathname
-    const avatarBordered = (pathname === `/users/${currentUser.id}`) ? true : false
+    const pathname = location.pathname;
+    const avatarBordered = (pathname === `/users/${currentUser.id}`) ? true : false;
     const history = useHistory();
     const [photoUrl, setPhotoUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
@@ -43,12 +43,12 @@ export default function BottomNav() {
     return (
         <nav className="bottom-nav">
             <Link to="/">
-                {location.pathname === '/' ? icons.filledHome : icons.unfilledHome}
+                {pathname === '/' ? icons.filledHome : icons.unfilledHome}
             </Link>
 
-            {/* <Link to="/explore"> */}
-            {location.pathname === '/explore' ? icons.filledCompass : icons.unfilledCompass}
-            {/* </Link> */}
+            <Link to="/explore">
+                {pathname === '/explore' ? icons.filledCompass : icons.unfilledCompass}
+            </Link>
 
             <label htmlFor="file-upload">
                 {icons.newPost}
@@ -62,13 +62,13 @@ export default function BottomNav() {
                 accept=".jpg, .jpeg, .png, .pdf"
             />
 
-            {/* <Link to="/accounts/activity"> */}
-            {icons.unfilledHeart}
-            {/* </Link> */}
+            <Link to="/accounts/activity">
+                {pathname === '/accounts/activity' ? icons.filledHeart : icons.unfilledHeart}
+            </Link>
 
             <Link to={`/users/${currentUser.id}`}>
                 <div className={`avatar-container ${avatarBordered === true ? 'bordered' : ''}`}>
-                <UserAvatar imageUrl={currentUser.image_url} />
+                    <UserAvatar imageUrl={currentUser.image_url} />
                 </div>
             </Link>
         </nav>
