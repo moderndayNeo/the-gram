@@ -67,7 +67,7 @@ export default function BottomNav() {
             {icons.unfilledHeart}
             {/* </Link> */}
 
-            <Link to={`/${currentUser.username}`}>
+            <Link to={`/users/${currentUser.id}`}>
                 <UserAvatar imageUrl={currentUser.image_url} />
             </Link>
         </nav>

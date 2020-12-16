@@ -15,7 +15,7 @@ export default function App() {
             <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute exact path="/create/style" component={PostStyle} />
             <ProtectedRoute exact path="/create/details" component={PostDetails} />
-            <ProtectedRoute exact path="/:username" component={Profile} />
+            <ProtectedRoute exact path="/users/:userId" component={Profile} />
         </div>
     );
 }
