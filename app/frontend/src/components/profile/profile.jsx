@@ -26,7 +26,7 @@ const OwnProfile = ({ user }) => {
             <main>
                 <ImageAndName user={user} />
                 <Bio user={user} />
-                {/* <Stats /> */}
+                <Stats user={user} />
                 {/* <PostCollections /> */}
 
             </main>
@@ -67,14 +67,13 @@ const ProfileHeader = ({ user }) => (
     </header>
 );
 
-const Bio = ({user}) => (
+const Bio = ({ user }) => (
     <div className="bio">
         <h1 className="name">{user.name}</h1>
         {/* <span>{user.bio}</span> */}
         <span>Bodybuilder</span>
     </div>
-)
-
+);
 
 const ImageAndName = ({ user }) => {
     return (
@@ -85,5 +84,29 @@ const ImageAndName = ({ user }) => {
                 <button>Edit Profile</button>
             </section>
         </div>
+    );
+};
+
+const Stats = () => {
+    let user = {
+        num_posts: 3,
+        num_followers: 11,
+        num_following: 14
+    };
+
+    const statTypes = ['posts', 'followers', 'following'];
+    const userInfo = ['num_posts', 'num_followers', 'num_following'];
+
+    return (
+        <ul className="stats">
+            {
+                statTypes.map((statName, idx) => (
+                    <li key={idx} className="stat">
+                        <p className="number">{user[userInfo[idx]]}</p>
+                        <p className="name">{statName}</p>
+                    </li>
+                ))
+            }
+        </ul>
     );
 };

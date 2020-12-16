@@ -1,0 +1,27 @@
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    margin: 0;
+    border-top: 1px solid var(--light-grey);
+    border-bottom: 1px solid var(--light-grey);
+
+    .stat {
+        list-style-type: none;
+        text-align: center;
+
+        p {
+            margin: 0;
+        }
+
+        .number {
+            font-weight: bold;
+        }
+
+        .name {
+            color: var(--dark-grey);
+        }
+    }
+
+
+}
