@@ -113,7 +113,7 @@ const PostCollections = ({ user, ownProfile }) => {
 
     return (
         <div className="post-collections">
-            <PostSelectorButtons ownProfile={true} />
+            <PostSelectorButtons ownProfile={ownProfile} />
             {/* <SelectedPosts /> */}
         </div>
     );
@@ -132,9 +132,12 @@ const PostSelectorButtons = ({ ownProfile }) => {
             <li className="selector" onClick={() => setSelected('feed')}>
                 <img src={selected === 'feed' ? window.profileFeedBlue : window.profileFeedGrey} alt="profile feed icon" />
             </li>
+            {
+                ownProfile &&
             <li className="selector" onClick={() => setSelected('saved')}>
                 {selected === 'saved' ? icons.profileSavedBlue : icons.profileSavedGrey}
             </li>
+            }
             <li className="selector" onClick={() => setSelected('tagged')}>
                 {selected === 'tagged' ? icons.profileTaggedBlue : icons.profileTaggedGrey}
             </li>
