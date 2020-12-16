@@ -3,7 +3,8 @@ import BottomNav from '../shared/bottom_nav';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { useParams } from 'react-router-dom';
-import icons from '../shared/icons/svg-icons'
+import icons from '../shared/icons/svg-icons';
+import UserAvatar from '../shared/user_avatar';
 
 export default function Profile() {
     const currentUser = useSelector(stateSelectors.currentUser());
@@ -17,12 +18,14 @@ export default function Profile() {
     }
 }
 
-const OwnProfile = ({user}) => {
+
+const OwnProfile = ({ user }) => {
     return (
-        <div>
+        <div className="own-profile">
             <ProfileHeader user={user} />
             <main>
-                {/* <CoreInfo /> */}
+                <ImageAndName user={user} />
+                {/* <Bio /> */}
                 {/* <Stats /> */}
                 {/* <PostCollections /> */}
 
@@ -48,7 +51,6 @@ const ForeignProfile = () => {
                 {/* <PostCollections /> */}
 
             </main>
-
             Foreign Profile
             <BottomNav />
         </div>
@@ -56,7 +58,7 @@ const ForeignProfile = () => {
 };
 
 
-const ProfileHeader = ({user}) => (
+const ProfileHeader = ({ user }) => (
     <header>
         {icons.gears}
         <h3>{user.username}</h3>
@@ -64,3 +66,16 @@ const ProfileHeader = ({user}) => (
 
     </header>
 );
+
+
+const ImageAndName = ({ user }) => {
+    return (
+        <div className="image-and-name">
+            <UserAvatar imageUrl={user.image_url} />
+            <section>
+                <h2 className="username">{user.username}</h2>
+                <button>Edit Profile</button>
+            </section>
+        </div>
+    );
+};

@@ -1,0 +1,33 @@
+.image-and-name {
+    margin: 16px 16px 24px;
+    border: 1px solid red;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    section {
+        width: 238px;
+        text-align: left;
+
+        .username {
+            font-weight: 300;
+            font-size: 28px;
+            line-height: 32px;
+            margin: 0;
+        }
+
+        button {
+            width: 100%;
+            border: 1px solid var(--light-grey);
+            font-weight: bold;
+            padding: 5px 9px;
+            border-radius: 4px;
+            margin-top: 2px;
+        }
+    }
+
+    img {
+        width: 77px;
+        height: 77px;
+    }
+}
