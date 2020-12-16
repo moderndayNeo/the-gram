@@ -20,7 +20,8 @@ export default function Profile() {
         return <OwnProfile user={currentUser} posts={posts} />;
     }
     else {
-        return <ForeignProfile />;
+        const otherUser = useSelector(stateSelectors.userById(userId));
+        return <ForeignProfile user={otherUser} />;
     }
 }
 
@@ -29,7 +30,7 @@ const OwnProfile = ({ user, posts }) => {
         <div className="own-profile">
             <ProfileHeader user={user} />
             <main>
-                <ImageAndName user={user} />
+                <ImageAndName user={user} ownProfile={true} />
                 <Bio user={user} />
                 <Stats user={user} />
                 <PostCollections user={user} ownProfile={true} posts={posts} />
@@ -39,21 +40,21 @@ const OwnProfile = ({ user, posts }) => {
     );
 };
 
-const ForeignProfile = () => {
+const ForeignProfile = ({ user }) => {
     return (
-        <div>
+        <div className="foreign-profile">
             <header>
-                {/* chevron icon */}
-                {/* foreign usernme */}
+                {icons.chevron}
+                {user.username}
+                <div className="blank-div"></div>
             </header>
 
             <main>
-                {/* <CoreInfo /> */}
-                {/* <Stats /> */}
-                {/* <PostCollections /> */}
-
+                <ImageAndName user={user} ownProfile={false} />
+                <Bio user={user} />
+                <State user={user} />
+                <PostCollections user={user} ownProfile={false} posts={posts} />
             </main>
-            Foreign Profile
             <BottomNav />
         </div>
     );
@@ -64,17 +65,25 @@ const ProfileHeader = ({ user }) => (
         {icons.gears}
         <h3>{user.username}</h3>
         {icons.discover}
-
     </header>
 );
 
-const ImageAndName = ({ user }) => {
+const ImageAndName = ({ user, ownProfile }) => {
     return (
         <div className="image-and-name">
             <UserAvatar imageUrl={user.image_url} />
             <section>
                 <h2 className="username">{user.username}</h2>
-                <button>Edit Profile</button>
+                {
+                    ownProfile ?
+                        <button>Edit Profile</button> :
+                        <div>
+                            <p>Message</p>
+                            <p>Following symbol</p>
+                            <p>Dropdown symbol</p>
+                        </div>
+
+                }
             </section>
         </div>
     );
@@ -112,7 +121,7 @@ const Stats = () => {
     );
 };
 
-const PostCollections = ({ user, ownProfile, posts }) => {
+const PostCollections = ({ ownProfile, posts }) => {
     const [selected, setSelected] = useState('posts');
 
     return (
