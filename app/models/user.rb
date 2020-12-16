@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 254 }
@@ -6,6 +8,7 @@ class User < ApplicationRecord
   validates :password_digest, presence: { message: 'Password can\t be blank' }
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true # perhaps no uniqueness validation require here
+  validate :valid_email
 
   after_initialize :ensure_session_token
 
@@ -48,28 +51,10 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end
+
+  def valid_email
+    unless self.email =~ EMAIL_REGEX
+      errors[:email] << "must be in a valid format"
+    end
+  end
 end
-
-
-
-# # app/validators/email_validator.rb
-# class EmailValidator < ActiveModel::EachValidator
-#   CRAZY_EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-
-#   def validate_each(record, attribute_name, value)
-#     unless value =~ CRAZY_EMAIL_REGEX
-#       # we can use `EachValidator#options` to access custom options
-#       # passed to the validator.
-#       message = options[:message] || 'is not an email'
-#       record.errors[attribute_name] << message
-#     end
-#   end
-# end
-
-# # app/models/person.rb
-# class Person < ApplicationRecord
-#   # Rails knows `:email` means `EmailValidator`.
-#   validates :email, presence: true, email: true
-#   # not required, but must also be an email
-#   validates :backup_email, email: { message: 'isn\'t even valid' }
-# end
