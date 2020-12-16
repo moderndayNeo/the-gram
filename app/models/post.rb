@@ -3,7 +3,8 @@ class Post < ApplicationRecord
 
   validates :author_id, presence: true
   validates :caption, length: { maximum: 2200 }
-#   validates :photo, attached: true
+
+  validate :has_photo_attached
 
   belongs_to :author,
              class_name: :User,
@@ -22,6 +23,14 @@ class Post < ApplicationRecord
   #          dependent: :destroy
 
   # has_many :hashtags, through: :taggings, source: :hashtag
+
+  private
+
+  def has_photo_attached
+    if !self.photo.attached?
+      errors[:post] << "must have a photo attached"
+    end
+  end
 
   def author_username
     self.author.username
