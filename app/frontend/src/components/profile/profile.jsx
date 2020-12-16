@@ -8,11 +8,16 @@ import UserAvatar from '../shared/user_avatar';
 
 export default function Profile() {
     const currentUser = useSelector(stateSelectors.currentUser());
-    const allPosts = useSelector(stateSelectors.allPosts());
+    let posts = useSelector(stateSelectors.allPosts());
+    if (!posts.length) {
+        let retrievedObject = localStorage.getItem('developmentPosts');
+        posts = Object.values(JSON.parse(retrievedObject))
+    }
+
     const { userId } = useParams();
 
     if (currentUser.id == userId) {
-        return <OwnProfile user={currentUser} posts={allPosts} />;
+        return <OwnProfile user={currentUser} posts={posts} />;
     }
     else {
         return <ForeignProfile />;

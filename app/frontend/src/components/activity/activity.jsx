@@ -5,7 +5,7 @@ export default function Activity() {
     return (
         <div>
             Activity Page
-            In progres...
+            In progress...
             <BottomNav />
         </div>
     );

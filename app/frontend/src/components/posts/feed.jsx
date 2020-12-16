@@ -4,8 +4,12 @@ import Post from './post';
 
 export default function Feed() {
 
-    const posts = useSelector(state => Object.values(state.entities.posts));
-    // const posts = [{ id: 1, author_id: 1, caption: 'Example post', author_username: 'arnie85', image_url: window.elephantImg }];
+    let posts = useSelector(state => Object.values(state.entities.posts));
+    if (!posts.length) {
+        let retrievedObject = localStorage.getItem('developmentPosts');
+        posts = Object.values(JSON.parse(retrievedObject))
+        // console.log('retrievedObject: ', JSON.parse(retrievedObject));
+    }
 
     return (
         <ul className="feed">
