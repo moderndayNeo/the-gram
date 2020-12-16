@@ -17,4 +17,17 @@
     .hidden-file-input {
         display: none;
     }
+
+    .avatar-container {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+
+    .avatar-container.bordered {
+        border: 1px solid black;
+    }
 }

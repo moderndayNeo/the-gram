@@ -19,7 +19,6 @@ export default function Profile() {
     }
 }
 
-
 const OwnProfile = ({ user, posts }) => {
     return (
         <div className="own-profile">
@@ -30,8 +29,6 @@ const OwnProfile = ({ user, posts }) => {
                 <Stats user={user} />
                 <PostCollections user={user} ownProfile={true} posts={posts} />
             </main>
-
-            Own Profile
             <BottomNav />
         </div>
     );
@@ -150,7 +147,7 @@ const PostSelectorButtons = ({ ownProfile, selected, setSelected }) => {
 };
 
 const SelectedPosts = ({ posts, selected }) => {
-    console.log(selected);
+    // console.log(selected);
 
     return (
         <article className="selected-posts">
@@ -167,7 +164,7 @@ const GridView = ({ posts }) => (
     <div className="grid-view">
         {
             posts.map(post => (
-                <a href={`/posts/${post.id}`}>
+                <a key={post.id} href={`/posts/${post.id}`}>
                     <img src={post.image_url} alt="post" />
                 </a>
             ))

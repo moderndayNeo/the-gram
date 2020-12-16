@@ -3,14 +3,14 @@ import icons from './icons/svg-icons';
 import UserAvatar from './user_avatar';
 import { useLocation, useHistory, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import stateSelectors  from '../../util/state_selectors';
+import stateSelectors from '../../util/state_selectors';
 
 
 export default function BottomNav() {
-    const currentUser = useSelector(stateSelectors.currentUser())
-
-
+    const currentUser = useSelector(stateSelectors.currentUser());
     const location = useLocation();
+    const pathname = location.pathname
+    const avatarBordered = (pathname === `/users/${currentUser.id}`) ? true : false
     const history = useHistory();
     const [photoUrl, setPhotoUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
@@ -62,13 +62,14 @@ export default function BottomNav() {
                 accept=".jpg, .jpeg, .png, .pdf"
             />
 
-
             {/* <Link to="/accounts/activity"> */}
             {icons.unfilledHeart}
             {/* </Link> */}
 
             <Link to={`/users/${currentUser.id}`}>
+                <div className={`avatar-container ${avatarBordered === true ? 'bordered' : ''}`}>
                 <UserAvatar imageUrl={currentUser.image_url} />
+                </div>
             </Link>
         </nav>
     );
