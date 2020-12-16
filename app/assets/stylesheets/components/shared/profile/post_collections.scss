@@ -1,0 +1,14 @@
+.post-collections {
+    .post-selector-buttons {
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid var(--light-grey);
+        height: 46px;
+        margin: 0;
+        align-items: center;
+
+        img {
+            width: 24px;
+        }
+    }
+}

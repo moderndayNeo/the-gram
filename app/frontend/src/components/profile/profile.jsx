@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BottomNav from '../shared/bottom_nav';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
@@ -27,8 +27,7 @@ const OwnProfile = ({ user }) => {
                 <ImageAndName user={user} />
                 <Bio user={user} />
                 <Stats user={user} />
-                {/* <PostCollections /> */}
-
+                <PostCollections user={user} ownProfile={true} />
             </main>
 
             Own Profile
@@ -57,7 +56,6 @@ const ForeignProfile = () => {
     );
 };
 
-
 const ProfileHeader = ({ user }) => (
     <header>
         {icons.gears}
@@ -65,14 +63,6 @@ const ProfileHeader = ({ user }) => (
         {icons.discover}
 
     </header>
-);
-
-const Bio = ({ user }) => (
-    <div className="bio">
-        <h1 className="name">{user.name}</h1>
-        {/* <span>{user.bio}</span> */}
-        <span>Bodybuilder</span>
-    </div>
 );
 
 const ImageAndName = ({ user }) => {
@@ -86,6 +76,14 @@ const ImageAndName = ({ user }) => {
         </div>
     );
 };
+
+const Bio = ({ user }) => (
+    <div className="bio">
+        <h1 className="name">{user.name}</h1>
+        {/* <span>{user.bio}</span> */}
+        <span>Bodybuilder</span>
+    </div>
+);
 
 const Stats = () => {
     let user = {
@@ -107,6 +105,40 @@ const Stats = () => {
                     </li>
                 ))
             }
+        </ul>
+    );
+};
+
+const PostCollections = ({ user, ownProfile }) => {
+
+    return (
+        <div className="post-collections">
+            <PostSelectorButtons ownProfile={true} />
+            {/* <SelectedPosts /> */}
+        </div>
+    );
+};
+
+const PostSelectorButtons = ({ ownProfile }) => {
+    const [selected, setSelected] = useState('posts');
+    console.log(selected)
+
+
+    return (
+        <ul className="post-selector-buttons">
+            <li className="selector" onClick={() => setSelected('posts')}>
+                {selected === 'posts' ? icons.profilePostsBlue : icons.profilePostsGrey}
+            </li>
+            <li className="selector" onClick={() => setSelected('feed')}>
+                <img src={selected === 'feed' ? window.profileFeedBlue : window.profileFeedGrey} alt="profile feed icon" />
+            </li>
+            <li className="selector" onClick={() => setSelected('saved')}>
+                {selected === 'saved' ? icons.profileSavedBlue : icons.profileSavedGrey}
+            </li>
+            <li className="selector" onClick={() => setSelected('tagged')}>
+                {selected === 'tagged' ? icons.profileTaggedBlue : icons.profileTaggedGrey}
+            </li>
+
         </ul>
     );
 };
