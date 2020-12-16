@@ -1,0 +1,12 @@
+.bio {
+    border: 1px solid red;
+    padding: 0px 16px 21px;
+
+    .name {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        font-weight: 600;
+    }
+}

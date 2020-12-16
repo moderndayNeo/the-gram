@@ -25,7 +25,7 @@ const OwnProfile = ({ user }) => {
             <ProfileHeader user={user} />
             <main>
                 <ImageAndName user={user} />
-                {/* <Bio /> */}
+                <Bio user={user} />
                 {/* <Stats /> */}
                 {/* <PostCollections /> */}
 
@@ -66,6 +66,14 @@ const ProfileHeader = ({ user }) => (
 
     </header>
 );
+
+const Bio = ({user}) => (
+    <div className="bio">
+        <h1 className="name">{user.name}</h1>
+        {/* <span>{user.bio}</span> */}
+        <span>Bodybuilder</span>
+    </div>
+)
 
 
 const ImageAndName = ({ user }) => {
