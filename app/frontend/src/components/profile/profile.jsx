@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import BottomNav from '../shared/bottom_nav';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
 
@@ -11,7 +11,7 @@ export default function Profile() {
     let posts = useSelector(stateSelectors.allPosts());
     if (!posts.length) {
         let retrievedObject = localStorage.getItem('developmentPosts');
-        posts = Object.values(JSON.parse(retrievedObject))
+        posts = Object.values(JSON.parse(retrievedObject));
     }
 
     const { userId } = useParams();
@@ -169,9 +169,9 @@ const GridView = ({ posts }) => (
     <div className="grid-view">
         {
             posts.map(post => (
-                <a key={post.id} href={`/posts/${post.id}`}>
+                <Link key={post.id} to={`/posts/${post.id}`}>
                     <img src={post.image_url} alt="post" />
-                </a>
+                </Link>
             ))
         }
 

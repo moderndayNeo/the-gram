@@ -51,11 +51,22 @@
                 font-weight: bold;
                 margin: 0;
             }
-            
+
             p {
                 display: inline;
-
             }
+        }
+    }
+}
+
+.post-show {
+    header {
+        svg {
+            transform: rotate(-90deg);
+        }
+
+        div {
+            width: 15px;
         }
     }
 }

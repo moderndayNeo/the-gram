@@ -1,7 +1,9 @@
 import React from 'react';
 import App from './components/app';
 import { HashRouter } from 'react-router-dom';
+
 import { Provider } from 'react-redux';
+
 
 const Root = ({ store }) => {
     return (

@@ -8,6 +8,7 @@ import PostDetails from './posts/post_creation/post_details';
 import Profile from './profile/profile';
 import Explore from './explore/explore';
 import Activity from './activity/activity';
+import PostShow from './posts/post_show';
 
 export default function App() {
     return (
@@ -15,6 +16,7 @@ export default function App() {
             <AuthRoute exact path="/signup" component={SignupPage} />
             <AuthRoute exact path="/login" component={LoginPage} />
             <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute exact path="/posts/:postId" component={PostShow} />
             <ProtectedRoute exact path="/explore" component={Explore} />
             <ProtectedRoute exact path="/accounts/activity" component={Activity} />
             <ProtectedRoute exact path="/create/style" component={PostStyle} />
