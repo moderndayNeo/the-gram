@@ -202,16 +202,31 @@ const FeedView = ({ posts }) => {
         <ul>{posts.map(post => (
             <Post key={post.id} post={post} />))}
         </ul> :
-        <NoContentPlaceholder selected='posts' />;
+        <NoContentPlaceholder selected='feed' />;
 };
 
 const NoContentPlaceholder = ({ selected }) => {
-    const messages = {
-        'posts': "When you make posts, they'll appear here",
-        'saved': "When you save posts, they'll appear here",
-        'tagged': "When you're tagged in posts, they'll appear here"
+    const placeholders = {
+        'posts': {
+            message: "When you make posts, they'll appear here",
+            icon: icons.profilePostsGrey
+        },
+        'feed': {
+            message: "When you save posts, they'll appear here",
+            icon: <img src={window.profileFeedGrey} alt=""/>
+        },
+        'saved': {
+            message: "When you save posts, they'll appear here",
+            icon: icons.profileSavedGrey
+        },
+        'tagged': {
+            message: "When you're tagged in posts, they'll appear here",
+            icon: icons.profileTaggedGrey
+        },
     };
+
     return <div className="no-content-placeholder">
-        <p>{messages[selected]}</p>
+        {placeholders[selected].icon}
+        <p>{placeholders[selected].message}</p>
     </div>;
 };
