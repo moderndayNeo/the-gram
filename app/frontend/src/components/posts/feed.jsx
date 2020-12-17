@@ -18,7 +18,6 @@ export default function Feed() {
         dispatch(getFeed());
     }, []);
 
-
     return (
         <ul className="feed">
             {
