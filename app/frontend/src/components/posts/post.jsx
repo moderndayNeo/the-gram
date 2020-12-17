@@ -17,7 +17,6 @@ export default function Post({ post: { id, author_id, image_url, caption } }) {
     );
 }
 
-
 const PostHeader = ({ author }) => {
     return (
         <header className="post-header">

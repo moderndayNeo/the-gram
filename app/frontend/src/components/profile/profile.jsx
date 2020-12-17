@@ -41,6 +41,12 @@ const OwnProfile = ({ user, posts }) => {
 };
 
 const ForeignProfile = ({ user }) => {
+    // localStorage.setItem('devtUser', JSON.stringify(user))
+    if (!user) {
+        let retrievedObject = localStorage.getItem('devtUser')
+        user = JSON.parse(retrievedObject)
+    }
+
     return (
         <div className="foreign-profile">
             <header>
@@ -52,8 +58,8 @@ const ForeignProfile = ({ user }) => {
             <main>
                 <ImageAndName user={user} ownProfile={false} />
                 <Bio user={user} />
-                <State user={user} />
-                <PostCollections user={user} ownProfile={false} posts={posts} />
+                <Stats user={user} />
+                {/* <PostCollections user={user} ownProfile={false} posts={posts} /> */}
             </main>
             <BottomNav />
         </div>
