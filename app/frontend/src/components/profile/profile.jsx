@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import BottomNav from '../shared/bottom_nav';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
 
@@ -41,17 +41,23 @@ const OwnProfile = ({ user, posts }) => {
 };
 
 const ForeignProfile = ({ user }) => {
+    const history = useHistory();
+
     // localStorage.setItem('devtUser', JSON.stringify(user))
     if (!user) {
-        let retrievedObject = localStorage.getItem('devtUser')
-        user = JSON.parse(retrievedObject)
+        let retrievedObject = localStorage.getItem('devtUser');
+        user = JSON.parse(retrievedObject);
     }
 
     return (
         <div className="foreign-profile">
             <header>
-                {icons.chevron}
-                {user.username}
+                <div onClick={() => history.goBack()}>
+                    {icons.chevron}
+                </div>
+                <p>
+                    {user.username}
+                </p>
                 <div className="blank-div"></div>
             </header>
 
