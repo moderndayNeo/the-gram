@@ -9,7 +9,6 @@ class Api::SessionsController < ApplicationController
       render json: ["Username or password is incorrect"], status: 404
     else
       login_user!(@user)
-      @posts = @user.posts
       render :show
     end
   end

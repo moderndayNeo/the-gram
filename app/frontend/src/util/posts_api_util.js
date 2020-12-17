@@ -15,3 +15,5 @@ export const updatePost = (postId, formData) =>
     axiosPutRequest(`/api/posts/${postId}`, formData)
 
 export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)
+
+export const getFeed = () => axiosGetRequest(`/api/posts`, { type: 'feed' })

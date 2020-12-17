@@ -35,3 +35,7 @@ axiosPutRequest(`/api/users/${10}`, { user: { name: 'ANOTHER NAME' }}).then(res 
 Example DELETE request:
 axiosDeleteRequest(`/api/users/${11}`).then(res => console.log(res))
 */
+
+
+
+// axiosGetRequest(`/api/posts`, { type: 'feed' })

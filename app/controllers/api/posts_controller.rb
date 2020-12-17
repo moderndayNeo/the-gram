@@ -1,7 +1,16 @@
 class Api::PostsController < ApplicationController
   def index
-    @posts = Post.all.includes(:author)
     # The Feed (posts by current_user, people they follow, hashtags they follow, ordered by creation date)
+
+    @posts = Post.all
+      .includes(:author)
+      .with_eager_loaded_photo
+      .order(created_at: :desc)
+
+    @users = @posts.map(&:author)
+
+    # @users = Post.associated_users(@posts)
+    render :index
   end
 
   def show

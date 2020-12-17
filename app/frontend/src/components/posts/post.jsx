@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 export default function Post({ post: { id, author_id, image_url, caption } }) {
     const author = useSelector(state => state.entities.users[author_id]);
+    // use state selector
     const authorImage = author.image_url;
 
     return (
@@ -28,7 +29,6 @@ const PostHeader = ({ author, authorImage }) => {
 };
 
 const PostImage = ({ imageUrl }) => {
-
     return (
         <div className="image-container">
             <img className="post-image" src={imageUrl || window.placeholderImg} alt="post image" />
@@ -63,6 +63,5 @@ const CaptionAndComments = ({ author, caption }) => (
             <span className="author">{author}</span>
             <p> {caption}</p>
         </div>
-
     </div>
 );
