@@ -8,20 +8,20 @@ import UserAvatar from '../shared/user_avatar';
 
 export default function Profile() {
     const currentUser = useSelector(stateSelectors.currentUser());
-    let posts = useSelector(stateSelectors.allPosts());
+    const { userId } = useParams();
+    let posts = useSelector(stateSelectors.postsByAuthorId(userId));
+
     if (!posts.length) {
         let retrievedObject = localStorage.getItem('developmentPosts');
         posts = Object.values(JSON.parse(retrievedObject));
     }
-
-    const { userId } = useParams();
 
     if (currentUser.id == userId) {
         return <OwnProfile user={currentUser} posts={posts} />;
     }
     else {
         const otherUser = useSelector(stateSelectors.userById(userId));
-        return <ForeignProfile user={otherUser} />;
+        return <ForeignProfile user={otherUser} posts={posts} />;
     }
 }
 
@@ -40,7 +40,7 @@ const OwnProfile = ({ user, posts }) => {
     );
 };
 
-const ForeignProfile = ({ user }) => {
+const ForeignProfile = ({ user, posts }) => {
     const history = useHistory();
 
     // localStorage.setItem('devtUser', JSON.stringify(user))
@@ -65,7 +65,7 @@ const ForeignProfile = ({ user }) => {
                 <ImageAndName user={user} ownProfile={false} />
                 <Bio user={user} />
                 <Stats user={user} />
-                {/* <PostCollections user={user} ownProfile={false} posts={posts} /> */}
+                <PostCollections user={user} ownProfile={false} posts={posts} />
             </main>
             <BottomNav />
         </div>
@@ -90,9 +90,9 @@ const ImageAndName = ({ user, ownProfile }) => {
                     ownProfile ?
                         <button>Edit Profile</button> :
                         <div>
-                            <p>Message</p>
+                            {/* <p>Message</p>
                             <p>Following symbol</p>
-                            <p>Dropdown symbol</p>
+                            <p>Dropdown symbol</p> */}
                         </div>
 
                 }
@@ -104,8 +104,7 @@ const ImageAndName = ({ user, ownProfile }) => {
 const Bio = ({ user }) => (
     <div className="bio">
         <h1 className="name">{user.name}</h1>
-        {/* <span>{user.bio}</span> */}
-        <span>Bodybuilder</span>
+        <span>{user.bio}</span>
     </div>
 );
 
@@ -184,7 +183,6 @@ const SelectedPosts = ({ posts, selected }) => {
         </article>
     );
 };
-
 
 const GridView = ({ posts }) => (
     <div className="grid-view">
