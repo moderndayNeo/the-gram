@@ -14,7 +14,6 @@ export default function Feed() {
     //     // console.log('retrievedObject: ', JSON.parse(retrievedObject));
     // }
 
-
     useEffect(() => {
         dispatch(getFeed());
     }, []);
