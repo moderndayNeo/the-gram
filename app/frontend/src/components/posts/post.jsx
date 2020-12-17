@@ -2,10 +2,10 @@ import React from 'react';
 import UserAvatar from '../shared/user_avatar';
 import icons from '../shared/icons/svg-icons';
 import { useSelector } from 'react-redux';
+import stateSelectors from '../../util/state_selectors';
 
 export default function Post({ post: { id, author_id, image_url, caption } }) {
-    const author = useSelector(state => state.entities.users[author_id]);
-    // use state selector
+    const author = useSelector(stateSelectors.userById(author_id));
     const authorImage = author.image_url;
 
     return (
