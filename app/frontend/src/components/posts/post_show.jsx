@@ -29,7 +29,7 @@ export default function PostShow() {
                 <h3>Photo</h3>
                 <div></div>
             </header>
-            <Post post={post1} />
+            <Post post={post} />
         </div>
     );
 }

@@ -3,14 +3,14 @@ import UserAvatar from '../shared/user_avatar';
 import icons from '../shared/icons/svg-icons';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
+import { Link } from 'react-router-dom';
 
 export default function Post({ post: { id, author_id, image_url, caption } }) {
     const author = useSelector(stateSelectors.userById(author_id));
-    const authorImage = author.image_url;
 
     return (
         <article className="post">
-            <PostHeader author={author.username} authorImage={authorImage} />
+            <PostHeader author={author} />
             <PostImage id={id} imageUrl={image_url} />
             <PostFooter author={author.username} caption={caption} />
         </article>
@@ -18,11 +18,13 @@ export default function Post({ post: { id, author_id, image_url, caption } }) {
 }
 
 
-const PostHeader = ({ author, authorImage }) => {
+const PostHeader = ({ author }) => {
     return (
         <header className="post-header">
-            <UserAvatar imageUrl={authorImage} />
-            <p>{author}</p>
+            <UserAvatar imageUrl={author.image_url} />
+            <Link to={`/users/${author.id}`}>
+                <p>{author.username}</p>
+            </Link>
             {icons.threeDots}
         </header>
     );
