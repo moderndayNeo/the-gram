@@ -1,15 +1,20 @@
 class Api::PostsController < ApplicationController
   def index
     # The Feed (posts by current_user, people they follow, hashtags they follow, ordered by creation date)
+    case params[:type]
+    when "feed"
+      @posts = Post.all
+        .includes(:author)
+        .with_eager_loaded_photo
+        .order(created_at: :desc)
 
-    @posts = Post.all
-      .includes(:author)
-      .with_eager_loaded_photo
-      .order(created_at: :desc)
+      @users = @posts.map(&:author)
+      # @users = Post.associated_users(@posts)
 
-    @users = @posts.map(&:author)
+    else
+      render json: ["Error: No type provided to posts index"], status: 422
+    end
 
-    # @users = Post.associated_users(@posts)
     render :index
   end
 

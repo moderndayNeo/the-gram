@@ -5,17 +5,18 @@ import stateSelectors from '../../util/state_selectors';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
-import Post from '../posts/post'
+import Post from '../posts/post';
 
 export default function Profile() {
     const currentUser = useSelector(stateSelectors.currentUser());
     const { userId } = useParams();
     let posts = useSelector(stateSelectors.postsByAuthorId(userId));
 
-    if (!posts.length) {
-        let retrievedObject = localStorage.getItem('developmentPosts');
-        posts = Object.values(JSON.parse(retrievedObject));
-    }
+    // if (!posts.length) {
+    //     let retrievedObject = localStorage.getItem('developmentPosts');
+    //     posts = Object.values(JSON.parse(retrievedObject));
+    // }
+    posts = [];
 
     if (currentUser.id == userId) {
         return <OwnProfile user={currentUser} posts={posts} />;
@@ -45,10 +46,10 @@ const ForeignProfile = ({ user, posts }) => {
     const history = useHistory();
 
     // localStorage.setItem('devtUser', JSON.stringify(user))
-    if (!user) {
-        let retrievedObject = localStorage.getItem('devtUser');
-        user = JSON.parse(retrievedObject);
-    }
+    // if (!user) {
+    //     let retrievedObject = localStorage.getItem('devtUser');
+    //     user = JSON.parse(retrievedObject);
+    // }
 
     return (
         <div className="foreign-profile">
@@ -178,32 +179,39 @@ const SelectedPosts = ({ posts, selected }) => {
     return (
         <article className="selected-posts">
             {['posts', 'saved', 'tagged'].includes(selected) ?
-                <GridView posts={posts} /> :
+                <GridView posts={posts} selected={selected} /> :
                 <FeedView posts={posts} />
             }
         </article>
     );
 };
 
-const GridView = ({ posts }) => (
-    <div className="grid-view">
-        {
-            posts.map(post => (
+const GridView = ({ posts, selected }) => {
+    return posts.length > 0 ?
+        <div className="grid-view">
+            {posts.map(post => (
                 <Link key={post.id} to={`/posts/${post.id}`}>
                     <img src={post.image_url} alt="post" />
-                </Link>
-            ))
-        }
+                </Link>))}
+        </div> :
+        <NoContentPlaceholder selected={selected} />;
+};
 
-    </div>
-);
+const FeedView = ({ posts }) => {
+    return posts.length > 0 ?
+        <ul>{posts.map(post => (
+            <Post key={post.id} post={post} />))}
+        </ul> :
+        <NoContentPlaceholder selected='posts' />;
+};
 
-const FeedView = ({ posts }) => (
-    <ul>
-        {
-            posts.map(post => (
-                <Post key={post.id} post={post} />
-            ))
-        }
-    </ul>
-);
+const NoContentPlaceholder = ({ selected }) => {
+    const messages = {
+        'posts': "When you make posts, they'll appear here",
+        'saved': "When you save posts, they'll appear here",
+        'tagged': "When you're tagged in posts, they'll appear here"
+    };
+    return <div className="no-content-placeholder">
+        <p>{messages[selected]}</p>
+    </div>;
+};
