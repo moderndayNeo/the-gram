@@ -5,14 +5,14 @@ import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
 
-export default function Post({ post: { id, author_id, image_url, caption } }) {
+export default function Post({ post: { id, author_id, image_url, caption, num_likes } }) {
     const author = useSelector(stateSelectors.userById(author_id));
 
     return (
         <article className="post">
             <PostHeader author={author} />
             <PostImage id={id} imageUrl={image_url} />
-            <PostFooter author={author.username} caption={caption} />
+            <PostFooter author={author.username} caption={caption} numLikes={num_likes} />
         </article>
     );
 }
@@ -37,11 +37,11 @@ const PostImage = ({ imageUrl }) => {
     );
 };
 
-const PostFooter = ({ author, caption }) => {
+const PostFooter = ({ author, caption, numLikes }) => {
     return (
         <div className="post-footer">
             <FooterIcons />
-            <div className="post-likes">135 likes</div>
+            <PostLikes numLikes={numLikes} />
             <CaptionAndComments author={author} caption={caption} />
         </div>
     );
@@ -66,3 +66,15 @@ const CaptionAndComments = ({ author, caption }) => (
         </div>
     </div>
 );
+
+const PostLikes = ({ numLikes }) => {
+    let content = numLikes === 0 ?
+        "Be the first to like this" :
+        numLikes === 1 ?
+            "1 Like" : `${numLikes} likes`;
+
+    return (
+        < div className="post-likes" > { content}</div>
+    );
+};
+
