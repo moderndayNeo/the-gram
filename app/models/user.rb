@@ -12,12 +12,20 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
-  has_one_attached :photo
+  has_one_attached :photo, dependent: :destroy
 
   has_many :posts,
            class_name: :Post,
            foreign_key: :author_id,
            dependent: :destroy
+
+  has_many :post_likes, -> { where likeable_type: "Post" },
+    class_name: :Like,
+    foreign_key: :liker_id
+
+  has_many :liked_posts,
+           through: :post_likes,
+           source: :liker
 
   attr_reader :password
 

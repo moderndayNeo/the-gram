@@ -4,12 +4,11 @@ class Api::PostsController < ApplicationController
     case params[:type]
     when "feed"
       @posts = Post.all
-        .includes(:author)
+        .includes(:author, :likes)
         .with_eager_loaded_photo
         .order(created_at: :desc)
 
       @users = @posts.map(&:author)
-      # @users = Post.associated_users(@posts )
       render :index
     else
       render json: ["Error: No type provided to posts index"], status: 422

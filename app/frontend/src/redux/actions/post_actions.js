@@ -19,11 +19,6 @@ export const receivePostErrors = (errors) => ({
     errors,
 })
 
-// const deletePost = (postId) => ({
-//     type: DELETE_POST,
-//     postId,
-// })
-
 export const createPost = (post) => (dispatch) =>
     PostsAPIUtil.createPost(post)
         .then(({ data: { post } }) => dispatch(receivePost(post)))
@@ -41,9 +36,3 @@ export const getFeed = () => (dispatch) =>
             dispatch(receivePosts(posts))
         })
         .catch((errors) => console.log(errors))
-
-
-        // export const deletePost = (postId) => (dispatch) =>
-//     PostsAPIUtil.deletePost(postId)
-//         .then((postId) => dispatch(deletePost(postId)))
-//         .catch((errors) => receivePostErrors(errors))

@@ -14,4 +14,6 @@ export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)
 export const getFeed = () => axiosGetRequest(`/api/posts`, { type: 'feed' })
 // export const getDiscoverPosts = () => axiosGetRequest(`/api/posts`, { type: 'discover'})
 
-// export const likePost = (postId) => axiosPostRequest(`/api/posts/${postId}/likes`)
+export const likePost = (postId) => axiosPostRequest(`/api/posts/${postId}/likes`)
+export const unlikePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}/likes`)
+
