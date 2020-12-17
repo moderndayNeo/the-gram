@@ -17,3 +17,12 @@ export const getFeed = () => axiosGetRequest(`/api/posts`, { type: 'feed' })
 export const likePost = (postId) => axiosPostRequest(`/api/posts/${postId}/likes`)
 export const unlikePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}/likes`)
 
+
+/*
+dispatch like post
+post actions
+
+api like post
+post is returned
+receive post
+*/

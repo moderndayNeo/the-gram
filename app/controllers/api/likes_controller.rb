@@ -7,19 +7,17 @@ class Api::LikesController < ApplicationController
       @post = Post.find(params[:post_id])
       render json: ["Error: Post not found"], status: 404 unless @post
       @like.likeable = @post
-      # @like.likeable_type = "Post"
-
+      @like.save!
+      render :show
     elsif params[:comment_id]
       @comment = Comment.find(params[:comment_id])
       render json: ["Error: Comment not found"], status: 404 unless @comment
       @like.likeable = @comment
-      # @like.likeable_type = "Comment"
+      @like.save!
+      render :show
     else
       render json: ["A like must be attached to either a post or a comment"], status: 422
     end
-
-    @like.save!
-    render :show
   end
 
   def destroy
