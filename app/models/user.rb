@@ -13,6 +13,8 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   has_one_attached :photo, dependent: :destroy
+  scope :with_eager_loaded_photo, -> {eager_load(photo_attachment: :blob)}
+
 
   has_many :posts,
            class_name: :Post,

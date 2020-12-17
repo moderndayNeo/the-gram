@@ -2,7 +2,10 @@ class Api::UsersController < ApplicationController
   # before_action :require_current_user!, except: [:create]
 
   def index
-    @users = User.all.includes(:posts)
+    @users = User
+      .all
+      .includes(posts: [:likes, :photo_attachment, :likers])
+      .includes(:photo_attachment)
   end
 
   def show
