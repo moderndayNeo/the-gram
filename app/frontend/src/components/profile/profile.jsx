@@ -110,9 +110,9 @@ const Bio = ({ user }) => (
     </div>
 );
 
-const Stats = () => {
-    let user = {
-        num_posts: 3,
+const Stats = ({user}) => {
+    let userData = {
+        ...user,
         num_followers: 11,
         num_following: 14
     };
@@ -125,7 +125,7 @@ const Stats = () => {
             {
                 statTypes.map((statName, idx) => (
                     <li key={idx} className="stat">
-                        <p className="number">{user[userInfo[idx]]}</p>
+                        <p className="number">{userData[userInfo[idx]]}</p>
                         <p className="name">{statName}</p>
                     </li>
                 ))
