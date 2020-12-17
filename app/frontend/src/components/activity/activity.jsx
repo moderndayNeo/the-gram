@@ -1,11 +1,11 @@
 import React from 'react';
 import BottomNav from '../shared/bottom_nav';
+import DevelopmentModal from '../shared/development_modal';
 
 export default function Activity() {
     return (
         <div>
-            Activity Page
-            In progress...
+            <DevelopmentModal feature='Activity Page' />
             <BottomNav />
         </div>
     );
