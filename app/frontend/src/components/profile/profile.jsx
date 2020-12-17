@@ -16,7 +16,7 @@ export default function Profile() {
     //     let retrievedObject = localStorage.getItem('developmentPosts');
     //     posts = Object.values(JSON.parse(retrievedObject));
     // }
-    posts = [];
+    // posts = [];
 
     if (currentUser.id == userId) {
         return <OwnProfile user={currentUser} posts={posts} />;
