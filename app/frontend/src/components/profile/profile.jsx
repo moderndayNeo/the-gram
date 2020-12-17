@@ -5,6 +5,7 @@ import stateSelectors from '../../util/state_selectors';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
+import Post from '../posts/post'
 
 export default function Profile() {
     const currentUser = useSelector(stateSelectors.currentUser());
@@ -199,6 +200,10 @@ const GridView = ({ posts }) => (
 
 const FeedView = ({ posts }) => (
     <ul>
-        Feed View
+        {
+            posts.map(post => (
+                <Post key={post.id} post={post} />
+            ))
+        }
     </ul>
 );
