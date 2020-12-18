@@ -12,12 +12,6 @@ export default function Profile() {
     const { userId } = useParams();
     let posts = useSelector(stateSelectors.postsByAuthorId(userId));
 
-    // if (!posts.length) {
-    //     let retrievedObject = localStorage.getItem('developmentPosts');
-    //     posts = Object.values(JSON.parse(retrievedObject));
-    // }
-    // posts = [];
-
     if (currentUser.id == userId) {
         return <OwnProfile user={currentUser} posts={posts} />;
     }
@@ -44,12 +38,6 @@ const OwnProfile = ({ user, posts }) => {
 
 const ForeignProfile = ({ user, posts }) => {
     const history = useHistory();
-
-    // localStorage.setItem('devtUser', JSON.stringify(user))
-    // if (!user) {
-    //     let retrievedObject = localStorage.getItem('devtUser');
-    //     user = JSON.parse(retrievedObject);
-    // }
 
     return (
         <div className="foreign-profile">
@@ -230,3 +218,15 @@ const NoContentPlaceholder = ({ selected }) => {
         <p>{placeholders[selected].message}</p>
     </div>;
 };
+
+
+    // if (!posts.length) {
+    //     let retrievedObject = localStorage.getItem('developmentPosts');
+    //     posts = Object.values(JSON.parse(retrievedObject));
+    // }
+
+        // localStorage.setItem('devtUser', JSON.stringify(user))
+    // if (!user) {
+    //     let retrievedObject = localStorage.getItem('devtUser');
+    //     user = JSON.parse(retrievedObject);
+    // }

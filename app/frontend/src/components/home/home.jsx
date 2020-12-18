@@ -10,7 +10,6 @@ import stateSelectors from '../../util/state_selectors'
 export default function Home() {
     const dispatch = useDispatch();
     let posts = useSelector(stateSelectors.allPosts());
-
     if (!posts.length) dispatch(getFeed())
 
     return (
