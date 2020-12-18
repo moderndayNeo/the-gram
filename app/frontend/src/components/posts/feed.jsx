@@ -12,7 +12,6 @@ export default function Feed({posts}) {
     //     posts = Object.values(JSON.parse(retrievedObject))
     //     // console.log('retrievedObject: ', JSON.parse(retrievedObject));
     // }
-    
 
     return (
         <ul className="feed">

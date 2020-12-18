@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BottomNav from '../shared/bottom_nav';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
 import Post from '../posts/post';
+import { getFeed } from '../../redux/actions/post_actions';
 
 export default function Profile() {
+    const dispatch = useDispatch();
     const currentUser = useSelector(stateSelectors.currentUser());
     const { userId } = useParams();
     let posts = useSelector(stateSelectors.postsByAuthorId(userId));
+    const [loading, setLoading] = useState(false);
 
-    if (currentUser.id == userId) {
+    useEffect(() => {
+        if (!posts.length) {
+            setLoading(true);
+            dispatch(getFeed())
+                .then(() => setLoading(false));
+        }
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    } else if (currentUser.id == userId) {
         return <OwnProfile user={currentUser} posts={posts} />;
     }
     else {
@@ -98,7 +111,7 @@ const Bio = ({ user }) => (
     </div>
 );
 
-const Stats = ({user}) => {
+const Stats = ({ user }) => {
     let userData = {
         ...user,
         num_followers: 11,
@@ -201,7 +214,7 @@ const NoContentPlaceholder = ({ selected }) => {
         },
         'feed': {
             message: "When you save posts, they'll appear here",
-            icon: <img src={window.profileFeedGrey} alt=""/>
+            icon: <img src={window.profileFeedGrey} alt="" />
         },
         'saved': {
             message: "When you save posts, they'll appear here",
