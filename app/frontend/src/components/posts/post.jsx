@@ -64,8 +64,10 @@ const FooterIcons = ({ postId, liked }) => {
                             {icons.unfilledHeart}
                         </div>
                 }
-
+                
+                <Link to={`/posts/${postId}/comments`}>
                 {icons.comment}
+                </Link>
                 {icons.paperPlane}
             </div>
             {icons.unfilledSave}

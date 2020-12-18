@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import Post from './post';
 import icons from '../shared/icons/svg-icons';
+import BottomNav from '../shared/bottom_nav'
 
 export default function PostShow() {
     const history = useHistory();
@@ -30,6 +31,7 @@ export default function PostShow() {
                 <div></div>
             </header>
             <Post post={post} />
+            <BottomNav />
         </div>
     );
 }
