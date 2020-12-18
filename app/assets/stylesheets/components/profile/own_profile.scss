@@ -1,0 +1,25 @@
+.options-modal {
+    height: 100vh;
+
+    .option-bar {
+        padding: 0px 16px;
+        border-top: 1px solid var(--light-grey);
+        border-bottom: 1px solid var(--light-grey);
+        height: 44px;
+        margin-top: 20px;
+
+        a {
+            color: var(--red-text);
+            font-weight: 400;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 44px;
+
+            img {
+                height: 24px;
+                width: 24px;
+            }
+        }
+    }
+}

@@ -19,7 +19,9 @@ export const loginUser = (user) => (dispatch) =>
         .catch((errors) => dispatch(receiveSessionErrors(errors)))
 
 export const logoutUser = () => (dispatch) =>
-    SessionAPIUtil.logoutUser().then(() => dispatch(logoutCurrentUser()))
+    SessionAPIUtil.logoutUser()
+        .then(() => dispatch(logoutCurrentUser()))
+        .catch(errors => console.log(errors))
 
 export const updateUser = (userId, formData) => (dispatch) =>
     SessionAPIUtil.updateUser(userId, formData)

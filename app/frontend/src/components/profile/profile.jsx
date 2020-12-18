@@ -7,6 +7,7 @@ import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
 import Post from '../posts/post';
 import { getFeed } from '../../redux/actions/post_actions';
+import { logoutUser } from '../../redux/actions/session_actions';
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -35,9 +36,14 @@ export default function Profile() {
 }
 
 const OwnProfile = ({ user, posts }) => {
+    const [optionsModal, setOptionsModal] = useState(false);
+
     return (
         <div className="own-profile">
-            <ProfileHeader user={user} />
+            {
+                optionsModal && <OptionsModal setOptionsModal={setOptionsModal} />
+            }
+            <ProfileHeader user={user} setOptionsModal={setOptionsModal} />
             <main>
                 <ImageAndName user={user} ownProfile={true} />
                 <Bio user={user} />
@@ -45,6 +51,28 @@ const OwnProfile = ({ user, posts }) => {
                 <PostCollections user={user} ownProfile={true} posts={posts} />
             </main>
             <BottomNav />
+        </div>
+    );
+};
+
+const OptionsModal = ({ setOptionsModal }) => {
+    return (
+        <div className="options-modal">
+            <header>
+                <div onClick={() => setOptionsModal(false)}>
+                    {icons.cross}
+                </div>
+                <h3>Options</h3>
+                <div className="blank-div"></div>
+            </header>
+
+            <div className="option-bar">
+                <Link to="/signup" onClick={() => dispatch(logoutUser())}>
+                    <p>Log Out</p>
+                    <img src={window.greyChevron} alt="chevron icon" />
+                </Link>
+            </div>
+
         </div>
     );
 };
@@ -75,9 +103,11 @@ const ForeignProfile = ({ user, posts }) => {
     );
 };
 
-const ProfileHeader = ({ user }) => (
+const ProfileHeader = ({ user, setOptionsModal }) => (
     <header>
-        {icons.gears}
+        <div onClick={() => setOptionsModal(true)}>
+            {icons.gears}
+        </div>
         <h3>{user.username}</h3>
         {icons.discover}
     </header>
