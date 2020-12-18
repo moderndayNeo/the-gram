@@ -17,10 +17,10 @@ class Post < ApplicationRecord
     through: :likes,
     source: :liker
 
-  # has_many :comments,
-  #          class_name: :Comment,
-  #          foreign_key: :post_id,
-  #          dependent: :destroy
+  has_many :comments,
+           class_name: :Comment,
+           foreign_key: :post_id,
+           dependent: :destroy
 
   # has_many :taggings,
   #          class_name: :Tagging,

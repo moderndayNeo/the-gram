@@ -13,8 +13,7 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   has_one_attached :photo, dependent: :destroy
-  scope :with_eager_loaded_photo, -> {eager_load(photo_attachment: :blob)}
-
+  scope :with_eager_loaded_photo, -> { eager_load(photo_attachment: :blob) }
 
   has_many :posts,
            class_name: :Post,
@@ -30,6 +29,41 @@ class User < ApplicationRecord
            source: :liker
 
   attr_reader :password
+
+  has_many :comments,
+           class_name: :Comment,
+           foreign_key: :author_id,
+           dependent: :destroy
+
+  # has_many :follows, -> { where followee_type: "User" },
+  #     class_name: :Follow,
+  #     foreign_key: :followee_id
+
+  # has_many :followers, through: :follows, source: :follower
+
+  # has_many :outgoing_follows,
+  #     class_name: :Follow,
+  #     foreign_key: :follower_id
+
+  # has_many :followed_users,
+  #     through: :outgoing_follows,
+  #     source_type: :User,
+  #     source: :followee
+
+  # has_many :followed_hashtags,
+  #     through: :outgoing_follows,
+  #     source_type: :Hashtag,
+  #     source: :followee
+
+  # has_many :saves,
+  #    class_name: :Save,
+  #    foreign_key: :user_id
+
+  # has_many :saved_posts, through: :saves, source: :post
+
+  # has_many :notifications,
+  #     class_name: :Notification,
+  #     foreign_key: :notified_user_id
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
