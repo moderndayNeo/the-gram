@@ -4,17 +4,18 @@ import icons from '../shared/icons/svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
-import {likePost} from '../../redux/actions/post_actions'
+import { likePost } from '../../redux/actions/post_actions';
 
-export default function Post({ post: { id, author_id, image_url, caption, num_likes } }) {
+export default function Post({ post }) {
+    let { id, author_id, image_url } = post;
     const author = useSelector(stateSelectors.userById(author_id));
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     return (
         <article className="post">
             <PostHeader author={author} />
             <PostImage id={id} imageUrl={image_url} />
-            <PostFooter author={author.username} caption={caption} numLikes={num_likes} postId={id} />
+            <PostFooter post={post} />
         </article>
     );
 }
@@ -39,22 +40,22 @@ const PostImage = ({ imageUrl }) => {
     );
 };
 
-const PostFooter = ({ author, caption, numLikes, postId }) => {
+const PostFooter = ({ post }) => {
     return (
         <div className="post-footer">
-            <FooterIcons postId={postId} />
-            <PostLikes numLikes={numLikes} />
-            <CaptionAndComments author={author} caption={caption}  />
+            <FooterIcons postId={post.id} />
+            <PostLikes numLikes={post.num_likes} />
+            <CaptionAndComments post={post} />
         </div>
     );
 };
 
-const FooterIcons = ({postId}) => (
+const FooterIcons = ({ postId }) => (
     <div className="footer-icons">
         <div className="icons-left">
             <div onClick={() => dispatch(likePost(postId))}>
 
-            {icons.unfilledHeart}
+                {icons.unfilledHeart}
             </div>
             {icons.comment}
             {icons.paperPlane}
@@ -63,11 +64,11 @@ const FooterIcons = ({postId}) => (
     </div>
 );
 
-const CaptionAndComments = ({ author, caption }) => (
+const CaptionAndComments = ({ post }) => (
     <div className="caption-and-comments">
         <div className="caption">
-            <span className="author">{author}</span>
-            <p> {caption}</p>
+            <span className="author">{post.author_username}</span>
+            <p> {post.caption}</p>
         </div>
     </div>
 );
