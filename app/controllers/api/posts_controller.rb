@@ -9,6 +9,7 @@ class Api::PostsController < ApplicationController
         .order(created_at: :desc)
 
       @users = @posts.map(&:author)
+
       return render :index
     else
       return render json: ["Error: No type provided to posts index"], status: 422

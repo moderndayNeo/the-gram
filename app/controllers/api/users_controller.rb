@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
     @users = User
       .all
       .includes(posts: [:likes, :photo_attachment, :likers])
-      .includes(:photo_attachment)
+      .includes(:photo_attachment, :liked_posts)
   end
 
   def show
