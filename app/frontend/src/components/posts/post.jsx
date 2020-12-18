@@ -4,19 +4,13 @@ import icons from '../shared/icons/svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
-import { likePost } from '../../redux/actions/post_actions';
-import { unlikePost } from '../../util/api_util';
+import { likePost, unlikePost } from '../../redux/actions/post_actions';
 
 export default function Post({ post }) {
     let { id, author_id, image_url, liker_ids } = post;
     const author = useSelector(stateSelectors.userById(author_id));
-    // const likedPosts = useSelector(stateSelectors.currentUserLikedPosts());
-    const currentUserId = useSelector(stateSelectors.currentUserId());
-    console.log(liker_ids)
-    console.log(currentUserId)
-    
+    const currentUserId = useSelector(stateSelectors.currentUserId());    
     const liked = liker_ids.includes(currentUserId);
-    // const liked = likedPosts.includes(id);
 
     return (
         <article className="post">
@@ -58,7 +52,6 @@ const PostFooter = ({ post, liked }) => {
 };
 
 const FooterIcons = ({ postId, liked }) => {
-    // console.log(postId, liked);
     return (
         <div className="footer-icons">
             <div className="icons-left">

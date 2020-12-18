@@ -24,13 +24,15 @@ class Api::LikesController < ApplicationController
     if params[:post_id]
       @like = Like.find_by(likeable_id: params[:post_id], liker_id: current_user.id, likeable_type: "Post")
       render json: ["Error: Like not found"] unless @like
-      @like.destroy
+      @like.destroy!
+      @post = Post.find(params[:post_id])
+      render :show
     elsif params[:comment_id]
       @like = Like.find_by(likeable_id: params[:comment_id], liker_id: current_user.id, likeable_type: "Comment")
       render json: ["Error: Like not found"] unless @like
-      @like.destroy
+      @like.destroy!
+      @comment = Comment.find(params[:comment_id])
+      render :show
     end
   end
 end
-
-# render the post with show page

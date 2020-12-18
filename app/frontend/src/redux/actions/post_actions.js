@@ -42,3 +42,8 @@ export const likePost = (postId) => (dispatch) =>
     PostsAPIUtil.likePost(postId)
         .then(({ data: { post } }) => dispatch(receivePost(post)))
         .catch((errors) => console.log(errors))
+
+export const unlikePost = (postId) => (dispatch) =>
+    PostsAPIUtil.unlikePost(postId)
+        .then(({ data: { post } }) => dispatch(receivePost(post)))
+        .catch((errors) => console.log(errors))
