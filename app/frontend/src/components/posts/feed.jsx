@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getFeed } from '../../redux/actions/post_actions';
+import React from 'react';
 import Post from './post';
-import stateSelectors from '../../util/state_selectors';
 
-export default function Feed({posts}) {
-    const dispatch = useDispatch();
-    const [loading, setLoading] = useState(false);
-    
+export default function Feed({ posts }) {
     return (
         <ul className="feed">
-            {
-                loading ?
-                <LoadingComponent /> :
-                posts.map(post => (
-                    <Post key={post.id} post={post} />
-                    ))
-                }
+            {posts.map(post => (
+                <Post key={post.id} post={post} />
+            ))}
         </ul>
     );
 }
