@@ -8,11 +8,10 @@ Rails.application.routes.draw do
 
     resources :posts, only: [:create, :index, :show, :update, :destroy] do
       resources :likes, only: [:create, :destroy]
+      resources :comments, only: [:create] do
+        resources :likes, only: [:create, :destroy]
+      end
       resources :saves, only: [:create, :destroy]
-    end
-    
-    resources :comments, only: [:create] do
-      resources :likes, only: [:create, :destroy]
     end
 
     resources :notifications, only: [:index, :create]

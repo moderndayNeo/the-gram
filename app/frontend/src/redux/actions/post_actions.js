@@ -47,3 +47,8 @@ export const unlikePost = (postId) => (dispatch) =>
     PostsAPIUtil.unlikePost(postId)
         .then(({ data: { post } }) => dispatch(receivePost(post)))
         .catch((errors) => console.log(errors))
+
+export const commentOnPost = (postId, body) => dispatch => (
+    PostsAPIUtil.commentOnPost(postId, body)
+        .then(res => console.log(res))
+)
