@@ -10,5 +10,5 @@ export default {
             (post) => post.author_id == id
         ),
     currentUserLikedPosts: () => state => state.entities.users[state.session.id].liked_post_ids,
-    currentUserImageUrl: () => state.entities.users[state.session.id].image_url
+    currentUserImageUrl: () => state => state.entities.users[state.session.id].image_url
 }

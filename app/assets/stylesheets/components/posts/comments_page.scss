@@ -1,0 +1,20 @@
+.comments-page {
+ 
+    
+    .form-container {
+        height: 62px;
+        padding: 8px 0px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: var(--light-grey);
+
+        form {
+            padding: 12px 16px;
+            margin-right: 16px;
+            border: 1px solid var(--dark-grey);
+            border-radius: 20px;
+            width: 295px;
+        }
+    }
+}
