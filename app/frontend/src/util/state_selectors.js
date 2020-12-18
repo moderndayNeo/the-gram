@@ -9,4 +9,5 @@ export default {
         Object.values(state.entities.posts).filter(
             (post) => post.author_id == id
         ),
+    currentUserLikedPosts: () => state => state.entities.users[state.session.id].liked_post_ids
 }

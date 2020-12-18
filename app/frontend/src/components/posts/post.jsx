@@ -5,17 +5,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
 import { likePost } from '../../redux/actions/post_actions';
+import { unlikePost } from '../../util/api_util';
 
 export default function Post({ post }) {
-    let { id, author_id, image_url } = post;
+    let { id, author_id, image_url, liker_ids } = post;
     const author = useSelector(stateSelectors.userById(author_id));
-    const dispatch = useDispatch();
+    // const likedPosts = useSelector(stateSelectors.currentUserLikedPosts());
+    const currentUserId = useSelector(stateSelectors.currentUserId());
+    console.log(liker_ids)
+    console.log(currentUserId)
+    
+    const liked = liker_ids.includes(currentUserId);
+    // const liked = likedPosts.includes(id);
 
     return (
         <article className="post">
             <PostHeader author={author} />
             <PostImage id={id} imageUrl={image_url} />
-            <PostFooter post={post} />
+            <PostFooter post={post} liked={liked} />
         </article>
     );
 }
@@ -40,29 +47,38 @@ const PostImage = ({ imageUrl }) => {
     );
 };
 
-const PostFooter = ({ post }) => {
+const PostFooter = ({ post, liked }) => {
     return (
         <div className="post-footer">
-            <FooterIcons postId={post.id} />
+            <FooterIcons postId={post.id} liked={liked} />
             <PostLikes numLikes={post.num_likes} />
             <CaptionAndComments post={post} />
         </div>
     );
 };
 
-const FooterIcons = ({ postId }) => (
-    <div className="footer-icons">
-        <div className="icons-left">
-            <div onClick={() => dispatch(likePost(postId))}>
+const FooterIcons = ({ postId, liked }) => {
+    // console.log(postId, liked);
+    return (
+        <div className="footer-icons">
+            <div className="icons-left">
+                {
+                    liked ?
+                        <div onClick={() => dispatch(unlikePost(postId))}>
+                            {icons.redHeart}
+                        </div> :
+                        <div onClick={() => dispatch(likePost(postId))}>
+                            {icons.unfilledHeart}
+                        </div>
+                }
 
-                {icons.unfilledHeart}
+                {icons.comment}
+                {icons.paperPlane}
             </div>
-            {icons.comment}
-            {icons.paperPlane}
+            {icons.unfilledSave}
         </div>
-        {icons.unfilledSave}
-    </div>
-);
+    );
+};
 
 const CaptionAndComments = ({ post }) => (
     <div className="caption-and-comments">

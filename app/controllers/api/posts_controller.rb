@@ -4,7 +4,7 @@ class Api::PostsController < ApplicationController
     case params[:type]
     when "feed"
       @posts = Post.all
-        .includes(:author, :likes)
+        .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
         .order(created_at: :desc)
 
