@@ -12,7 +12,7 @@ export default (state = {}, action) => {
             return Object.assign({}, state, action.posts)
 
         case RECEIVE_POST:
-            return Object.assign({}, state, action.post)
+            return Object.assign({}, state, { [action.post.id]: action.post })
 
         default:
             return state
