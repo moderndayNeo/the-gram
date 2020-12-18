@@ -7,14 +7,29 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        background-color: var(--light-grey);
+        background-color: var(--very-light-grey);
+
+        img {
+            margin: 0 16px;
+        }
 
         form {
             padding: 12px 16px;
             margin-right: 16px;
-            border: 1px solid var(--dark-grey);
+            border: 1px solid var(--light-grey);
             border-radius: 20px;
             width: 295px;
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                color: var(--blue);
+                font-weight: bold;
+
+                &:disabled {
+                    opacity: 0.3
+                }
+            }
         }
     }
 }

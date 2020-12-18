@@ -27,7 +27,8 @@ export default function CommentsPage() {
                     />
 
                     <button
-                        disabled={body}
+                        disabled={body.length === 0}
+                        type="submit"
                     >Post</button>
                 </form>
             </section>
