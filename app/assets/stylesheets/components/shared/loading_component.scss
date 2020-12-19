@@ -1,0 +1,12 @@
+.loading-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    height: 100vh;
+ 
+    img {
+        width: 80px;
+        height: 80px;
+    }
+}
