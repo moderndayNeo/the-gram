@@ -1,5 +1,6 @@
 import * as PostsAPIUtil from '../../util/api_util'
 import { receiveUsers } from './session_actions'
+import {receiveComments} from './comment_actions'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const DELETE_POST = 'DELETE_POST'
