@@ -10,7 +10,9 @@ class Api::PostsController < ApplicationController
 
       @users = @posts.map(&:author)
 
-      @comments = Comment.where(post_id: [@posts.pluck(:id)])
+      @comments = Comment
+        .where(post_id: [@posts.pluck(:id)])
+        .includes(:author)
 
       return render :index
     else

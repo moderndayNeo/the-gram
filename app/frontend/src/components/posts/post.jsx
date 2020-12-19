@@ -85,14 +85,28 @@ const CaptionAndComments = ({ post, comments }) => (
         <div>
             {
                 comments.map(comment => (
-                    <li key={comment.id}>
-                        {comment.body}
-                    </li>
+                    <FeedComment key={comment.id} comment={comment} />
                 ))
             }
         </div>
     </div>
 );
+
+const FeedComment = ({comment}) => {
+    return (
+        <div className="feed-comment">
+            <div>
+                <Link
+                    to={`/users/${comment.author_id}`}
+                    className="author">
+                    {comment.author_name}
+                </Link>
+                <p>{comment.body}</p>
+            </div>
+            {icons.unfilledHeart}
+        </div>
+    );
+};
 
 const PostLikes = ({ numLikes }) => {
     let content = numLikes === 0 ?
