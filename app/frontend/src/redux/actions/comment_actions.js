@@ -1,5 +1,5 @@
 import * as APIUtil from '../../util/api_util'
-
+import {receivePost} from './post_actions'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 
