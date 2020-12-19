@@ -11,11 +11,12 @@ export default function CommentsPage() {
     const currentUserImg = useSelector(stateSelectors.currentUserImageUrl());
     const [body, setBody] = useState('');
     const { postId } = useParams();
-    const history = useHistory()
+    const history = useHistory();
+    const comments = useSelector(stateSelectors.commentsByPostId(postId));
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(commentOnPost(postId, {body}));
+        dispatch(commentOnPost(postId, { body }));
     };
 
     return (
@@ -47,9 +48,26 @@ export default function CommentsPage() {
                 </form>
             </section>
 
-            {/* {comments.map(comment => (
+            {comments.map(comment => (
                 <Comment key={comment.id} comment={comment} />
-            ))} */}
+            ))}
         </div>
     );
 }
+
+const Comment = ({ comment }) => {
+    return (
+        <ul className="comment">
+            <div className="comment-container">
+                <li className="main-comment">
+                    <UserAvatar />
+                    <div className="text">
+                        {comment.body}
+                    </div>
+                    {icons.unfilledHeart}
+                </li>
+            </div>
+            <div className="replies"></div>
+        </ul>
+    );
+};

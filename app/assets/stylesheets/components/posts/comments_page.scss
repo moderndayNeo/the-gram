@@ -33,5 +33,17 @@
         }
     }
 
-    
+    .comment {
+        margin-bottom: 16px;
+        border: 1px solid red;
+        
+        .main-comment {
+            border: 1px solid red;
+            margin-left: -12px;
+            margin-right: 0;
+            // padding: 12px 16px;
+            padding: 12px 28px 0 16px;
+            width: auto;
+        }
+    }
 }
