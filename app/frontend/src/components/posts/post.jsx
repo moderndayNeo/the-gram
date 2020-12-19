@@ -95,7 +95,7 @@ const CaptionAndComments = ({ post, comments }) => (
 const FeedComment = ({comment}) => {
     return (
         <div className="feed-comment">
-            <div>
+            <div className="text">
                 <Link
                     to={`/users/${comment.author_id}`}
                     className="author">

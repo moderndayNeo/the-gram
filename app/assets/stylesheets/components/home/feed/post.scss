@@ -58,6 +58,39 @@
                 display: inline;
             }
         }
+
+        .feed-comment {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            .text {
+                display: flex;
+                align-items: center;
+
+                p {
+                     margin: 0 0 0 5px
+                }
+
+                a {
+                    font-weight: bold;
+                    color: black;
+                    font-weight: 600;
+                    font-size: inherit;
+                    // overflow: hidden;
+                    // text-overflow: ellipsis;
+                    // white-space: nowrap;
+                    // padding-left: 5px;
+                    // margin-left: -5px;
+                }
+
+            }
+
+            svg {
+                width: 12px;
+                height: 12px;
+            }
+        }
     }
 }
 
