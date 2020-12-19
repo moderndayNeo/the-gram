@@ -1,6 +1,4 @@
 .comments-page {
- 
-    
     .form-container {
         height: 62px;
         padding: 8px 0px;
@@ -27,7 +25,7 @@
                 font-weight: bold;
 
                 &:disabled {
-                    opacity: 0.3
+                    opacity: 0.3;
                 }
             }
         }
@@ -36,7 +34,7 @@
     .comment {
         margin-bottom: 16px;
         border: 1px solid red;
-        
+
         .main-comment {
             border: 1px solid red;
             margin-left: -12px;
@@ -44,6 +42,32 @@
             // padding: 12px 16px;
             padding: 12px 28px 0 16px;
             width: auto;
+        }
+
+        .author {
+            font-weight: bold;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .inner-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .text {
+            display: flex;
+            width: 80%;
+            text-align: left;
+            // update this later
+        }
+
+        svg {
+            height: 12px;
+            width: 12px;
+            margin-top: 9px;
         }
     }
 }

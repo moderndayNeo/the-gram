@@ -59,15 +59,26 @@ const Comment = ({ comment }) => {
     return (
         <ul className="comment">
             <div className="comment-container">
+
                 <li className="main-comment">
-                    <UserAvatar />
-                    <div className="text">
-                        {comment.body}
+                    <div className="inner-container">
+                        <UserAvatar imageUrl={window.noAvatarImg} />
+                        <div className="text">
+                            <p className="author">Author</p>
+                            <p>Body
+                            {comment.body}
+                            </p>
+                        </div>
+                        <span>
+                            {icons.unfilledHeart}
+                        </span>
+
                     </div>
-                    {icons.unfilledHeart}
                 </li>
             </div>
-            <div className="replies"></div>
+
+            <li className="replies"></li>
         </ul>
     );
 };
+
