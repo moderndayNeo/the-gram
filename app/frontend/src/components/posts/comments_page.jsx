@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import icons from '../shared/icons/svg-icons';
 import { useParams, useHistory } from 'react-router-dom';
-import { commentOnPost } from '../../redux/actions/post_actions';
+import { commentOnPost } from '../../redux/actions/comment_actions';
 
 
 export default function CommentsPage() {

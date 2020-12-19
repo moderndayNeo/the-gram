@@ -94,4 +94,3 @@ const PostLikes = ({ numLikes }) => {
         < div className="post-likes" > { content}</div>
     );
 };
-

@@ -1,4 +1,3 @@
-import Post from '../../components/posts/post'
 import * as PostsAPIUtil from '../../util/api_util'
 import { receiveUsers } from './session_actions'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
@@ -32,9 +31,10 @@ export const fetchPosts = () => (dispatch) =>
 
 export const getFeed = () => (dispatch) =>
     PostsAPIUtil.getFeed()
-        .then(({ data: { posts, users } }) => {
+        .then(({ data: { posts, users, comments } }) => {
             dispatch(receiveUsers(users))
             dispatch(receivePosts(posts))
+            dispatch(receiveComments(comments))
         })
         .catch((errors) => console.log(errors))
 
@@ -48,7 +48,3 @@ export const unlikePost = (postId) => (dispatch) =>
         .then(({ data: { post } }) => dispatch(receivePost(post)))
         .catch((errors) => console.log(errors))
 
-export const commentOnPost = (postId, body) => dispatch => (
-    PostsAPIUtil.commentOnPost(postId, body)
-        .then(res => console.log(res))
-)

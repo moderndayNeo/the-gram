@@ -10,6 +10,8 @@ class Api::PostsController < ApplicationController
 
       @users = @posts.map(&:author)
 
+      @comments = Comment.where(post_id: [@posts.pluck(:id)])
+
       return render :index
     else
       return render json: ["Error: No type provided to posts index"], status: 422
