@@ -9,14 +9,15 @@ import { likePost, unlikePost } from '../../redux/actions/post_actions';
 export default function Post({ post }) {
     let { id, author_id, image_url, liker_ids } = post;
     const author = useSelector(stateSelectors.userById(author_id));
-    const currentUserId = useSelector(stateSelectors.currentUserId());    
+    const currentUserId = useSelector(stateSelectors.currentUserId());
     const liked = liker_ids.includes(currentUserId);
+    const comments = useSelector(stateSelectors.commentsByPostId(post.id));
 
     return (
         <article className="post">
             <PostHeader author={author} />
             <PostImage id={id} imageUrl={image_url} />
-            <PostFooter post={post} liked={liked} />
+            <PostFooter post={post} liked={liked} comments={comments} />
         </article>
     );
 }
@@ -41,12 +42,12 @@ const PostImage = ({ imageUrl }) => {
     );
 };
 
-const PostFooter = ({ post, liked }) => {
+const PostFooter = ({ post, liked, comments }) => {
     return (
         <div className="post-footer">
             <FooterIcons postId={post.id} liked={liked} />
             <PostLikes numLikes={post.num_likes} />
-            <CaptionAndComments post={post} />
+            <CaptionAndComments post={post} comments={comments} />
         </div>
     );
 };
@@ -64,9 +65,9 @@ const FooterIcons = ({ postId, liked }) => {
                             {icons.unfilledHeart}
                         </div>
                 }
-                
+
                 <Link to={`/posts/${postId}/comments`}>
-                {icons.comment}
+                    {icons.comment}
                 </Link>
                 {icons.paperPlane}
             </div>
@@ -75,11 +76,20 @@ const FooterIcons = ({ postId, liked }) => {
     );
 };
 
-const CaptionAndComments = ({ post }) => (
+const CaptionAndComments = ({ post, comments }) => (
     <div className="caption-and-comments">
         <div className="caption">
             <span className="author">{post.author_username}</span>
             <p> {post.caption}</p>
+        </div>
+        <div>
+            {
+                comments.map(comment => (
+                    <li key={comment.id}>
+                        {comment.body}
+                    </li>
+                ))
+            }
         </div>
     </div>
 );
