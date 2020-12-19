@@ -16,7 +16,8 @@ export default function CommentsPage() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(commentOnPost(postId, { body }));
+        dispatch(commentOnPost(postId, { body }))
+            .then(() => setBody(''));
     };
 
     return (
