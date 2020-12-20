@@ -101,4 +101,8 @@ class User < ApplicationRecord
       errors[:email] << "must be in a valid format"
     end
   end
+
 end
+
+
+
