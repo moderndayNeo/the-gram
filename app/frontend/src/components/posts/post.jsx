@@ -26,9 +26,11 @@ const PostHeader = ({ author }) => {
     return (
         <header className="post-header">
             <UserAvatar imageUrl={author.image_url} />
-            <Link to={`/users/${author.id}`}>
-                <p>{author.username}</p>
-            </Link>
+            <div className="author-name">
+                <Link to={`/users/${author.id}`}>
+                    {author.username}
+                </Link>
+            </div>
             {icons.threeDots}
         </header>
     );
@@ -151,8 +153,8 @@ const PostLikes = ({ numLikes }) => {
     );
 };
 
-const DatePosted = ({post}) => (
+const DatePosted = ({ post }) => (
     <div className="date-posted">
         <p >{post.time_ago.toUpperCase()} AGO</p>
     </div>
-)
+);

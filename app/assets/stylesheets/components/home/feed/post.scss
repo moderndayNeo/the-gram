@@ -6,9 +6,12 @@
         height: 60px;
         // border: 1px solid red;
 
-        a {
+        .author-name {
             width: 80%;
             text-align: left;
+        }
+
+        a {
             font-weight: 600;
             color: black;
             font-size: inherit;
