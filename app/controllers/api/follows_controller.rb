@@ -4,8 +4,8 @@ class Api::FollowsController < ApplicationController
     @follow.follower = current_user
 
     if params[:user_id]
-      @user = User.find(params[:user_id])
-      @follow.followee = @user
+      @followee = User.find(params[:user_id])
+      @follow.followee = @followee
       @follow.save
       render :show
     elsif params[:hashtag_id]

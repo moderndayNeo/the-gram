@@ -1,4 +1,4 @@
-import * as SessionAPIUtil from '../../util/api_util'
+import * as APIUtil from '../../util/api_util'
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER'
@@ -7,27 +7,33 @@ export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 
 export const createNewUser = (user) => (dispatch) =>
-    SessionAPIUtil.createUser(user)
+    APIUtil.createUser(user)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receiveSessionErrors(errors)))
 
 export const loginUser = (user) => (dispatch) =>
-    SessionAPIUtil.loginUser(user)
+    APIUtil.loginUser(user)
         .then(({ data: { user } }) => {
             dispatch(receiveCurrentUser(user))
         })
         .catch((errors) => dispatch(receiveSessionErrors(errors)))
 
 export const logoutUser = () => (dispatch) =>
-    SessionAPIUtil.logoutUser()
+    APIUtil.logoutUser()
         .then(() => dispatch(logoutCurrentUser()))
         .catch(errors => console.log(errors))
 
 export const updateUser = (userId, formData) => (dispatch) =>
-    SessionAPIUtil.updateUser(userId, formData)
+    APIUtil.updateUser(userId, formData)
         .then((user) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receiveUserErrors(errors)))
 // update this
+
+export const followUser = userId => dispatch => (
+    APIUtil.followUser(userId)
+    .then(({users}) => dispatch(receiveUsers(users)))
+    .catch(errors => console.log(errors))
+)
 
 const receiveSessionErrors = (errors) => ({
     type: RECEIVE_SESSION_ERRORS,
@@ -52,3 +58,5 @@ export const receiveUsers = (users) => ({
     type: RECEIVE_USERS,
     users,
 })
+
+

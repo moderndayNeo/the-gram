@@ -8,6 +8,7 @@ import UserAvatar from '../shared/user_avatar';
 import Post from '../posts/post';
 import { getFeed } from '../../redux/actions/post_actions';
 import { logoutUser } from '../../redux/actions/session_actions';
+import FollowButton from '../shared/follow_button';
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -31,7 +32,10 @@ export default function Profile() {
     }
     else {
         const otherUser = useSelector(stateSelectors.userById(userId));
-        return <ForeignProfile user={otherUser} posts={posts} />;
+        // const isFollowing = currentUser.followed_user_ids.includes(userId)
+        const isFollowing = false;
+
+        return <ForeignProfile user={otherUser} posts={posts} isFollowing={isFollowing} />;
     }
 }
 
@@ -77,8 +81,15 @@ const OptionsModal = ({ setOptionsModal }) => {
     );
 };
 
-const ForeignProfile = ({ user, posts }) => {
+const ForeignProfile = ({ user, posts, isFollowing }) => {
     const history = useHistory();
+
+    if (user) {
+        localStorage.setItem('devtUser', JSON.stringify(user));
+    } else {
+        let retrievedObject = localStorage.getItem('devtUser');
+        user = JSON.parse(retrievedObject);
+    }
 
     return (
         <div className="foreign-profile">
@@ -93,7 +104,7 @@ const ForeignProfile = ({ user, posts }) => {
             </header>
 
             <main>
-                <ImageAndName user={user} ownProfile={false} />
+                <ImageAndName user={user} ownProfile={false} isFollowing={isFollowing} />
                 <Bio user={user} />
                 <Stats user={user} />
                 <PostCollections user={user} ownProfile={false} posts={posts} />
@@ -113,7 +124,7 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
     </header>
 );
 
-const ImageAndName = ({ user, ownProfile }) => {
+const ImageAndName = ({ user, ownProfile, isFollowing }) => {
     return (
         <div className="image-and-name">
             <UserAvatar imageUrl={user.image_url} />
@@ -121,11 +132,14 @@ const ImageAndName = ({ user, ownProfile }) => {
                 <h2 className="username">{user.username}</h2>
                 {
                     ownProfile ?
-                        <button>Edit Profile</button> :
-                        <div>
-                            {/* <p>Message</p>
-                            <p>Following symbol</p>
-                            <p>Dropdown symbol</p> */}
+                        <button className="edit-button">Edit Profile</button> :
+                        isFollowing ?
+                            <div>
+                                <p>Message</p>
+                                <p>Following symbol</p>
+                            </div> :
+                            <div>
+                                <FollowButton userId={user.id} />
                         </div>
 
                 }
