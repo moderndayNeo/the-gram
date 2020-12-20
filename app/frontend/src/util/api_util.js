@@ -27,3 +27,9 @@ export const unlikePost = (postId) =>
 
 export const commentOnPost = (postId, body) =>
     axiosPostRequest(`/api/posts/${postId}/comments`, body)
+
+export const followUser = (userId) =>
+    axiosPostRequest(`/api/users/${userId}/follows`)
+
+// export const unfollowUser = (userId) =>
+//     axiosDeleteRequest(`/api/users/${userId}/follows/1`)
