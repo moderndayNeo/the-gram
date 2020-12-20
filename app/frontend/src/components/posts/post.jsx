@@ -81,6 +81,7 @@ const CaptionAndComments = ({ post, comments }) => {
         <div className="caption-and-comments">
             <Caption post={post} />
             <FeedPostComments post={post} comments={comments} />
+            <DatePosted post={post} />
         </div>
     );
 };
@@ -149,3 +150,9 @@ const PostLikes = ({ numLikes }) => {
         < div className="post-likes" > { content}</div>
     );
 };
+
+const DatePosted = ({post}) => (
+    <div className="date-posted">
+        <p >{post.time_ago.toUpperCase()} AGO</p>
+    </div>
+)
