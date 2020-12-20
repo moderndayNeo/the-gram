@@ -76,23 +76,25 @@ const FooterIcons = ({ postId, liked }) => {
     );
 };
 
-const CaptionAndComments = ({ post, comments }) => (
-    <div className="caption-and-comments">
-        <div className="caption">
-            <span className="author">{post.author_username}</span>
-            <p> {post.caption}</p>
-        </div>
-        <div>
-            {
-                comments.map(comment => (
-                    <FeedComment key={comment.id} comment={comment} />
-                ))
-            }
-        </div>
-    </div>
-);
+const CaptionAndComments = ({ post, comments }) => {
+    const numComments = comments.length;
 
-const FeedComment = ({comment}) => {
+    return (
+
+        <div className="caption-and-comments">
+            <div className="caption">
+                <span className="author">{post.author_username}</span>
+                <p> {post.caption}</p>
+            </div>
+            {numComments > 2 &&
+                <Link to={`/posts/${post.id}/comments`}>View all {numComments} comments</Link>}
+            {comments.slice(0, 2).map(comment => (
+                <FeedComment key={comment.id} comment={comment} />))}
+        </div>
+    );
+};
+
+const FeedComment = ({ comment }) => {
     return (
         <div className="feed-comment">
             <div className="text">

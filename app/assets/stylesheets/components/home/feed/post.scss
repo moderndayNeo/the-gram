@@ -49,6 +49,8 @@
         }
 
         .caption-and-comments {
+            line-height: 22px;
+
             .author {
                 font-weight: bold;
                 margin: 0;
@@ -56,6 +58,12 @@
 
             p {
                 display: inline;
+            }
+
+            a {
+                color: var(--dark-grey);
+                font-weight: normal;
+                font-size: inherit;
             }
         }
 
