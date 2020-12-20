@@ -77,3 +77,15 @@ h3 {
 .rotate-left {
     transform: rotate(-90deg);
 }
+
+.username-link {
+    font-weight: 600;
+    color: black;
+    font-size: inherit;
+    margin-right: 5px;
+}
+
+.text-after-username {
+    margin: 0;
+    display: inline;
+}

@@ -3,7 +3,7 @@ import UserAvatar from '../shared/user_avatar';
 import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import icons from '../shared/icons/svg-icons';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { commentOnPost } from '../../redux/actions/comment_actions';
 
 
@@ -58,28 +58,24 @@ export default function CommentsPage() {
 
 const Comment = ({ comment }) => {
     return (
-        <ul className="comment">
-            <div className="comment-container">
-
-                <li className="main-comment">
-                    <div className="inner-container">
-                        <UserAvatar imageUrl={window.noAvatarImg} />
-                        <div className="text">
-                            <p className="author">Author</p>
-                            <p>Body
-                            {comment.body}
-                            </p>
-                        </div>
-                        <span>
-                            {icons.unfilledHeart}
-                        </span>
-
-                    </div>
-                </li>
+        <li className="comment-container">
+            <div className="comment-elements">
+                <UserAvatar imageUrl={window.noAvatarImg} />
+                <TextBlock comment={comment} />
+                {icons.unfilledHeart}
             </div>
-
-            <li className="replies"></li>
-        </ul>
+        </li>
     );
 };
 
+const TextBlock = ({ comment }) => {
+    return (
+        <div className="text-block">
+            <div className="author-and-body">
+                <Link className="username-link" to={`/users/1`}>Author</Link>
+                <p className="text-after-username">{comment.body}</p>
+            </div>
+            <div className="stats"></div>
+        </div>
+    );
+};
