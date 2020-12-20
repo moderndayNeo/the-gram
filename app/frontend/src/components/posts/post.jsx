@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UserAvatar from '../shared/user_avatar';
 import icons from '../shared/icons/svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -77,15 +77,38 @@ const FooterIcons = ({ postId, liked }) => {
 };
 
 const CaptionAndComments = ({ post, comments }) => {
-    const numComments = comments.length;
+    return (
+        <div className="caption-and-comments">
+            <Caption post={post} />
+            <FeedPostComments post={post} comments={comments} />
+        </div>
+    );
+};
+
+const Caption = ({ post }) => {
+    const captionLength = post.caption.length;
+    const [captionRevealed, setCaptionRevealed] = useState(false);
 
     return (
+        <div className="caption">
+            <span className="author">{post.author_username}</span>
+            {
+                captionLength > 20 ?
+                    <div>
+                        <p>{post.caption.slice(0, 20)}</p>
+                        <button onClick={() => setCaptionRevealed(true)}>... more</button>
+                    </div> :
+                    <p>{post.caption}</p>
+            }
+        </div>
 
-        <div className="caption-and-comments">
-            <div className="caption">
-                <span className="author">{post.author_username}</span>
-                <p> {post.caption}</p>
-            </div>
+    );
+};
+
+const FeedPostComments = ({ post, comments }) => {
+    const numComments = comments.length;
+    return (
+        <div className="feed-post-comments">
             {numComments > 2 &&
                 <Link to={`/posts/${post.id}/comments`}>View all {numComments} comments</Link>}
             {comments.slice(0, 2).map(comment => (
