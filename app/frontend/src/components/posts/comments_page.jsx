@@ -72,10 +72,14 @@ const TextBlock = ({ comment }) => {
     return (
         <div className="text-block">
             <div className="author-and-body">
-                <Link className="username-link" to={`/users/1`}>Author</Link>
-                <p className="text-after-username">{comment.body}</p>
+                <Link className="username-link" to={`/users/1`}>{comment.author_username}</Link>
+                <p className="body text-after-username">{comment.body}</p>
             </div>
-            <div className="stats"></div>
+            <div className="comment-stats">
+                <p className="comment-time-ago">3 days</p>
+                <p className="comment-likes">3 likes</p>
+                <p className="comment-num-replies">Reply</p>
+            </div>
         </div>
     );
 };

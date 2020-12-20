@@ -36,17 +36,21 @@
         padding: 12px 28px 0 16px;
 
         .comment-elements {
-            border: 1px solid red;
+            // border: 1px solid red;
             display: flex;
             justify-content: space-between;
 
             .user-avatar {
-                margin-top: -5px;
+                margin-top: -2px;
             }
 
             .text-block {
-                border: 1px solid yellow;
+                // border: 1px solid yellow;
                 width: 257px;
+
+                .body {
+                    word-wrap: break-word;
+                }
             }
 
             svg {
@@ -55,36 +59,24 @@
                 margin-top: 9px;
             }
 
+            .text-block {
+                .comment-stats {
+                    display: flex;
+                    justify-content: flex-start;
+                    color: var(--dark-grey);
+                    font-size: 12px;
+                    margin-top: 10px;
+                }
 
-            
+                .comment-stats > * {
+                    margin: 0 12px 0 0;
+                }
+
+                .comment-likes,
+                .comment-num-replies {
+                    font-weight: bold;
+                }
+            }
         }
     }
 }
-
-// .main-comment {
-//     border: 1px solid red;
-//     margin-left: -12px;
-//     margin-right: 0;
-//     // padding: 12px 16px;
-//     width: auto;
-// }
-
-// .author {
-//     font-weight: bold;
-// }
-
-// p {
-//     margin: 0;
-// }
-
-// .inner-container {
-//     display: flex;
-//     justify-content: space-between;
-// }
-
-// .text {
-//     display: flex;
-//     width: 80%;
-//     text-align: left;
-//     // update this later
-// }
