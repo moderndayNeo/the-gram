@@ -24,7 +24,7 @@ export default function Home() {
                 loading ?
                     <LoadingComponent /> :
                     <div>
-                        <button onClick={() => dispatch(logoutUser())}>Log Out</button>
+                        <button className="home-logout-button" onClick={() => dispatch(logoutUser())}>Log Out</button>
                         <Feed posts={posts} />
                     </div>
             }

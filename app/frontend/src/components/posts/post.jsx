@@ -89,17 +89,23 @@ const Caption = ({ post }) => {
     const captionLength = post.caption.length;
     const [captionRevealed, setCaptionRevealed] = useState(false);
 
+    const captionDisplayed = () => {
+        if (captionLength <= 20) {
+            return <p>{post.caption}</p>;
+        } else if (captionRevealed) {
+            return <p>{post.caption}</p>;
+        } else {
+            return <div className="reveal-caption">
+                <p>{post.caption.slice(0, 20)}</p>...
+                <button className="expand-caption" onClick={() => setCaptionRevealed(true)}>more</button>
+            </div>;
+        }
+    };
+
     return (
         <div className="caption">
             <span className="author">{post.author_username}</span>
-            {
-                captionLength > 20 ?
-                    <div>
-                        <p>{post.caption.slice(0, 20)}</p>
-                        <button onClick={() => setCaptionRevealed(true)}>... more</button>
-                    </div> :
-                    <p>{post.caption}</p>
-            }
+            {captionDisplayed()}
         </div>
 
     );
