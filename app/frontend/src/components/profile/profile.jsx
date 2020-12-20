@@ -144,7 +144,6 @@ const Bio = ({ user }) => (
 const Stats = ({ user }) => {
     let userData = {
         ...user,
-        num_followers: 11,
         num_following: 14
     };
 
