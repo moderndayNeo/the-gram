@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_18_114943) do
+ActiveRecord::Schema.define(version: 2020_12_20_154710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2020_12_18_114943) do
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "followee_id", null: false
+    t.string "followee_type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followee_type", "followee_id"], name: "index_follows_on_followee_type_and_followee_id"
+    t.index ["follower_id", "followee_type", "followee_id"], name: "index_follows_on_follower_id_and_followee_type_and_followee_id", unique: true
   end
 
   create_table "likes", force: :cascade do |t|

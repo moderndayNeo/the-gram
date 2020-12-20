@@ -35,20 +35,20 @@ class User < ApplicationRecord
            foreign_key: :author_id,
            dependent: :destroy
 
-  # has_many :follows, -> { where followee_type: "User" },
-  #     class_name: :Follow,
-  #     foreign_key: :followee_id
+  has_many :follows, -> { where followee_type: "User" },
+      class_name: :Follow,
+      foreign_key: :followee_id
 
-  # has_many :followers, through: :follows, source: :follower
+  has_many :followers, through: :follows, source: :follower
 
-  # has_many :outgoing_follows,
-  #     class_name: :Follow,
-  #     foreign_key: :follower_id
+  has_many :outgoing_follows,
+      class_name: :Follow,
+      foreign_key: :follower_id
 
-  # has_many :followed_users,
-  #     through: :outgoing_follows,
-  #     source_type: :User,
-  #     source: :followee
+  has_many :followed_users,
+      through: :outgoing_follows,
+      source_type: :User,
+      source: :followee
 
   # has_many :followed_hashtags,
   #     through: :outgoing_follows,
