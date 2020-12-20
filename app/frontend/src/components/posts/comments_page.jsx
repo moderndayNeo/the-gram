@@ -5,6 +5,7 @@ import stateSelectors from '../../util/state_selectors';
 import icons from '../shared/icons/svg-icons';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { commentOnPost } from '../../redux/actions/comment_actions';
+import BottomNav from '../shared/bottom_nav';
 
 
 export default function CommentsPage() {
@@ -52,6 +53,8 @@ export default function CommentsPage() {
             {comments.map(comment => (
                 <Comment key={comment.id} comment={comment} />
             ))}
+
+            <BottomNav />
         </div>
     );
 }
