@@ -20,6 +20,7 @@ class Api::SavesController < ApplicationController
     render json: ["Error: Save not found"], status: 404 unless @save
 
     if @save.destroy
+      @user = current_user
       render :show
     else
       render json: ["Couldn't unsave post"], status: 422 unless @save

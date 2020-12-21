@@ -1,5 +1,5 @@
 import * as APIUtil from '../../util/api_util'
-import { receiveUsers } from './session_actions'
+import { receiveUsers, receiveCurrentUser } from './session_actions'
 import { receiveComments } from './comment_actions'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
@@ -50,7 +50,11 @@ export const unlikePost = (postId) => (dispatch) =>
         .catch((errors) => console.log(errors))
 
 export const savePost = (postId) =>
-    APIUtil.savePost(postId).then((res) => console.log(res))
+    APIUtil.savePost(postId)
+        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .catch((errors) => console.log(errors))
 
 export const unsavePost = (postId) =>
-    APIUtil.unsavePost(postId).then((res) => console.log(res))
+    APIUtil.unsavePost(postId)
+        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .catch((errors) => console.log(errors))

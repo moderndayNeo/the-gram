@@ -49,7 +49,7 @@ const receiveUserErrors = (errors) => ({
     errors,
 })
 
-const receiveCurrentUser = (user) => ({
+export const receiveCurrentUser = (user) => ({
     type: RECEIVE_CURRENT_USER,
     user,
 })

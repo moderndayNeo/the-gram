@@ -4,7 +4,7 @@ import icons from '../shared/icons/svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
-import { likePost, unlikePost } from '../../redux/actions/post_actions';
+import { likePost, unlikePost, savePost, unsavePost } from '../../redux/actions/post_actions';
 
 export default function Post({ post }) {
     let { id, author_id, image_url, liker_ids } = post;
@@ -12,7 +12,7 @@ export default function Post({ post }) {
     const currentUserId = useSelector(stateSelectors.currentUserId());
     const liked = liker_ids.includes(currentUserId);
     const comments = useSelector(stateSelectors.commentsByPostId(post.id));
-    const savedPostIds = useSelector(stateSelectors.currentUserSavedPostIds);
+    const savedPostIds = useSelector(stateSelectors.currentUserSavedPostIds());
     const isSaved = savedPostIds.includes(id); // check data types here
 
     return (
@@ -51,7 +51,7 @@ const PostImage = ({ imageUrl }) => {
     );
 };
 
-const PostFooter = ({ post, liked, comments }) => {
+const PostFooter = ({ post, liked, comments, isSaved }) => {
     return (
         <div className="post-footer">
             <FooterIcons postId={post.id} liked={liked} isSaved={isSaved} />
