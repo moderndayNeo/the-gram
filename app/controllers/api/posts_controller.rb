@@ -11,7 +11,7 @@ class Api::PostsController < ApplicationController
       @users = @posts.map(&:author)
       # @users = User
       #   .where(id: @posts.pluck(:author_id))
-      #   .includes(:photo_attachment)
+      #   .includes(:photo_attachment, :saved_posts)
 
       @comments = Comment
         .where(post_id: [@posts.pluck(:id)])
