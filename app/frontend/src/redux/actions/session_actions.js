@@ -31,13 +31,11 @@ export const updateUser = (userId, formData) => (dispatch) =>
 
 export const followUser = (userId) => (dispatch) =>
     APIUtil.followUser(userId)
-        // .then((res) => console.log(res))
         .then(({ data: { users } }) => dispatch(receiveUsers(users)))
         .catch((errors) => console.log(errors))
 
 export const unfollowUser = (userId) => (dispatch) =>
     APIUtil.unfollowUser(userId)
-        // .then((res) => console.log(res))
         .then(({ data: { users } }) => dispatch(receiveUsers(users)))
         .catch((errors) => console.log(errors))
 

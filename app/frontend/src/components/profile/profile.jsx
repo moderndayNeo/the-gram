@@ -124,7 +124,7 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
 );
 
 const ImageAndName = ({ user, ownProfile, isFollowing }) => {
-    console.log('isFollowing', isFollowing);
+    // console.log('isFollowing', isFollowing);
 
     return (
         <div className="image-and-name">
@@ -136,9 +136,9 @@ const ImageAndName = ({ user, ownProfile, isFollowing }) => {
                         <button className="edit-button">Edit Profile</button> :
                         isFollowing ?
                             <div>
-                                <FollowingButton userId={user.id} />
-                                {/* <p>Message</p>
-                                <p>Following symbol</p> */}
+                                {/* <FollowingButton userId={user.id} /> */}
+                                <p>Message</p>
+                                <p>Following symbol</p>
                             </div> :
                             <div>
                                 <FollowButton userId={user.id} />
