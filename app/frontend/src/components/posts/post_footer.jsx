@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { likePost, unlikePost, savePost, unsavePost } from '../../redux/actions/post_actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import icons from '../shared/icons/svg-icons';
 import { Link } from 'react-router-dom';
-import { likeComment, unlikeComment } from '../../redux/actions/comment_actions';
-import stateSelectors from '../../util/state_selectors';
 import CommentLikeButton from './comment_like_button';
 
 export default function PostFooter({ post, liked, comments, isSaved }) {
-    const likedCommentIds = useSelector(stateSelectors.currentUsedLikedCommentIds());
 
     return (
         <div className="post-footer">
             <FooterIcons postId={post.id} liked={liked} isSaved={isSaved} />
             <PostLikes numLikes={post.num_likes} />
-            <CaptionAndComments post={post} comments={comments} likedCommentIds={likedCommentIds} />
+            <CaptionAndComments post={post} comments={comments} />
         </div>
     );
 };
@@ -45,11 +42,11 @@ const FooterIcons = ({ postId, liked, isSaved }) => {
     );
 };
 
-const CaptionAndComments = ({ post, comments, likedCommentIds }) => {
+const CaptionAndComments = ({ post, comments, }) => {
     return (
         <div className="caption-and-comments">
             <Caption post={post} />
-            <FeedPostComments post={post} comments={comments} likedCommentIds={likedCommentIds} />
+            <FeedPostComments post={post} comments={comments} />
             <DatePosted post={post} />
         </div>
     );
@@ -80,21 +77,19 @@ const Caption = ({ post }) => {
     );
 };
 
-const FeedPostComments = ({ post, comments, likedCommentIds }) => {
+const FeedPostComments = ({ post, comments, }) => {
     const numComments = comments.length;
     return (
         <div className="feed-post-comments">
             {numComments > 2 &&
                 <Link className="comments-page-link" to={`/posts/${post.id}/comments`}>View all {numComments} comments</Link>}
             {comments.slice(0, 2).map(comment => (
-                <FeedComment key={comment.id} comment={comment} post={post} likedCommentIds={likedCommentIds} />))}
+                <FeedComment key={comment.id} comment={comment} post={post} />))}
         </div>
     );
 };
 
-const FeedComment = ({ comment, post, likedCommentIds }) => {
-    const isLiked = likedCommentIds.includes(comment.id);
-    const dispatch = useDispatch();
+const FeedComment = ({ comment, post, }) => {
 
     return (
         <div className="feed-comment">
@@ -106,15 +101,6 @@ const FeedComment = ({ comment, post, likedCommentIds }) => {
                 </Link>
                 <p>{comment.body}</p>
             </div>
-            {/* {
-                isLiked ?
-                    <button onClick={() => dispatch(unlikeComment(post.id, comment.id))}>
-                        {icons.redHeart}
-                    </button> :
-                    <button onClick={() => dispatch(likeComment(post.id, comment.id))}>
-                        {icons.unfilledHeart}
-                    </button>
-            } */}
             <CommentLikeButton postId={post.id} commentId={comment.id} />
         </div>
     );
