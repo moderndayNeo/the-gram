@@ -15,4 +15,15 @@
             fill: var(--dark-grey);
         }
     }
+
+    .search-bar-selected {
+        text-align: left;
+        // color: red;
+    }
+
+    .cancel-button {
+        font-weight: 600;
+        margin-left: 10px;
+    }
+    
 }

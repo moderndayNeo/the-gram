@@ -1,29 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BottomNav from '../shared/bottom_nav';
-import DevelopmentModal from '../shared/development_modal';
 import icons from '../shared/icons/svg-icons';
-{/* <DevelopmentModal feature={'Explore Page'} /> */ }
 
 export default function Explore() {
+    const [selected, setSelected] = useState(false);
+    const [filter, setFilter] = useState('');
     return (
         <div className="explore">
-            <SearchBar />
+            <SearchBar
+                selected={selected}
+                setSelected={setSelected}
+                filter={filter}
+                setFilter={setFilter}
+            />
             <BottomNav />
         </div>
     );
 }
 
-const SearchBar = () => {
+const SearchBar = ({ selected, setSelected, filter, setFilter }) => {
+    const handleCancel = () => {
+        setSelected(false);
+        setFilter('');
+    };
+    
+    console.log(filter);
     return (
         <header>
-            <div
-                className="search-bar search-bar-placeholder"
-            >
+            {
+                selected ?
+                    <div className="search-bar search-bar-selected">
+                        {icons.filledCompass}
+                        <input
+                            placeholder="Search"
+                            autoFocus
+                            value={filter}
+                            onChange={(e) => setFilter(e.target.value)}
+                        />
 
-                {icons.filledCompass}
-Search
-
-           </div>
+                    </div> :
+                    <div
+                        className="search-bar search-bar-placeholder"
+                        onClick={() => setSelected(true)}
+                    >{icons.filledCompass} Search</div>
+            }
+            {
+                selected &&
+                <button className="cancel-button" onClick={() => handleCancel()}>Cancel</button>
+            }
         </header>
 
     );
