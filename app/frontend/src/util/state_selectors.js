@@ -9,6 +9,10 @@ export default {
         Object.values(state.entities.posts).filter(
             (post) => post.author_id == id
         ),
+    currentUsersPosts: () => (state) =>
+        Object.values(state.entities.posts).filter(
+            (post) => post.author_id == state.session.id
+        ),
     currentUserLikedPosts: () => (state) =>
         state.entities.users[state.session.id].liked_post_ids,
     currentUserImageUrl: () => (state) =>
@@ -19,4 +23,10 @@ export default {
         ),
     currentUserSavedPostIds: () => (state) =>
         state.entities.users[state.session.id].saved_post_ids,
+    currentUserSavedPosts: () => (state) => {
+        let postIds = state.entities.users[state.session.id].saved_post_ids
+        return Object.values(state.entities.posts).filter((post) =>
+            postIds.includes(post.id)
+        )
+    },
 }
