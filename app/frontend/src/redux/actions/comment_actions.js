@@ -1,5 +1,5 @@
 import * as APIUtil from '../../util/api_util'
-import {receivePost} from './post_actions'
+import { receivePost } from './post_actions'
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 
@@ -20,3 +20,9 @@ export const receiveComments = (comments) => ({
     type: RECEIVE_COMMENTS,
     comments,
 })
+
+export const likeComment = (postId, commentId) => (dispatch) =>
+    APIUtil.likeComment(postId, likeId).then((res) => console.log(res))
+
+export const unlikeComment = (postId, commentId) => (dispatch) =>
+    APIUtil.unlikeComment(postId, likeId).then((res) => console.log(res))
