@@ -12,12 +12,19 @@ export default function Post({ post }) {
     const currentUserId = useSelector(stateSelectors.currentUserId());
     const liked = liker_ids.includes(currentUserId);
     const comments = useSelector(stateSelectors.commentsByPostId(post.id));
+    const savedPostIds = useSelector(stateSelectors.currentUserSavedPostIds);
+    const isSaved = savedPostIds.includes(id); // check data types here
 
     return (
         <article className="post">
             <PostHeader author={author} />
             <PostImage id={id} imageUrl={image_url} />
-            <PostFooter post={post} liked={liked} comments={comments} />
+            <PostFooter
+                post={post}
+                liked={liked}
+                comments={comments}
+                isSaved={isSaved}
+            />
         </article>
     );
 }
@@ -47,14 +54,14 @@ const PostImage = ({ imageUrl }) => {
 const PostFooter = ({ post, liked, comments }) => {
     return (
         <div className="post-footer">
-            <FooterIcons postId={post.id} liked={liked} />
+            <FooterIcons postId={post.id} liked={liked} isSaved={isSaved} />
             <PostLikes numLikes={post.num_likes} />
             <CaptionAndComments post={post} comments={comments} />
         </div>
     );
 };
 
-const FooterIcons = ({ postId, liked }) => {
+const FooterIcons = ({ postId, liked, isSaved }) => {
     return (
         <div className="footer-icons">
             <div className="icons-left">
@@ -73,7 +80,7 @@ const FooterIcons = ({ postId, liked }) => {
                 </Link>
                 {icons.paperPlane}
             </div>
-            {icons.unfilledSave}
+            <SaveIcon isSaved={isSaved} postId={postId} />
         </div>
     );
 };
@@ -157,3 +164,11 @@ const DatePosted = ({ post }) => (
         <p >{post.time_ago.toUpperCase()} AGO</p>
     </div>
 );
+
+const SaveIcon = ({ isSaved, postId }) => {
+    const buttonDisplayed = isSaved ?
+        <button onClick={() => unsavePost(postId)}>{icons.filledSave}</button> :
+        <button onClick={() => savePost(postId)}>{icons.unfilledSave}</button>;
+
+    return buttonDisplayed;
+};

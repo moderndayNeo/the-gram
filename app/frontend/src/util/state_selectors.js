@@ -17,4 +17,6 @@ export default {
         Object.values(state.entities.comments).filter(
             (comment) => comment.post_id == postId
         ),
+    currentUserSavedPostIds: () => (state) =>
+        state.entities.users[state.session.id].saved_post_ids,
 }
