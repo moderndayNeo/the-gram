@@ -1,10 +1,10 @@
 class Like < ApplicationRecord
   validates :likeable_id,
-            presence: true
+            presence: true,
+            uniqueness: { scope: [:liker_id, :likeable_type], message: "Users can only like something once" }
 
   validates :liker_id,
-            presence: true,
-            uniqueness: { scope: :likeable_id, message: "Users can only like something once" }
+            presence: true
 
   validates :likeable_type,
             presence: true

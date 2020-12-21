@@ -1,7 +1,7 @@
 import * as APIUtil from '../../util/api_util'
 import { receiveUsers, receiveCurrentUser } from './session_actions'
 import { receiveComments } from './comment_actions'
-import { batch } from 'react-redux';
+import { batch } from 'react-redux'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -44,12 +44,22 @@ export const getFeed = () => (dispatch) =>
 
 export const likePost = (postId) => (dispatch) =>
     APIUtil.likePost(postId)
-        .then(({ data: { post } }) => dispatch(receivePost(post)))
+        .then(({ data: { user, post } }) => {
+            batch(() => {
+                dispatch(receiveCurrentUser(user))
+                dispatch(receivePost(post))
+            })
+        })
         .catch((errors) => console.log(errors))
 
 export const unlikePost = (postId) => (dispatch) =>
     APIUtil.unlikePost(postId)
-        .then(({ data: { post } }) => dispatch(receivePost(post)))
+        .then(({ data: { user, post } }) => {
+            batch(() => {
+                dispatch(receiveCurrentUser(user))
+                dispatch(receivePost(post))
+            })
+        })
         .catch((errors) => console.log(errors))
 
 export const savePost = (postId) =>
