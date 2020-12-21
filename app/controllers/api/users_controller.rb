@@ -6,6 +6,11 @@ class Api::UsersController < ApplicationController
       .all
       .includes(posts: [:likes, :photo_attachment, :likers])
       .includes(:photo_attachment, :liked_posts)
+
+
+      followed_users_ids = current_user.followed_users.pluck(:id)
+      not_followed_users = User.where.not(id: followed_users_ids)
+      
   end
 
   def show
