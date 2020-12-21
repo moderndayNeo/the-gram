@@ -29,6 +29,8 @@ export default {
             postIds.includes(post.id)
         )
     },
+    currentUsedLikedCommentIds: () => (state) =>
+        state.entities.users[state.session.id].liked_comment_ids,
     // usersNotFollowed: () => state => (
 
     // )
