@@ -6,7 +6,7 @@ import icons from '../shared/icons/svg-icons';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { commentOnPost } from '../../redux/actions/comment_actions';
 import BottomNav from '../shared/bottom_nav';
-
+import CommentLikeButton from './comment_like_button';
 
 export default function CommentsPage() {
     const currentUserImg = useSelector(stateSelectors.currentUserImageUrl());
@@ -51,7 +51,7 @@ export default function CommentsPage() {
             </section>
 
             {comments.map(comment => (
-                <Comment key={comment.id} comment={comment} />
+                <Comment key={comment.id} comment={comment} postId={postId} />
             ))}
 
             <BottomNav />
@@ -59,28 +59,20 @@ export default function CommentsPage() {
     );
 }
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, postId }) => {
     return (
         <li className="comment-container">
             <div className="comment-elements">
                 <UserAvatar imageUrl={window.noAvatarImg} />
                 <TextBlock comment={comment} />
-                {/* {
-                isLiked ?
-                    <button onClick={() => dispatch(unlikeComment(post.id, comment.id))}>
-                        {icons.redHeart}
-                    </button> :
-                    <button onClick={() => dispatch(likeComment(post.id, comment.id))}>
-                        {icons.unfilledHeart}
-                    </button>
-            } */}
+                <CommentLikeButton commentId={comment.id} postId={postId} />
             </div>
         </li>
     );
 };
 
 const TextBlock = ({ comment }) => {
-    const timeAgo = comment.time_ago.toUpperCase()
+    const timeAgo = comment.time_ago.toUpperCase();
 
     return (
         <div className="text-block">
