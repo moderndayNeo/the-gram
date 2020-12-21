@@ -8,6 +8,7 @@ import UserAvatar from '../shared/user_avatar';
 import { receiveUsers } from '../../redux/actions/session_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import { fetchUsersNotFollowed } from '../../util/api_util';
+import { substrings } from '../../util/helpers';
 
 export default function Explore() {
     const [selected, setSelected] = useState(false);
@@ -18,10 +19,10 @@ export default function Explore() {
     useEffect(() => {
         if (!usersNotFollowed.length) {
             fetchUsersNotFollowed()
-            .then(({ data: { users } }) => {
-                dispatch(receiveUsers(users));
-                setUsersNotFollowed(Object.values(users));
-            });
+                .then(({ data: { users } }) => {
+                    dispatch(receiveUsers(users));
+                    setUsersNotFollowed(Object.values(users));
+                });
         } else {
             // console.log(usersNotFollowed)
         }
@@ -38,7 +39,7 @@ export default function Explore() {
             {
                 usersNotFollowed.length === 0 ?
                     <LoadingPlaceholder /> :
-                    <PagesToExplore users={usersNotFollowed} />
+                    <PagesToExplore users={usersNotFollowed} filter={filter} />
             }
             <BottomNav />
         </div>
@@ -63,7 +64,6 @@ const SearchBar = ({ selected, setSelected, filter, setFilter }) => {
                             value={filter}
                             onChange={(e) => setFilter(e.target.value)}
                         />
-
                     </div> :
                     <div
                         className="search-bar search-bar-placeholder"
@@ -79,11 +79,16 @@ const SearchBar = ({ selected, setSelected, filter, setFilter }) => {
     );
 };
 
-const PagesToExplore = ({ users }) => {
+const PagesToExplore = ({ users, filter }) => {
+
+    let filteredUsers = filter ?
+        users.filter(user => substrings(user.username).includes(filter)) :
+        users;
+
     return (
         <div className="pages-to-explore">
             {
-                users.map(user => (
+                filteredUsers.map(user => (
                     <li key={user.id} className="page-link">
                         <Link to={`/users/${user.id}`}>
                             <div className="container">
