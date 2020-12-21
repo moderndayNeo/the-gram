@@ -1,5 +1,11 @@
 .explore {
     // position: relative;
+    padding: 40px 0;
+
+    .search-bar-container {
+        position: fixed;
+        top: 0;
+    }
 
     .search-bar {
         border: 1px solid var(--light-grey);

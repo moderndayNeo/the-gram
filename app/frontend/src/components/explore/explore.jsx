@@ -5,23 +5,28 @@ import stateSelectors from '../../util/state_selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import UserAvatar from '../shared/user_avatar';
-import { fetchUsersNotFollowed } from '../../redux/actions/session_actions';
+import { receiveUsers } from '../../redux/actions/session_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
+import { fetchUsersNotFollowed } from '../../util/api_util';
 
 export default function Explore() {
     const [selected, setSelected] = useState(false);
     const [filter, setFilter] = useState('');
-    const users = useSelector(stateSelectors.allUsers());
+    const [usersNotFollowed, setUsersNotFollowed] = useState([]);
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // setLoading(true)
-        // .then(() => setLoading(false))
-        //  dispatch(fetchUsersNotFollowed())
+        if (!usersNotFollowed.length) {
+            fetchUsersNotFollowed()
+            .then(({ data: { users } }) => {
+                dispatch(receiveUsers(users));
+                setUsersNotFollowed(Object.values(users));
+            });
+        } else {
+            console.log(usersNotFollowed)
+        }
     }), [];
 
-    
     return (
         <div className="explore">
             <SearchBar
@@ -31,9 +36,9 @@ export default function Explore() {
                 setFilter={setFilter}
             />
             {
-                users.length > 0 ?
+                usersNotFollowed.length === 0 ?
                     <LoadingPlaceholder /> :
-                    <PagesToExplore users={users} />
+                    <PagesToExplore users={usersNotFollowed} />
             }
             <BottomNav />
         </div>
@@ -46,9 +51,8 @@ const SearchBar = ({ selected, setSelected, filter, setFilter }) => {
         setFilter('');
     };
 
-    console.log(filter);
     return (
-        <header>
+        <header className="search-bar-container">
             {
                 selected ?
                     <div className="search-bar search-bar-selected">
@@ -76,7 +80,6 @@ const SearchBar = ({ selected, setSelected, filter, setFilter }) => {
 };
 
 const PagesToExplore = ({ users }) => {
-
     return (
         <div className="pages-to-explore">
             {
@@ -87,7 +90,7 @@ const PagesToExplore = ({ users }) => {
                                 <UserAvatar imageUrl={user.image_url} />
                                 <div className="username-and-bio">
                                     <p className="username-link">{user.username}</p>
-                                    {user.bio.length > 40 ?
+                                    {user.bio && user.bio.length > 40 ?
                                         <p className="explore-bio">{user.bio.slice(0, 40)}...</p> :
                                         <p className="explore-bio">{user.bio}</p>}
                                 </div>

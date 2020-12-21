@@ -29,4 +29,7 @@ export default {
             postIds.includes(post.id)
         )
     },
+    // usersNotFollowed: () => state => (
+
+    // )
 }
