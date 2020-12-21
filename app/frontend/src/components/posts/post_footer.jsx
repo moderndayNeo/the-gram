@@ -3,6 +3,7 @@ import { likePost, unlikePost, savePost, unsavePost } from '../../redux/actions/
 import { useDispatch } from 'react-redux';
 import icons from '../shared/icons/svg-icons';
 import { Link } from 'react-router-dom';
+import { likeComment, unlikeComment } from '../../redux/actions/comment_actions';
 
 export default function PostFooter({ post, liked, comments, isSaved }) {
     return (
@@ -98,8 +99,11 @@ const FeedComment = ({ comment }) => {
                 </Link>
                 <p>{comment.body}</p>
             </div>
+            {/* CODE HERE */}
+            
             {icons.unfilledHeart}
-        </div>
+            {icons.redHeart}
+        </div> 
     );
 };
 

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  attr_reader :password
 
   validates :name, presence: true, uniqueness: true, length: { maximum: 30 }
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
@@ -26,9 +27,17 @@ class User < ApplicationRecord
 
   has_many :liked_posts,
            through: :post_likes,
-           source: :liker
+           source: :likeable,
+           source_type: :Post
 
-  attr_reader :password
+  has_many :comment_likes, -> { where likeable_type: "Comment" },
+           class_name: :Like,
+           foreign_key: :liker_id
+
+  has_many :liked_comments,
+           through: :comment_likes,
+           source: :likeable,
+           source_type: :Comment
 
   has_many :comments,
            class_name: :Comment,
@@ -36,19 +45,19 @@ class User < ApplicationRecord
            dependent: :destroy
 
   has_many :follows, -> { where followee_type: "User" },
-      class_name: :Follow,
-      foreign_key: :followee_id
+           class_name: :Follow,
+           foreign_key: :followee_id
 
   has_many :followers, through: :follows, source: :follower
 
   has_many :outgoing_follows,
-      class_name: :Follow,
-      foreign_key: :follower_id
+           class_name: :Follow,
+           foreign_key: :follower_id
 
   has_many :followed_users,
-      through: :outgoing_follows,
-      source_type: :User,
-      source: :followee
+           through: :outgoing_follows,
+           source_type: :User,
+           source: :followee
 
   # has_many :followed_hashtags,
   #     through: :outgoing_follows,
@@ -56,8 +65,8 @@ class User < ApplicationRecord
   #     source: :followee
 
   has_many :saves,
-     class_name: :Save,
-     foreign_key: :user_id
+           class_name: :Save,
+           foreign_key: :user_id
 
   has_many :saved_posts, through: :saves, source: :post
 
@@ -101,8 +110,4 @@ class User < ApplicationRecord
       errors[:email] << "must be in a valid format"
     end
   end
-
 end
-
-
-
