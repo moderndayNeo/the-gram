@@ -41,9 +41,8 @@ export const unfollowUser = (userId) => (dispatch) =>
 
 export const fetchUsersNotFollowed = () => (dispatch) =>
     APIUtil.fetchUsersNotFollowed()
-        .then(res => console.log(res))
-        // .then(({ data: { users } }) => dispatch(receiveUsers(users)))
-        // .then((errors) => console.log(errors))
+        .then(({ data: { users } }) => dispatch(receiveUsers(users)))
+        .then((errors) => console.log(errors))
 
 const receiveSessionErrors = (errors) => ({
     type: RECEIVE_SESSION_ERRORS,

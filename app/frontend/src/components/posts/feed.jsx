@@ -11,7 +11,6 @@ export default function Feed({ posts }) {
     );
 }
 
-const LoadingComponent = () => <div>Loading...</div>;
 
 // if (!posts.length) {
 //     let retrievedObject = localStorage.getItem('developmentPosts');

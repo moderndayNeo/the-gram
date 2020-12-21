@@ -1,4 +1,4 @@
-.loading-component {
+.loading-placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,6 +6,7 @@
     height: 100vh;
  
     img {
+        margin-top: -100px;
         width: 80px;
         height: 80px;
     }
