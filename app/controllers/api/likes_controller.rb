@@ -3,7 +3,7 @@ class Api::LikesController < ApplicationController
     @like = Like.new
     @like.liker = current_user
 
-    if params[:post_id]
+    if params[:post_id] && !params[:comment_id]
       @post = Post.find(params[:post_id])
       render json: ["Error: Post not found"], status: 404 unless @post
       @like.likeable = @post
