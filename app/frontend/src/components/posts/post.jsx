@@ -131,7 +131,7 @@ const FeedComment = ({ comment }) => {
             <div className="text">
                 <Link
                     to={`/users/${comment.author_id}`}
-                    className="author">
+                    className="username-link">
                     {comment.author_username}
                 </Link>
                 <p>{comment.body}</p>

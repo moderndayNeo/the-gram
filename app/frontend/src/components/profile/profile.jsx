@@ -124,8 +124,6 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
 );
 
 const ImageAndName = ({ user, ownProfile, isFollowing }) => {
-    // console.log('isFollowing', isFollowing);
-
     return (
         <div className="image-and-name">
             <UserAvatar imageUrl={user.image_url} />
@@ -136,9 +134,7 @@ const ImageAndName = ({ user, ownProfile, isFollowing }) => {
                         <button className="edit-button">Edit Profile</button> :
                         isFollowing ?
                             <div>
-                                {/* <FollowingButton userId={user.id} /> */}
-                                <p>Message</p>
-                                <p>Following symbol</p>
+                                <FollowingButton userId={user.id} />
                             </div> :
                             <div>
                                 <FollowButton userId={user.id} />
@@ -219,8 +215,6 @@ const PostSelectorButtons = ({ ownProfile, selected, setSelected }) => {
 };
 
 const SelectedPosts = ({ posts, selected }) => {
-    // console.log(selected);
-
     return (
         <article className="selected-posts">
             {['posts', 'saved', 'tagged'].includes(selected) ?

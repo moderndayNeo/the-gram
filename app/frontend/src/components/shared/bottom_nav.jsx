@@ -1,44 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import icons from './icons/svg-icons';
 import UserAvatar from './user_avatar';
-import { useLocation, useHistory, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
-
+import NewPostButton from './new_post_button';
 
 export default function BottomNav() {
     const currentUser = useSelector(stateSelectors.currentUser());
     const location = useLocation();
     const pathname = location.pathname;
     const avatarBordered = (pathname === `/users/${currentUser.id}`) ? true : false;
-    const history = useHistory();
-    const [photoUrl, setPhotoUrl] = useState('');
-    const [photoFile, setPhotoFile] = useState(null);
-
-    const handleUpload = (e) => {
-        const reader = new FileReader();
-        const file = e.currentTarget.files[0];
-        reader.onloadend = () => {
-            setPhotoUrl(reader.result);
-            setPhotoFile(file);
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            setPhotoUrl('');
-            setPhotoFile(null);
-        }
-    };
-
-    useEffect(() => {
-        if (photoFile && photoUrl) {
-            history.push({
-                pathname: "/create/style",
-                state: { photoFile, photoUrl }
-            });
-        }
-    }, [photoUrl, photoFile]);
 
     return (
         <nav className="bottom-nav">
@@ -50,17 +22,7 @@ export default function BottomNav() {
                 {pathname === '/explore' ? icons.filledCompass : icons.unfilledCompass}
             </Link>
 
-            <label htmlFor="file-upload">
-                {icons.newPost}
-            </label>
-            <input
-                className="hidden-file-input"
-                id="file-upload"
-                type="file"
-                onChange={(e) => handleUpload(e)}
-                multiple={false}
-                accept=".jpg, .jpeg, .png, .pdf"
-            />
+            <NewPostButton icon={icons.newPost} />
 
             <Link to="/accounts/activity">
                 {pathname === '/accounts/activity' ? icons.filledHeart : icons.unfilledHeart}
