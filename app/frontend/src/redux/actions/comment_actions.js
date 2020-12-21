@@ -22,7 +22,7 @@ export const receiveComments = (comments) => ({
 })
 
 export const likeComment = (postId, commentId) => (dispatch) =>
-    APIUtil.likeComment(postId, likeId).then((res) => console.log(res))
+    APIUtil.likeComment(postId, commentId).then((res) => console.log(res))
 
 export const unlikeComment = (postId, commentId) => (dispatch) =>
-    APIUtil.unlikeComment(postId, likeId).then((res) => console.log(res))
+    APIUtil.unlikeComment(postId, commentId).then((res) => console.log(res))
