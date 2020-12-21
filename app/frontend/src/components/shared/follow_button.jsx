@@ -1,5 +1,5 @@
 import React from 'react';
-import { followUser } from '../../redux/actions/session_actions'
+import { followUser } from '../../redux/actions/session_actions';
 import { useDispatch } from 'react-redux';
 
 export default function FollowButton({ userId }) {
@@ -9,6 +9,8 @@ export default function FollowButton({ userId }) {
         <button
             className="follow-button"
             onClick={() => dispatch(followUser(userId))}
-        >Follow</button>
+        >
+            Follow
+        </button>
     );
 }

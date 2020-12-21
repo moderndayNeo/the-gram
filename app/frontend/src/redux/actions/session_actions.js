@@ -35,6 +35,12 @@ export const followUser = userId => dispatch => (
     .catch(errors => console.log(errors))
 )
 
+export const unfollowUser = userId => dispatch => (
+    APIUtil.unfollowUser(userId)
+    .then(({users}) => dispatch(receiveUsers(users)))
+    .catch(errors => console.log(errors))
+)
+
 const receiveSessionErrors = (errors) => ({
     type: RECEIVE_SESSION_ERRORS,
     errors,

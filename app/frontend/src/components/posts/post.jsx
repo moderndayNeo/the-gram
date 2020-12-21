@@ -110,7 +110,6 @@ const Caption = ({ post }) => {
             <Link className="username-link" to={`/users/${post.author_id}`}>{post.author_username}</Link>
             {captionDisplayed()}
         </div>
-
     );
 };
 

@@ -9,6 +9,7 @@ import Post from '../posts/post';
 import { getFeed } from '../../redux/actions/post_actions';
 import { logoutUser } from '../../redux/actions/session_actions';
 import FollowButton from '../shared/follow_button';
+import FollowingButton from '../shared/following_button';
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -32,8 +33,9 @@ export default function Profile() {
     }
     else {
         const otherUser = useSelector(stateSelectors.userById(userId));
-        // const isFollowing = currentUser.followed_user_ids.includes(userId)
-        const isFollowing = false;
+        const isFollowing = currentUser.followed_user_ids.includes(parseInt(userId))
+        // console.log('type', typeof userId)
+        // console.log('json type', typeof currentUser.followed_user_ids[0])
 
         return <ForeignProfile user={otherUser} posts={posts} isFollowing={isFollowing} />;
     }
@@ -125,6 +127,8 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
 );
 
 const ImageAndName = ({ user, ownProfile, isFollowing }) => {
+    console.log(isFollowing)
+
     return (
         <div className="image-and-name">
             <UserAvatar imageUrl={user.image_url} />
@@ -135,8 +139,9 @@ const ImageAndName = ({ user, ownProfile, isFollowing }) => {
                         <button className="edit-button">Edit Profile</button> :
                         isFollowing ?
                             <div>
-                                <p>Message</p>
-                                <p>Following symbol</p>
+                                <FollowingButton userId={user.id} />
+                                {/* <p>Message</p>
+                                <p>Following symbol</p> */}
                             </div> :
                             <div>
                                 <FollowButton userId={user.id} />

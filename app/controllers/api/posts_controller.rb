@@ -9,6 +9,9 @@ class Api::PostsController < ApplicationController
         .order(created_at: :desc)
 
       @users = @posts.map(&:author)
+      # @users = User
+      #   .where(id: @posts.pluck(:author_id))
+      #   .includes(:photo_attachment)
 
       @comments = Comment
         .where(post_id: [@posts.pluck(:id)])

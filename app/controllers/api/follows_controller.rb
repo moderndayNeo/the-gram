@@ -6,10 +6,14 @@ class Api::FollowsController < ApplicationController
     if params[:user_id]
       @followee = User.find(params[:user_id])
       @follow.followee = @followee
-      @follow.save
-      render :show
     elsif params[:hashtag_id]
       # code here
+    else
+      render json: ["Error: You must follow either a user or a hashtag"], status: 422
+    end
+
+    if @follow.save
+      render :show
     else
       render json: ["Error: Could not create follow"], status: 422
     end
