@@ -93,13 +93,13 @@ const Caption = ({ post }) => {
     const [captionRevealed, setCaptionRevealed] = useState(false);
 
     const captionDisplayed = () => {
-        if (captionLength <= 20) {
+        if (captionLength <= 25) {
             return <p>{post.caption}</p>;
         } else if (captionRevealed) {
             return <p>{post.caption}</p>;
         } else {
             return <div className="reveal-caption">
-                <p>{post.caption.slice(0, 20)}</p>...
+                <p>{post.caption.slice(0, 25)}</p>...
                 <button className="expand-caption" onClick={() => setCaptionRevealed(true)}>more</button>
             </div>;
         }
@@ -107,7 +107,7 @@ const Caption = ({ post }) => {
 
     return (
         <div className="caption">
-            <span className="author">{post.author_username}</span>
+            <Link className="username-link" to={`/users/${post.author_id}`}>{post.author_username}</Link>
             {captionDisplayed()}
         </div>
 
@@ -119,7 +119,7 @@ const FeedPostComments = ({ post, comments }) => {
     return (
         <div className="feed-post-comments">
             {numComments > 2 &&
-                <Link to={`/posts/${post.id}/comments`}>View all {numComments} comments</Link>}
+                <Link className="comments-page-link" to={`/posts/${post.id}/comments`}>View all {numComments} comments</Link>}
             {comments.slice(0, 2).map(comment => (
                 <FeedComment key={comment.id} comment={comment} />))}
         </div>

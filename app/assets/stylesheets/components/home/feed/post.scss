@@ -54,17 +54,11 @@
         .caption-and-comments {
             line-height: 22px;
 
-            .author {
-                font-weight: bold;
-                margin: 0;
-                margin-right: 5px;
-            }
-
             p {
                 display: inline;
             }
 
-            a {
+            .comments-page-link {
                 color: var(--dark-grey);
                 font-weight: normal;
                 font-size: inherit;
