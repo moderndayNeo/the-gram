@@ -55,11 +55,11 @@ class User < ApplicationRecord
   #     source_type: :Hashtag,
   #     source: :followee
 
-  # has_many :saves,
-  #    class_name: :Save,
-  #    foreign_key: :user_id
+  has_many :saves,
+     class_name: :Save,
+     foreign_key: :user_id
 
-  # has_many :saved_posts, through: :saves, source: :post
+  has_many :saved_posts, through: :saves, source: :post
 
   # has_many :notifications,
   #     class_name: :Notification,
