@@ -40,3 +40,7 @@ export const savePost = (postId) =>
 
 export const unsavePost = (postId) =>
     axiosDeleteRequest(`/api/posts/${postId}/saves/1`)
+
+export const fetchUsersNotFollowed = () => (
+    axiosGetRequest(`/api/users?type=explore`)
+)

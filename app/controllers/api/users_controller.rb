@@ -2,15 +2,24 @@ class Api::UsersController < ApplicationController
   # before_action :require_current_user!, except: [:create]
 
   def index
-    @users = User
-      .all
-      .includes(posts: [:likes, :photo_attachment, :likers])
-      .includes(:photo_attachment, :liked_posts)
+    # @users = User
+    #   .all
+    #   .includes(posts: [:likes, :photo_attachment, :likers])
+    #   .includes(:photo_attachment, :liked_posts)
 
-
+    case params[:type]
+    when "explore"
       followed_users_ids = current_user.followed_users.pluck(:id)
-      not_followed_users = User.where.not(id: followed_users_ids)
-      
+      not_followed_users =
+        User
+          .where.not(id: followed_users_ids)
+          .includes(:photo_attachment, :posts, :followers, :saved_posts)
+
+      @users = not_followed_users
+      render :index
+    else
+      render json: ["Error: Must pass a parameter when requesting users"], status: 422
+    end
   end
 
   def show
