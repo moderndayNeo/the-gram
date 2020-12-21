@@ -82,7 +82,7 @@ const SearchBar = ({ selected, setSelected, filter, setFilter }) => {
 const PagesToExplore = ({ users, filter }) => {
 
     let filteredUsers = filter ?
-        users.filter(user => substrings(user.username).includes(filter)) :
+        users.filter(user => substrings(user.username.toLowerCase()).includes(filter.toLowerCase())) :
         users;
 
     return (
