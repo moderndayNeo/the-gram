@@ -1,0 +1,18 @@
+.explore {
+
+    .search-bar {
+        border: 1px solid var(--light-grey);
+        color: var(--dark-grey);
+        text-align: center;
+        width: 100%;
+        border-radius: 6px;
+        padding: 4px 12px 4px 22px;
+
+        svg {
+            height: 10px;
+            width: 10px;
+            margin-right: 5px;
+            fill: var(--dark-grey);
+        }
+    }
+}
