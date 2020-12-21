@@ -22,7 +22,7 @@ export const getFeed = () => axiosGetRequest(`/api/posts`, { type: 'feed' })
 
 export const likePost = (postId) =>
     axiosPostRequest(`/api/posts/${postId}/likes`)
-    
+
 export const unlikePost = (postId) =>
     axiosDeleteRequest(`/api/posts/${postId}/likes/1`)
 
@@ -34,3 +34,9 @@ export const followUser = (userId) =>
 
 export const unfollowUser = (userId) =>
     axiosDeleteRequest(`/api/users/${userId}/follows/1`)
+
+export const savePost = (postId) =>
+    axiosPostRequest(`/api/posts/${postId}/saves`)
+
+export const unsavePost = (postId) =>
+    axiosDeleteRequest(`/api/posts/${postId}/saves/1`)
