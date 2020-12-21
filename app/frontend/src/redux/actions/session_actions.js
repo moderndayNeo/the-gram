@@ -21,7 +21,7 @@ export const loginUser = (user) => (dispatch) =>
 export const logoutUser = () => (dispatch) =>
     APIUtil.logoutUser()
         .then(() => dispatch(logoutCurrentUser()))
-        .catch(errors => console.log(errors))
+        .catch((errors) => console.log(errors))
 
 export const updateUser = (userId, formData) => (dispatch) =>
     APIUtil.updateUser(userId, formData)
@@ -29,17 +29,17 @@ export const updateUser = (userId, formData) => (dispatch) =>
         .catch((errors) => dispatch(receiveUserErrors(errors)))
 // update this
 
-export const followUser = userId => dispatch => (
+export const followUser = (userId) => (dispatch) =>
     APIUtil.followUser(userId)
-    .then(({users}) => dispatch(receiveUsers(users)))
-    .catch(errors => console.log(errors))
-)
+        // .then((res) => console.log(res))
+        .then(({ data: { users } }) => dispatch(receiveUsers(users)))
+        .catch((errors) => console.log(errors))
 
-export const unfollowUser = userId => dispatch => (
+export const unfollowUser = (userId) => (dispatch) =>
     APIUtil.unfollowUser(userId)
-    .then(({users}) => dispatch(receiveUsers(users)))
-    .catch(errors => console.log(errors))
-)
+        // .then((res) => console.log(res))
+        .then(({ data: { users } }) => dispatch(receiveUsers(users)))
+        .catch((errors) => console.log(errors))
 
 const receiveSessionErrors = (errors) => ({
     type: RECEIVE_SESSION_ERRORS,
@@ -64,5 +64,3 @@ export const receiveUsers = (users) => ({
     type: RECEIVE_USERS,
     users,
 })
-
-

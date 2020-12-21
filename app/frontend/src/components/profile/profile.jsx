@@ -18,13 +18,13 @@ export default function Profile() {
     let posts = useSelector(stateSelectors.postsByAuthorId(userId));
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (!posts.length) {
-            setLoading(true);
-            dispatch(getFeed())
-                .then(() => setLoading(false));
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!posts.length) {
+    //         setLoading(true);
+    //         dispatch(getFeed())
+    //             .then(() => setLoading(false));
+    //     }
+    // }, []);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -33,10 +33,7 @@ export default function Profile() {
     }
     else {
         const otherUser = useSelector(stateSelectors.userById(userId));
-        const isFollowing = currentUser.followed_user_ids.includes(parseInt(userId))
-        // console.log('type', typeof userId)
-        // console.log('json type', typeof currentUser.followed_user_ids[0])
-
+        const isFollowing = currentUser.followed_user_ids.includes(parseInt(userId));
         return <ForeignProfile user={otherUser} posts={posts} isFollowing={isFollowing} />;
     }
 }
@@ -127,7 +124,7 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
 );
 
 const ImageAndName = ({ user, ownProfile, isFollowing }) => {
-    console.log(isFollowing)
+    console.log('isFollowing', isFollowing);
 
     return (
         <div className="image-and-name">
@@ -145,7 +142,7 @@ const ImageAndName = ({ user, ownProfile, isFollowing }) => {
                             </div> :
                             <div>
                                 <FollowButton userId={user.id} />
-                        </div>
+                            </div>
 
                 }
             </section>
