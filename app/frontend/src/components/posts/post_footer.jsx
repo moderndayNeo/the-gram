@@ -5,6 +5,7 @@ import icons from '../shared/icons/svg-icons';
 import { Link } from 'react-router-dom';
 import { likeComment, unlikeComment } from '../../redux/actions/comment_actions';
 import stateSelectors from '../../util/state_selectors';
+import CommentLikeButton from './comment_like_button';
 
 export default function PostFooter({ post, liked, comments, isSaved }) {
     const likedCommentIds = useSelector(stateSelectors.currentUsedLikedCommentIds());
@@ -105,7 +106,7 @@ const FeedComment = ({ comment, post, likedCommentIds }) => {
                 </Link>
                 <p>{comment.body}</p>
             </div>
-            {
+            {/* {
                 isLiked ?
                     <button onClick={() => dispatch(unlikeComment(post.id, comment.id))}>
                         {icons.redHeart}
@@ -113,7 +114,8 @@ const FeedComment = ({ comment, post, likedCommentIds }) => {
                     <button onClick={() => dispatch(likeComment(post.id, comment.id))}>
                         {icons.unfilledHeart}
                     </button>
-            }
+            } */}
+            <CommentLikeButton postId={post.id} commentId={comment.id} />
         </div>
     );
 };

@@ -65,13 +65,23 @@ const Comment = ({ comment }) => {
             <div className="comment-elements">
                 <UserAvatar imageUrl={window.noAvatarImg} />
                 <TextBlock comment={comment} />
-                {icons.unfilledHeart}
+                {/* {
+                isLiked ?
+                    <button onClick={() => dispatch(unlikeComment(post.id, comment.id))}>
+                        {icons.redHeart}
+                    </button> :
+                    <button onClick={() => dispatch(likeComment(post.id, comment.id))}>
+                        {icons.unfilledHeart}
+                    </button>
+            } */}
             </div>
         </li>
     );
 };
 
 const TextBlock = ({ comment }) => {
+    const timeAgo = comment.time_ago.toUpperCase()
+
     return (
         <div className="text-block">
             <div className="author-and-body">
@@ -79,8 +89,8 @@ const TextBlock = ({ comment }) => {
                 <p className="body text-after-username">{comment.body}</p>
             </div>
             <div className="comment-stats">
-                <p className="comment-time-ago">3 days</p>
-                <p className="comment-likes">3 likes</p>
+                <p className="comment-time-ago">{timeAgo}</p>
+                <p className="comment-likes">{comment.num_likes} likes</p>
                 <p className="comment-num-replies">Reply</p>
             </div>
         </div>
