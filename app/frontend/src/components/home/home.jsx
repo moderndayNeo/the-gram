@@ -5,28 +5,23 @@ import HomeTopNav from './home_top_nav';
 import BottomNav from '../shared/bottom_nav';
 import { getFeed } from '../../redux/actions/post_actions';
 import stateSelectors from '../../util/state_selectors';
-import LoadingPlaceholder from '../shared/loading_placeholder'
+import LoadingPlaceholder from '../shared/loading_placeholder';
 
 export default function Home() {
-    const [loading, setLoading] = useState(false);
-
     const dispatch = useDispatch();
     let posts = useSelector(stateSelectors.allPosts());
 
     if (!posts.length) {
-        dispatch(getFeed())
+        dispatch(getFeed());
     }
 
     return (
         <section className="home">
             <HomeTopNav />
             {
-                loading ?
+                posts.length ?
+                    <Feed posts={posts} /> :
                     <LoadingPlaceholder />
-                     :
-                    <div>
-                        <Feed posts={posts} />
-                    </div>
             }
             <BottomNav />
         </section>

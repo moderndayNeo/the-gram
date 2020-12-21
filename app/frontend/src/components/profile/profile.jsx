@@ -5,31 +5,27 @@ import stateSelectors from '../../util/state_selectors';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
-import Post from '../posts/post';
 import { getFeed } from '../../redux/actions/post_actions';
 import { logoutUser } from '../../redux/actions/session_actions';
 import FollowButton from '../shared/follow_button';
 import FollowingButton from '../shared/following_button';
-import PostCollections from './post_collections'
+import PostCollections from './post_collections';
+import LoadingPlaceholder from '../shared/loading_placeholder';
 
 export default function Profile() {
     const dispatch = useDispatch();
     const currentUser = useSelector(stateSelectors.currentUser());
     const { userId } = useParams();
-    // let posts = useSelector(stateSelectors.postsByAuthorId(userId));
     let posts = useSelector(stateSelectors.allPosts());
-    const [loading, setLoading] = useState(false);
 
-    // useEffect(() => {
-    //     if (!posts.length) {
-    //         setLoading(true);
-    //         dispatch(getFeed())
-    //             .then(() => setLoading(false));
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (!posts.length) {
+            dispatch(getFeed());
+        }
+    }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
+    if (!posts.length) {
+        return <LoadingPlaceholder />
     } else if (currentUser.id == userId) {
         return <OwnProfile user={currentUser} posts={posts} />;
     }

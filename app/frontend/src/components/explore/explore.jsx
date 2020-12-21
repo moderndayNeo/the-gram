@@ -23,7 +23,7 @@ export default function Explore() {
                 setUsersNotFollowed(Object.values(users));
             });
         } else {
-            console.log(usersNotFollowed)
+            // console.log(usersNotFollowed)
         }
     }), [];
 

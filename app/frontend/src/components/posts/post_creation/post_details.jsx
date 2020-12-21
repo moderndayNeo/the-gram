@@ -12,7 +12,6 @@ export default function PostDetails() {
     const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
     const photoFile = location.state ? location.state.photoFile : null;
     const currentUser = useSelector(stateSelectors.currentUser())
-
     const [caption, setCaption] = useState('');
 
     const submitPost = () => {

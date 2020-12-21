@@ -11,16 +11,6 @@ export default function PostShow() {
     const { postId } = useParams();
     const post = useSelector(stateSelectors.postById(postId));
 
-    let post1 = {
-        id: 18,
-        author_id: 28,
-        author_username: "guest",
-        caption: "purpleom",
-        id: 18,
-        image_url: "/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2e2edffeceefc48af51bcc158c6ba14f34f72ab7/purpleom%20copy.jpg",
-        location: null
-    };
-
     return (
         <div className="post-show">
             <header>
