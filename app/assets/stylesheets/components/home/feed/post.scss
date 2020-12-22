@@ -19,7 +19,39 @@
     }
 
     .image-container {
-        // border: 1px solid red;
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .white-heart {
+            position: absolute;
+            background: transparent;
+
+            svg {
+                fill: white;
+                background: transparent;
+                height: 80px;
+                width: 80px;
+                transform: scale(0);
+                display: none;
+            }
+        }
+
+        .white-heart.displayed {
+            svg {
+                animation: like-heart-animation;
+                animation-duration: 1000ms;
+                -webkit-animation-name: like-heart-animation;
+                animation-name: like-heart-animation;
+                -webkit-animation-timing-function: ease-in-out;
+                animation-timing-function: ease-in-out;
+                opacity: 0;
+                -webkit-transform: scale(0);
+                transform: scale(0);
+                display: block;
+            }
+        }
 
         .post-image {
             width: 100%;
@@ -128,5 +160,29 @@
         div {
             width: 15px;
         }
+    }
+}
+
+@keyframes like-heart-animation {
+    0%,
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    15% {
+        opacity: 0.9;
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+    30% {
+        -webkit-transform: scale(0.95);
+        transform: scale(0.95);
+    }
+    45%,
+    80% {
+        opacity: 0.9;
+        -webkit-transform: scale(1);
+        transform: scale(1);
     }
 }

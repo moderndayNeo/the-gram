@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
 import PostFooter from './post_footer';
-import { likePost, unlikePost } from '../../redux/actions/post_actions';
+import { likePost } from '../../redux/actions/post_actions';
 
 
 export default function Post({ post }) {
@@ -51,18 +51,17 @@ const PostHeader = ({ author }) => {
 };
 
 const PostImage = ({ post, isLiked }) => {
-    const [firstClicked, setFirstClicked] = useState(false);
     const dispatch = useDispatch();
-
-    const toggleLiked = () => {
-        return isLiked ?
-            dispatch(unlikePost(post.id)) :
-            dispatch(likePost(post.id));
-    };
+    const [firstClicked, setFirstClicked] = useState(false);
+    const [whiteHeartDisplayed, setWhiteHeartDisplayed] = useState(false);
 
     const handleClick = () => {
         if (firstClicked) {
-            toggleLiked();
+            setWhiteHeartDisplayed(true);
+            setTimeout(() => {
+                setWhiteHeartDisplayed(false);
+            }, 1000);
+            if (!isLiked) dispatch(likePost(post.id));
         } else {
             setFirstClicked(true);
             setTimeout(() => {
@@ -71,8 +70,13 @@ const PostImage = ({ post, isLiked }) => {
         }
     };
 
+
+
     return (
         <div className="image-container">
+            <div
+                className={`white-heart ${whiteHeartDisplayed && "displayed"}`}
+            >{icons.filledHeart}</div>
             <img
                 className="post-image" src={post.image_url || window.placeholderImg}
                 alt="post image"
