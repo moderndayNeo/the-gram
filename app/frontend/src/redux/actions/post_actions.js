@@ -2,7 +2,7 @@ import * as APIUtil from '../../util/api_util'
 import { receiveUsers, receiveCurrentUser } from './session_actions'
 import { receiveComments } from './comment_actions'
 import { batch } from 'react-redux'
-import { receiveNotification } from './notification_actions'
+import { receiveNotification, receiveNotifications } from './notification_actions'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -34,11 +34,12 @@ export const fetchPosts = () => (dispatch) =>
 
 export const getFeed = () => (dispatch) =>
     APIUtil.getFeed()
-        .then(({ data: { posts, users, comments } }) => {
+        .then(({ data: { posts, users, comments, notifications } }) => {
             batch(() => {
                 dispatch(receiveUsers(users))
                 dispatch(receivePosts(posts))
                 dispatch(receiveComments(comments))
+                dispatch(receiveNotifications(notifications))
             })
         })
         .catch((errors) => console.log(errors))

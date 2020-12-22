@@ -37,6 +37,8 @@ class Api::PostsController < ApplicationController
           :likes
         )
 
+        @notifications = current_user.notifications
+
       return render :index
     else
       return render json: ["Error: No type provided to posts index"], status: 422
