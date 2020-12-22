@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_101013) do
+ActiveRecord::Schema.define(version: 2020_12_22_103646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,21 @@ ActiveRecord::Schema.define(version: 2020_12_21_101013) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
     t.index ["liker_id", "likeable_type", "likeable_id"], name: "index_likes_on_liker_id_and_likeable_type_and_likeable_id", unique: true
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "notifiable_id", null: false
+    t.string "notifiable_type", null: false
+    t.integer "notified_user_id", null: false
+    t.integer "source_user_id", null: false
+    t.string "message", null: false
+    t.boolean "read", default: false, null: false
+    t.integer "source_post_id"
+    t.integer "source_comment_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notified_user_id", "notifiable_type", "notifiable_id"], name: "index_notifications_on_notified_user_and_notifiable", unique: true
+    t.index ["notified_user_id"], name: "index_notifications_on_notified_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
