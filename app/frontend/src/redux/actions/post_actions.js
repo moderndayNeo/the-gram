@@ -42,21 +42,21 @@ export const getFeed = () => (dispatch) =>
         })
         .catch((errors) => console.log(errors))
 
-// export const likePost = (postId) => (dispatch) =>
-//     APIUtil.likePost(postId)
-//         .then(({ data: { user, post } }) => {
-//             batch(() => {
-//                 dispatch(receiveCurrentUser(user))
-//                 dispatch(receivePost(post))
-//             })
-//         })
-//         .catch((errors) => console.log(errors))
-
-        export const likePost = (postId) => (dispatch) =>
+export const likePost = (postId) => (dispatch) =>
     APIUtil.likePost(postId)
-        .then(res => console.log(res))
+        .then(({ data: { user, post } }) => {
+            batch(() => {
+                dispatch(receiveCurrentUser(user))
+                dispatch(receivePost(post))
+            })
+        })
+        .catch((errors) => console.log(errors))
 
-        
+    //     export const likePost = (postId) => (dispatch) =>
+    // APIUtil.likePost(postId)
+    //     .then(res => console.log(res))
+
+
 export const unlikePost = (postId) => (dispatch) =>
     APIUtil.unlikePost(postId)
         .then(({ data: { user, post } }) => {

@@ -29,11 +29,6 @@ class ApplicationController < ActionController::Base
     n.source_user = current_user
     n.read = false
 
-    # n.notifiable = notifiable
-    # n.notified_user = notified_user
-    # n.source_comment = source_comment if source_comment
-    # n.source_post = source_post if source_post
-
     case n.notifiable_type
     when "Like"
       n.message = "liked your photo"
@@ -55,3 +50,28 @@ end
 #   source_post: nil,
 #   source_comment: nil,
 # })
+
+# n.notifiable
+# n.notified_user
+# n.source_comment = source_comment if source_comment
+# n.source_post = source_post if source_post
+
+
+# note = Notification.new(
+#   notifiable: Like.first,
+#   notified_user: User.last,
+#   source_user: User.first,
+#   message: "liked your post",
+#   read: false,
+# )
+
+   # note = Notification.new(
+    #   notifiable: Like.first,
+    #   notified_user: User.last,
+    #   source_user: current_user,
+    #   message: "liked your post",
+    #   read: false,
+    # )
+
+    # note.save!
+    # return
