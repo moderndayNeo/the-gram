@@ -13,7 +13,7 @@ export default {
         Object.values(state.entities.posts).filter(
             (post) => post.author_id == state.session.id
         ),
-    currentUserLikedPosts: () => (state) =>
+    currentUserLikedPostIds: () => (state) =>
         state.entities.users[state.session.id].liked_post_ids,
     currentUserImageUrl: () => (state) =>
         state.entities.users[state.session.id].image_url,

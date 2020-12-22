@@ -5,25 +5,25 @@ import icons from '../shared/icons/svg-icons';
 import { Link } from 'react-router-dom';
 import CommentLikeButton from './comment_like_button';
 
-export default function PostFooter({ post, liked, comments, isSaved }) {
+export default function PostFooter({ post, isLiked, comments, isSaved }) {
 
     return (
         <div className="post-footer">
-            <FooterIcons postId={post.id} liked={liked} isSaved={isSaved} />
+            <FooterIcons postId={post.id} isLiked={isLiked} isSaved={isSaved} />
             <PostLikes numLikes={post.num_likes} />
             <CaptionAndComments post={post} comments={comments} />
         </div>
     );
 };
 
-const FooterIcons = ({ postId, liked, isSaved }) => {
+const FooterIcons = ({ postId, isLiked, isSaved }) => {
     const dispatch = useDispatch();
 
     return (
         <div className="footer-icons">
             <div className="icons-left">
                 {
-                    liked ?
+                    isLiked ?
                         <div onClick={() => dispatch(unlikePost(postId))}>
                             {icons.redHeart}
                         </div> :

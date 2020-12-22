@@ -5,25 +5,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
 import PostFooter from './post_footer';
-import {likePost, unlikePost} from '../../redux/actions/post_actions'
+import { likePost, unlikePost } from '../../redux/actions/post_actions';
 
 
 export default function Post({ post }) {
-    let { id, author_id, image_url, liker_ids } = post;
+    let { id, author_id, image_url } = post;
     const author = useSelector(stateSelectors.userById(author_id));
-    const currentUserId = useSelector(stateSelectors.currentUserId());
-    const liked = liker_ids.includes(currentUserId);
     const comments = useSelector(stateSelectors.commentsByPostId(post.id));
     const savedPostIds = useSelector(stateSelectors.currentUserSavedPostIds());
-    const isSaved = savedPostIds.includes(id); // check data types here
+    const likedPostIds = useSelector(stateSelectors.currentUserLikedPostIds());
+    const isSaved = savedPostIds.includes(id);
+    const isLiked = likedPostIds.includes(id);
 
     return (
         <article className="post">
             <PostHeader author={author} />
-            <PostImage id={id} imageUrl={image_url} post={post} />
+            <PostImage
+                id={id}
+                imageUrl={image_url}
+                post={post}
+                isLiked={isLiked}
+            />
             <PostFooter
                 post={post}
-                liked={liked}
+                isLiked={isLiked}
                 comments={comments}
                 isSaved={isSaved}
             />
@@ -45,15 +50,19 @@ const PostHeader = ({ author }) => {
     );
 };
 
-const PostImage = ({ imageUrl, post }) => {
+const PostImage = ({ post, isLiked }) => {
     const [firstClicked, setFirstClicked] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
+    const toggleLiked = () => {
+        return isLiked ?
+            dispatch(unlikePost(post.id)) :
+            dispatch(likePost(post.id));
+    };
 
     const handleClick = () => {
         if (firstClicked) {
-            // like photo
-            dispatch(likePost(post.id))
+            toggleLiked();
         } else {
             setFirstClicked(true);
             setTimeout(() => {
@@ -63,11 +72,9 @@ const PostImage = ({ imageUrl, post }) => {
     };
 
     return (
-        <div
-            className="image-container"
-        >
+        <div className="image-container">
             <img
-                className="post-image" src={imageUrl || window.placeholderImg}
+                className="post-image" src={post.image_url || window.placeholderImg}
                 alt="post image"
                 onClick={() => handleClick()}
             />
