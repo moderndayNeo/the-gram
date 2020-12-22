@@ -8,18 +8,18 @@ class Api::LikesController < ApplicationController
       return render json: ["Error: Post not found"], status: 404 unless @post
       @like.likeable = @post
       @like.save!
-      render :show
 
-      # liked your post
-      # notify the author of the post
-      @notification = create_notification({
+      valid, notification_response = create_notification({
         notified_user: @post.author,
         notifiable: @like,
         source_post: @post,
         source_comment: nil,
       })
 
-
+      return render notification_response, status: 422 if !valid
+      @notification = notification_response
+      return render :show
+      
     elsif params[:comment_id]
       @comment = Comment.find(params[:comment_id])
       @post = Post.find(params[:post_id])

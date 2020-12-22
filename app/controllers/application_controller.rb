@@ -33,22 +33,26 @@ class ApplicationController < ActionController::Base
     # n.source_comment = source_comment if source_comment
     # n.source_post = source_post if source_post
 
-    n.message = message
-    # case
-    # case statement for message. handle message logic here
+    case notifiable_type
+    when "Like"
+      n.message = "liked your photo"
+    when "Follow"
+      n.message = "started following you"
+    end
 
     if n.save
-      return n
+      return true, n
     else
-      # # throw exception
-      # render json: ["Error: Could not create notification"], status: 422
+      return false, n.errors.full_messages
     end
+
   end
+
 end
 
-n = Notification.new({
-  notified_user: User.last,
-  notifiable: Like.first,
-  source_post: nil,
-  source_comment: nil,
-})
+# n = Notification.new({
+#   notified_user: User.last,
+#   notifiable: Like.first,
+#   source_post: nil,
+#   source_comment: nil,
+# })
