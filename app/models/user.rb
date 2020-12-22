@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 150 }
   validates :password_digest, presence: { message: 'Password can\t be blank' }
   validates :password, length: { minimum: 6, allow_nil: true }
-  validates :session_token, presence: true, uniqueness: true # perhaps no uniqueness validation require here
+  validates :session_token, presence: true, uniqueness: true
   validate :valid_email
 
   after_initialize :ensure_session_token

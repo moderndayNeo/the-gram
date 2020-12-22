@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :login_user!, :logout_current_user!, :logged_in?
+  helper_method :current_user, :login_user!, :logout_current_user!, :logged_in?, :create_notification
 
   def current_user
     return nil if session[:session_token].nil?
@@ -27,13 +27,14 @@ class ApplicationController < ActionController::Base
   def create_notification(props)
     n = Notification.new(props)
     n.source_user = current_user
+    n.read = false
 
     # n.notifiable = notifiable
     # n.notified_user = notified_user
     # n.source_comment = source_comment if source_comment
     # n.source_post = source_post if source_post
 
-    case notifiable_type
+    case n.notifiable_type
     when "Like"
       n.message = "liked your photo"
     when "Follow"
@@ -43,11 +44,9 @@ class ApplicationController < ActionController::Base
     if n.save
       return true, n
     else
-      return false, n.errors.full_messages
+      return false, n
     end
-
   end
-
 end
 
 # n = Notification.new({

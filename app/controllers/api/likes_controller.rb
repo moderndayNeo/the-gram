@@ -9,17 +9,16 @@ class Api::LikesController < ApplicationController
       @like.likeable = @post
       @like.save!
 
-      valid, notification_response = create_notification({
+      valid, n_response = create_notification({
         notified_user: @post.author,
         notifiable: @like,
         source_post: @post,
         source_comment: nil,
       })
 
-      return render notification_response, status: 422 if !valid
-      @notification = notification_response
-      return render :show
-      
+      @notification = n_response if valid
+      return render json: n_response.errors.full_messages, status: 422 unless valid
+      render :show
     elsif params[:comment_id]
       @comment = Comment.find(params[:comment_id])
       @post = Post.find(params[:post_id])

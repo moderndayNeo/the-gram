@@ -13,7 +13,7 @@ class Notification < ApplicationRecord
 
   validate :no_self_notifications
 
-  after_initialize :ensure_read_state
+#   after_initialize :ensure_read_state
 
   belongs_to :notifiable, polymorphic: true
 
@@ -53,9 +53,9 @@ class Notification < ApplicationRecord
     end
   end
 
-  def ensure_read_state
-    self.read = false
-  end
+#   def ensure_read_state
+#     self.read = false
+#   end
 end
 
 =begin
