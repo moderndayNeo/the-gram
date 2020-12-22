@@ -22,6 +22,10 @@
             display: flex;
             justify-content: space-between;
 
+            input {
+                width: 100%;
+            }
+
             button {
                 color: var(--blue);
                 font-weight: bold;
