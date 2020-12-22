@@ -2,6 +2,7 @@ import * as APIUtil from '../../util/api_util'
 import { receiveUsers, receiveCurrentUser } from './session_actions'
 import { receiveComments } from './comment_actions'
 import { batch } from 'react-redux'
+import { receiveNotification } from './notification_actions'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -44,18 +45,14 @@ export const getFeed = () => (dispatch) =>
 
 export const likePost = (postId) => (dispatch) =>
     APIUtil.likePost(postId)
-        .then(({ data: { user, post } }) => {
+        .then(({ data: { user, post, notification = nil } }) => {
             batch(() => {
                 dispatch(receiveCurrentUser(user))
                 dispatch(receivePost(post))
+                notification && receiveNotification(notification)
             })
         })
         .catch((errors) => console.log(errors))
-
-    //     export const likePost = (postId) => (dispatch) =>
-    // APIUtil.likePost(postId)
-    //     .then(res => console.log(res))
-
 
 export const unlikePost = (postId) => (dispatch) =>
     APIUtil.unlikePost(postId)
