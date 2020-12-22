@@ -49,11 +49,11 @@ export const getFeed = () => (dispatch) =>
 
 export const likePost = (postId) => (dispatch) =>
     APIUtil.likePost(postId)
-        .then(({ data: { user, post, notification = nil } }) => {
+        .then(({ data: { user, post, notification } }) => {
             batch(() => {
                 dispatch(receiveCurrentUser(user))
                 dispatch(receivePost(post))
-                notification && receiveNotification(notification)
+                if (notification) dispatch(receiveNotification(notification))
             })
         })
         .catch((errors) => console.log(errors))

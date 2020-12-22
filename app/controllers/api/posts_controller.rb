@@ -4,40 +4,31 @@ class Api::PostsController < ApplicationController
     case params[:type]
     when "feed"
       @posts = Post.all
-        .includes(
-          :author, 
-          :likes, 
-          :likers
-        )
+        .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
         .order(created_at: :desc)
 
+      post_author_ids = @posts.pluck(:author_id)
+
       @users = User
-        .where(id: [@posts.map(&:author_id)])
+        .where(id: [post_author_ids])
         .includes(
           :photo_attachment,
           :saves,
           :saved_posts,
           :follows,
-          :post_likes,
           :liked_posts,
           :posts,
-          :follows,
           :followers,
-          :outgoing_follows,
           :followed_users,
-          :comment_likes,
           :liked_comments
         )
 
       @comments = Comment
         .where(post_id: [@posts.pluck(:id)])
-        .includes(
-          :author,
-          :likes
-        )
+        .includes(:author, :likes)
 
-        @notifications = current_user.notifications
+      @notifications = current_user.notifications
 
       return render :index
     else
