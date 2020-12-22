@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import UserAvatar from '../shared/user_avatar';
 import icons from '../shared/icons/svg-icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
 import PostFooter from './post_footer';
+import {likePost, unlikePost} from '../../redux/actions/post_actions'
+
 
 export default function Post({ post }) {
     let { id, author_id, image_url, liker_ids } = post;
@@ -18,7 +20,7 @@ export default function Post({ post }) {
     return (
         <article className="post">
             <PostHeader author={author} />
-            <PostImage id={id} imageUrl={image_url} />
+            <PostImage id={id} imageUrl={image_url} post={post} />
             <PostFooter
                 post={post}
                 liked={liked}
@@ -43,10 +45,32 @@ const PostHeader = ({ author }) => {
     );
 };
 
-const PostImage = ({ imageUrl }) => {
+const PostImage = ({ imageUrl, post }) => {
+    const [firstClicked, setFirstClicked] = useState(false);
+    const dispatch = useDispatch()
+
+
+    const handleClick = () => {
+        if (firstClicked) {
+            // like photo
+            dispatch(likePost(post.id))
+        } else {
+            setFirstClicked(true);
+            setTimeout(() => {
+                setFirstClicked(false);
+            }, 200);
+        }
+    };
+
     return (
-        <div className="image-container">
-            <img className="post-image" src={imageUrl || window.placeholderImg} alt="post image" />
+        <div
+            className="image-container"
+        >
+            <img
+                className="post-image" src={imageUrl || window.placeholderImg}
+                alt="post image"
+                onClick={() => handleClick()}
+            />
         </div>
     );
 };
