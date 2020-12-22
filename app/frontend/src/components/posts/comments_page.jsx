@@ -82,7 +82,10 @@ const TextBlock = ({ comment }) => {
             </div>
             <div className="comment-stats">
                 <p className="comment-time-ago">{timeAgo}</p>
-                <p className="comment-likes">{comment.num_likes} likes</p>
+                {
+                    comment.num_likes > 0 &&
+                    <p className="comment-likes">{comment.num_likes} likes</p>
+                }
                 <p className="comment-num-replies">Reply</p>
             </div>
         </div>
