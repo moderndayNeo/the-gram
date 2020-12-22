@@ -9,6 +9,17 @@ class Api::LikesController < ApplicationController
       @like.likeable = @post
       @like.save!
       render :show
+
+      # liked your post
+      # notify the author of the post
+      @notification = create_notification({
+        notified_user: @post.author,
+        notifiable: @like,
+        source_post: @post,
+        source_comment: nil,
+      })
+
+
     elsif params[:comment_id]
       @comment = Comment.find(params[:comment_id])
       @post = Post.find(params[:post_id])
