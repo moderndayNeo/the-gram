@@ -7,6 +7,7 @@ import LoadingPlaceholder from '../shared/loading_placeholder';
 import UserAvatar from '../shared/user_avatar';
 import FollowButton from '../shared/follow_button';
 import FollowingButton from '../shared/following_button';
+import {modifyTime} from '../../util/helpers'
 
 export default function Activity() {
     const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const Notification = ({ notification }) => {
             <div className="details">
                 <p className="username-link">{sourceUser.username}</p>
                 <p> {notification.message}.</p>
-                <p className="time-ago"> 12h</p>
+                <p className="time-ago">{modifyTime(notification.time_ago)}</p>
                 {/* <p className="time-ago">{notification.time_ago}</p> */}
             </div>
             {imageOrButton()}
