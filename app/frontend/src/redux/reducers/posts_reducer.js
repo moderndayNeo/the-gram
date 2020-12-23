@@ -14,7 +14,13 @@ export default (state = {}, action) => {
         case RECEIVE_POST:
             return Object.assign({}, state, { [action.post.id]: action.post })
 
+        case DELETE_POST:
+            let nextState = Object.assign({}, state)
+            delete nextState[action.postId]
+            return nextState
+
         default:
             return state
     }
 }
+

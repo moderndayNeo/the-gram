@@ -11,10 +11,16 @@ import PostModal from '../posts/post_modal';
 export default function Home() {
     const dispatch = useDispatch();
     let posts = useSelector(stateSelectors.allPosts());
-    const [postModalDisplayed, setPostModalDisplayed] = useState(true);
+    const [postModalDisplayed, setPostModalDisplayed] = useState(false);
+    const [postModalId, setPostModalId] = useState(null)
 
     if (!posts.length) {
         dispatch(getFeed());
+    }
+
+    const displayPostModal = (postId) => {
+        setPostModalDisplayed(true)
+        setPostModalId(postId)
     }
 
     return (
@@ -22,11 +28,11 @@ export default function Home() {
             <HomeTopNav />
             {
                 posts.length ?
-                    <Feed posts={posts} setPostModalDisplayed={setPostModalDisplayed} /> :
+                    <Feed posts={posts} displayPostModal={displayPostModal} /> :
                     <LoadingPlaceholder />
             }
             <BottomNav />
-            {postModalDisplayed && <PostModal setPostModalDisplayed={setPostModalDisplayed} />}
+            {postModalDisplayed && <PostModal setPostModalDisplayed={setPostModalDisplayed} postId={postModalId} />}
         </section>
     );
 }

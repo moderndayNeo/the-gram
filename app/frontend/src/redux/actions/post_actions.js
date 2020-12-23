@@ -25,6 +25,11 @@ export const receivePostErrors = (errors) => ({
     errors,
 })
 
+export const removePost = postId => ({
+    type: DELETE_POST,
+    postId
+})
+
 export const createPost = (post) => (dispatch) =>
     APIUtil.createPost(post)
         .then(({ data: { post } }) => dispatch(receivePost(post)))
@@ -76,4 +81,9 @@ export const savePost = (postId) =>
 export const unsavePost = (postId) =>
     APIUtil.unsavePost(postId)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .catch((errors) => console.log(errors))
+
+export const deletePost = (postId) => (dispatch) =>
+    APIUtil.deletePost(postId)
+        .then(() => dispatch(removePost(postId)))
         .catch((errors) => console.log(errors))
