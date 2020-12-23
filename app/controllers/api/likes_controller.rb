@@ -9,12 +9,12 @@ class Api::LikesController < ApplicationController
       @like.likeable = @post
       @like.save!
 
-      valid, notification = create_notification({
-        notified_user: @post.author,
-        notifiable: @like,
-        source_post: @post,
-        source_comment: nil,
-      })
+      # valid, notification = create_notification({
+      #   notified_user: @post.author,
+      #   notifiable: @like,
+      #   source_post: @post,
+      #   source_comment: nil,
+      # })
 
       # @notification = notification if valid
       render :show

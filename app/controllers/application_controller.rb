@@ -56,7 +56,6 @@ end
 # n.source_comment = source_comment if source_comment
 # n.source_post = source_post if source_post
 
-
 # note = Notification.new(
 #   notifiable: Like.first,
 #   notified_user: User.last,
@@ -65,13 +64,13 @@ end
 #   read: false,
 # )
 
-   # note = Notification.new(
-    #   notifiable: Like.first,
-    #   notified_user: User.last,
-    #   source_user: current_user,
-    #   message: "liked your post",
-    #   read: false,
-    # )
+# note = Notification.new(
+#   notifiable: Like.first,
+#   notified_user: User.last,
+#   source_user: current_user,
+#   message: "liked your post",
+#   read: false,
+# )
 
-    # note.save!
-    # return
+# note.save!
+# return
