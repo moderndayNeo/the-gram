@@ -16,7 +16,7 @@ class Api::LikesController < ApplicationController
         source_comment: nil,
       })
 
-      @notification = notification if valid
+      # @notification = notification if valid
       render :show
     elsif params[:comment_id]
       @comment = Comment.find(params[:comment_id])

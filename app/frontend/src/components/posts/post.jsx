@@ -8,7 +8,7 @@ import PostFooter from './post_footer';
 import { likePost } from '../../redux/actions/post_actions';
 
 
-export default function Post({ post }) {
+export default function Post({ post, setPostModalDisplayed }) {
     let { id, author_id, image_url } = post;
     const author = useSelector(stateSelectors.userById(author_id));
     const comments = useSelector(stateSelectors.commentsByPostId(post.id));
@@ -19,7 +19,7 @@ export default function Post({ post }) {
 
     return (
         <article className="post">
-            <PostHeader author={author} />
+            <PostHeader author={author} setPostModalDisplayed={setPostModalDisplayed} />
             <PostImage
                 id={id}
                 imageUrl={image_url}
@@ -36,7 +36,7 @@ export default function Post({ post }) {
     );
 }
 
-const PostHeader = ({ author }) => {
+const PostHeader = ({ author, setPostModalDisplayed }) => {
     return (
         <header className="post-header">
             <UserAvatar imageUrl={author.image_url} />
@@ -45,7 +45,10 @@ const PostHeader = ({ author }) => {
                     {author.username}
                 </Link>
             </div>
-            {icons.threeDots}
+            <button onClick={() => setPostModalDisplayed(true)}>
+                {icons.threeDots}
+
+            </button>
         </header>
     );
 };
