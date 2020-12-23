@@ -6,27 +6,27 @@ import BottomNav from '../shared/bottom_nav';
 import { getFeed } from '../../redux/actions/post_actions';
 import stateSelectors from '../../util/state_selectors';
 import LoadingPlaceholder from '../shared/loading_placeholder';
-import PostModal from '../posts/post_modal'
+import PostModal from '../posts/post_modal';
 
 export default function Home() {
     const dispatch = useDispatch();
     let posts = useSelector(stateSelectors.allPosts());
-    const [postModalDisplayed, setPostModalDisplayed] = useState(false)
+    const [postModalDisplayed, setPostModalDisplayed] = useState(true);
 
     if (!posts.length) {
         dispatch(getFeed());
     }
 
     return (
-        <section className="home">
+            <section className="home">
             <HomeTopNav />
             {
                 posts.length ?
-                    <Feed posts={posts} setPostModalDisplayed={setPostModalDisplayed}  /> :
+                    <Feed posts={posts} setPostModalDisplayed={setPostModalDisplayed} /> :
                     <LoadingPlaceholder />
             }
             <BottomNav />
-            {postModalDisplayed && <PostModal />}
+            {postModalDisplayed && <PostModal setPostModalDisplayed={setPostModalDisplayed} />}
         </section>
     );
 }
