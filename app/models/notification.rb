@@ -13,7 +13,7 @@ class Notification < ApplicationRecord
   validate :no_self_notifications
   scope :newest_first, -> { order(created_at: :desc) }
 
-  #   after_initialize :ensure_read_state
+  after_initialize :ensure_read_state
 
   belongs_to :notifiable, polymorphic: true
 
@@ -35,6 +35,12 @@ class Notification < ApplicationRecord
              foreign_key: :source_comment_id,
              optional: true
 
+  belongs_to :like,
+             class_name: :Like,
+             foreign_key: :notifiable_id,
+             optional: true
+
+
   def read_notification
     self.read = true
 
@@ -53,16 +59,16 @@ class Notification < ApplicationRecord
     end
   end
 
-  def clear_empty_notifications
-    post_ids = Post.all.pluck(:id)
-    empty_notifications =
-      Notification.where(notifiable_type: :Like).where.not(source_post_id: [post_ids])
-    empty_notifications.destroy_all
-  end
+  # def clear_empty_notifications
+  #   post_ids = Post.all.pluck(:id)
+  #   empty_notifications =
+  #     Notification.where(notifiable_type: :Like).where.not(source_post_id: [post_ids])
+  #   empty_notifications.destroy_all
+  # end
 
-  #   def ensure_read_state
-  #     self.read = false
-  #   end
+    def ensure_read_state
+      self.read = false
+    end
 end
 
 =begin

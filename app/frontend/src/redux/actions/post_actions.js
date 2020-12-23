@@ -25,9 +25,9 @@ export const receivePostErrors = (errors) => ({
     errors,
 })
 
-export const removePost = postId => ({
+export const removePost = (postId) => ({
     type: DELETE_POST,
-    postId
+    postId,
 })
 
 export const createPost = (post) => (dispatch) =>

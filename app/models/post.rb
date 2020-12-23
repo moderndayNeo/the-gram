@@ -22,11 +22,6 @@ class Post < ApplicationRecord
            foreign_key: :post_id,
            dependent: :destroy
 
-  has_many :notifications,
-    class_name: :Notification,
-    foreign_key: :source_post_id,
-    dependent: :destroy
-
   # has_many :taggings,
   #          class_name: :Tagging,
   #          foreign_key: :post_id,

@@ -9,14 +9,15 @@ class Api::LikesController < ApplicationController
       @like.likeable = @post
       @like.save!
 
-      valid, notification = create_notification({
-        notified_user: @post.author,
-        notifiable: @like,
-        source_post: @post,
-        source_comment: nil,
-      })
+      unless @post.author == current_user
+        create_notification({
+          notified_user: @post.author,
+          notifiable: @like,
+          source_post: @post,
+          source_comment: nil,
+        })
+      end
 
-      # @notification = notification if valid
       render :show
     elsif params[:comment_id]
       @comment = Comment.find(params[:comment_id])
@@ -34,13 +35,13 @@ class Api::LikesController < ApplicationController
     if params[:post_id] && !params[:comment_id]
       @like = Like.find_by(likeable_id: params[:post_id], liker_id: current_user.id, likeable_type: "Post")
       @post = Post.find(params[:post_id])
-      return render json: ["Error: Like not found"] unless @like
+      return render json: ["Error: Like not found"], status: 404 unless @like
       @like.destroy!
       render :show
     elsif params[:comment_id]
       @post = Post.find(params[:post_id])
       @like = Like.find_by(likeable_id: params[:comment_id], liker_id: current_user.id, likeable_type: "Comment")
-      return render json: ["Error: Like not found"] unless @like
+      return render json: ["Error: Like not found"], status: 404 unless @like
       @like.destroy!
       render :show
     end

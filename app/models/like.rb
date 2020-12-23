@@ -14,4 +14,9 @@ class Like < ApplicationRecord
   belongs_to :liker,
              class_name: :User,
              foreign_key: :liker_id
+
+  has_many :notifications, -> { where notifiable_type: :Like },
+    class_name: :Notification,
+    foreign_key: :notifiable_id,
+    dependent: :destroy
 end

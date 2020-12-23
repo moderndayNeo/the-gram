@@ -12,8 +12,8 @@ if @comment
   end
 end
 
-if @notification
-  json.notification do
-    json.partial! "api/notifications/notification", notification: @notification
-  end
-end
+# if @notification
+#   json.notification do
+#     json.partial! "api/notifications/notification", notification: @notification
+#   end
+# end

@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
   def create_notification(props)
     n = Notification.new(props)
     n.source_user = current_user
-    n.read = false
 
     case n.notifiable_type
     when "Like"
@@ -36,42 +35,7 @@ class ApplicationController < ActionController::Base
       n.message = "started following you"
     end
 
-    if n.save
-      return true, n
-    else
-      return false, n
-    end
+    n.save!()
   end
 end
 
-# n = Notification.new({
-#   notified_user: User.last,
-#   notifiable: Like.first,
-#   source_post: nil,
-#   source_comment: nil,
-# })
-
-# n.notifiable
-# n.notified_user
-# n.source_comment = source_comment if source_comment
-# n.source_post = source_post if source_post
-
-
-# note = Notification.new(
-#   notifiable: Like.first,
-#   notified_user: User.last,
-#   source_user: User.first,
-#   message: "liked your post",
-#   read: false,
-# )
-
-   # note = Notification.new(
-    #   notifiable: Like.first,
-    #   notified_user: User.last,
-    #   source_user: current_user,
-    #   message: "liked your post",
-    #   read: false,
-    # )
-
-    # note.save!
-    # return
