@@ -35,7 +35,7 @@ export default {
 
     // )
     allNotifications: () => (state) =>
-        Object.values(state.entities.notifications),
+        Object.values(state.entities.notifications).reverse(),
     currentUserIsFollowing: (userId) => (state) =>
         state.entities.users[state.session.id].followed_user_ids.includes(
             userId

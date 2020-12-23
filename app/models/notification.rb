@@ -11,6 +11,7 @@ class Notification < ApplicationRecord
     inclusion: BOOLEANS
 
   validate :no_self_notifications
+  scope :newest_first, -> { order(created_at: :desc) }
 
   #   after_initialize :ensure_read_state
 
