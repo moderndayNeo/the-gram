@@ -7,8 +7,7 @@ import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
 import { getFeed } from '../../redux/actions/post_actions';
 import { logoutUser } from '../../redux/actions/session_actions';
-import FollowButton from '../shared/follow_button';
-import FollowingButton from '../shared/following_button';
+import DynamicFollowButton from '../shared/dynamic_follow_button';
 import PostCollections from './post_collections';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 
@@ -25,14 +24,13 @@ export default function Profile() {
     }, []);
 
     if (!posts.length) {
-        return <LoadingPlaceholder />
+        return <LoadingPlaceholder />;
     } else if (currentUser.id == userId) {
         return <OwnProfile user={currentUser} posts={posts} />;
     }
     else {
         const otherUser = useSelector(stateSelectors.userById(userId));
-        const isFollowing = currentUser.followed_user_ids.includes(parseInt(userId));
-        return <ForeignProfile user={otherUser} posts={posts} isFollowing={isFollowing} />;
+        return <ForeignProfile user={otherUser} posts={posts} />;
     }
 }
 
@@ -78,7 +76,7 @@ const OptionsModal = ({ setOptionsModal }) => {
     );
 };
 
-const ForeignProfile = ({ user, posts, isFollowing }) => {
+const ForeignProfile = ({ user, posts }) => {
     const history = useHistory();
 
     if (user) {
@@ -101,7 +99,7 @@ const ForeignProfile = ({ user, posts, isFollowing }) => {
             </header>
 
             <main>
-                <ImageAndName user={user} ownProfile={false} isFollowing={isFollowing} />
+                <ImageAndName user={user} ownProfile={false} />
                 <Bio user={user} />
                 <Stats user={user} />
                 <PostCollections user={user} ownProfile={false} posts={posts} />
@@ -121,7 +119,7 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
     </header>
 );
 
-const ImageAndName = ({ user, ownProfile, isFollowing }) => {
+const ImageAndName = ({ user, ownProfile }) => {
     return (
         <div className="image-and-name">
             <UserAvatar imageUrl={user.image_url} />
@@ -130,13 +128,10 @@ const ImageAndName = ({ user, ownProfile, isFollowing }) => {
                 {
                     ownProfile ?
                         <button className="edit-button">Edit Profile</button> :
-                        isFollowing ?
-                            <div>
-                                <FollowingButton userId={user.id} />
-                            </div> :
-                            <div>
-                                <FollowButton userId={user.id} />
-                            </div>
+                        <div>
+                            <DynamicFollowButton userId={user.id} />
+                        </div>
+
 
                 }
             </section>

@@ -38,6 +38,6 @@ export default {
         Object.values(state.entities.notifications).reverse(),
     currentUserIsFollowing: (userId) => (state) =>
         state.entities.users[state.session.id].followed_user_ids.includes(
-            userId
+            parseInt(userId)
         ),
 }

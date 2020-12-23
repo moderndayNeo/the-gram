@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getFeed } from '../../redux/actions/post_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import UserAvatar from '../shared/user_avatar';
-import FollowButton from '../shared/follow_button';
-import FollowingButton from '../shared/following_button';
+import DynamicFollowButton from '../shared/dynamic_follow_button';
+
 import { modifyTime } from '../../util/helpers';
 import { Link } from 'react-router-dom';
 
@@ -53,7 +53,7 @@ const Notification = ({ notification }) => {
             case "Follow":
                 return <Link to={`/users/${sourceUser.id}`}>
                     <FollowNotification notification={notification} sourceUser={sourceUser} />
-                </Link>
+                </Link>;
         }
     };
 
@@ -73,10 +73,7 @@ const FollowNotification = ({ notification, sourceUser }) => {
                 <p> {notification.message}.</p>
                 <p className="time-ago">{modifyTime(notification.time_ago)}</p>
             </div>
-            {
-                isFollowing ?
-                    <FollowButton userId={sourceUser.id} /> : <FollowingButton userId={sourceUser.id} />
-            }
+            <DynamicFollowButton userId={sourceUser.id} />
         </li>
     );
 

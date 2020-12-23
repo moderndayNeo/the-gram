@@ -14,7 +14,8 @@ class Api::FollowsController < ApplicationController
           source_post: nil,
           source_comment: nil,
         })
-        @notification = notification if valid
+
+        @notification = notification if valid unless notification.source_user == current_user
         render :show
       else
         render json: ["Error: Could not create follow"], status: 422
