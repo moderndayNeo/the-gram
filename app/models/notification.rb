@@ -53,6 +53,13 @@ class Notification < ApplicationRecord
     end
   end
 
+  def clear_empty_notifications
+    post_ids = Post.all.pluck(:id)
+    empty_notifications =
+      Notification.where(notifiable_type: :Like).where.not(source_post_id: [post_ids])
+    empty_notifications.destroy_all
+  end
+
   #   def ensure_read_state
   #     self.read = false
   #   end

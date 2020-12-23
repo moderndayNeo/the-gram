@@ -61,7 +61,6 @@ const Notification = ({ notification }) => {
 };
 
 const FollowNotification = ({ notification, sourceUser }) => {
-    const isFollowing = useSelector(stateSelectors.currentUserIsFollowing(notification.source_user_id));
 
     return (
         <li
@@ -73,7 +72,9 @@ const FollowNotification = ({ notification, sourceUser }) => {
                 <p> {notification.message}.</p>
                 <p className="time-ago">{modifyTime(notification.time_ago)}</p>
             </div>
-            <DynamicFollowButton userId={sourceUser.id} />
+            <DynamicFollowButton
+                userId={sourceUser.id}
+            />
         </li>
     );
 
@@ -91,7 +92,10 @@ const LikeNotification = ({ notification, sourceUser }) => {
                 <p className="time-ago">{modifyTime(notification.time_ago)}</p>
             </div>
 
-            <SquarePostImage imageUrl={post.image_url} />
+            <SquarePostImage
+                imageUrl={post.image_url}
+
+            />
         </li>
     );
 

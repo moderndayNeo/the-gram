@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   validates :caption, length: { maximum: 2200 }
 
   validate :has_photo_attached
-  scope :with_eager_loaded_photo, -> {eager_load(photo_attachment: :blob)}
+  scope :with_eager_loaded_photo, -> { eager_load(photo_attachment: :blob) }
 
   belongs_to :author,
              class_name: :User,
@@ -21,6 +21,11 @@ class Post < ApplicationRecord
            class_name: :Comment,
            foreign_key: :post_id,
            dependent: :destroy
+
+  has_many :notifications,
+    class_name: :Notification,
+    foreign_key: :source_post_id,
+    dependent: :destroy
 
   # has_many :taggings,
   #          class_name: :Tagging,

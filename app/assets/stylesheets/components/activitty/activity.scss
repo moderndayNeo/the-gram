@@ -53,4 +53,10 @@
             width: 40px;
         }
     }
+
+    .follow-notification {
+        button {
+            z-index: 3;
+        }
+    }
 }
