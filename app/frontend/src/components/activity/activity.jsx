@@ -7,7 +7,7 @@ import LoadingPlaceholder from '../shared/loading_placeholder';
 import UserAvatar from '../shared/user_avatar';
 import FollowButton from '../shared/follow_button';
 import FollowingButton from '../shared/following_button';
-import {modifyTime} from '../../util/helpers'
+import { modifyTime } from '../../util/helpers';
 
 export default function Activity() {
     const dispatch = useDispatch();
@@ -21,11 +21,9 @@ export default function Activity() {
     return (
         <div className="activity">
             <header><h3>Activity</h3></header>
-
             {
-                !notifications.length ?
-                    <LoadingPlaceholder /> :
-                    <ul>
+                notifications.length > 0 ?
+                    <ul className="notifications-list">
                         {
                             notifications.map(notification => (
                                 <div className="notification-container" key={notification.id}>
@@ -34,9 +32,9 @@ export default function Activity() {
                                 </div>
                             ))
                         }
-                    </ul>
+                    </ul> :
+                    <LoadingPlaceholder />
             }
-
             <BottomNav />
         </div>
     );

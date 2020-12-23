@@ -17,7 +17,6 @@ class Api::LikesController < ApplicationController
       })
 
       @notification = notification if valid
-      # return render json: notification.errors.full_messages, status: 422 unless valid
       render :show
     elsif params[:comment_id]
       @comment = Comment.find(params[:comment_id])

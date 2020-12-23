@@ -1,5 +1,9 @@
+import { batch } from 'react-redux'
 import * as APIUtil from '../../util/api_util'
-
+import {
+    receiveNotification,
+    receiveNotifications,
+} from './notification_actions'
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER'
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS'
@@ -31,7 +35,12 @@ export const updateUser = (userId, formData) => (dispatch) =>
 
 export const followUser = (userId) => (dispatch) =>
     APIUtil.followUser(userId)
-        .then(({ data: { users } }) => dispatch(receiveUsers(users)))
+        .then(({ data: { users, notification } }) => {
+            batch(() => {
+                dispatch(receiveUsers(users))
+                if (notification) dispatch(receiveNotification(notification))
+            })
+        })
         .catch((errors) => console.log(errors))
 
 export const unfollowUser = (userId) => (dispatch) =>
