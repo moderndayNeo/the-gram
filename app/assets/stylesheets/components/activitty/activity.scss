@@ -4,10 +4,44 @@
         font-weight: 600;
     }
 
+    .notification-container {
+        position: relative;
+    }
+
+    .border-line {
+        background-color: var(--light-grey);
+        width: 82%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        right: 12px;
+    }
 
     .notification {
+        display: flex;
+        // justify-content: space-between;
+        align-items: center;
+        min-height: 40px;
+        // border: 1px solid red;
         padding: 12px 16px 13px;
-        
+        // border-bottom: 1px solid var(--light-grey);
+
+        .details {
+            margin: 0 12px;
+            min-width: 200px;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .info {
+            display: flex;
+
+            .time-ago {
+                margin-left: 5px;
+                color: var(--dark-grey);
+            }
+        }
     }
 }
-

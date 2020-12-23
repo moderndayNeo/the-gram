@@ -27,7 +27,10 @@ export default function Activity() {
                     <ul>
                         {
                             notifications.map(notification => (
-                                <Notification key={notification.id} notification={notification} />
+                                <div className="notification-container" key={notification.id}>
+                                    <Notification notification={notification} />
+                                    <div className="border-line" />
+                                </div>
                             ))
                         }
                     </ul>
@@ -46,16 +49,18 @@ const Notification = ({ notification }) => {
         <li className="notification">
             <UserAvatar imageUrl={sourceUser.image_url} />
             <div className="details">
-                <p>{sourceUser.username}</p>
-                <p>{notification.message}</p>
-                <p>{notification.time_ago}</p>
+                <p className="username-link">{sourceUser.username}</p>
+                <div className="info">
+                    <p>{notification.message}.</p>
+                    <p className="time-ago">12h</p>
+                    {/* <p className="time-ago">{notification.time_ago}</p> */}
+                </div>
             </div>
             {
                 isFollowing ?
-                    <FollowButton /> : <FollowingButton />
+                    <FollowButton userId={sourceUser.id} /> : <FollowingButton userId={sourceUser.id} />
             }
         </li>
     );
 };
 
-// if current user is following user 4, id 4 is in current users followed user ids 
