@@ -8,6 +8,7 @@ import UserAvatar from '../shared/user_avatar';
 import FollowButton from '../shared/follow_button';
 import FollowingButton from '../shared/following_button';
 import { modifyTime } from '../../util/helpers';
+import { Link } from 'react-router-dom';
 
 export default function Activity() {
     const dispatch = useDispatch();
@@ -46,7 +47,9 @@ const Notification = ({ notification }) => {
     const content = () => {
         switch (notification.notifiable_type) {
             case "Like":
-                return <LikeNotification notification={notification} sourceUser={sourceUser} />;
+                return <Link to={`/users/${sourceUser.id}`}>
+                    <LikeNotification notification={notification} sourceUser={sourceUser} />
+                </Link>;
             case "Follow":
                 return <FollowNotification notification={notification} sourceUser={sourceUser} />;
         }
@@ -59,7 +62,9 @@ const FollowNotification = ({ notification, sourceUser }) => {
     const isFollowing = useSelector(stateSelectors.currentUserIsFollowing(notification.source_user_id));
 
     return (
-        <li className="notification follow-notification">
+        <li
+            className="notification follow-notification"
+        >
             <UserAvatar imageUrl={sourceUser.image_url} />
             <div className="details">
                 <p className="username-link" id="follow-notification-username">{sourceUser.username}</p>
