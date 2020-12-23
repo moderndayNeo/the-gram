@@ -47,11 +47,13 @@ const Notification = ({ notification }) => {
     const content = () => {
         switch (notification.notifiable_type) {
             case "Like":
-                return <Link to={`/users/${sourceUser.id}`}>
+                return <Link to={`/posts/${notification.source_post_id}`}>
                     <LikeNotification notification={notification} sourceUser={sourceUser} />
                 </Link>;
             case "Follow":
-                return <FollowNotification notification={notification} sourceUser={sourceUser} />;
+                return <Link to={`/users/${sourceUser.id}`}>
+                    <FollowNotification notification={notification} sourceUser={sourceUser} />
+                </Link>
         }
     };
 
@@ -92,7 +94,7 @@ const LikeNotification = ({ notification, sourceUser }) => {
                 <p className="time-ago">{modifyTime(notification.time_ago)}</p>
             </div>
 
-            <SquarePostImage imageUrl={post.image_url} />;
+            <SquarePostImage imageUrl={post.image_url} />
         </li>
     );
 
