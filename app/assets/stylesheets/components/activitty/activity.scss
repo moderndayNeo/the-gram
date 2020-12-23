@@ -19,19 +19,18 @@
 
     .notification {
         display: flex;
-        // justify-content: space-between;
         align-items: center;
         min-height: 40px;
-        // border: 1px solid red;
         padding: 12px 16px 13px;
-        // border-bottom: 1px solid var(--light-grey);
 
         .details {
             margin: 0 12px;
             min-width: 200px;
+            flex: 1;
 
             p {
                 margin: 0;
+                display: inline;
             }
         }
 
@@ -42,6 +41,11 @@
                 margin-left: 5px;
                 color: var(--dark-grey);
             }
+        }
+
+        .square-post-image {
+            height: 40px;
+            width: 40px;
         }
     }
 }
