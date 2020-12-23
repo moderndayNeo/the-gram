@@ -1,11 +1,26 @@
 import React from 'react';
 import BottomNav from '../shared/bottom_nav';
-import DevelopmentModal from '../shared/development_modal';
+import stateSelectors from '../../util/state_selectors';
+import {useSelector} from 'react-redux'
 
 export default function Activity() {
+    const notifications = useSelector(stateSelectors.allNotifications());
+    
+
     return (
-        <div>
-            <DevelopmentModal feature='Activity Page' />
+        <div className="activity">
+            <header><h3>Activity</h3></header>
+
+            <ul>
+                {
+                    notifications.map(notification => (
+                        <li key={notification.id}>
+                            <p>{notification.message}</p>
+                        </li>
+                    ))
+                }
+            </ul>
+
             <BottomNav />
         </div>
     );

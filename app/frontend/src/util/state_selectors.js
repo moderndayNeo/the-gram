@@ -34,4 +34,6 @@ export default {
     // usersNotFollowed: () => state => (
 
     // )
+    allNotifications: () => (state) =>
+        Object.values(state.entities.notifications),
 }
