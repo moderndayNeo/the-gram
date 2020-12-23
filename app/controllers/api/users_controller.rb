@@ -13,7 +13,17 @@ class Api::UsersController < ApplicationController
       not_followed_users =
         User
           .where.not(id: followed_users_ids)
-          .includes(:photo_attachment, :posts, :followers, :saved_posts)
+          .includes(
+            :photo_attachment,
+            :saves,
+            :saved_posts,
+            :follows,
+            :liked_posts,
+            :posts,
+            :followers,
+            :followed_users,
+            :liked_comments
+          )
 
       @users = not_followed_users
       render :index
@@ -23,15 +33,17 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @posts = @user.posts
-    render :show
+    # @user = User.find(params[:id])
+    # @posts = @user.posts
+    # render :show
 
     # if @user.id !== current_user.id
     #     render json: { errors: "You cannot view another user's information" }, status: 401
     # else
     #     render :show
     # end
+
+    # can render private user info if requested user id is current_user's id
   end
 
   def create
