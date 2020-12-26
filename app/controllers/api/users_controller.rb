@@ -28,7 +28,21 @@ class Api::UsersController < ApplicationController
       @users = not_followed_users
       render :index
     when "followers"
-      @users = current_user.followers
+      follower_ids = current_user.followers.pluck(:id)
+      @users = User
+        .where(id: follower_ids)
+        .includes(
+          :photo_attachment,
+          :saves,
+          :saved_posts,
+          :follows,
+          :liked_posts,
+          :posts,
+          :followers,
+          :followed_users,
+          :liked_comments
+        )
+
       render :index
     else
       render json: ["Error: Must pass a parameter when requesting users"], status: 422
