@@ -4,14 +4,14 @@ import { useHistory } from 'react-router-dom';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector } from 'react-redux';
 import BottomNav from '../shared/bottom_nav';
-import UserLink from './user_link'
+import UserLink from './user_link';
 
 export default function Following() {
     const history = useHistory();
     const allFollowedUsers = useSelector(stateSelectors.allFollowedUsers());
 
     return (
-        <div className="followers-and-following">
+        <div className="following user-list-page">
             <header>
                 <div onClick={() => history.goBack()}>
                     {icons.chevron}

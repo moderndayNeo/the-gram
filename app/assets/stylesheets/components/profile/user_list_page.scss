@@ -1,0 +1,28 @@
+.user-list-page {
+    header {
+        position: fixed;
+        top: 0;
+
+        h3 {
+            margin-left: -20px;
+        }
+    }
+
+    .suggested-title {
+        margin: 16px 0 12px 0;
+        padding: 0 12px;
+        font-size: 16px;
+        margin-top: 60px;
+        font-weight: 600;
+    }
+
+    .user-list {
+        margin-top: 60px;
+    }
+}
+
+.suggested {
+    .user-list {
+        margin-top: 0;
+    }
+}
