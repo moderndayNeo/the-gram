@@ -28,6 +28,7 @@ class Api::PostsController < ApplicationController
         .where(post_id: [@posts.pluck(:id)])
         .includes(:author, :likes)
 
+      
       @notifications = current_user.notifications.newest_first
 
       return render :index

@@ -6,6 +6,7 @@ import { getFeed } from '../../redux/actions/post_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import UserAvatar from '../shared/user_avatar';
 import DynamicFollowButton from '../shared/dynamic_follow_button';
+import DevelopmentModal from '../shared/development_modal'
 
 import { modifyTime } from '../../util/helpers';
 import { Link } from 'react-router-dom';
@@ -21,7 +22,8 @@ export default function Activity() {
 
     return (
         <div className="activity">
-            <header><h3>Activity</h3></header>
+            <DevelopmentModal feature="Activity Page" />
+            {/* <header><h3>Activity</h3></header>
             {
                 notifications.length > 0 ?
                     <ul className="notifications-list">
@@ -35,7 +37,7 @@ export default function Activity() {
                         }
                     </ul> :
                     <LoadingPlaceholder />
-            }
+            } */}
             <BottomNav />
         </div>
     );
