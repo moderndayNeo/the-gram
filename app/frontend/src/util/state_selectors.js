@@ -59,4 +59,5 @@ export default {
         )
     },
     postModalId: () => (state) => state.ui.postModal,
+    clipboardPopup: () => state => state.ui.clipboardPopup
 }

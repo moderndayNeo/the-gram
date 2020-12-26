@@ -1,7 +1,13 @@
-import { DISPLAY_POST_MODAL, HIDE_POST_MODAL } from '../actions/ui_actions'
+import {
+    DISPLAY_POST_MODAL,
+    HIDE_POST_MODAL,
+    DISPLAY_CLIPBOARD_POPUP,
+    HIDE_CLIPBOARD_POPUP,
+} from '../actions/ui_actions'
 
 const _defaultState = {
     postModal: null,
+    clipboardPopup: false,
 }
 
 export default (state = _defaultState, action) => {
@@ -14,15 +20,23 @@ export default (state = _defaultState, action) => {
         case HIDE_POST_MODAL:
             return Object.assign({}, state, { postModal: null })
 
+        case DISPLAY_CLIPBOARD_POPUP:
+            return Object.assign({}, state, { clipboardPopup: true })
+
+        case HIDE_CLIPBOARD_POPUP:
+            return Object.assign({}, state, { clipboardPopup: false })
+
         default:
             return _defaultState
     }
 }
 
 // ui : {
-//     postModal: 12
+//     postModal: 12,
+//     clipboardPopup: false
 // }
 
 // ui : {
-//     postModal: null
+//     postModal: null,
+//     clipboardPopup: true
 // }
