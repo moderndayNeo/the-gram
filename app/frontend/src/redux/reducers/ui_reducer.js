@@ -1,7 +1,7 @@
 import { DISPLAY_POST_MODAL, HIDE_POST_MODAL } from '../actions/ui_actions'
 
 const _defaultState = {
-    postModal: false,
+    postModal: null,
 }
 
 export default (state = _defaultState, action) => {
@@ -9,12 +9,20 @@ export default (state = _defaultState, action) => {
 
     switch (action.type) {
         case DISPLAY_POST_MODAL:
-            return Object.assign({}, state, { postModal: true })
+            return Object.assign({}, state, { postModal: action.postId })
 
         case HIDE_POST_MODAL:
-            return Object.assign({}, state, { postModal: false })
+            return Object.assign({}, state, { postModal: null })
 
         default:
             return _defaultState
     }
 }
+
+// ui : {
+//     postModal: 12
+// }
+
+// ui : {
+//     postModal: null
+// }

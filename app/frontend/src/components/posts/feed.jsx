@@ -1,11 +1,11 @@
 import React from 'react';
 import Post from './post';
 
-export default function Feed({ posts, displayPostModal }) {
+export default function Feed({ posts }) {
     return (
         <ul className="feed">
             {posts.map(post => (
-                <Post key={post.id} post={post} displayPostModal={displayPostModal} />
+                <Post key={post.id} post={post} />
             ))}
         </ul>
     );

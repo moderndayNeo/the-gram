@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../redux/actions/post_actions';
+import { hidePostModal } from '../../redux/actions/ui_actions';
 
-export default function PostModal({ setPostModalDisplayed, postId }) {
+export default function PostModal({ postId }) {
     const dispatch = useDispatch();
 
     const handleDelete = () => {
         dispatch(deletePost(postId));
-        setPostModalDisplayed(false);
+        dispatch(hidePostModal());
     };
 
     return (
@@ -21,7 +22,7 @@ export default function PostModal({ setPostModalDisplayed, postId }) {
                     <button>Copy Link</button>
                     <button
                         className="cancel-button"
-                        onClick={() => setPostModalDisplayed(false)}
+                        onClick={() => dispatch(hidePostModal())}
                     >Cancel</button>
                 </div>
             </div>

@@ -54,8 +54,9 @@ export default {
         const followedUserIds =
             state.entities.users[state.session.id].followed_user_ids
 
-        return Object.values(state.entities.users).filter((user) =>
-            !followedUserIds.includes(user.id)
+        return Object.values(state.entities.users).filter(
+            (user) => !followedUserIds.includes(user.id)
         )
     },
+    postModalId: () => (state) => state.ui.postModal,
 }

@@ -6,9 +6,10 @@ import stateSelectors from '../../util/state_selectors';
 import { Link } from 'react-router-dom';
 import PostFooter from './post_footer';
 import { likePost } from '../../redux/actions/post_actions';
+import { displayPostModal } from '../../redux/actions/ui_actions';
 
 
-export default function Post({ post, displayPostModal }) {
+export default function Post({ post }) {
     let { id, author_id, image_url } = post;
     const author = useSelector(stateSelectors.userById(author_id));
     const comments = useSelector(stateSelectors.commentsByPostId(post.id));
@@ -45,9 +46,8 @@ const PostHeader = ({ author, displayPostModal, id }) => {
                     {author.username}
                 </Link>
             </div>
-            <button onClick={() => displayPostModal(id)}>
+            <button onClick={() => dispatch(displayPostModal(id))}>
                 {icons.threeDots}
-
             </button>
         </header>
     );
@@ -72,8 +72,6 @@ const PostImage = ({ post, isLiked }) => {
             }, 200);
         }
     };
-
-
 
     return (
         <div className="image-container">
