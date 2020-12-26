@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function UserLink({ user }) {
     return (
-        <li className="user">
+        <li className="user-link">
             <div className="container">
                 <Link to={`/users/${user.id}`}>
                     <div className="image-and-text">

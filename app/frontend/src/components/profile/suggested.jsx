@@ -39,8 +39,5 @@ export default function Followers() {
     );
 }
 
-
-
-
 // Api call to get suggested users -> return a random list of users from the 
 // People not following you
