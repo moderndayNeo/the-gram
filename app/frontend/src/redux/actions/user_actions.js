@@ -7,3 +7,9 @@ export const fetchFollowers = () => (dispatch) =>
         .then(({ data: { users } }) => dispatch(receiveUsers(users)))
         .catch((errors) => console.log(errors))
 
+export const fetchSuggestedUsers = () => (dispatch) =>
+    APIUtil.fetchUsersNotFollowed()
+        .then(({ data: { users } }) => {
+            dispatch(receiveUsers(users))
+        })
+        .catch((errors) => console.log(errors))

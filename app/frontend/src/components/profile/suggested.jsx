@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import icons from '../shared/icons/svg-icons';
 import { useHistory } from 'react-router-dom';
-import { fetchFollowers } from '../../redux/actions/user_actions';
+import { fetchSuggestedUsers } from '../../redux/actions/user_actions';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import BottomNav from '../shared/bottom_nav';
-import UserLink from './user_link'
+import UserLink from './user_link';
 
 export default function Followers() {
     const history = useHistory();
     const dispatch = useDispatch();
     // const suggestedUsers = useSelector(stateSelectors.allUsers());
     const suggestedUsers = useSelector(stateSelectors.suggestedUsers());
-    
+
     useEffect(() => {
-        dispatch(fetchFollowers());
+        dispatch(fetchSuggestedUsers());
     }, []);
 
     return (
@@ -27,7 +27,7 @@ export default function Followers() {
                 <div></div>
             </header>
 
-           <h4 className="suggested-title">Suggested</h4>
+            <h4 className="suggested-title">Suggested</h4>
 
             <ul className="user-list">
                 {
@@ -40,6 +40,3 @@ export default function Followers() {
         </div>
     );
 }
-
-// Api call to get suggested users -> return a random list of users from the 
-// People not following you
