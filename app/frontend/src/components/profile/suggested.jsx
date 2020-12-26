@@ -10,7 +10,6 @@ import UserLink from './user_link';
 export default function Followers() {
     const history = useHistory();
     const dispatch = useDispatch();
-    // const suggestedUsers = useSelector(stateSelectors.allUsers());
     const suggestedUsers = useSelector(stateSelectors.suggestedUsers());
 
     useEffect(() => {
