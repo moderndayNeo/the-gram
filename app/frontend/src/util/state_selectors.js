@@ -50,7 +50,12 @@ export default {
             followedUserIds.includes(user.id)
         )
     },
-    // suggestedUsers: () => state => (
-        // const usersNotFollowed = 
-    // )
+    suggestedUsers: () => (state) => {
+        const followedUserIds =
+            state.entities.users[state.session.id].followed_user_ids
+
+        return Object.values(state.entities.users).filter((user) =>
+            !followedUserIds.includes(user.id)
+        )
+    },
 }
