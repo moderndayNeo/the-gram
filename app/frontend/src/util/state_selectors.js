@@ -40,4 +40,10 @@ export default {
         state.entities.users[state.session.id].followed_user_ids.includes(
             parseInt(userId)
         ),
+    allFollowers: () => (state) => {
+        const followerIds = state.entities.users[state.session.id].follower_ids
+        return Object.values(
+            state.entities.users).filter((user) => followerIds.includes(user.id))
+        
+    },
 }

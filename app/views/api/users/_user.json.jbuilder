@@ -5,6 +5,7 @@ json.num_followers user.followers.size
 json.num_following user.followed_users.size
 json.saved_post_ids user.saved_posts.pluck(:id)
 
+json.follower_ids user.followers.pluck(:id)
 json.followed_user_ids user.followed_users.pluck(:id)
 json.liked_comment_ids user.liked_comments.pluck(:id)
 json.liked_post_ids user.liked_posts.pluck(:id)

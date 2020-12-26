@@ -51,5 +51,5 @@ export const likeComment = (postId, commentId) =>
 export const unlikeComment = (postId, commentId) =>
     axiosDeleteRequest(`/api/posts/${postId}/comments/${commentId}/likes/1`)
 
-export const getFollowers = () =>
+export const fetchFollowers = () =>
     axiosGetRequest(`/api/users`, { type: 'followers' })

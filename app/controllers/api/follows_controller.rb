@@ -8,12 +8,12 @@ class Api::FollowsController < ApplicationController
       @followee = User.find(params[:user_id])
       @follow.followee = @followee
       if @follow.save
-        valid, notification = create_notification({
-          notified_user: @followee,
-          notifiable: @follow,
-          source_post: nil,
-          source_comment: nil,
-        })
+        #   valid, notification = create_notification({
+        #     notified_user: @followee,
+        #     notifiable: @follow,
+        #     source_post: nil,
+        #     source_comment: nil,
+        #   })
 
         # @notification = notification if valid unless notification.source_user == current_user
         render :show
