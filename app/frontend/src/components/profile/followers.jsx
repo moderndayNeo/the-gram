@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import icons from '../shared/icons/svg-icons';
-import { useHistory, Link } from 'react-router-dom';
-import DynamicFollowButton from '../shared/dynamic_follow_button';
+import { useHistory } from 'react-router-dom';
 import { fetchFollowers } from '../../redux/actions/user_actions';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import BottomNav from '../shared/bottom_nav';
-import UserAvatar from '../shared/user_avatar';
+import UserLink from './user_link';
 
 export default function Followers() {
     const history = useHistory();
@@ -37,22 +36,3 @@ export default function Followers() {
         </div>
     );
 }
-
-const UserLink = ({ user }) => {
-    return (
-        <li className="user">
-            <div className="container">
-                <Link to={`/users/${user.id}`}>
-                    <div className="image-and-text">
-                        <UserAvatar imageUrl={user.image_url} />
-                        <div className="text">
-                            <p className="username-link">{user.username}</p>
-                            <p className="text-after-username">{user.bio}</p>
-                        </div>
-                    </div>
-                </Link>
-                <DynamicFollowButton userId={user.id} />
-            </div>
-        </li>
-    );
-};

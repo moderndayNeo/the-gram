@@ -1,11 +1,10 @@
 import React from 'react';
 import icons from '../shared/icons/svg-icons';
-import { useHistory, Link } from 'react-router-dom';
-import DynamicFollowButton from '../shared/dynamic_follow_button';
+import { useHistory } from 'react-router-dom';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector } from 'react-redux';
 import BottomNav from '../shared/bottom_nav';
-import UserAvatar from '../shared/user_avatar';
+import UserLink from './user_link'
 
 export default function Following() {
     const history = useHistory();
@@ -31,22 +30,3 @@ export default function Following() {
         </div>
     );
 }
-
-const UserLink = ({ user }) => {
-    return (
-        <li className="user">
-            <div className="container">
-                <Link to={`/users/${user.id}`}>
-                    <div className="image-and-text">
-                        <UserAvatar imageUrl={user.image_url} />
-                        <div className="text">
-                            <p className="username-link">{user.username}</p>
-                            <p className="text-after-username">{user.bio}</p>
-                        </div>
-                    </div>
-                </Link>
-                <DynamicFollowButton userId={user.id} />
-            </div>
-        </li>
-    );
-};
