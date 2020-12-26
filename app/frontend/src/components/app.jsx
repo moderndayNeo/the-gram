@@ -10,6 +10,7 @@ import Explore from './explore/explore';
 import Activity from './activity/activity';
 import PostShow from './posts/post_show'
 import CommentsPage from './posts/comments_page'
+import Followers from './profile/followers'
 
 export default function App() {
     return (
@@ -24,6 +25,7 @@ export default function App() {
             <ProtectedRoute exact path="/create/style" component={PostStyle} />
             <ProtectedRoute exact path="/create/details" component={PostDetails} />
             <ProtectedRoute exact path="/users/:userId" component={Profile} />
+            <ProtectedRoute exact path="/users/:userId/followers" component={Followers} />
         </div>
     );
 }

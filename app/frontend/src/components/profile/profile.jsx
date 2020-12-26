@@ -147,23 +147,25 @@ const Bio = ({ user }) => (
 );
 
 const Stats = ({ user }) => {
-    let userData = {
-        ...user
-    };
-
-    const statTypes = ['posts', 'followers', 'following'];
-    const userInfo = ['num_posts', 'num_followers', 'num_following'];
-
     return (
         <ul className="stats">
-            {
-                statTypes.map((statName, idx) => (
-                    <li key={idx} className="stat">
-                        <p className="number">{userData[userInfo[idx]]}</p>
-                        <p className="name">{statName}</p>
-                    </li>
-                ))
-            }
+            <li className="stat">
+                <p className="number">{user.num_posts}</p>
+                <p className="name">posts</p>
+            </li>
+            <Link to={`/users/${user.id}/followers`}>
+                <li className="stat">
+                    <p className="number">{user.num_followers}</p>
+                    <p className="name">followers</p>
+                </li>
+            </Link>
+            <Link to={`/users/${user.id}/following`}>
+                <li className="stat">
+                    <p className="number">{user.num_following}</p>
+                    <p className="name">following</p>
+                </li>
+            </Link>
+
         </ul>
     );
 };
