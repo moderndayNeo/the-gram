@@ -13,6 +13,7 @@ class Api::LikesController < ApplicationController
         notified_user: @post.author,
         notifiable: @like,
         source_post: @post,
+        source_user: current_user
       })
 
       render :show

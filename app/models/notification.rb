@@ -45,19 +45,9 @@ class Notification < ApplicationRecord
              foreign_key: :notifiable_id,
              optional: true
 
-  def read_notification
-    self.read = true
-
-    if self.save
-      return self
-    else
-      return self.errors.full_messages
-    end
-  end
-
-  def create_notification(props)
+  def self.create_notification(props)
     n = Notification.new(props)
-    n.source_user = current_user
+    # n.source_user = current_user
 
     case n.notifiable_type
     when "Like"
@@ -69,7 +59,15 @@ class Notification < ApplicationRecord
     n.save
   end
 
+  def read_notification
+    self.read = true
 
+    if self.save
+      return self
+    else
+      return self.errors.full_messages
+    end
+  end
 
   private
 
