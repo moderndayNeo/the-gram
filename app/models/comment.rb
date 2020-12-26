@@ -22,4 +22,11 @@ class Comment < ApplicationRecord
   belongs_to :post,
              class_name: :Post,
              foreign_key: :post_id
+
+             after_destroy :destroy_notification
+
+             def destroy_notification
+              n = Notification.find_by(notifiable_type: "Comment", notifiable_id: id)
+              n.destroy() if n
+            end
 end

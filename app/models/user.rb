@@ -52,7 +52,8 @@ class User < ApplicationRecord
 
   has_many :outgoing_follows,
            class_name: :Follow,
-           foreign_key: :follower_id
+           foreign_key: :follower_id,
+           dependent: :destroy
 
   has_many :followed_users,
            through: :outgoing_follows,
@@ -71,8 +72,8 @@ class User < ApplicationRecord
   has_many :saved_posts, through: :saves, source: :post
 
   has_many :notifications,
-      class_name: :Notification,
-      foreign_key: :notified_user_id
+           class_name: :Notification,
+           foreign_key: :notified_user_id
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

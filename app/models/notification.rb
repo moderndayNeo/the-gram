@@ -40,6 +40,11 @@ class Notification < ApplicationRecord
              foreign_key: :notifiable_id,
              optional: true
 
+  belongs_to :follow,
+             class_name: :Follow,
+             foreign_key: :notifiable_id,
+             optional: true
+             
 
   def read_notification
     self.read = true
@@ -66,9 +71,9 @@ class Notification < ApplicationRecord
   #   empty_notifications.destroy_all
   # end
 
-    def ensure_read_state
-      self.read = false
-    end
+  def ensure_read_state
+    self.read = false
+  end
 end
 
 =begin

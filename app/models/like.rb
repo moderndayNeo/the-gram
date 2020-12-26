@@ -15,8 +15,15 @@ class Like < ApplicationRecord
              class_name: :User,
              foreign_key: :liker_id
 
-  has_many :notifications, -> { where notifiable_type: :Like },
-    class_name: :Notification,
-    foreign_key: :notifiable_id,
-    dependent: :destroy
+  # has_many :notifications, -> { where notifiable_type: :Like },
+  #          class_name: :Notification,
+  #          foreign_key: :notifiable_id,
+  #          dependent: :destroy
+
+           after_destroy :destroy_notification
+
+           def destroy_notification
+            n = Notification.find_by(notifiable_type: "Like", notifiable_id: id)
+            n.destroy() if n
+          end
 end
