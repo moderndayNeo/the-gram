@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import BottomNav from '../shared/bottom_nav';
 import UserLink from './user_link';
 
-export default function Followers() {
+export default function Suggested() {
     const history = useHistory();
     const dispatch = useDispatch();
     const suggestedUsers = useSelector(stateSelectors.suggestedUsers());

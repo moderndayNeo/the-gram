@@ -1,4 +1,6 @@
 .user-list-page {
+    padding-bottom: 50px;
+
     header {
         position: fixed;
         top: 0;
@@ -24,11 +26,11 @@
 .suggested {
     .user-list {
         margin-top: 0;
-    }
-
-    .user-avatar {
-        width: 44px;
-        height: 44px;
+        
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+        }
     }
 
     .text {
