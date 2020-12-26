@@ -22,8 +22,8 @@ export default function Following() {
             </header>
             <ul className="user-list">
                 {
-                    allFollowedUsers.map(follower => (
-                        <UserLink key={follower.id} user={follower} />
+                    allFollowedUsers.map(user => (
+                        <UserLink key={user.id} user={user} />
                     ))
                 }
             </ul>

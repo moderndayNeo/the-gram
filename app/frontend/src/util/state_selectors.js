@@ -50,4 +50,7 @@ export default {
             followedUserIds.includes(user.id)
         )
     },
+    // suggestedUsers: () => state => (
+        // const usersNotFollowed = 
+    // )
 }

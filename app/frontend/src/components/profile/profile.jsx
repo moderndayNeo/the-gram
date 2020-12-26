@@ -115,7 +115,9 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
             {icons.gears}
         </div>
         <h3>{user.username}</h3>
-        {icons.discover}
+        <Link to={`/explore/people/suggested`}>
+            {icons.discover}
+        </Link>
     </header>
 );
 

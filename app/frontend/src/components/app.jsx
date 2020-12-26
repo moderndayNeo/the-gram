@@ -12,6 +12,7 @@ import PostShow from './posts/post_show'
 import CommentsPage from './posts/comments_page'
 import Followers from './profile/followers'
 import Following from './profile/following'
+import Suggested from './profile/suggested'
 
 export default function App() {
     return (
@@ -28,6 +29,7 @@ export default function App() {
             <ProtectedRoute exact path="/users/:userId" component={Profile} />
             <ProtectedRoute exact path="/users/:userId/followers" component={Followers} />
             <ProtectedRoute exact path="/users/:userId/following" component={Following} />
+            <ProtectedRoute exact path="/explore/people/suggested" component={Suggested} />
         </div>
     );
 }
