@@ -44,7 +44,6 @@ class Notification < ApplicationRecord
              class_name: :Follow,
              foreign_key: :notifiable_id,
              optional: true
-             
 
   def read_notification
     self.read = true
@@ -55,6 +54,22 @@ class Notification < ApplicationRecord
       return self.errors.full_messages
     end
   end
+
+  def create_notification(props)
+    n = Notification.new(props)
+    n.source_user = current_user
+
+    case n.notifiable_type
+    when "Like"
+      n.message = "liked your photo"
+    when "Follow"
+      n.message = "started following you"
+    end
+
+    n.save
+  end
+
+
 
   private
 

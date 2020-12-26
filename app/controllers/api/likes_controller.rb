@@ -9,12 +9,11 @@ class Api::LikesController < ApplicationController
       @like.likeable = @post
       @like.save!
 
-      # valid, notification = create_notification({
-      #   notified_user: @post.author,
-      #   notifiable: @like,
-      #   source_post: @post,
-      #   source_comment: nil,
-      # })
+      Notification.create_notification({
+        notified_user: @post.author,
+        notifiable: @like,
+        source_post: @post,
+      })
 
       render :show
     elsif params[:comment_id]
