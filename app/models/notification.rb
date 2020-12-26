@@ -47,7 +47,6 @@ class Notification < ApplicationRecord
 
   def self.create_notification(props)
     n = Notification.new(props)
-    # n.source_user = current_user
 
     case n.notifiable_type
     when "Like"

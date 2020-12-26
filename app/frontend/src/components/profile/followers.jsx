@@ -56,7 +56,3 @@ const Follower = ({ user }) => {
         </li>
     );
 };
-
-
-
-// n + 1 query, fetch

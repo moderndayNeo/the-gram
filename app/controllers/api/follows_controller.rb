@@ -14,8 +14,6 @@ class Api::FollowsController < ApplicationController
           source_user: current_user,
         })
 
-        # ensure source user in after_initialize
-
         render :show
       else
         render json: ["Error: Could not create follow"], status: 422
