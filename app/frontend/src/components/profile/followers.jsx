@@ -11,7 +11,8 @@ const history = useHistory()
             <div onClick={() => history.goBack()}>
                     {icons.chevron}
                 </div>
-                <p>Followers</p>
+                <h3>Followers</h3>
+                <div></div>
             </header>
         </div>
     )
