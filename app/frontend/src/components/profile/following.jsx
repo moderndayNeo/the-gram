@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import icons from '../shared/icons/svg-icons';
 import { useHistory, Link } from 'react-router-dom';
 import DynamicFollowButton from '../shared/dynamic_follow_button';
-import { fetchFollowers } from '../../redux/actions/user_actions';
 import stateSelectors from '../../util/state_selectors';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import BottomNav from '../shared/bottom_nav';
 import UserAvatar from '../shared/user_avatar';
 
 export default function Following() {
     const history = useHistory();
-    const dispatch = useDispatch();
     const allFollowedUsers = useSelector(stateSelectors.allFollowedUsers());
-
-    // useEffect(() => {
-    //     dispatch(fetchFollowers());
-    // }, []);
-
-    console.log(allFollowedUsers);
 
     return (
         <div className="followers-and-following">
