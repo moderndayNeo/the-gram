@@ -27,6 +27,9 @@ class Api::UsersController < ApplicationController
 
       @users = not_followed_users
       render :index
+    when "followers"
+      @users = current_user.followers
+      render :index
     else
       render json: ["Error: Must pass a parameter when requesting users"], status: 422
     end

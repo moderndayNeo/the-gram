@@ -18,6 +18,7 @@ export const updatePost = (postId, formData) =>
 export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)
 
 export const getFeed = () => axiosGetRequest(`/api/posts`, { type: 'feed' })
+
 // export const getDiscoverPosts = () => axiosGetRequest(`/api/posts`, { type: 'discover'})
 
 export const likePost = (postId) =>
@@ -49,3 +50,6 @@ export const likeComment = (postId, commentId) =>
 
 export const unlikeComment = (postId, commentId) =>
     axiosDeleteRequest(`/api/posts/${postId}/comments/${commentId}/likes/1`)
+
+export const getFollowers = () =>
+    axiosGetRequest(`/api/users`, { type: 'followers' })
