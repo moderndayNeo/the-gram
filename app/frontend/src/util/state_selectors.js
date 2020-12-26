@@ -31,9 +31,6 @@ export default {
     },
     currentUsedLikedCommentIds: () => (state) =>
         state.entities.users[state.session.id].liked_comment_ids,
-    // usersNotFollowed: () => state => (
-
-    // )
     allNotifications: () => (state) =>
         Object.values(state.entities.notifications).reverse(),
     currentUserIsFollowing: (userId) => (state) =>
@@ -42,8 +39,15 @@ export default {
         ),
     allFollowers: () => (state) => {
         const followerIds = state.entities.users[state.session.id].follower_ids
-        return Object.values(
-            state.entities.users).filter((user) => followerIds.includes(user.id))
-        
+        return Object.values(state.entities.users).filter((user) =>
+            followerIds.includes(user.id)
+        )
+    },
+    allFollowedUsers: () => (state) => {
+        const followedUserIds =
+            state.entities.users[state.session.id].followed_user_ids
+        return Object.values(state.entities.users).filter((user) =>
+            followedUserIds.includes(user.id)
+        )
     },
 }

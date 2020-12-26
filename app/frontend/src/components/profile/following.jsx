@@ -8,14 +8,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import BottomNav from '../shared/bottom_nav';
 import UserAvatar from '../shared/user_avatar';
 
-export default function Followers() {
+export default function Following() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const allFollowers = useSelector(stateSelectors.allFollowers());
+    const allFollowedUsers = useSelector(stateSelectors.allFollowedUsers());
 
-    useEffect(() => {
-        dispatch(fetchFollowers());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(fetchFollowers());
+    // }, []);
+
+    console.log(allFollowedUsers);
 
     return (
         <div className="followers-and-following">
@@ -23,12 +25,12 @@ export default function Followers() {
                 <div onClick={() => history.goBack()}>
                     {icons.chevron}
                 </div>
-                <h3>Followers</h3>
+                <h3>Following</h3>
                 <div></div>
             </header>
             <ul className="user-list">
                 {
-                    allFollowers.map(follower => (
+                    allFollowedUsers.map(follower => (
                         <UserLink key={follower.id} user={follower} />
                     ))
                 }
