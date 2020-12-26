@@ -153,18 +153,18 @@ const Stats = ({ user }) => {
                 <p className="number">{user.num_posts}</p>
                 <p className="name">posts</p>
             </li>
-            <Link to={`/users/${user.id}/followers`}>
-                <li className="stat">
+            <li className="stat">
+                <Link to={`/users/${user.id}/followers`}>
                     <p className="number">{user.num_followers}</p>
                     <p className="name">followers</p>
-                </li>
-            </Link>
-            <Link to={`/users/${user.id}/following`}>
-                <li className="stat">
+                </Link>
+            </li>
+            <li className="stat">
+                <Link to={`/users/${user.id}/following`}>
                     <p className="number">{user.num_following}</p>
                     <p className="name">following</p>
-                </li>
-            </Link>
+                </Link>
+            </li>
 
         </ul>
     );
