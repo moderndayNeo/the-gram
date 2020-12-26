@@ -8,13 +8,18 @@ import PostDetails from './posts/post_creation/post_details';
 import Profile from './profile/profile';
 import Explore from './explore/explore';
 import Activity from './activity/activity';
-import PostShow from './posts/post_show'
-import CommentsPage from './posts/comments_page'
-import Followers from './profile/followers'
-import Following from './profile/following'
-import Suggested from './profile/suggested'
+import PostShow from './posts/post_show';
+import CommentsPage from './posts/comments_page';
+import Followers from './profile/followers';
+import Following from './profile/following';
+import Suggested from './profile/suggested';
+import PostModal from './posts/post_modal';
+import stateSelectors from '../util/state_selectors';
+import { useSelector } from 'react-redux';
 
 export default function App() {
+    const postModalId = useSelector(stateSelectors.postModalId());
+
     return (
         <div className="app">
             <AuthRoute exact path="/signup" component={SignupPage} />
@@ -30,6 +35,7 @@ export default function App() {
             <ProtectedRoute exact path="/users/:userId/followers" component={Followers} />
             <ProtectedRoute exact path="/users/:userId/following" component={Following} />
             <ProtectedRoute exact path="/explore/people/suggested" component={Suggested} />
+            {postModalId && <PostModal postId={postModalId} />}
         </div>
     );
 }
