@@ -11,8 +11,12 @@ export const logoutUser = () => axiosDeleteRequest('/api/session')
 export const updateUser = (userId, formData) =>
     axiosPutRequest(`/api/users/${userId}`, formData)
 
+export const updatePassword = (userId, passwords) =>
+    axiosPutRequest(`/api/users/${userId}?type=password`, {
+        old_password: passwords.oldPassword,
+        new_password: passwords.newPassword,
+    })
 
-    
 export const createPost = (post) => axiosPostRequest(`/api/posts`, post)
 export const fetchPosts = () => axiosGetRequest(`/api/posts`)
 export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)

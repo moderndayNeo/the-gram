@@ -10,6 +10,7 @@ export default function BottomNav() {
     const currentUser = useSelector(stateSelectors.currentUser());
     const clipboardPopup = useSelector(stateSelectors.clipboardPopup());
     const editProfilePopup = useSelector(stateSelectors.editProfilePopup());
+    const passwordPopup = useSelector(stateSelectors.passwordPopup());
     const location = useLocation();
     const pathname = location.pathname;
     const avatarBordered = (pathname === `/users/${currentUser.id}`) ? true : false;
@@ -18,6 +19,7 @@ export default function BottomNav() {
         <nav className="bottom-nav">
             {clipboardPopup && <BottomNavPopup text="Link copied to clipboard." />}
             {editProfilePopup && <BottomNavPopup text="Profile saved." />}
+            {passwordPopup && <BottomNavPopup text="Password changed." />}
 
             <div className="links">
                 <Link to="/">

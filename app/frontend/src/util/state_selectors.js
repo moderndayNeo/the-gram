@@ -61,6 +61,7 @@ export default {
     postModalId: () => (state) => state.ui.postModal,
     clipboardPopup: () => (state) => state.ui.clipboardPopup,
     editProfilePopup: () => (state) => state.ui.editProfilePopup,
+    passwordPopup: () => state => state.ui.passwordPopup,
     dmModal: () => (state) => state.ui.dmModal,
     userErrors: () => (state) => state.errors.users,
 }

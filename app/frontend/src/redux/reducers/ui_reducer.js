@@ -14,6 +14,7 @@ const _defaultState = {
     clipboardPopup: false,
     dmModal: false,
     editProfilePopup: false,
+    passwordPopup: false,
 }
 
 export default (state = _defaultState, action) => {

@@ -42,6 +42,13 @@ export const hidePopup = (popupType) => ({
     popupType,
 })
 
+export const showPopup = (popupType) => (dispatch) => {
+    dispatch(displayPopup(popupType))
+    setTimeout(() => {
+        dispatch(hidePopup(popupType))
+    }, 4000)
+}
+
 export const showEditProfilePopup = () => (dispatch) => {
     dispatch(displayPopup('editProfilePopup'))
     setTimeout(() => {

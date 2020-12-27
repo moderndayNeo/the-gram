@@ -20,6 +20,11 @@ export const updateUser = (userId, formData) => (dispatch) =>
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receiveUserErrors(errors)))
 
+export const updatePassword = (userId, passwords) => (dispatch) =>
+    APIUtil.updatePassword(userId, passwords)
+        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .catch((errors) => dispatch(receiveUserErrors(errors)))
+
 const receiveUserErrors = (errors) => ({
     type: RECEIVE_USER_ERRORS,
     errors,
