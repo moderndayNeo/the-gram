@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import icons from '../shared/icons/svg-icons';
 import { Link } from 'react-router-dom';
 import CommentLikeButton from './comment_like_button';
+import { displayDirectMessageModal } from '../../redux/actions/ui_actions';
+
 
 export default function PostFooter({ post, isLiked, comments, isSaved }) {
 
@@ -35,7 +37,9 @@ const FooterIcons = ({ postId, isLiked, isSaved }) => {
                 <Link to={`/posts/${postId}/comments`}>
                     {icons.comment}
                 </Link>
-                {icons.paperPlane}
+                <button onClick={() => dispatch(displayDirectMessageModal())}>
+                    {icons.paperPlane}
+                </button>
             </div>
             <SaveIcon isSaved={isSaved} postId={postId} />
         </div>

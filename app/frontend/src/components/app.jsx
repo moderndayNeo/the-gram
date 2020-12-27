@@ -20,7 +20,7 @@ import DirectMessageModal from './shared/direct_message_modal';
 
 export default function App() {
     const postModalId = useSelector(stateSelectors.postModalId());
-    const dmModal = useSelector(stateSelectors.dmModal);
+    const dmModal = useSelector(stateSelectors.dmModal());
 
     return (
         <div className="app">
