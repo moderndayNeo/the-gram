@@ -1,6 +1,7 @@
 import * as APIUtil from '../../util/api_util'
 import { receiveUsers, receiveCurrentUser } from './session_actions'
 export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS'
+export const RECEIVE_USER = 'RECEIVE_USER'
 
 export const fetchFollowers = () => (dispatch) =>
     APIUtil.fetchFollowers()
@@ -16,10 +17,15 @@ export const fetchSuggestedUsers = () => (dispatch) =>
 
 export const updateUser = (userId, formData) => (dispatch) =>
     APIUtil.updateUser(userId, formData)
-        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+    .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receiveUserErrors(errors)))
 
 const receiveUserErrors = (errors) => ({
     type: RECEIVE_USER_ERRORS,
     errors,
+})
+
+const receiveUser = (user) => ({
+    type: RECEIVE_USER,
+    user,
 })

@@ -6,6 +6,7 @@ import UserAvatar from '../shared/user_avatar';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector } from 'react-redux';
 import { updateUser } from '../../redux/actions/user_actions';
+import { showEditProfilePopup } from '../../redux/actions/ui_actions';
 
 export default function EditProfile() {
     const history = useHistory();
@@ -27,7 +28,11 @@ export default function EditProfile() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(updateUser(currentUser.id, info));
+        dispatch(updateUser(currentUser.id, info))
+            .then(() =>
+                dispatch(showEditProfilePopup()));
+
+        setHasChanged(false);
     };
 
     return (
