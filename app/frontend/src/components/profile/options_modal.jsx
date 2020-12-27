@@ -18,28 +18,37 @@ export default function OptionsModal({ setOptionsModal }) {
             </header>
 
             <section>
-                <h3>ACCOUNT</h3>
+                <h3 className="section-title">ACCOUNT</h3>
+                <ul>
+                    <OptionBar
+                        path="/accounts/edit"
+                        text="Edit Profile"
+                        callbackFn={null} 
+                        className="full-border"
+                        />
 
+                    <OptionBar
+                        path="/accounts/password/change"
+                        text="Change Password"
+                        callbackFn={null} />
+                </ul>
             </section>
 
-            {/* <div className="option-bar">
-                <Link to="/signup" onClick={() => dispatch(logoutUser())}>
-                    <p>Log Out</p>
-                    <img src={window.greyChevron} alt="chevron icon" />
-                </Link>
-            </div> */}
-
-            <OptionBar path="/signup" callbackFn={() => dispatch(logoutUser())} text="Log Out" />
+            <OptionBar
+                className="logout-bar full-border"
+                path="/signup"
+                text="Log Out"
+                callbackFn={() => dispatch(logoutUser())} />
 
         </div>
     );
 }
 
-
-const OptionBar = ({ path, callbackFn, text }) => {
+const OptionBar = ({ path, callbackFn, text, className }) => {
     return (
-        <div className="option-bar">
-            <Link to={path} onClick={() => callbackFn}>
+        <div className={`option-bar ${className}`}>
+            <Link to={path}
+                onClick={callbackFn ? () => callbackFn() : null}>
                 <p>{text}</p>
                 <img src={window.greyChevron} alt="chevron icon" />
             </Link>

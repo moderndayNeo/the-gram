@@ -1,25 +1,41 @@
 .options-modal {
     height: 100vh;
 
+    .section-title {
+        margin: 20px 16px 8px;
+        color: var(--dark-grey);
+        font-size: inherit;
+    }
+
+    section {
+        margin-bottom: 20px;
+    }
+
     .option-bar {
         padding: 0px 16px;
-        border-top: 1px solid var(--light-grey);
         border-bottom: 1px solid var(--light-grey);
         height: 44px;
-        margin-top: 20px;
 
         a {
-            color: var(--red-text);
+            color: inherit;
             font-weight: 400;
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 44px;
+            font-size: 16px;
 
             img {
                 height: 24px;
                 width: 24px;
             }
         }
+    }
+    .logout-bar {
+        color: var(--red-text);
+    }
+
+    .full-border {
+        border-top: 1px solid var(--light-grey);
     }
 }
