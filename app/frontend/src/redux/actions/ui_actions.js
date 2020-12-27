@@ -22,9 +22,7 @@ export const hideClipboardPopup = () => ({
 
 export const showClipboardPopup = () => (dispatch) => {
     dispatch(displayClipboardPopup())
-    console.log('showing cb')
     setTimeout(() => {
         dispatch(hideClipboardPopup())
-        console.log('hiding cb')
     }, 4000)
 }

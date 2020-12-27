@@ -10,6 +10,7 @@
         justify-content: space-between;
         padding: 0 25px;
         border-top: 1px solid var(--light-grey);
+        position: relative;
 
         img {
             width: 24px;
@@ -35,11 +36,32 @@
     padding: 0 16px;
     width: 100%;
     background-color: var(--off-black);
-    color: white;
-    
+    position: relative;
+    animation-name: revealPopup;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    bottom: -45px;
+
     p {
         background-color: var(--off-black);
+        color: white;
         padding: 12px 0px;
         margin: 0;
+    }
+}
+
+@keyframes revealPopup {
+    0% {
+        bottom: -45px;
+    }
+    20% {
+        bottom: 0;
+    }
+    80% {
+        bottom: 0;
+    }
+    100% {
+        bottom: -45px;
+        display: none;
     }
 }

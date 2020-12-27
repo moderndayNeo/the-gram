@@ -8,8 +8,7 @@ import NewPostButton from './new_post_button';
 
 export default function BottomNav() {
     const currentUser = useSelector(stateSelectors.currentUser());
-    const clipboardPopup = true
-    // const clipboardPopup = useSelector(stateSelectors.clipboardPopup());
+    const clipboardPopup = useSelector(stateSelectors.clipboardPopup());
     const location = useLocation();
     const pathname = location.pathname;
     const avatarBordered = (pathname === `/users/${currentUser.id}`) ? true : false;
