@@ -1,3 +1,4 @@
+import { batch } from 'react-redux'
 import * as APIUtil from '../../util/api_util'
 import { receivePost } from './post_actions'
 import { receiveCurrentUser } from './session_actions'
@@ -24,10 +25,20 @@ export const receiveComments = (comments) => ({
 
 export const likeComment = (postId, commentId) => (dispatch) =>
     APIUtil.likeComment(postId, commentId)
-        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .then(({ data: { user, comment } }) => {
+            batch(() => {
+                dispatch(receiveCurrentUser(user))
+                dispatch(receiveComment(comment))
+            })
+        })
         .catch((errors) => console.log(errors))
 
 export const unlikeComment = (postId, commentId) => (dispatch) =>
     APIUtil.unlikeComment(postId, commentId)
-        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .then(({ data: { user, comment } }) => {
+            batch(() => {
+                dispatch(receiveCurrentUser(user))
+                dispatch(receiveComment(comment))
+            })
+        })
         .catch((errors) => console.log(errors))

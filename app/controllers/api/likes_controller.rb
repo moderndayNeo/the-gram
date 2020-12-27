@@ -41,6 +41,7 @@ class Api::LikesController < ApplicationController
       @like = Like.find_by(likeable_id: params[:comment_id], liker_id: current_user.id, likeable_type: "Comment")
       return render json: ["Error: Like not found"], status: 404 unless @like
       @like.destroy!
+      @comment = Comment.find(params[:comment_id])
       render :show
     end
   end

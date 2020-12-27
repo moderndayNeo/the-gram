@@ -22,8 +22,8 @@ export default function Activity() {
 
     return (
         <div className="activity">
-            <DevelopmentModal feature="Activity Page" />
-            {/* <header><h3>Activity</h3></header>
+            {/* <DevelopmentModal feature="Activity Page" /> */}
+            <header><h3>Activity</h3></header>
             {
                 notifications.length > 0 ?
                     <ul className="notifications-list">
@@ -37,7 +37,7 @@ export default function Activity() {
                         }
                     </ul> :
                     <LoadingPlaceholder />
-            } */}
+            }
             <BottomNav />
         </div>
     );

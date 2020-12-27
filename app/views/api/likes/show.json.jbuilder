@@ -11,9 +11,3 @@ if @comment
     json.partial! "api/comments/comment", comment: @comment
   end
 end
-
-# if @notification
-#   json.notification do
-#     json.partial! "api/notifications/notification", notification: @notification
-#   end
-# end
