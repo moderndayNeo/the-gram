@@ -31,7 +31,7 @@ export default function Explore() {
     }), [];
 
     return (
-        <div className="explore">
+        <div className="explore scroll-page">
             <SearchBar
                 selected={selected}
                 setSelected={setSelected}
