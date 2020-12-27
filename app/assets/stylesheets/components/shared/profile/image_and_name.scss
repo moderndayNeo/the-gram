@@ -8,6 +8,10 @@
     section {
         width: 238px;
         text-align: left;
+        height: 77px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
 
         .username {
             font-weight: 300;
@@ -23,6 +27,9 @@
             padding: 5px 9px;
             border-radius: 4px;
             margin-top: 2px;
+            color: inherit;
+            font-weight: 600;
+            text-align: center;
         }
     }
 

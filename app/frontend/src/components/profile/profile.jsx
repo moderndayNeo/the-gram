@@ -129,7 +129,10 @@ const ImageAndName = ({ user, ownProfile }) => {
                 <h2 className="username">{user.username}</h2>
                 {
                     ownProfile ?
-                        <button className="edit-button">Edit Profile</button> :
+                        <Link to='/accounts/edit' className="edit-button">
+                            Edit Profile
+                    </Link>
+                        :
                         <div>
                             <DynamicFollowButton userId={user.id} />
                         </div>

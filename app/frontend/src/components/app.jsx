@@ -17,6 +17,7 @@ import PostModal from './posts/post_modal';
 import stateSelectors from '../util/state_selectors';
 import { useSelector } from 'react-redux';
 import DirectMessageModal from './shared/direct_message_modal';
+import EditProfile from './profile/edit_profile'
 
 export default function App() {
     const postModalId = useSelector(stateSelectors.postModalId());
@@ -31,6 +32,7 @@ export default function App() {
             <ProtectedRoute exact path="/posts/:postId/comments" component={CommentsPage} />
             <ProtectedRoute exact path="/explore" component={Explore} />
             <ProtectedRoute exact path="/accounts/activity" component={Activity} />
+            <ProtectedRoute exact path="/accounts/edit" component={EditProfile} />
             <ProtectedRoute exact path="/create/style" component={PostStyle} />
             <ProtectedRoute exact path="/create/details" component={PostDetails} />
             <ProtectedRoute exact path="/users/:userId" component={Profile} />
