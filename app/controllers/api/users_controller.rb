@@ -83,11 +83,9 @@ class Api::UsersController < ApplicationController
       return render json: ["Users may only edit their own account"], status: 401
     end
 
-    # check that this doesn't break normal profile updates, test the edit profile page
     if params[:type] == "password"
       unless @user.is_password?(params[:old_password])
         return render json: ["Error: Incorrect password"], status: 401
-        # return render :show, status: 401
       end
 
       @user.password = params[:new_password]

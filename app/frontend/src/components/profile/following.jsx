@@ -15,7 +15,7 @@ export default function Following() {
     }, [])
 
     return (
-        <div className="following user-list-page">
+        <div className="following user-list-page scroll-page">
             <header className="fixed-header">
                 <div onClick={() => history.goBack()}>
                     {icons.chevron}

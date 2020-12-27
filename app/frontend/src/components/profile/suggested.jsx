@@ -17,7 +17,7 @@ export default function Suggested() {
     }, []);
 
     return (
-        <div className="suggested user-list-page">
+        <div className="suggested user-list-page scroll-page">
             <header className="fixed-header">
                 <div onClick={() => history.goBack()}>
                     {icons.chevron}
