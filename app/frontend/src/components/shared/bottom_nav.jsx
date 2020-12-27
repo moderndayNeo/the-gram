@@ -9,13 +9,16 @@ import NewPostButton from './new_post_button';
 export default function BottomNav() {
     const currentUser = useSelector(stateSelectors.currentUser());
     const clipboardPopup = useSelector(stateSelectors.clipboardPopup());
+    const editProfilePopup = useSelector(stateSelectors.editProfilePopup());
     const location = useLocation();
     const pathname = location.pathname;
     const avatarBordered = (pathname === `/users/${currentUser.id}`) ? true : false;
 
     return (
         <nav className="bottom-nav">
-            { clipboardPopup && <ClipboardPopup />}
+            {clipboardPopup && <BottomNavPopup text="Link copied to clipboard." />}
+            {editProfilePopup && <BottomNavPopup text="Profile saved." />}
+
             <div className="links">
                 <Link to="/">
                     {pathname === '/' ? icons.filledHome : icons.unfilledHome}
@@ -41,11 +44,11 @@ export default function BottomNav() {
     );
 }
 
-
-const ClipboardPopup = () => {
+const BottomNavPopup = ({ text }) => {
     return (
-        <div className="clipboard-popup">
-            <p>Link copied to clipboard.</p>
+        <div className="bottom-nav-popup">
+            <p>{text}</p>
         </div>
     );
 };
+
