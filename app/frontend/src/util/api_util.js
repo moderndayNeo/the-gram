@@ -11,6 +11,8 @@ export const logoutUser = () => axiosDeleteRequest('/api/session')
 export const updateUser = (userId, formData) =>
     axiosPutRequest(`/api/users/${userId}`, formData)
 
+
+    
 export const createPost = (post) => axiosPostRequest(`/api/posts`, post)
 export const fetchPosts = () => axiosGetRequest(`/api/posts`)
 export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)

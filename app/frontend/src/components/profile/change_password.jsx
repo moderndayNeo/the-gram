@@ -5,6 +5,8 @@ import UserAvatar from '../shared/user_avatar';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import icons from '../shared/icons/svg-icons';
+import UserErrors from '../shared/user_errors';
+import { updateUser } from '../../redux/actions/user_actions';
 
 export default function ChangePassword() {
     const [info, setInfo] = useState({
@@ -13,6 +15,7 @@ export default function ChangePassword() {
         confirmNewPassword: ''
     });
     const [displayMessage, setDisplayMessage] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
     const history = useHistory();
     const currentUser = useSelector(stateSelectors.currentUser());
     const passwordsDontMatch = info.newPassword !== info.confirmNewPassword;
@@ -20,16 +23,23 @@ export default function ChangePassword() {
 
     const updateValue = type => {
         return e => {
+            setDisplayMessage(false);
             setInfo({ ...info, [type]: e.currentTarget.value });
         };
     };
 
     const handleSubmit = e => {
         e.preventDefault();
-
         if (passwordsDontMatch) return setDisplayMessage(true);
 
-        dispatch(updateUser(currentUser.id, { password: info.newPassword }));
+        setSubmitting(true);
+        dispatch(updateUser(currentUser.id, { user: { password: info.newPassword } }))
+            .then(() => setSubmitting(false))
+    };
+
+    const handleSuccess = () => {
+        // clear inputs
+        // passsword changed popup
     };
 
     return (
@@ -59,6 +69,7 @@ export default function ChangePassword() {
                         value={info.oldPassword}
                         onChange={updateValue("oldPassword")}
                     />
+                    <UserErrors />
 
                     <label>New Password</label>
                     <input
@@ -82,6 +93,7 @@ export default function ChangePassword() {
                         disabled={allFormsFilled ? false : true}
                         className="blue-button"
                         onClick={(e) => handleSubmit(e)}>Change Password</button>
+                        {submitting && <p>Submitting</p>}
 
                 </form>
 

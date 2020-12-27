@@ -62,4 +62,5 @@ export default {
     clipboardPopup: () => (state) => state.ui.clipboardPopup,
     editProfilePopup: () => (state) => state.ui.editProfilePopup,
     dmModal: () => (state) => state.ui.dmModal,
+    userErrors: () => (state) => state.errors.users,
 }
