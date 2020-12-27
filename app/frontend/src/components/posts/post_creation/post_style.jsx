@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useHistory } from 'react-router-dom';
 import icons from '../../shared/icons/svg-icons';
+import { useSelector } from 'react-redux';
+import { updateUser } from '../../../redux/actions/user_actions';
+import stateSelectors from '../../../util/state_selectors';
 
 export default function PostStyle() {
     const location = useLocation();
@@ -22,11 +25,14 @@ export default function PostStyle() {
 }
 
 const PostStyleHeader = ({ photoFile, photoUrl, photoType }) => {
-    const updateProfilePicture = () => {
-        e.preventDefault();
+    const currentUserId = useSelector(stateSelectors.currentUserId());
+    const history = useHistory();
 
-        console.log('updating profile pic');
-        // handle profile pic upload
+    const updateProfilePicture = () => {
+        const formData = new FormData();
+        formData.append('user[photo]', photoFile);
+        dispatch(updateUser(currentUserId, formData))
+            .then(() => history.push('/accounts/edit'));
     };
 
     return (
@@ -35,7 +41,6 @@ const PostStyleHeader = ({ photoFile, photoUrl, photoType }) => {
                 {icons.cross}
             </Link>
             <h3>New Photo Post</h3>
-
             {
                 photoType === 'profile' ?
                     <button onClick={() => updateProfilePicture()}>Save</button> :

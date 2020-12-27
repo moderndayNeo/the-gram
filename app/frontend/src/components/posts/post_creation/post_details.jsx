@@ -4,14 +4,14 @@ import icons from '../../shared/icons/svg-icons';
 import UserAvatar from '../../shared/user_avatar';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPost } from '../../../redux/actions/post_actions';
-import stateSelectors from '../../../util/state_selectors'
+import stateSelectors from '../../../util/state_selectors';
 
 export default function PostDetails() {
     const location = useLocation();
     const dispatch = useDispatch();
     const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
     const photoFile = location.state ? location.state.photoFile : null;
-    const currentUser = useSelector(stateSelectors.currentUser())
+    const currentUser = useSelector(stateSelectors.currentUser());
     const [caption, setCaption] = useState('');
 
     const submitPost = () => {
