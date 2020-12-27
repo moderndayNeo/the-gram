@@ -34,7 +34,8 @@ body {
     margin: 12%;
 }
 
-.grey-input, .white-input {
+.grey-input,
+.white-input {
     border: 1px solid #dbdbdb;
     border-radius: 4px;
     outline: none;
@@ -63,6 +64,16 @@ header {
     padding: 0 16px;
     border-bottom: 1px solid var(--light-grey);
 }
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+
+    h3 {
+        margin-left: -20px;
+    }
+}
+
 
 a {
     text-decoration: none;
@@ -94,4 +105,3 @@ h3 {
 .hidden-file-input {
     display: none;
 }
-

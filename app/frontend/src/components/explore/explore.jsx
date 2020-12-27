@@ -55,7 +55,7 @@ const SearchBar = ({ selected, setSelected, filter, setFilter }) => {
     };
 
     return (
-        <header className="search-bar-container">
+        <header className="search-bar-container fixed-header">
             {
                 selected ?
                     <div className="search-bar search-bar-selected">

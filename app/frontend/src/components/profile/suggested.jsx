@@ -18,7 +18,7 @@ export default function Suggested() {
 
     return (
         <div className="suggested user-list-page">
-            <header>
+            <header className="fixed-header">
                 <div onClick={() => history.goBack()}>
                     {icons.chevron}
                 </div>

@@ -1,15 +1,6 @@
 .user-list-page {
     padding-bottom: 50px;
 
-    header {
-        position: fixed;
-        top: 0;
-
-        h3 {
-            margin-left: -20px;
-        }
-    }
-
     .suggested-title {
         margin: 16px 0 12px 0;
         padding: 0 12px;
@@ -26,7 +17,7 @@
 .suggested {
     .user-list {
         margin-top: 0;
-        
+
         .user-avatar {
             width: 44px;
             height: 44px;
