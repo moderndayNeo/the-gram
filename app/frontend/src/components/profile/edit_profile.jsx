@@ -5,6 +5,7 @@ import BottomNav from '../shared/bottom_nav';
 import UserAvatar from '../shared/user_avatar';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector } from 'react-redux';
+import { updateUser } from '../../redux/actions/user_actions';
 
 export default function EditProfile() {
     const history = useHistory();
@@ -17,7 +18,6 @@ export default function EditProfile() {
         email: currentUser.email,
     });
 
-
     const updateValue = type => {
         return e => {
             setInfo({ ...info, [type]: e.currentTarget.value });
@@ -27,6 +27,7 @@ export default function EditProfile() {
 
     const handleSubmit = e => {
         e.preventDefault();
+        dispatch(updateUser(currentUser.id, info));
     };
 
     return (

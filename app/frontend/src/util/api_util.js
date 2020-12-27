@@ -13,13 +13,11 @@ export const updateUser = (userId, formData) =>
 
 export const createPost = (post) => axiosPostRequest(`/api/posts`, post)
 export const fetchPosts = () => axiosGetRequest(`/api/posts`)
+export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)
 export const updatePost = (postId, formData) =>
     axiosPutRequest(`/api/posts/${postId}`, formData)
-export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)
 
 export const getFeed = () => axiosGetRequest(`/api/posts`, { type: 'feed' })
-
-// export const getDiscoverPosts = () => axiosGetRequest(`/api/posts`, { type: 'discover'})
 
 export const likePost = (postId) =>
     axiosPostRequest(`/api/posts/${postId}/likes`)

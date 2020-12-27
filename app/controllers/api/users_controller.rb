@@ -79,6 +79,8 @@ class Api::UsersController < ApplicationController
 
     if @user.username == "guest"
       return render json: ["The guest account cannot be edited"], status: 401
+    elsif @user != current_user
+      return render json: ["Users may only edit their own account"], status: 401
     end
 
     if @user.update!(user_params)
