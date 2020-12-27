@@ -7,18 +7,29 @@ import stateSelectors from '../../util/state_selectors';
 import icons from '../shared/icons/svg-icons';
 
 export default function ChangePassword() {
-    const history = useHistory();
-    const currentUser = useSelector(stateSelectors.currentUser());
     const [info, setInfo] = useState({
         oldPassword: '',
-        newpassword: '',
+        newPassword: '',
         confirmNewPassword: ''
     });
+    const [displayMessage, setDisplayMessage] = useState(false);
+    const history = useHistory();
+    const currentUser = useSelector(stateSelectors.currentUser());
+    const passwordsDontMatch = info.newPassword !== info.confirmNewPassword;
+    const allFormsFilled = Object.values(info).every(field => field.length > 0);
 
     const updateValue = type => {
         return e => {
             setInfo({ ...info, [type]: e.currentTarget.value });
         };
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        if (passwordsDontMatch) return setDisplayMessage(true);
+
+        dispatch(updateUser(currentUser.id, { password: info.newPassword }));
     };
 
     return (
@@ -46,7 +57,7 @@ export default function ChangePassword() {
                         className="grey-input"
                         type="password"
                         value={info.oldPassword}
-                        onChange={updateValue("password")}
+                        onChange={updateValue("oldPassword")}
                     />
 
                     <label>New Password</label>
@@ -54,8 +65,9 @@ export default function ChangePassword() {
                         className="grey-input"
                         type="password"
                         value={info.newpassword}
-                        onChange={updateValue("password")}
+                        onChange={updateValue("newPassword")}
                     />
+                    {displayMessage && <p className="password-message">Passwords must match</p>}
 
                     <label>Confirm New Password</label>
                     <input
@@ -64,8 +76,12 @@ export default function ChangePassword() {
                         value={info.confirmNewPassword}
                         onChange={updateValue("confirmNewPassword")}
                     />
+                    {displayMessage && <p className="password-message">Passwords must match</p>}
 
-                    <button className="blue-button" onClick={(e) => handleSubmit(e)}>Change Password</button>
+                    <button
+                        disabled={allFormsFilled ? false : true}
+                        className="blue-button"
+                        onClick={(e) => handleSubmit(e)}>Change Password</button>
 
                 </form>
 
