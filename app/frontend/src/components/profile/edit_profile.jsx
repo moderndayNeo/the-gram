@@ -12,6 +12,7 @@ export default function EditProfile() {
     const history = useHistory();
     const currentUser = useSelector(stateSelectors.currentUser());
     const [hasChanged, setHasChanged] = useState(false);
+    const isGuestAccount = currentUser.username === 'guest';
     const [info, setInfo] = useState({
         name: currentUser.name,
         username: currentUser.username,
@@ -28,6 +29,7 @@ export default function EditProfile() {
 
     const handleSubmit = e => {
         e.preventDefault();
+
         dispatch(updateUser(currentUser.id, info))
             .then(() =>
                 dispatch(showEditProfilePopup()));
@@ -81,7 +83,8 @@ export default function EditProfile() {
                         <input className="grey-input" type="text" value={info.email} placeholder="Email" onChange={updateValue("email")} />
                     </section>
 
-                    <button disabled={hasChanged ? false : true} className="blue-button" onClick={(e) => handleSubmit(e)}>Submit</button>
+                    <button disabled={!isGuestAccount && hasChanged ? false : true} className="blue-button" onClick={(e) => handleSubmit(e)}>Submit</button>
+                    {isGuestAccount && <p className="subtext">The guest account may not be edited.</p>}
                 </form>
             </main>
 

@@ -17,7 +17,7 @@ export const fetchSuggestedUsers = () => (dispatch) =>
 
 export const updateUser = (userId, formData) => (dispatch) =>
     APIUtil.updateUser(userId, formData)
-    .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receiveUserErrors(errors)))
 
 const receiveUserErrors = (errors) => ({
