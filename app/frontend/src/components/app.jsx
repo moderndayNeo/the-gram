@@ -16,9 +16,11 @@ import Suggested from './profile/suggested';
 import PostModal from './posts/post_modal';
 import stateSelectors from '../util/state_selectors';
 import { useSelector } from 'react-redux';
+import DirectMessageModal from './shared/direct_message_modal';
 
 export default function App() {
     const postModalId = useSelector(stateSelectors.postModalId());
+    const dmModal = useSelector(stateSelectors.dmModal);
 
     return (
         <div className="app">
@@ -36,6 +38,7 @@ export default function App() {
             <ProtectedRoute exact path="/users/:userId/following" component={Following} />
             <ProtectedRoute exact path="/explore/people/suggested" component={Suggested} />
             {postModalId && <PostModal postId={postModalId} />}
+            {dmModal && <DirectMessageModal />}
         </div>
     );
 }

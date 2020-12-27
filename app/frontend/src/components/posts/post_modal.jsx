@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../redux/actions/post_actions';
 import { hidePostModal, showClipboardPopup } from '../../redux/actions/ui_actions';
+// import {Link} from 'react-router-dom'
 
 export default function PostModal({ postId }) {
     const dispatch = useDispatch();
@@ -17,7 +18,6 @@ export default function PostModal({ postId }) {
         dispatch(hidePostModal());
         dispatch(showClipboardPopup());
     };
-
 
     return (
         <div className="post-modal">
@@ -39,3 +39,6 @@ export default function PostModal({ postId }) {
         </div>
     );
 }
+
+
+

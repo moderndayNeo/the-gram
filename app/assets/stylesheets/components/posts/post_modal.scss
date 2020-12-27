@@ -34,6 +34,10 @@
             padding: 4px 8px;
             min-height: 48px;
             border-bottom: 1px solid var(--light-grey);
+            color: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }
