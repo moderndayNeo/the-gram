@@ -22,10 +22,14 @@
                 font-weight: normal;
             }
 
-            button {
+            .new-post-button {
                 padding: 0;
                 color: var(--blue);
                 font-weight: 600;
+                
+                p {
+                    margin: 0;
+                }
             }
         }
     }

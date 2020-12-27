@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-export default function NewPostButton({ icon }) {
+export default function NewPostButton(props) {
     const history = useHistory();
     const [photoUrl, setPhotoUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
@@ -26,7 +26,11 @@ export default function NewPostButton({ icon }) {
         if (photoFile && photoUrl) {
             history.push({
                 pathname: "/create/style",
-                state: { photoFile, photoUrl }
+                state: {
+                    photoFile,
+                    photoUrl,
+                    type: props.type,
+                }
             });
         }
     }, [photoUrl, photoFile]);
@@ -34,7 +38,8 @@ export default function NewPostButton({ icon }) {
     return (
         <div className="new-post-button">
             <label htmlFor="file-upload">
-                {icon}
+                {props.text && <p>{props.text}</p>}
+                {props.icon}
             </label>
             <input
                 className="hidden-file-input"

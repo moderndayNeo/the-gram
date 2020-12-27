@@ -7,6 +7,7 @@ import stateSelectors from '../../util/state_selectors';
 import { useSelector } from 'react-redux';
 import { updateUser } from '../../redux/actions/user_actions';
 import { showEditProfilePopup } from '../../redux/actions/ui_actions';
+import NewPostButton from '../shared/new_post_button';
 
 export default function EditProfile() {
     const history = useHistory();
@@ -52,9 +53,7 @@ export default function EditProfile() {
                     <UserAvatar imageUrl={currentUser.image_url} />
                     <div className="text">
                         <h3>{currentUser.username}</h3>
-                        <button
-                            onClick={() => null}>
-                            Change Profile Photo</button>
+                        <NewPostButton text="Change Profile Photo" type="profile" />
                     </div>
                 </div>
 
