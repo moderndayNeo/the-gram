@@ -25,6 +25,10 @@ export default function EditProfile() {
         };
     };
 
+    const handleSubmit = e => {
+        e.preventDefault();
+    };
+
     return (
         <div className="edit-profile scroll-page">
             <header className="fixed-header">
@@ -52,7 +56,7 @@ export default function EditProfile() {
                         <input className="grey-input" type="text" value={info.name} placeholder="Full Name" onChange={updateValue("name")} />
                         <div className="subtext">
                             <p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name</p>
-                            <p>You can only change your name twice within 14 days.</p>
+                            {/* <p>You can only change your name twice within 14 days.</p> */}
                         </div>
                     </section>
 
@@ -62,23 +66,17 @@ export default function EditProfile() {
                     </section>
 
                     <section>
-                        <label>Username</label>
-                        <input className="grey-input" type="text" value={info.username} placeholder="Username" onChange={updateValue("username")} />
+                        <label>Bio</label>
+                        <input className="grey-input" type="text" value={info.bio} placeholder="Bio" onChange={updateValue("bio")} />
                     </section>
 
+                    <section>
+                        <label>Email</label>
+                        <input className="grey-input" type="text" value={info.email} placeholder="Email" onChange={updateValue("email")} />
+                    </section>
 
-                    {/* <input className="grey-input" type="text" value={info.email} placeholder="Email" onChange={updateValue("email")} />
-                    <br />
-                    <br />
-                    <br />
-                    <input className="grey-input" type="password" value={info.password} placeholder="Password" onChange={updateValue("password")} />
-                    <br />
-                    <button disabled={hasChanged ? false : true} className="blue-button" onClick={(e) => handleSubmit(e)}>Sign Up</button> */}
-
-
-
+                    <button disabled={hasChanged ? false : true} className="blue-button" onClick={(e) => handleSubmit(e)}>Submit</button>
                 </form>
-
             </main>
 
             <BottomNav />
