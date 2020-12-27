@@ -20,7 +20,7 @@ export default function PostModal({ postId }) {
     };
 
     return (
-        <div className="post-modal">
+        <div className="post-modal modal-container">
             <div className="overlay">
                 <div className="modal">
                     <button
