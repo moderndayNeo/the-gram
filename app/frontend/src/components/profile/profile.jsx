@@ -6,10 +6,10 @@ import { useParams, Link, useHistory } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
 import { getFeed } from '../../redux/actions/post_actions';
-import { logoutUser } from '../../redux/actions/session_actions';
 import DynamicFollowButton from '../shared/dynamic_follow_button';
 import PostCollections from './post_collections';
 import LoadingPlaceholder from '../shared/loading_placeholder';
+import OptionsModal from './options_modal';
 
 export default function Profile() {
     const dispatch = useDispatch();
@@ -54,27 +54,7 @@ const OwnProfile = ({ user, posts }) => {
     );
 };
 
-const OptionsModal = ({ setOptionsModal }) => {
-    return (
-        <div className="options-modal">
-            <header>
-                <div onClick={() => setOptionsModal(false)}>
-                    {icons.cross}
-                </div>
-                <h3>Options</h3>
-                <div className="blank-div"></div>
-            </header>
 
-            <div className="option-bar">
-                <Link to="/signup" onClick={() => dispatch(logoutUser())}>
-                    <p>Log Out</p>
-                    <img src={window.greyChevron} alt="chevron icon" />
-                </Link>
-            </div>
-
-        </div>
-    );
-};
 
 const ForeignProfile = ({ user, posts }) => {
     const history = useHistory();
