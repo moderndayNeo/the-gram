@@ -17,6 +17,8 @@ export default function Explore() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+
         if (!usersNotFollowed.length) {
             fetchUsersNotFollowed()
                 .then(({ data: { users } }) => {

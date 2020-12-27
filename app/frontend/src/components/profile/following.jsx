@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import icons from '../shared/icons/svg-icons';
 import { useHistory } from 'react-router-dom';
 import stateSelectors from '../../util/state_selectors';
@@ -9,6 +9,10 @@ import UserLink from './user_link';
 export default function Following() {
     const history = useHistory();
     const allFollowedUsers = useSelector(stateSelectors.allFollowedUsers());
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className="following user-list-page">
