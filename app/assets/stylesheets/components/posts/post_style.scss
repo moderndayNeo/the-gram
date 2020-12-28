@@ -62,10 +62,7 @@
         .filter-name {
             margin: 0;
             color: var(--dark-grey);
-
             font-size: 12px;
-            // font-weight: 400;
-            // line-height: 14px;
             padding-bottom: 10px;
         }
 
@@ -73,5 +70,30 @@
             width: 100px;
             height: 100px;
         }
+    }
+
+    .selected-filter {
+        .filter-name {
+            font-weight: 600;
+            color: black;
+        }
+
+        img {
+            animation-name: shrink;
+            animation-duration: 0.1s;
+            animation-timing-function: ease-out;
+        }
+    }
+}
+
+@keyframes shrink {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
     }
 }

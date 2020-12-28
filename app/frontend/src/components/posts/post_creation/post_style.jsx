@@ -84,6 +84,7 @@ const PostStyleFooter = () => {
 
 const Filters = () => {
     const filterNames = ['Normal', 'Clarendon', 'Gingham', 'Moon', 'Lark', 'Reyes', 'Juno', 'Slumber', 'Crema', 'Ludwig', 'Aden', 'Perpetua'];
+    const selectedFilter = useSelector(stateSelectors.selectedFilter());
 
     return (
         <div className="filters-container">
@@ -92,8 +93,7 @@ const Filters = () => {
                     <FilterButton
                         key={name}
                         name={name}
-                        selected={name === 'Normal'}
-                    // selected={name === selectedFilter}
+                        selected={name === selectedFilter}
                     />
                 ))
             }
@@ -103,12 +103,10 @@ const Filters = () => {
 };
 
 const FilterButton = (props) => {
-    const selectedFilter = useSelector(stateSelectors.selectedFilter());
-    console.log(selectedFilter);
 
     return (
         <button
-            className="filter-button"
+            className={`filter-button ${props.selected && "selected-filter"}`}
             onClick={() => dispatch(updateFilter(props.name))}
 
         >
