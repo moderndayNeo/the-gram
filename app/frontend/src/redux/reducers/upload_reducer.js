@@ -1,8 +1,12 @@
-import { UPDATE_FILTER } from '../actions/upload_actions'
+import {
+    UPDATE_FILTER,
+    UPDATE_UPLOAD_PAGE_TYPE,
+} from '../actions/upload_actions'
 
 const _defaultState = {
     originalImage: null,
     editedImage: null,
+    pageType: 'edit',
     adjustments: {
         filter: 'Normal',
         rotation: 0,
@@ -21,6 +25,9 @@ export default (state = _defaultState, action) => {
                     filter: action.newFilter,
                 },
             })
+
+        case UPDATE_UPLOAD_PAGE_TYPE:
+            return Object.assign({}, state, { pageType: action.pageType })
 
         default:
             return state

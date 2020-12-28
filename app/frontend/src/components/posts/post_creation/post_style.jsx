@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation, Link, useHistory } from 'react-router-dom';
 import icons from '../../shared/icons/svg-icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../../redux/actions/user_actions';
 import stateSelectors from '../../../util/state_selectors';
-import { updateFilter } from '../../../redux/actions/upload_actions';
+import { updateFilter, updateUploadPageType } from '../../../redux/actions/upload_actions';
 
 export default function PostStyle() {
+    const pageTypeSelected = useSelector(stateSelectors.uploadPageType());
     const location = useLocation();
     const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
     const photoFile = location.state ? location.state.photoFile : null;
@@ -32,9 +33,9 @@ export default function PostStyle() {
                 <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
             </div> */}
 
-            <Filters />
+            {pageTypeSelected === 'filter' && <Filters />}
 
-            <PostStyleFooter />
+            <PostStyleFooter pageTypeSelected={pageTypeSelected} />
         </div>
     );
 }
@@ -71,13 +72,20 @@ const PostStyleHeader = ({ photoFile, photoUrl, photoType }) => {
     );
 };
 
-const PostStyleFooter = () => {
-    const [selected, setSelected] = useState('filter');
-
+const PostStyleFooter = ({ pageTypeSelected }) => {
     return (
         <footer>
-            <button onClick={() => setSelected('filter')} className={selected === 'filter' ? "selected" : null}>Filter</button>
-            <button onClick={() => setSelected('edit')} className={selected === 'edit' ? "selected" : null}>Edit</button>
+            {
+                ['filter', 'edit'].map(pageType => (
+                    <button
+                        key={pageType}
+                        className={pageType === pageTypeSelected ? 'selected' : null}
+                        onClick={() => dispatch(updateUploadPageType(pageType))}
+                    >
+                        {pageType[0].toUpperCase() + pageType.slice(1)}
+                    </button>
+                ))
+            }
         </footer>
     );
 };
