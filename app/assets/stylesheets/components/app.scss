@@ -101,7 +101,7 @@ h3 {
     font-weight: 600;
 }
 
-.fit-to-square-icon {
+.rotate-left {
     transform: rotate(-90deg);
 }
 
@@ -133,13 +133,13 @@ h3 {
 
     .rotate-icon {
         // border: 1px solid yellow;
-        transform: translateY(-52px);        
+        transform: translateY(-52.5px);        
         width: 80px;
     }
  
     .fit-to-square-icon {
         // border: 1px solid yellow;
-        transform: translateY(-52px);        
+        transform: translateX(-52.5px);        
         width: 80px;
     }
 
