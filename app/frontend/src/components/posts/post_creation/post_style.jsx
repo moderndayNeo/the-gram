@@ -25,13 +25,17 @@ export default function PostStyle() {
                 <img src={photoUrl} alt="post photo" />
             </div>
 
-            {/* <div className="sprite-container">
-                <img className="rotate-icon" src={window.postStyleSprites} alt="" />
-            </div>
+            {pageTypeSelected === 'edit' &&
+                <div className="sprite-container">
+                    <img className="rotate-icon" src={window.postStyleSprites} alt="" />
+                </div>}
 
-            <div className="sprite-container">
-                <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
-            </div> */}
+            {pageTypeSelected === 'edit' &&
+                <div className="sprite-container">
+                    <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
+                </div>
+            }
+
 
             {pageTypeSelected === 'filter' && <Filters />}
 
@@ -39,6 +43,8 @@ export default function PostStyle() {
         </div>
     );
 }
+
+
 
 const PostStyleHeader = ({ photoFile, photoUrl, photoType }) => {
     const currentUserId = useSelector(stateSelectors.currentUserId());
@@ -123,3 +129,16 @@ const FilterButton = (props) => {
         </button>
     );
 };
+
+
+
+
+
+// const EditOverlay = () => (
+//     <div className="edit-overlay">
+//         <div style="left: 33%; top: 0%; width: 1px; height: 100%;"></div>
+//         <div style="right: 33%; top: 0%; width: 1px; height: 100%;"></div>
+//         <div style="top: 33%; left: 0%; height: 1px; width: 100%;"></div>
+//         <div style="bottom: 33%; left: 0%; height: 1px; width: 100%;"></div>
+//     </div>
+// );
