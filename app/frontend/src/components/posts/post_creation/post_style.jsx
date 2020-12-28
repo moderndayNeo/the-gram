@@ -4,6 +4,7 @@ import icons from '../../shared/icons/svg-icons';
 import { useSelector } from 'react-redux';
 import { updateUser } from '../../../redux/actions/user_actions';
 import stateSelectors from '../../../util/state_selectors';
+import { updateFilter } from '../../../redux/actions/upload_actions';
 
 export default function PostStyle() {
     const location = useLocation();
@@ -82,31 +83,37 @@ const PostStyleFooter = () => {
 };
 
 const Filters = () => {
-    const filterNames = ['Normal', 'Clarendon', 'Gingham', 'Moon', 'Lark', 'Reyes', 'Juno', 'Slumber', 'Crema', 'Ludwig', 'Aden', 'Perpetua']
+    const filterNames = ['Normal', 'Clarendon', 'Gingham', 'Moon', 'Lark', 'Reyes', 'Juno', 'Slumber', 'Crema', 'Ludwig', 'Aden', 'Perpetua'];
 
     return (
-       <div className="filters-container">
-           {
-               filterNames.map(name => (
-                   <FilterButton
-                    key={name} 
-                    name={name} 
-                    selected={name === 'Normal'} 
+        <div className="filters-container">
+            {
+                filterNames.map(name => (
+                    <FilterButton
+                        key={name}
+                        name={name}
+                        selected={name === 'Normal'}
                     // selected={name === selectedFilter}
                     />
-               ))
-           }
-       </div>
-    )
+                ))
+            }
+        </div>
+    );
 
-}
+};
 
 const FilterButton = (props) => {
+    const selectedFilter = useSelector(stateSelectors.selectedFilter());
+    console.log(selectedFilter);
 
     return (
-        <button className="filter-button">
+        <button
+            className="filter-button"
+            onClick={() => dispatch(updateFilter(props.name))}
+
+        >
             <p className="filter-name">{props.name}</p>
-            <img src={window[props.name.toLowerCase() + 'Filter']} alt=""/>
+            <img src={window[props.name.toLowerCase() + 'Filter']} alt="" />
         </button>
-    )
-}
+    );
+};

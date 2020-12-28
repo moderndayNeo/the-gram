@@ -16,7 +16,10 @@ export default (state = _defaultState, action) => {
     switch (action.type) {
         case UPDATE_FILTER:
             return Object.assign({}, state, {
-                [adjustments.filter]: action.newFilter,
+                adjustments: {
+                    ...state.adjustments,
+                    filter: action.newFilter,
+                },
             })
 
         default:

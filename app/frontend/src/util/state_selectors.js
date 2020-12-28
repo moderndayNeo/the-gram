@@ -64,4 +64,6 @@ export default {
     passwordPopup: () => state => state.ui.passwordPopup,
     dmModal: () => (state) => state.ui.dmModal,
     userErrors: () => (state) => state.errors.users,
+
+    selectedFilter: () => state => state.upload.adjustments.filter
 }
