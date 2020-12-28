@@ -19,6 +19,14 @@ export default function PostStyle() {
                 photoType={photoType}
             />
             <img src={photoUrl} alt="post photo" />
+
+            <div className="sprite-container">
+                <img className="rotate-icon" src={window.postStyleSprites} alt=""/>
+            </div>
+          
+            <div className="sprite-container">
+                <img className="fit-to-square-icon" src={window.postStyleSprites} alt=""/>
+            </div>
             <PostStyleFooter />
         </div>
     );
