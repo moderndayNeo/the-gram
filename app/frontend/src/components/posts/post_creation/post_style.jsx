@@ -18,15 +18,21 @@ export default function PostStyle() {
                 photoUrl={photoUrl}
                 photoType={photoType}
             />
-            <img src={photoUrl} alt="post photo" />
+
+            <div className="image-container">
+                <img src={photoUrl} alt="post photo" />
+            </div>
 
             <div className="sprite-container">
-                <img className="rotate-icon" src={window.postStyleSprites} alt=""/>
+                <img className="rotate-icon" src={window.postStyleSprites} alt="" />
             </div>
-          
+
             <div className="sprite-container">
-                <img className="fit-to-square-icon" src={window.postStyleSprites} alt=""/>
+                <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
             </div>
+
+            <Filters />
+
             <PostStyleFooter />
         </div>
     );
@@ -75,4 +81,33 @@ const PostStyleFooter = () => {
     );
 };
 
+const Filters = () => {
+ 
+    const filterNames = ['Normal', 'Clarendon', 'Gingham', 'Moon', 'Lark', 'Reyes', 'Juno', 'Slumber', 'Crema', 'Ludwig', 'Aden', 'Perpetua']
 
+    return (
+       <div className="filters-container">
+           {
+               filterNames.map(name => (
+                   <FilterButton
+                    key={name} 
+                    name={name} 
+                    // selected={filterSelected} 
+                    />
+               ))
+           }
+       </div>
+    )
+
+}
+
+const FilterButton = (props) => {
+
+    return (
+        <button className="filter-button">
+            <p className="filter-name">{props.name}</p>
+            <img src={window.clarendonFilter} alt=""/>
+            {/* <img src={window[name]} alt=""/> */}
+        </button>
+    )
+}
