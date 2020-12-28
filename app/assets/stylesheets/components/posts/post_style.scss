@@ -38,33 +38,37 @@
 
     .rotate-icon {
         // border: 1px solid yellow;
-        transform: translateY(-52.5px);        
+        transform: translateY(-52.5px);
         width: 80px;
     }
- 
+
     .fit-to-square-icon {
         // border: 1px solid yellow;
-        transform: translateX(-52.5px);        
+        transform: translateX(-52.5px);
         width: 80px;
     }
-
 }
-
 
 .filters-container {
     display: flex;
-    height: 124px;
-    padding: 0 13px;
+    height: 156px;
+    padding: 16px 13px;
     width: 100vw;
     overflow: scroll;
 
-
-
     .filter-button {
-        p {
+        padding: 0 3px;
+
+        .filter-name {
             margin: 0;
+            color: var(--dark-grey);
+
+            font-size: 12px;
+            // font-weight: 400;
+            // line-height: 14px;
+            padding-bottom: 10px;
         }
-        
+
         img {
             width: 100px;
             height: 100px;

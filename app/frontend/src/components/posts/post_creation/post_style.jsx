@@ -23,13 +23,13 @@ export default function PostStyle() {
                 <img src={photoUrl} alt="post photo" />
             </div>
 
-            <div className="sprite-container">
+            {/* <div className="sprite-container">
                 <img className="rotate-icon" src={window.postStyleSprites} alt="" />
             </div>
 
             <div className="sprite-container">
                 <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
-            </div>
+            </div> */}
 
             <Filters />
 
@@ -82,7 +82,6 @@ const PostStyleFooter = () => {
 };
 
 const Filters = () => {
- 
     const filterNames = ['Normal', 'Clarendon', 'Gingham', 'Moon', 'Lark', 'Reyes', 'Juno', 'Slumber', 'Crema', 'Ludwig', 'Aden', 'Perpetua']
 
     return (
@@ -92,7 +91,8 @@ const Filters = () => {
                    <FilterButton
                     key={name} 
                     name={name} 
-                    // selected={filterSelected} 
+                    selected={name === 'Normal'} 
+                    // selected={name === selectedFilter}
                     />
                ))
            }
@@ -106,8 +106,7 @@ const FilterButton = (props) => {
     return (
         <button className="filter-button">
             <p className="filter-name">{props.name}</p>
-            <img src={window.clarendonFilter} alt=""/>
-            {/* <img src={window[name]} alt=""/> */}
+            <img src={window[props.name.toLowerCase() + 'Filter']} alt=""/>
         </button>
     )
 }
