@@ -3,7 +3,7 @@ import { updateFilter, updateUploadPageType, setEditedImage } from '../../../red
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../../util/state_selectors';
 import * as Transformations from '../../../util/transformations';
-
+import { presetsMapping, applyPresetOnCanvas } from 'instagram-filters';
 
 export default function ImageEditor({ originalImage }) {
     const selectedFilter = useSelector(stateSelectors.selectedFilter());
@@ -23,7 +23,7 @@ export default function ImageEditor({ originalImage }) {
         // tempImage = fitWidth ? Transformations.cropFitToSquareImg(tempImage) : tempImage
         tempImage = Transformations.cropImageBetweenRatios(tempImage, (4 / 5), (16 / 9));
         tempImage = Transformations.scaleImg(tempImage, '1080');
-        // if (selectedFilter && selectedFilter !== 'Normal') applyPresetOnCanvas(tempImage, presetsMapping[selectedFilter]());
+        if (selectedFilter && selectedFilter !== 'Normal') applyPresetOnCanvas(tempImage, presetsMapping[selectedFilter]());
         const displayImage = Transformations.centerImg(tempImage, 400);
 
 
