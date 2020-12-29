@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { updateFilter, updateUploadPageType } from '../../../redux/actions/upload_actions';
+import { updateFilter, updateUploadPageType, setEditedImage } from '../../../redux/actions/upload_actions';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../../util/state_selectors';
 import * as Transformations from '../../../util/transformations';
 
 
 export default function ImageEditor({ originalImage }) {
+    const selectedFilter = useSelector(stateSelectors.selectedFilter());
     const pageTypeSelected = useSelector(stateSelectors.uploadPageType());
     const myCanvas = useRef();
     const placeholderImg = new Image();
@@ -18,30 +19,20 @@ export default function ImageEditor({ originalImage }) {
 
     const saveChanges = () => {
         let tempImage = originalImage;
+        // tempImage = Transformations.rotateImg(tempImage, selectedRotation)
+        // tempImage = fitWidth ? Transformations.cropFitToSquareImg(tempImage) : tempImage
+        tempImage = Transformations.cropImageBetweenRatios(tempImage, (4 / 5), (16 / 9));
         tempImage = Transformations.scaleImg(tempImage, '1080');
-
+        // if (selectedFilter && selectedFilter !== 'Normal') applyPresetOnCanvas(tempImage, presetsMapping[selectedFilter]());
         const displayImage = Transformations.centerImg(tempImage, 400);
+
 
         myCanvas.current.width = 400;
         myCanvas.current.height = 400;
         myCanvas.current.getContext("2d").drawImage(displayImage, 0, 0);
+
+        dispatch(setEditedImage(tempImage));
     };
-
-    const saveChanges = () => {
-        let tempImage = originalImage
-        // tempImage = Transformations.rotateImg(tempImage, selectedRotation)
-        // tempImage = fitWidth ? Transformations.cropFitToSquareImg(tempImage) : tempImage
-        tempImage = Transformations.cropImageBetweenRatios(tempImage, (4 / 5), (16 / 9))
-        tempImage = Transformations.scaleImg(tempImage, '1080')
-        if (selectedFilter && selectedFilter !== 'Normal') applyPresetOnCanvas(tempImage, presetsMapping[selectedFilter]())
-
-        myCanvas.current.width = 400
-        myCanvas.current.height = 400
-        myCanvas.current.getContext("2d").drawImage(displayImage, 0, 0);
-
-        // dispatch(imageEditorActions.imageSavedSuccess(tempImage)) // save processed img to state
-        dispatch(saveProcessedImage(tempImage))
-    }
 
     return (
         <div className="image-editor" >
@@ -61,7 +52,7 @@ export default function ImageEditor({ originalImage }) {
                 }
             </div>
 
-            {pageTypeSelected === 'filter' && <Filters />}
+            {pageTypeSelected === 'filter' && <Filters selectedFilter={selectedFilter} />}
 
             <PostStyleFooter pageTypeSelected={pageTypeSelected} />
         </div>
@@ -88,9 +79,9 @@ const PostStyleFooter = ({ pageTypeSelected }) => {
 };
 
 
-const Filters = () => {
+const Filters = ({ selectedFilter }) => {
     const filterNames = ['Normal', 'Clarendon', 'Gingham', 'Moon', 'Lark', 'Reyes', 'Juno', 'Slumber', 'Crema', 'Ludwig', 'Aden', 'Perpetua'];
-    const selectedFilter = useSelector(stateSelectors.selectedFilter());
+    // const selectedFilter = useSelector(stateSelectors.selectedFilter());
 
     return (
         <div className="filters-container">

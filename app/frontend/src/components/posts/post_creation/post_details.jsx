@@ -19,10 +19,10 @@ export default function PostDetails() {
         const formData = new FormData();
 
         // convert canvas object to file object, append to formdata        
-        
+
         formData.append('post[photo]', photoFile);
         formData.append('post[caption]', caption);
-        
+
         dispatch(createPost(formData));
     };
 
@@ -37,13 +37,7 @@ export default function PostDetails() {
 
 const PostDetailsHeader = ({ photoFile, photoUrl, submitPost }) => (
     <header>
-        <Link to={{
-            pathname: '/create/style',
-            state: {
-                photoUrl,
-                photoFile
-            }
-        }}>
+        <Link to='/create/style'>
             {icons.chevron}
         </Link>
         <h3>New Post</h3>

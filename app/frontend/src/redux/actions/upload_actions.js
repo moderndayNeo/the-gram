@@ -1,6 +1,7 @@
 export const UPDATE_FILTER = 'UPDATE_FILTER'
 export const UPDATE_UPLOAD_PAGE_TYPE = 'UPDATE_UPLOAD_PAGE_TYPE'
 export const SET_ORIGINAL_IMAGE = 'SET_ORIGINAL_IMAGE'
+export const SET_EDITED_IMAGE = 'SET_EDITED_IMAGE'
 export const SET_IMAGE_FOR = 'SET_IMAGE_FOR'
 
 export const updateFilter = (newFilter) => ({
@@ -15,6 +16,11 @@ export const updateUploadPageType = (pageType) => ({
 
 export const setOriginalImage = (img) => ({
     type: SET_ORIGINAL_IMAGE,
+    img,
+})
+
+export const setEditedImage = (img) => ({
+    type: SET_EDITED_IMAGE,
     img,
 })
 
