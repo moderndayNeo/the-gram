@@ -9,7 +9,7 @@ import stateSelectors from '../../../util/state_selectors';
 export default function PostDetails() {
     const location = useLocation();
     const dispatch = useDispatch();
-    const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
+    const photoUrl = location.state ? location.state.photoUrl : window.placeholderImgUrl;
     const photoFile = location.state ? location.state.photoFile : null;
     const originalImage = useSelector(stateSelectors.originalImage());
     const currentUser = useSelector(stateSelectors.currentUser());

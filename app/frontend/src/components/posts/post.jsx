@@ -79,7 +79,7 @@ const PostImage = ({ post, isLiked }) => {
                 className={`white-heart ${whiteHeartDisplayed && "displayed"}`}
             >{icons.filledHeart}</div>
             <img
-                className="post-image" src={post.image_url || window.placeholderImg}
+                className="post-image" src={post.image_url || window.placeholderImgUrl}
                 alt="post image"
                 onClick={() => handleClick()}
             />

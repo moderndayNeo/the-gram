@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { updateFilter, updateUploadPageType } from '../../../redux/actions/upload_actions';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../../util/state_selectors';
@@ -6,26 +6,44 @@ import stateSelectors from '../../../util/state_selectors';
 
 export default function ImageEditor({ originalImage }) {
     const pageTypeSelected = useSelector(stateSelectors.uploadPageType());
+    const myCanvas = useRef();
+    const placeholderImg = new Image()
+    placeholderImg.src = window.placeholderImgUrl
+    console.log(placeholderImg)
+
+    useEffect(() => {
+        // if (originalImage) saveChanges();
+        saveChanges()
+    });
+
+    const saveChanges = () => {
+        let tempImage = originalImage
+
+        tempImage = Transformations.scaleImg(tempImage, props.maxRes)
+
+
+        myCanvas.current.width = 400;
+        myCanvas.current.height = 400;
+        myCanvas.current.getContext("2d").drawImage(tempImage, 0, 0);
+    };
 
     return (
-        <div className="image-editor">
+        <div className="image-editor" >
 
-            <div className="image-container">
-                {/* original image, drawn on canvas */}
-                <canvas></canvas>
+            <div className="canvas-container">
+                <canvas ref={myCanvas} />
+
+                {pageTypeSelected === 'edit' &&
+                    <div className="sprite-container">
+                        <img className="rotate-icon" src={window.postStyleSprites} alt="" />
+                    </div>}
+
+                {pageTypeSelected === 'edit' &&
+                    <div className="sprite-container">
+                        <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
+                    </div>
+                }
             </div>
-
-            {pageTypeSelected === 'edit' &&
-                <div className="sprite-container">
-                    <img className="rotate-icon" src={window.postStyleSprites} alt="" />
-                </div>}
-
-            {pageTypeSelected === 'edit' &&
-                <div className="sprite-container">
-                    <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
-                </div>
-            }
-
 
             {pageTypeSelected === 'filter' && <Filters />}
 
