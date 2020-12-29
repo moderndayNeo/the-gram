@@ -65,6 +65,7 @@ export default {
     dmModal: () => (state) => state.ui.dmModal,
     userErrors: () => (state) => state.errors.users,
 
+    selectedRotation: () => (state) => state.upload.adjustments.rotation,
     selectedFilter: () => (state) => state.upload.adjustments.filter,
     uploadPageType: () => (state) => state.upload.pageType,
     originalImage: () => (state) => state.upload.originalImage,

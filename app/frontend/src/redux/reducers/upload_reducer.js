@@ -4,6 +4,7 @@ import {
     SET_ORIGINAL_IMAGE,
     SET_EDITED_IMAGE,
     SET_IMAGE_FOR,
+    ROTATE_UPLOADED_IMAGE,
 } from '../actions/upload_actions'
 
 const _defaultState = {
@@ -27,6 +28,14 @@ export default (state = _defaultState, action) => {
                 adjustments: {
                     ...state.adjustments,
                     filter: action.newFilter,
+                },
+            })
+
+        case ROTATE_UPLOADED_IMAGE:
+            return Object.assign({}, state, {
+                adjustments: {
+                    ...state.adjustments,
+                    rotation: state.adjustments.rotation + 90,
                 },
             })
 
