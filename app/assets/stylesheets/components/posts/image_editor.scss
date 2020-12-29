@@ -120,9 +120,9 @@
     }
 }
 
-
 .rotate-button {
     right: 16px;
+
     background-color: transparent;
     border: 0;
     bottom: 16px;
@@ -138,6 +138,31 @@
         white-space: nowrap;
         background-position: 0 -59px;
         background-size: 89px 89px;
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.edit-button {
+    left: 16px;
+
+    background-color: transparent;
+    border: 0;
+    bottom: 16px;
+    outline: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+
+    .edit-sprite {
+        display: block;
+        overflow: hidden;
+        text-indent: 110%;
+        white-space: nowrap;
+
+        background-position: -59px 0;
+        background-size: 89px 89px;
+
         height: 30px;
         width: 30px;
     }

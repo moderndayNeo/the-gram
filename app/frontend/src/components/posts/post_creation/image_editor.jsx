@@ -41,7 +41,7 @@ export default function ImageEditor(props) {
                 <canvas ref={myCanvas} />
 
                 {pageTypeSelected === 'edit' && <RotateButton rotateImg={rotateImg} />}
-                {/* {pageTypeSelected === 'edit' && <EditButton toggleFitToSquare={toggleFitToSquare} />} */}
+                {pageTypeSelected === 'edit' && <EditButton toggleFitToSquare={toggleFitToSquare} />}
             </div>
 
             {pageTypeSelected === 'filter' && <Filters selectedFilter={selectedFilter} />}
@@ -51,7 +51,7 @@ export default function ImageEditor(props) {
     );
 }
 
-export const RotateButton = ({ rotateImg }) => (
+const RotateButton = ({ rotateImg }) => (
     <button
         className="rotate-button"
         onClick={rotateImg}
@@ -65,14 +65,20 @@ export const RotateButton = ({ rotateImg }) => (
     </button>
 );
 
-// const EditButton = ({ toggleFitToSquare }) => (
-//     <div
-//         className="sprite-container edit"
-//         onClick={toggleFitToSquare}
-//     >
-//         <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
-//     </div>
-// );
+const EditButton = ({ toggleFitToSquare }) => (
+    <button
+        className="edit-button"
+        onClick={toggleFitToSquare}
+    >
+        <span
+            className="edit-sprite"
+            style={{ "backgroundImage": `url(${window.postStyleSprites})` }}
+        >
+            Edit
+        </span>
+    </button>
+);
+
 
 const PostStyleFooter = ({ pageTypeSelected }) => {
     return (

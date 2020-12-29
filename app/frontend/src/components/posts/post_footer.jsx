@@ -53,7 +53,7 @@ const CaptionAndComments = ({ post, comments, }) => {
             <FeedPostComments post={post} comments={comments} />
             <DatePosted post={post} />
 
-            <RotateButton />
+            {/* <RotateButton /> */}
 
         </div>
     );
