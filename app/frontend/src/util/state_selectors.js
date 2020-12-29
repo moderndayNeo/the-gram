@@ -70,5 +70,6 @@ export default {
     selectedFilter: () => (state) => state.upload.adjustments.filter,
     uploadPageType: () => (state) => state.upload.pageType,
     originalImage: () => (state) => state.upload.originalImage,
+    editedImage: () => (state) => state.upload.editedImage,
     imageFor: () => (state) => state.upload.imageFor,
 }

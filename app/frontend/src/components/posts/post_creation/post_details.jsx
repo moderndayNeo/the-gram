@@ -7,11 +7,9 @@ import { createPost } from '../../../redux/actions/post_actions';
 import stateSelectors from '../../../util/state_selectors';
 
 export default function PostDetails() {
-    const location = useLocation();
     const dispatch = useDispatch();
-    const photoUrl = location.state ? location.state.photoUrl : window.placeholderImgUrl;
-    const photoFile = location.state ? location.state.photoFile : null;
-    const originalImage = useSelector(stateSelectors.originalImage());
+    const editedImage = useSelector(stateSelectors.editedImage());
+
     const currentUser = useSelector(stateSelectors.currentUser());
     const [caption, setCaption] = useState('');
 
@@ -26,16 +24,15 @@ export default function PostDetails() {
         dispatch(createPost(formData));
     };
 
-
     return (
         <div className="post-details">
-            <PostDetailsHeader photoFile={photoFile} photoUrl={photoUrl} submitPost={submitPost} />
-            <Caption userImage={currentUser.image_url} photoUrl={photoUrl} setCaption={setCaption} caption={caption} />
+            <PostDetailsHeader submitPost={submitPost} />
+            <Caption userImage={currentUser.image_url} setCaption={setCaption} caption={caption} />
         </div>
     );
 }
 
-const PostDetailsHeader = ({ photoFile, photoUrl, submitPost }) => (
+const PostDetailsHeader = ({ submitPost }) => (
     <header>
         <Link to='/create/style'>
             {icons.chevron}
@@ -51,7 +48,7 @@ const PostDetailsHeader = ({ photoFile, photoUrl, submitPost }) => (
     </header>
 );
 
-const Caption = ({ userImage, photoUrl, setCaption, caption }) => {
+const Caption = ({ userImage, setCaption, caption }) => {
     return (
         <section className="caption">
             <UserAvatar imageUrl={userImage} />
@@ -62,7 +59,8 @@ const Caption = ({ userImage, photoUrl, setCaption, caption }) => {
                 value={caption}
             />
 
-            <img className="post-image" src={photoUrl} alt="" />
+            {/* <img className="post-image" src={photoUrl} alt="" /> */}
+            {/* img preview of editedImage */}
         </section>
     );
 };

@@ -24,6 +24,9 @@ export default function ImageEditor(props) {
         if (selectedFilter && selectedFilter !== 'Normal') applyPresetOnCanvas(tempImage, presetsMapping[selectedFilter]());
         const displayImage = Transformations.centerImg(tempImage, 400);
 
+        console.log('to Data URL', displayImage.toDataURL());
+
+
         myCanvas.current.width = 400;
         myCanvas.current.height = 400;
         myCanvas.current.getContext("2d").drawImage(displayImage, 0, 0);
