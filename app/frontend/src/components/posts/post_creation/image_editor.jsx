@@ -40,22 +40,8 @@ export default function ImageEditor(props) {
             <div className="canvas-container">
                 <canvas ref={myCanvas} />
 
-                {pageTypeSelected === 'edit' &&
-                    <div
-                        className="sprite-container"
-                        onClick={rotateImg}
-                    >
-                        <img className="rotate-icon" src={window.postStyleSprites} alt="" />
-                    </div>}
-
-                {pageTypeSelected === 'edit' &&
-                    <div
-                        className="sprite-container"
-                        onClick={toggleFitToSquare}
-                    >
-                        <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
-                    </div>
-                }
+                {pageTypeSelected === 'edit' && <RotateIcon rotateImg={rotateImg} />}
+                {pageTypeSelected === 'edit' && <EditIcon toggleFitToSquare={toggleFitToSquare} />}
             </div>
 
             {pageTypeSelected === 'filter' && <Filters selectedFilter={selectedFilter} />}
@@ -65,6 +51,23 @@ export default function ImageEditor(props) {
     );
 }
 
+const RotateIcon = ({ rotateImg }) => (
+    <div
+        className="sprite-container rotate"
+        onClick={rotateImg}
+    >
+        <img className="rotate-icon" src={window.postStyleSprites} alt="" />
+    </div>
+);
+
+const EditIcon = ({ toggleFitToSquare }) => (
+    <div
+        className="sprite-container edit"
+        onClick={toggleFitToSquare}
+    >
+        <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
+    </div>
+);
 
 const PostStyleFooter = ({ pageTypeSelected }) => {
     return (

@@ -1,10 +1,26 @@
 .image-editor {
-
     .canvas-container {
         width: 100%;
+        border: 1px solid red;
+        position: relative;
 
         canvas {
             width: 100%;
+        }
+
+        .sprite-container {
+            position: absolute;
+            bottom: 15px;
+            background: transparent;
+
+            &.rotate {
+                border: 1px solid red;
+                right: 15px;
+            }
+
+            &.edit {
+                left: 15px;
+            }
         }
     }
 
@@ -98,4 +114,9 @@
     100% {
         transform: scale(1);
     }
+}
+
+.icon-test {
+    height: 100px;
+    width: 100px;
 }

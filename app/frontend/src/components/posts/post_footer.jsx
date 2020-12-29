@@ -52,6 +52,12 @@ const CaptionAndComments = ({ post, comments, }) => {
             <Caption post={post} />
             <FeedPostComments post={post} comments={comments} />
             <DatePosted post={post} />
+
+            {/* <div 
+            className="icon-test"
+            style={{"backgroundImage":`url(${window.postStyleSprites})`}}
+            >Icon test</div> */}
+
         </div>
     );
 };
