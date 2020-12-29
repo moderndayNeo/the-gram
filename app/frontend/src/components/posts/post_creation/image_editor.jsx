@@ -1,32 +1,28 @@
 import React, { useEffect, useRef } from 'react';
-import { updateFilter, updateUploadPageType, setEditedImage, rotateUploadedImage } from '../../../redux/actions/upload_actions';
+import { updateFilter, updateUploadPageType, setEditedImage, rotateUploadedImage, fitToSquare } from '../../../redux/actions/upload_actions';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../../util/state_selectors';
 import * as Transformations from '../../../util/transformations';
 import { presetsMapping, applyPresetOnCanvas } from 'instagram-filters';
 
-export default function ImageEditor({ originalImage }) {
-    const selectedFilter = useSelector(stateSelectors.selectedFilter());
+export default function ImageEditor(props) {
     const pageTypeSelected = useSelector(stateSelectors.uploadPageType());
-    const selectedRotation = useSelector(stateSelectors.selectedRotation());
+    const { rotation: selectedRotation, filter: selectedFilter, fitWidth: selectedFitWidth } = useSelector(stateSelectors.imageAdjustments());
+    const fitWidth = props.forceSquareImage ? true : selectedFitWidth;
     const myCanvas = useRef();
-    const placeholderImg = new Image();
-    placeholderImg.src = window.placeholderImgUrl;
-    console.log(placeholderImg);
 
     useEffect(() => {
-        if (originalImage) saveChanges();
+        if (props.originalImage) saveChanges();
     });
 
     const saveChanges = () => {
-        let tempImage = originalImage;
+        let tempImage = props.originalImage;
         tempImage = Transformations.rotateImg(tempImage, selectedRotation);
-        // tempImage = fitWidth ? Transformations.cropFitToSquareImg(tempImage) : tempImage
+        tempImage = fitWidth ? Transformations.cropFitToSquareImg(tempImage) : tempImage;
         tempImage = Transformations.cropImageBetweenRatios(tempImage, (4 / 5), (16 / 9));
         tempImage = Transformations.scaleImg(tempImage, '1080');
         if (selectedFilter && selectedFilter !== 'Normal') applyPresetOnCanvas(tempImage, presetsMapping[selectedFilter]());
         const displayImage = Transformations.centerImg(tempImage, 400);
-
 
         myCanvas.current.width = 400;
         myCanvas.current.height = 400;
@@ -35,9 +31,8 @@ export default function ImageEditor({ originalImage }) {
         dispatch(setEditedImage(tempImage));
     };
 
-    const rotateImg = () => {
-        dispatch(rotateUploadedImage())
-    }
+    const rotateImg = () => dispatch(rotateUploadedImage());
+    const toggleFitToSquare = () => dispatch(fitToSquare(!fitWidth));
 
     return (
         <div className="image-editor" >
@@ -46,15 +41,18 @@ export default function ImageEditor({ originalImage }) {
                 <canvas ref={myCanvas} />
 
                 {pageTypeSelected === 'edit' &&
-                    <div 
-                    className="sprite-container"
-                    onClick={rotateImg}
+                    <div
+                        className="sprite-container"
+                        onClick={rotateImg}
                     >
                         <img className="rotate-icon" src={window.postStyleSprites} alt="" />
                     </div>}
 
                 {pageTypeSelected === 'edit' &&
-                    <div className="sprite-container">
+                    <div
+                        className="sprite-container"
+                        onClick={toggleFitToSquare}
+                    >
                         <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
                     </div>
                 }

@@ -5,6 +5,7 @@ import {
     SET_EDITED_IMAGE,
     SET_IMAGE_FOR,
     ROTATE_UPLOADED_IMAGE,
+    FIT_TO_SQUARE,
 } from '../actions/upload_actions'
 
 const _defaultState = {
@@ -15,7 +16,7 @@ const _defaultState = {
     adjustments: {
         filter: 'Normal',
         rotation: 0,
-        crop: 0,
+        fitWidth: false,
     },
 }
 
@@ -36,6 +37,14 @@ export default (state = _defaultState, action) => {
                 adjustments: {
                     ...state.adjustments,
                     rotation: state.adjustments.rotation + 90,
+                },
+            })
+
+        case FIT_TO_SQUARE:
+            return Object.assign({}, state, {
+                adjustments: {
+                    ...state.adjustments,
+                    fitWidth: action.boolean,
                 },
             })
 

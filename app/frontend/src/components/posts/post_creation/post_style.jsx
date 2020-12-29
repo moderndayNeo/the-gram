@@ -19,7 +19,7 @@ export default function PostStyle() {
     return (
         <div className="post-style">
             <PostStyleHeader imageFor={imageFor} />
-            <ImageEditor originalImage={originalImage} />
+            <ImageEditor originalImage={originalImage} forceSquareImage={false} />
         </div>
     );
 }
