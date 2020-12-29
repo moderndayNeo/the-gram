@@ -8,22 +8,18 @@ import { updateFilter, updateUploadPageType } from '../../../redux/actions/uploa
 
 export default function PostStyle() {
     const pageTypeSelected = useSelector(stateSelectors.uploadPageType());
-    const location = useLocation();
-    const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
-    const photoFile = location.state ? location.state.photoFile : null;
-    const photoType = location.state ? location.state.type : 'post';
+    const imageFor = useSelector(stateSelectors.imageFor());
     const originalImage = useSelector(stateSelectors.originalImage());
 
     return (
         <div className="post-style">
             <PostStyleHeader
-                photoFile={photoFile}
-                photoUrl={photoUrl}
-                photoType={photoType}
-        />
+                imageFor={imageFor}
+            />
 
             <div className="image-container">
-                <img src={photoUrl} alt="post photo" />
+                {/* original image, drawn on canvas */}
+                <canvas></canvas>
             </div>
 
             {pageTypeSelected === 'edit' &&
@@ -37,8 +33,6 @@ export default function PostStyle() {
                 </div>
             }
 
-            {/* <img src={originalImage} alt="" /> */}
-
 
             {pageTypeSelected === 'filter' && <Filters />}
 
@@ -49,15 +43,18 @@ export default function PostStyle() {
 
 
 
-const PostStyleHeader = ({ photoFile, photoUrl, photoType }) => {
+const PostStyleHeader = ({ imageFor }) => {
     const currentUserId = useSelector(stateSelectors.currentUserId());
     const history = useHistory();
 
     const updateProfilePicture = () => {
-        const formData = new FormData();
-        formData.append('user[photo]', photoFile);
-        dispatch(updateUser(currentUserId, formData))
-            .then(() => history.push('/accounts/edit'));
+        // convert editedImage canvas to file object, append to formdata, dispatch to backend
+        // redirect to /accounts/edit
+
+        // const formData = new FormData();
+        // formData.append('user[photo]', photoFile);
+        // dispatch(updateUser(currentUserId, formData))
+        //     .then(() => history.push('/accounts/edit'));
     };
 
     return (
@@ -67,14 +64,10 @@ const PostStyleHeader = ({ photoFile, photoUrl, photoType }) => {
             </Link>
             <h3>New Photo Post</h3>
             {
-                photoType === 'profile' ?
+                imageFor === 'profile' ?
                     <button onClick={() => updateProfilePicture()}>Save</button> :
                     <Link to={{
                         pathname: '/create/details',
-                        state: {
-                            photoUrl,
-                            photoFile
-                        }
                     }}>Next</Link>
             }
         </header >

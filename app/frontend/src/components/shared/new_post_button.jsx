@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { setOriginalImage } from '../../redux/actions/upload_actions';
+import { setOriginalImage, setImageFor } from '../../redux/actions/upload_actions';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector } from 'react-redux';
 import { fetchImageFromFile } from '../../util/image_upload_helpers';
@@ -13,11 +13,14 @@ export default function NewPostButton(props) {
         fetchImageFromFile(e.currentTarget.files[0])
             .then(img => {
                 dispatch(setOriginalImage(img));
+                dispatch(setImageFor(props.imageFor))
             });
     };
 
     useEffect(() => {
-        originalImage && history.push(`/create/style`);
+        if (originalImage) {
+            history.push(`/create/style`)
+        }
     });
 
     return (

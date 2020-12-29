@@ -53,7 +53,7 @@ export default function EditProfile() {
                     <UserAvatar imageUrl={currentUser.image_url} />
                     <div className="text">
                         <h3>{currentUser.username}</h3>
-                        <NewPostButton text="Change Profile Photo" type="profile" />
+                        <NewPostButton text="Change Profile Photo" imageFor="profile" />
                     </div>
                 </div>
 

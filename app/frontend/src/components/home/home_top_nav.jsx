@@ -11,7 +11,7 @@ export default function HomeTopNav() {
 
     return (
         <nav className="home-top-nav">
-            <NewPostButton icon={icons.camera} />
+            <NewPostButton icon={icons.camera} imageFor="post" />
             <Link to="/">
                 <MainLogo />
             </Link>

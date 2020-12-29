@@ -2,12 +2,14 @@ import {
     UPDATE_FILTER,
     UPDATE_UPLOAD_PAGE_TYPE,
     SET_ORIGINAL_IMAGE,
+    SET_IMAGE_FOR,
 } from '../actions/upload_actions'
 
 const _defaultState = {
     originalImage: null,
     editedImage: null,
     pageType: 'edit',
+    imageFor: null,
     adjustments: {
         filter: 'Normal',
         rotation: 0,
@@ -32,6 +34,9 @@ export default (state = _defaultState, action) => {
 
         case SET_ORIGINAL_IMAGE:
             return Object.assign({}, state, { originalImage: action.img })
+
+        case SET_IMAGE_FOR:
+            return Object.assign({}, state, { imageFor: action.imageFor })
 
         default:
             return state

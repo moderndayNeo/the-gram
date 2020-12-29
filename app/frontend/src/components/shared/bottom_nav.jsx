@@ -30,7 +30,7 @@ export default function BottomNav() {
                     {pathname === '/explore' ? icons.filledCompass : icons.unfilledCompass}
                 </Link>
 
-                <NewPostButton icon={icons.newPost} />
+                <NewPostButton icon={icons.newPost} imageFor="post" />
 
                 <Link to="/accounts/activity">
                     {pathname === '/accounts/activity' ? icons.filledHeart : icons.unfilledHeart}
