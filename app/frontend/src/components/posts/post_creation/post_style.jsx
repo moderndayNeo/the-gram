@@ -20,7 +20,7 @@ export default function PostStyle() {
                 photoFile={photoFile}
                 photoUrl={photoUrl}
                 photoType={photoType}
-            />
+        />
 
             <div className="image-container">
                 <img src={photoUrl} alt="post photo" />

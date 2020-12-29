@@ -42,3 +42,5 @@ export const modifyTime = time => {
 // Number.isInteger(parseInt('word'))
 // Number.isInteger(parseInt(''))
 // Number.isInteger(parseInt(4))
+
+

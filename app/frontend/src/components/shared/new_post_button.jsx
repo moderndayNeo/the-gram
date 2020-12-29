@@ -1,48 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { setOriginalImage } from '../../redux/actions/upload_actions';
+import stateSelectors from '../../util/state_selectors';
+import { useSelector } from 'react-redux';
+import { fetchImageFromFile } from '../../util/image_upload_helpers';
 
 export default function NewPostButton(props) {
     const history = useHistory();
-    const [photoUrl, setPhotoUrl] = useState('');
-    const [photoFile, setPhotoFile] = useState(null);
+    const originalImage = useSelector(stateSelectors.originalImage());
 
     const handleUpload = (e) => {
-        const reader = new FileReader();
-        const file = e.currentTarget.files[0]; // { name: ..., size: ..., lastModified: ... }
-
-        // create new Image(), set reader.result as the src, save it in stateqq
-
-        const localImageUrl = window.URL.createObjectURL(file);
-        // blob: http://localhost:3000/07401b46-4526-4f2f-8a49-2fa148fc047a
-        // can be used as img url instead of full base 64 url
-
-        reader.onloadend = () => {
-            setPhotoUrl(reader.result); // reader.result is the base64 url
-            setPhotoFile(file);
-        };
-
-        if (file) {
-            reader.readAsDataURL(file); // converts img to large base64 string
-        } else {
-            setPhotoUrl('');
-            setPhotoFile(null);
-        }
+        fetchImageFromFile(e.currentTarget.files[0])
+            .then(img => {
+                dispatch(setOriginalImage(img));
+            });
     };
 
     useEffect(() => {
-        if (photoFile && photoUrl) {
-
-            history.push({
-                pathname: "/create/style",
-                state: {
-                    photoFile,
-                    photoUrl,
-                    type: props.type,
-                }
-            });
-        }
-    }, [photoUrl, photoFile])
+        originalImage && history.push(`/create/style`);
+    });
 
     return (
         <div className="new-post-button">
