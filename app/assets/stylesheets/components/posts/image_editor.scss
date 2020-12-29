@@ -8,20 +8,24 @@
             width: 100%;
         }
 
-        .sprite-container {
-            position: absolute;
-            bottom: 15px;
-            background: transparent;
+        // .sprite-container {
+        //     position: absolute;
+        //     bottom: 15px;
+        //     background: transparent;
 
-            &.rotate {
-                border: 1px solid red;
-                right: 15px;
-            }
+        //     &.rotate {
+        //         border: 1px solid red;
+        //         right: 15px;
+        //     }
 
-            &.edit {
-                left: 15px;
-            }
-        }
+        //     &.edit {
+        //         left: 15px;
+        //     }
+        // }
+
+        // .upload-sprite {
+        //     border: 1px solid red;
+        // }
     }
 
     footer {
@@ -46,26 +50,26 @@
     }
 }
 
-.sprite-container {
-    // border: 1px solid red;
-    margin: 30px;
-    z-index: 2;
-    overflow: hidden;
-    width: 30px;
-    height: 30px;
+// .sprite-container {
+//     // border: 1px solid red;
+//     margin: 30px;
+//     z-index: 2;
+//     overflow: hidden;
+//     width: 30px;
+//     height: 30px;
 
-    .rotate-icon {
-        // border: 1px solid yellow;
-        transform: translateY(-52.5px);
-        width: 80px;
-    }
+//     .rotate-icon {
+//         // border: 1px solid yellow;
+//         transform: translateY(-52.5px);
+//         width: 80px;
+//     }
 
-    .fit-to-square-icon {
-        // border: 1px solid yellow;
-        transform: translateX(-52.5px);
-        width: 80px;
-    }
-}
+//     .fit-to-square-icon {
+//         // border: 1px solid yellow;
+//         transform: translateX(-52.5px);
+//         width: 80px;
+//     }
+// }
 
 .filters-container {
     display: flex;
@@ -116,7 +120,25 @@
     }
 }
 
-.icon-test {
-    height: 100px;
-    width: 100px;
+
+.rotate-button {
+    right: 16px;
+    background-color: transparent;
+    border: 0;
+    bottom: 16px;
+    outline: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+
+    .rotate-sprite {
+        display: block;
+        overflow: hidden;
+        text-indent: 110%;
+        white-space: nowrap;
+        background-position: 0 -59px;
+        background-size: 89px 89px;
+        height: 30px;
+        width: 30px;
+    }
 }
