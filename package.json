@@ -9,6 +9,7 @@
     "@rails/webpacker": "4.3.0",
     "axios": "^0.21.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "instagram-filters": "^1.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -21,7 +22,7 @@
     "npm": "6.14.8"
   },
   "scripts": {
-    "dev":  "foreman start -f Procfile.dev",
+    "dev": "foreman start -f Procfile.dev",
     "postinstall": "webpack --mode=production"
   },
   "version": "0.1.0",
