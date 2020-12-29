@@ -11,14 +11,18 @@ export default function PostDetails() {
     const dispatch = useDispatch();
     const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
     const photoFile = location.state ? location.state.photoFile : null;
+    const originalImage = useSelector(stateSelectors.originalImage());
     const currentUser = useSelector(stateSelectors.currentUser());
     const [caption, setCaption] = useState('');
 
     const submitPost = () => {
         const formData = new FormData();
+
+        // convert canvas object to file object, append to formdata        
+        
         formData.append('post[photo]', photoFile);
         formData.append('post[caption]', caption);
-
+        
         dispatch(createPost(formData));
     };
 

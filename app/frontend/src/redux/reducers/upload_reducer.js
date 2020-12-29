@@ -1,6 +1,7 @@
 import {
     UPDATE_FILTER,
     UPDATE_UPLOAD_PAGE_TYPE,
+    SET_ORIGINAL_IMAGE,
 } from '../actions/upload_actions'
 
 const _defaultState = {
@@ -28,6 +29,9 @@ export default (state = _defaultState, action) => {
 
         case UPDATE_UPLOAD_PAGE_TYPE:
             return Object.assign({}, state, { pageType: action.pageType })
+
+        case SET_ORIGINAL_IMAGE:
+            return Object.assign({}, state, { originalImage: action.img })
 
         default:
             return state

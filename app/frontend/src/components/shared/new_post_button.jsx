@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { setOriginalImage } from '../../redux/actions/upload_actions';
 
 export default function NewPostButton(props) {
     const history = useHistory();
@@ -8,14 +9,21 @@ export default function NewPostButton(props) {
 
     const handleUpload = (e) => {
         const reader = new FileReader();
-        const file = e.currentTarget.files[0];
+        const file = e.currentTarget.files[0]; // { name: ..., size: ..., lastModified: ... }
+
+        // create new Image(), set reader.result as the src, save it in stateqq
+
+        const localImageUrl = window.URL.createObjectURL(file);
+        // blob: http://localhost:3000/07401b46-4526-4f2f-8a49-2fa148fc047a
+        // can be used as img url instead of full base 64 url
+
         reader.onloadend = () => {
-            setPhotoUrl(reader.result);
+            setPhotoUrl(reader.result); // reader.result is the base64 url
             setPhotoFile(file);
         };
 
         if (file) {
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(file); // converts img to large base64 string
         } else {
             setPhotoUrl('');
             setPhotoFile(null);
@@ -24,6 +32,7 @@ export default function NewPostButton(props) {
 
     useEffect(() => {
         if (photoFile && photoUrl) {
+
             history.push({
                 pathname: "/create/style",
                 state: {
@@ -33,7 +42,7 @@ export default function NewPostButton(props) {
                 }
             });
         }
-    }, [photoUrl, photoFile]);
+    }, [photoUrl, photoFile])
 
     return (
         <div className="new-post-button">

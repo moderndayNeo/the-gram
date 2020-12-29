@@ -12,6 +12,7 @@ export default function PostStyle() {
     const photoUrl = location.state ? location.state.photoUrl : window.placeholderImg;
     const photoFile = location.state ? location.state.photoFile : null;
     const photoType = location.state ? location.state.type : 'post';
+    const originalImage = useSelector(stateSelectors.originalImage());
 
     return (
         <div className="post-style">
@@ -35,6 +36,8 @@ export default function PostStyle() {
                     <img className="fit-to-square-icon" src={window.postStyleSprites} alt="" />
                 </div>
             }
+
+            {/* <img src={originalImage} alt="" /> */}
 
 
             {pageTypeSelected === 'filter' && <Filters />}

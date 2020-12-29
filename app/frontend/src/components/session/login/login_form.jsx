@@ -29,7 +29,7 @@ export default function LoginForm() {
                 value={info.username}
                 placeholder="Username"
                 onChange={updateValue("username")}
-                autoComplete="username"
+                autoComplete="off"
             />
             <br />
             <input
@@ -38,7 +38,7 @@ export default function LoginForm() {
                 value={info.password}
                 placeholder="Password"
                 onChange={updateValue("password")}
-                autoComplete="password"
+                autoComplete="off"
             />
             <br />
             <button className="blue-button" onClick={(e) => handleSubmit(e)}>Log In</button>
