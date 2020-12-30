@@ -8,12 +8,12 @@ import stateSelectors from '../../../util/state_selectors';
 import { dataURItoBlob } from '../../../util/upload_utils';
 
 export default function PostDetails() {
-    const history = useHistory()
-    const editedImage = useSelector(stateSelectors.editedImage());
-
-    const dispatch = useDispatch();
-    const currentUser = useSelector(stateSelectors.currentUser());
     const [caption, setCaption] = useState('');
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const editedImage = useSelector(stateSelectors.editedImage());
+    const imgSrc = editedImage ? editedImage.toDataURL() : ''
+    const currentUser = useSelector(stateSelectors.currentUser());
 
     const submitPost = () => {
         const dataURL = editedImage.toDataURL('image/png');
@@ -23,7 +23,7 @@ export default function PostDetails() {
         formData.append('post[photo]', blob);
         formData.append('post[caption]', caption);
 
-        dispatch(createPost(formData)).then(() => history.push('/'))
+        dispatch(createPost(formData)).then(() => history.push('/'));
     };
 
     return (
@@ -31,7 +31,9 @@ export default function PostDetails() {
             <PostDetailsHeader submitPost={submitPost} />
             <Caption
                 userImage={currentUser.image_url}
-                setCaption={setCaption} caption={caption}
+                setCaption={setCaption}
+                caption={caption}
+                imgSrc={imgSrc}
             />
         </div>
     );
@@ -52,19 +54,16 @@ const PostDetailsHeader = ({ submitPost }) => (
     </header>
 );
 
-const Caption = ({ userImage, setCaption, caption }) => {
-
+const Caption = ({ userImage, setCaption, caption, imgSrc }) => {
     return (
         <section className="caption">
             <UserAvatar imageUrl={userImage} />
-
             <textarea
                 placeholder="Write a caption..."
                 onChange={(e) => setCaption(e.target.value)}
                 value={caption}
             />
-
-            <canvas className="post-image"></canvas>
+            <img className="post-image" src={imgSrc} alt="post preview"/>
         </section>
     );
 };
