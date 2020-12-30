@@ -72,4 +72,5 @@ export default {
     originalImage: () => (state) => state.upload.originalImage,
     editedImage: () => (state) => state.upload.editedImage,
     imageFor: () => (state) => state.upload.imageFor,
+    postSubmissionReceived: () => (state) => state.upload.postSubmissionReceived,
 }

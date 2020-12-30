@@ -6,13 +6,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createPost } from '../../../redux/actions/post_actions';
 import stateSelectors from '../../../util/state_selectors';
 import { dataURItoBlob } from '../../../util/upload_utils';
+import { resetUploadState } from '../../../redux/actions/upload_actions';
 
 export default function PostDetails() {
     const [caption, setCaption] = useState('');
     const history = useHistory();
     const dispatch = useDispatch();
     const editedImage = useSelector(stateSelectors.editedImage());
-    const imgSrc = editedImage ? editedImage.toDataURL() : ''
+    const uploadSuccessful = useSelector(stateSelectors.postSubmissionReceived());
+
+    React.useEffect(() => {
+        if (!editedImage) history.push('/');
+
+        if (uploadSuccessful) {
+            history.push('/');
+            dispatch(resetUploadState());
+        }
+    });
+
+    const imgSrc = editedImage ? editedImage.toDataURL() : '';
     const currentUser = useSelector(stateSelectors.currentUser());
 
     const submitPost = () => {
@@ -23,8 +35,9 @@ export default function PostDetails() {
         formData.append('post[photo]', blob);
         formData.append('post[caption]', caption);
 
-        dispatch(createPost(formData)).then(() => history.push('/'));
+        dispatch(createPost(formData));
     };
+
 
     return (
         <div className="post-details">
@@ -63,7 +76,7 @@ const Caption = ({ userImage, setCaption, caption, imgSrc }) => {
                 onChange={(e) => setCaption(e.target.value)}
                 value={caption}
             />
-            <img className="post-image" src={imgSrc} alt="post preview"/>
+            <img className="post-image" src={imgSrc} alt="post preview" />
         </section>
     );
 };

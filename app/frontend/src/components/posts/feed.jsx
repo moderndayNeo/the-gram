@@ -10,6 +10,7 @@ export default function Feed({ posts }) {
         </ul>
     );
 }
+// if feed not rendering, refresh homepage
 
 
 // if (!posts.length) {
