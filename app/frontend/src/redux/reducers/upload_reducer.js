@@ -36,7 +36,7 @@ export default (state = _defaultState, action) => {
             return Object.assign({}, state, {
                 adjustments: {
                     ...state.adjustments,
-                    rotation: state.adjustments.rotation + 90,
+                    rotation: state.adjustments.rotation - 90,
                 },
             })
 

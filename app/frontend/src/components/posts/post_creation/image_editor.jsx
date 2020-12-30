@@ -16,7 +16,7 @@ export default function ImageEditor(props) {
     });
 
     const saveChanges = () => {
-        let tempImage = props.originalImage;
+        let tempImage = props.originalImage; // img object
         tempImage = Transformations.rotateImg(tempImage, selectedRotation);
         tempImage = fitWidth ? Transformations.cropFitToSquareImg(tempImage) : tempImage;
         tempImage = Transformations.cropImageBetweenRatios(tempImage, (4 / 5), (16 / 9));
@@ -24,14 +24,11 @@ export default function ImageEditor(props) {
         if (selectedFilter && selectedFilter !== 'Normal') applyPresetOnCanvas(tempImage, presetsMapping[selectedFilter]());
         const displayImage = Transformations.centerImg(tempImage, 400);
 
-        console.log('to Data URL', displayImage.toDataURL());
-
-
         myCanvas.current.width = 400;
         myCanvas.current.height = 400;
         myCanvas.current.getContext("2d").drawImage(displayImage, 0, 0);
 
-        dispatch(setEditedImage(tempImage));
+        dispatch(setEditedImage(tempImage)); // canvas object with edits applied
     };
 
     const rotateImg = () => dispatch(rotateUploadedImage());
@@ -41,7 +38,7 @@ export default function ImageEditor(props) {
         <div className="image-editor" >
 
             <div className="canvas-container">
-                <canvas ref={myCanvas} />
+                <canvas id="myCanvas" ref={myCanvas} />
 
                 {pageTypeSelected === 'edit' && <RotateButton rotateImg={rotateImg} />}
                 {pageTypeSelected === 'edit' && <EditButton toggleFitToSquare={toggleFitToSquare} />}
@@ -104,7 +101,6 @@ const PostStyleFooter = ({ pageTypeSelected }) => {
 
 const Filters = ({ selectedFilter }) => {
     const filterNames = ['Normal', 'Clarendon', 'Gingham', 'Moon', 'Lark', 'Reyes', 'Juno', 'Slumber', 'Crema', 'Ludwig', 'Aden', 'Perpetua'];
-    // const selectedFilter = useSelector(stateSelectors.selectedFilter());
 
     return (
         <div className="filters-container">

@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
   validate :valid_email
+# Eager load associations that are ALWAYS fetched with the user
 
   after_initialize :ensure_session_token
 
