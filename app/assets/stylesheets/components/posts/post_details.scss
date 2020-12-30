@@ -10,8 +10,9 @@
         border: 1px solid var(--light-grey);
 
         .user-avatar {
-            width: 30px;
             height: 30px;
+            // width: auto;
+            width: 40px;
             margin-top: -3px;
         };
 
