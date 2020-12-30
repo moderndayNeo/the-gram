@@ -8,6 +8,7 @@ import stateSelectors from '../../../util/state_selectors';
 import { createFileWithImage, dataURItoBlob } from '../../../util/upload_utils';
 
 export default function PostDetails() {
+    const history = useHistory()
     const editedImage = useSelector(stateSelectors.editedImage());
 
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function PostDetails() {
         formData.append('post[photo]', blob);
         formData.append('post[caption]', 'caption77');
 
-        dispatch(createPost(formData));
+        dispatch(createPost(formData)).then(() => history.push('/'))
     };
 
     return (
