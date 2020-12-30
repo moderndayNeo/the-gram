@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BottomNav from '../shared/bottom_nav';
 import icons from '../shared/icons/svg-icons';
-import stateSelectors from '../../util/state_selectors';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import UserAvatar from '../shared/user_avatar';
 import { receiveUsers } from '../../redux/actions/session_actions';
@@ -17,7 +16,7 @@ export default function Explore() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
 
         if (!usersNotFollowed.length) {
             fetchUsersNotFollowed()
@@ -25,8 +24,6 @@ export default function Explore() {
                     dispatch(receiveUsers(users));
                     setUsersNotFollowed(Object.values(users));
                 });
-        } else {
-            // console.log(usersNotFollowed)
         }
     }), [];
 

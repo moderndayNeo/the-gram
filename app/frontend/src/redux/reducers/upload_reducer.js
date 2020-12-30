@@ -6,6 +6,7 @@ import {
     SET_IMAGE_FOR,
     ROTATE_UPLOADED_IMAGE,
     FIT_TO_SQUARE,
+    RESET_UPLOAD_STATE,
 } from '../actions/upload_actions'
 
 const _defaultState = {
@@ -59,6 +60,9 @@ export default (state = _defaultState, action) => {
 
         case SET_IMAGE_FOR:
             return Object.assign({}, state, { imageFor: action.imageFor })
+
+        case RESET_UPLOAD_STATE:
+            return _defaultState
 
         default:
             return state

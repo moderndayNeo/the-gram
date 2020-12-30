@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useLocation, Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import icons from '../../shared/icons/svg-icons';
 import UserAvatar from '../../shared/user_avatar';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPost } from '../../../redux/actions/post_actions';
 import stateSelectors from '../../../util/state_selectors';
-import { createFileWithImage, dataURItoBlob } from '../../../util/upload_utils';
+import { dataURItoBlob } from '../../../util/upload_utils';
 
 export default function PostDetails() {
     const history = useHistory()
@@ -21,7 +21,7 @@ export default function PostDetails() {
 
         const formData = new FormData();
         formData.append('post[photo]', blob);
-        formData.append('post[caption]', 'caption77');
+        formData.append('post[caption]', caption);
 
         dispatch(createPost(formData)).then(() => history.push('/'))
     };

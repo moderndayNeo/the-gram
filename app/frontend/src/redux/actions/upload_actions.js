@@ -5,6 +5,7 @@ export const SET_EDITED_IMAGE = 'SET_EDITED_IMAGE'
 export const SET_IMAGE_FOR = 'SET_IMAGE_FOR'
 export const ROTATE_UPLOADED_IMAGE = 'ROTATE_UPLOADED_IMAGE'
 export const FIT_TO_SQUARE = 'FIT_TO_SQUARE'
+export const RESET_UPLOAD_STATE = 'RESET_UPLOAD_STATE'
 
 export const updateFilter = (newFilter) => ({
     type: UPDATE_FILTER,
@@ -38,4 +39,8 @@ export const rotateUploadedImage = () => ({
 export const fitToSquare = (boolean) => ({
     type: FIT_TO_SQUARE,
     boolean
+})
+
+export const resetUploadState = () => ({
+    type: RESET_UPLOAD_STATE
 })

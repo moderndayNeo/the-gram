@@ -9,13 +9,13 @@ export default function PostStyle() {
     const history = useHistory();
     const imageFor = useSelector(stateSelectors.imageFor());
     const originalImage = useSelector(stateSelectors.originalImage());
-
+    
     useEffect(() => {
         if (!originalImage) {
             history.push("/");
         }
     });
-
+    
     return (
         <div className="post-style">
             <PostStyleHeader imageFor={imageFor} />

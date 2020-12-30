@@ -32,15 +32,15 @@ export default function App() {
             <ProtectedRoute exact path="/posts/:postId" component={PostShow} />
             <ProtectedRoute exact path="/posts/:postId/comments" component={CommentsPage} />
             <ProtectedRoute exact path="/explore" component={Explore} />
-            <ProtectedRoute exact path="/accounts/activity" component={Activity} />
+            <ProtectedRoute exact path="/explore/people/suggested" component={Suggested} />
             <ProtectedRoute exact path="/accounts/edit" component={EditProfile} />
+            <ProtectedRoute exact path="/accounts/activity" component={Activity} />
             <ProtectedRoute exact path="/accounts/password/change" component={ChangePassword} />
             <ProtectedRoute exact path="/create/style" component={PostStyle} />
             <ProtectedRoute exact path="/create/details" component={PostDetails} />
             <ProtectedRoute exact path="/users/:userId" component={Profile} />
             <ProtectedRoute exact path="/users/:userId/followers" component={Followers} />
             <ProtectedRoute exact path="/users/:userId/following" component={Following} />
-            <ProtectedRoute exact path="/explore/people/suggested" component={Suggested} />
             {postModalId && <PostModal postId={postModalId} />}
             {dmModal && <DirectMessageModal />}
         </div>

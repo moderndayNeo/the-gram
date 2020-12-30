@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { setOriginalImage, setImageFor } from '../../redux/actions/upload_actions';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector } from 'react-redux';
-import { fetchImageFromFile, createFileWithImage, dataURItoBlob } from '../../util/upload_utils';
-import { createPost } from '../../redux/actions/post_actions';
+import { fetchImageFromFile} from '../../util/upload_utils';
 
 export default function NewPostButton(props) {
     const history = useHistory();

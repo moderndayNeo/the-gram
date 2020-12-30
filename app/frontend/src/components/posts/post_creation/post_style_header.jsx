@@ -5,10 +5,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import stateSelectors from '../../../util/state_selectors';
 import { dataURItoBlob } from '../../../util/upload_utils';
+import { resetUploadState } from '../../../redux/actions/upload_actions';
 
 export default function PostStyleHeader({ imageFor }) {
     const editedImage = useSelector(stateSelectors.editedImage());
-
     const currentUserId = useSelector(stateSelectors.currentUserId());
     const history = useHistory();
 
@@ -23,11 +23,14 @@ export default function PostStyleHeader({ imageFor }) {
             .then(() => history.push('/accounts/edit'));
     };
 
+    const redirect = () => {
+        dispatch(resetUploadState())
+        history.push('/')
+    };
+
     return (
         <header>
-            <Link to="/">
-                {icons.cross}
-            </Link>
+            <button onClick={redirect}>{icons.cross}</button>
             <h3>New Photo Post</h3>
             {imageFor === 'profile' ?
                 <button onClick={() => updateProfilePicture()}>Save</button> :
