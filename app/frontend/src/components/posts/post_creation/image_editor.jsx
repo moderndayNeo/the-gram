@@ -131,5 +131,3 @@ const FilterButton = (props) => {
         </button>
     );
 };
-
-

@@ -15,26 +15,8 @@ export default function PostDetails() {
     const [caption, setCaption] = useState('');
 
     const submitPost = () => {
-
-        // const canvas = document.createElement('canvas')
-        // canvas.width = 400
-        // canvas.height = 400
-        // canvas
-        //     .getContext('2d')
-        //     .drawImage(editedImage, 0, 0)
-
-
-        console.log(editedImage);
         const dataURL = editedImage.toDataURL('image/png');
-        console.log(dataURL);
         const blob = dataURItoBlob(dataURL);
-        console.log(blob);
-
-        // don't reference editedImage. Paint on a canvas and reference that canvas
-        // const dataURL = editedImage.current.toDataURL('image/png');
-        // console.log(dataURL);
-        // const blob = dataURItoBlob(dataURL);
-        // console.log(blob);
 
         const formData = new FormData();
         formData.append('post[photo]', blob);
@@ -70,10 +52,6 @@ const PostDetailsHeader = ({ submitPost }) => (
 );
 
 const Caption = ({ userImage, setCaption, caption }) => {
-    // const previewCanvas = React.useRef();
-    // previewCanvas.current.width = 400;
-    // previewCanvas.current.height = 400;
-    // previewCanvas.current.getContext("2d").drawImage(editedImage, 0, 0);
 
     return (
         <section className="caption">
@@ -85,11 +63,7 @@ const Caption = ({ userImage, setCaption, caption }) => {
                 value={caption}
             />
 
-            <canvas
-                className="post-image"
-            ></canvas>
-            {/* <img className="post-image" src={photoUrl} alt="" /> */}
-            {/* img preview of editedImage */}
+            <canvas className="post-image"></canvas>
         </section>
     );
 };

@@ -77,12 +77,3 @@ export function dataURItoBlob(dataURI) {
 
     return new Blob([ia], { type: mimeString })
 }
-
-// export function createFileObjectFromCanvas(canvasElement) {
-//     const blob = canvasElement.toBlob(function (blob) { }, 'image/jpg')
-//     console.log(blob)
-//     const file = new File([blob], 'canvasImage.jpg')
-//     console.log(file)
-
-//     return file
-// }
