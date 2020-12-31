@@ -23,6 +23,10 @@ export default function Profile() {
         }
     }, []);
 
+    return <SelectedProfile userId={userId} currentUser={currentUser} posts={posts} />;
+}
+
+const SelectedProfile = ({ userId, currentUser, posts }) => {
     if (!posts.length) {
         return <LoadingPlaceholder />;
     } else if (currentUser.id == userId) {
@@ -32,7 +36,8 @@ export default function Profile() {
         const otherUser = useSelector(stateSelectors.userById(userId));
         return <ForeignProfile user={otherUser} posts={posts} />;
     }
-}
+
+};
 
 const OwnProfile = ({ user, posts }) => {
     const [optionsModal, setOptionsModal] = useState(false);
@@ -44,10 +49,10 @@ const OwnProfile = ({ user, posts }) => {
             }
             <ProfileHeader user={user} setOptionsModal={setOptionsModal} />
             <main>
-                <ImageAndName user={user} ownProfile={true} />
+                <ImageAndName user={user} isOwnProfile={true} />
                 <Bio user={user} />
                 <Stats user={user} />
-                <PostCollections user={user} ownProfile={true} posts={posts} />
+                <PostCollections user={user} isOwnProfile={true} posts={posts} />
             </main>
             <BottomNav />
         </div>
@@ -79,10 +84,10 @@ const ForeignProfile = ({ user, posts }) => {
             </header>
 
             <main>
-                <ImageAndName user={user} ownProfile={false} />
+                <ImageAndName user={user} isOwnProfile={false} />
                 <Bio user={user} />
                 <Stats user={user} />
-                <PostCollections user={user} ownProfile={false} posts={posts} />
+                <PostCollections user={user} isOwnProfile={false} posts={posts} />
             </main>
             <BottomNav />
         </div>
@@ -101,14 +106,14 @@ const ProfileHeader = ({ user, setOptionsModal }) => (
     </header>
 );
 
-const ImageAndName = ({ user, ownProfile }) => {
+const ImageAndName = ({ user, isOwnProfile }) => {
     return (
         <div className="image-and-name">
             <UserAvatar imageUrl={user.image_url} />
             <section>
                 <h2 className="username">{user.username}</h2>
                 {
-                    ownProfile ?
+                    isOwnProfile ?
                         <Link to='/accounts/edit' className="edit-button">
                             Edit Profile
                     </Link>

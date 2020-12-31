@@ -6,13 +6,13 @@ import icons from '../shared/icons/svg-icons';
 import Post from '../posts/post';
 
 
-export default function PostCollections({ ownProfile, posts }) {
+export default function PostCollections({ isOwnProfile, posts }) {
     const [selected, setSelected] = useState('posts');
 
     return (
         <div className="post-collections">
             <PostSelectorButtons
-                ownProfile={ownProfile}
+                isOwnProfile={isOwnProfile}
                 selected={selected}
                 setSelected={setSelected} />
             <SelectedPosts
@@ -23,7 +23,7 @@ export default function PostCollections({ ownProfile, posts }) {
     );
 };
 
-const PostSelectorButtons = ({ ownProfile, selected, setSelected }) => {
+const PostSelectorButtons = ({ isOwnProfile, selected, setSelected }) => {
     return (
         <ul className="post-selector-buttons">
             <li className="selector" onClick={() => setSelected('posts')}>
@@ -33,7 +33,7 @@ const PostSelectorButtons = ({ ownProfile, selected, setSelected }) => {
                 <img src={selected === 'feed' ? window.profileFeedBlue : window.profileFeedGrey} alt="profile feed icon" />
             </li>
             {
-                ownProfile &&
+                isOwnProfile &&
                 <li className="selector" onClick={() => setSelected('saved')}>
                     {selected === 'saved' ? icons.profileSavedBlue : icons.profileSavedGrey}
                 </li>
