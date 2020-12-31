@@ -17,7 +17,6 @@ export default function Activity() {
     const notifications = []
     // const notifications = useSelector(stateSelectors.allNotifications());
 
-
     useEffect(() => {
         if (!notifications.length)
             setLoading(true);

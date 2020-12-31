@@ -1,31 +1,35 @@
 .activity-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid red;
-    height: 240px;
-    padding: 30px 40px;
-    text-align: center;
-
-    .title {
-        font-size: 24px;
-        font-weight: 400;
-        margin-bottom: 0;
-    }
-
-    .icon {
+    article {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        width: 62px;
-        height: 62px;
-        border: 2px solid black;
-        border-radius: 50%;
+        height: 240px;
+        padding: 30px 40px;
+        text-align: center;
 
-        svg {
-            height: 35px;
-            width: 35px;
+        .title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 62px;
+            height: 62px;
+            border: 2px solid black;
+            border-radius: 50%;
+
+            svg {
+                height: 35px;
+                width: 35px;
+            }
         }
     }
 
+    .suggested-users-title {
+        padding: 0 12px;
+    }
 }

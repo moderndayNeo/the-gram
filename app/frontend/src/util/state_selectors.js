@@ -51,8 +51,9 @@ export default {
         )
     },
     suggestedUsers: () => (state) => {
-        const followedUserIds =
-            state.entities.users[state.session.id].followed_user_ids
+        const followedUserIds = state.entities.users[
+            state.session.id
+        ].followed_user_ids.concat(state.session.id)
 
         return Object.values(state.entities.users).filter(
             (user) => !followedUserIds.includes(user.id)
@@ -72,5 +73,6 @@ export default {
     originalImage: () => (state) => state.upload.originalImage,
     editedImage: () => (state) => state.upload.editedImage,
     imageFor: () => (state) => state.upload.imageFor,
-    postSubmissionReceived: () => (state) => state.upload.postSubmissionReceived,
+    postSubmissionReceived: () => (state) =>
+        state.upload.postSubmissionReceived,
 }
