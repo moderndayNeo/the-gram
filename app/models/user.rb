@@ -10,7 +10,9 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
   validate :valid_email
-# Eager load associations that are ALWAYS fetched with the user
+  # Eager load associations that are ALWAYS fetched with the user
+  # public: username, name, image_url, num_posts, num_following, num_followers, follower_ids
+  # private: saved_post_ids, liked_post_ids, liked_comment_ids, followed_user_ids
 
   after_initialize :ensure_session_token
 

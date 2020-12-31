@@ -2,11 +2,6 @@ class Api::UsersController < ApplicationController
   # before_action :require_current_user!, except: [:create]
 
   def index
-    # @users = User
-    #   .all
-    #   .includes(posts: [:likes, :photo_attachment, :likers])
-    #   .includes(:photo_attachment, :liked_posts)
-
     case params[:type]
     when "explore"
       followed_users_ids = current_user.followed_users.pluck(:id)

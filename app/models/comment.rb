@@ -3,6 +3,9 @@ class Comment < ApplicationRecord
   validates :post_id, presence: true
   validates :body, presence: true, length: { maximum: 300 }
 
+  # Eager load oft-fetched associations:
+  # author, likes, likers
+
   has_many :likes, as: :likeable
 
   has_many :replies,
@@ -23,10 +26,10 @@ class Comment < ApplicationRecord
              class_name: :Post,
              foreign_key: :post_id
 
-             after_destroy :destroy_notification
+  after_destroy :destroy_notification
 
-             def destroy_notification
-              n = Notification.find_by(notifiable_type: "Comment", notifiable_id: id)
-              n.destroy() if n
-            end
+  def destroy_notification
+    n = Notification.find_by(notifiable_type: "Comment", notifiable_id: id)
+    n.destroy() if n
+  end
 end

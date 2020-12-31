@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   has_one_attached :photo
 
+  # Eager load oft-fetched associations:
+  # photo_attachment, author, likes, likers
+
   validates :author_id, presence: true
   validates :caption, length: { maximum: 2200 }
 
