@@ -86,7 +86,7 @@ const TextBlock = ({ comment }) => {
                     comment.num_likes > 0 &&
                     <p className="comment-likes">{comment.num_likes} likes</p>
                 }
-                <p className="comment-num-replies">Reply</p>
+                {/* <p className="comment-num-replies">Reply</p> */}
             </div>
         </div>
     );

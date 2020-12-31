@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
   def index
-    # The Feed (posts by current_user, people they follow, hashtags they follow, ordered by creation date)
+    # The Feed (posts by current_user, people they follow, ordered by creation date)
     case params[:type]
     when "feed"
       @posts = Post.all

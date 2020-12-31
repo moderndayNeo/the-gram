@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BottomNav from '../shared/bottom_nav';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,42 +6,52 @@ import { getFeed } from '../../redux/actions/post_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import UserAvatar from '../shared/user_avatar';
 import DynamicFollowButton from '../shared/dynamic_follow_button';
-import DevelopmentModal from '../shared/development_modal'
+import ActivityPlaceholder from './activity_placeholder';
 
 import { modifyTime } from '../../util/helpers';
 import { Link } from 'react-router-dom';
 
 export default function Activity() {
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const notifications = useSelector(stateSelectors.allNotifications());
+    const notifications = []
+    // const notifications = useSelector(stateSelectors.allNotifications());
+
 
     useEffect(() => {
         if (!notifications.length)
-            dispatch(getFeed());
+            setLoading(true);
+        dispatch(getFeed())
+            .then(() => setLoading(false));
     }, []);
 
     return (
         <div className="activity">
-            {/* <DevelopmentModal feature="Activity Page" /> */}
-            <header ><h3>Activity</h3></header>
+            <header><h3>Activity</h3></header>
             {
-                notifications.length > 0 ?
-                    <ul className="notifications-list">
-                        {
-                            notifications.map(notification => (
-                                <div className="notification-container" key={notification.id}>
-                                    <Notification notification={notification} />
-                                    <div className="border-line" />
-                                </div>
-                            ))
-                        }
-                    </ul> :
-                    <LoadingPlaceholder />
+                loading ? <LoadingPlaceholder /> :
+
+                    notifications.length > 0 ?
+                        <Notifications notifications={notifications} /> :
+                        <ActivityPlaceholder />
             }
             <BottomNav />
         </div>
     );
 }
+
+const Notifications = ({ notifications }) => (
+    <ul className="notifications-list">
+        {
+            notifications.map(notification => (
+                <div className="notification-container" key={notification.id}>
+                    <Notification notification={notification} />
+                    <div className="border-line" />
+                </div>
+            ))
+        }
+    </ul>
+);
 
 const Notification = ({ notification }) => {
     const sourceUser = useSelector(stateSelectors.userById(notification.source_user_id));
