@@ -8,29 +8,24 @@ import stateSelectors from '../../util/state_selectors';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 
 export default function Home() {
-    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     let posts = useSelector(stateSelectors.allPosts());
 
-    // if (!posts.length) {
-    // dispatch(getFeed());
-    // }
+    if (!posts.length) {
+        dispatch(getFeed());
+    }
 
-    React.useEffect(() => {
-        setLoading(true);
-        dispatch(getFeed())
-            .then(() => setLoading(false));
-    }, []);
+    console.log('home posts:', posts);
 
-    return loading ? <LoadingPlaceholder /> :
+    return (
         <section className="home">
             <HomeTopNav />
             {
-                posts.length ?
+                posts.length > 0 ?
                     <Feed posts={posts} /> :
                     <LoadingPlaceholder />
             }
             <BottomNav />
-        </section>;
-
+        </section>
+    );
 }

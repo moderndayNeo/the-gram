@@ -2,19 +2,15 @@ import React from 'react';
 import Post from './post';
 
 export default function Feed({ posts }) {
+    console.log('feed posts:', posts);
     return (
         <ul className="feed">
-            {posts.map(post => (
+            {posts ? posts.map(post => (
                 <Post key={post.id} post={post} />
-            ))}
+            )) : <p>No posts</p>
+        }
         </ul>
     );
 }
-// if feed not rendering, refresh homepage
 
-
-// if (!posts.length) {
-//     let retrievedObject = localStorage.getItem('developmentPosts');
-//     posts = Object.values(JSON.parse(retrievedObject))
-//     // console.log('retrievedObject: ', JSON.parse(retrievedObject));
-// }
+// if some posts undefined, setLoading true, get feed, setLoading false

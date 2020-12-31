@@ -13,15 +13,9 @@ export default function PostDetails() {
     const history = useHistory();
     const dispatch = useDispatch();
     const editedImage = useSelector(stateSelectors.editedImage());
-    const uploadSuccessful = useSelector(stateSelectors.postSubmissionReceived());
 
     React.useEffect(() => {
         if (!editedImage) history.push('/');
-
-        if (uploadSuccessful) {
-            history.push('/');
-            dispatch(resetUploadState());
-        }
     });
 
     const imgSrc = editedImage ? editedImage.toDataURL() : '';
@@ -35,7 +29,10 @@ export default function PostDetails() {
         formData.append('post[photo]', blob);
         formData.append('post[caption]', caption);
 
-        dispatch(createPost(formData));
+        dispatch(createPost(formData))
+            .then(() => {
+                dispatch(resetUploadState());
+            });
     };
 
 

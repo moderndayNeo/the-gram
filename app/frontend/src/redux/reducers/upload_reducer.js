@@ -9,7 +9,7 @@ import {
     RESET_UPLOAD_STATE,
 } from '../actions/upload_actions'
 
-import {RECEIVE_POST} from '../actions/post_actions'
+import { RECEIVE_POST } from '../actions/post_actions'
 
 const _defaultState = {
     originalImage: null,
@@ -66,9 +66,6 @@ export default (state = _defaultState, action) => {
 
         case RESET_UPLOAD_STATE:
             return _defaultState
-
-        case RECEIVE_POST:
-            return Object.assign({}, state, { postSubmissionReceived: true })
 
         default:
             return state
