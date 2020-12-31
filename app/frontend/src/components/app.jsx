@@ -17,8 +17,9 @@ import PostModal from './posts/post_modal';
 import stateSelectors from '../util/state_selectors';
 import { useSelector } from 'react-redux';
 import DirectMessageModal from './shared/direct_message_modal';
-import EditProfile from './profile/edit_profile'
-import ChangePassword from './profile/change_password'
+import EditProfile from './profile/edit_profile';
+import ChangePassword from './profile/change_password';
+import DesktopModal from './shared/desktop_modal';
 
 export default function App() {
     const postModalId = useSelector(stateSelectors.postModalId());
@@ -43,6 +44,7 @@ export default function App() {
             <ProtectedRoute exact path="/users/:userId/following" component={Following} />
             {postModalId && <PostModal postId={postModalId} />}
             {dmModal && <DirectMessageModal />}
+            <DesktopModal />
         </div>
     );
 }
