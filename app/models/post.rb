@@ -9,6 +9,7 @@ class Post < ApplicationRecord
 
   validate :has_photo_attached
   scope :with_eager_loaded_photo, -> { eager_load(photo_attachment: :blob) }
+  scope :newest_first, -> { order(created_at: :desc) }
 
   belongs_to :author,
              class_name: :User,
@@ -42,15 +43,5 @@ class Post < ApplicationRecord
 
   def author_username
     self.author.username
-  end
-
-  def self.associated_users(posts)
-    associated_users = []
-
-    posts.each do |post|
-      associated_users << post.author
-    end
-
-    return associated_users
   end
 end

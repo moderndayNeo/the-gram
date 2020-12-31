@@ -1,17 +1,15 @@
 class Api::PostsController < ApplicationController
   def index
-    # The Feed (posts by current_user, people they follow, ordered by creation date)
     case params[:type]
     when "feed"
-      @posts = Post.all
+      @posts = Post
+        .where(author_id: [current_user.associated_user_ids])
         .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
-        .order(created_at: :desc)
-
-      post_author_ids = @posts.pluck(:author_id)
+        .newest_first
 
       @users = User
-        .where(id: [post_author_ids])
+        .where(id: [current_user.associated_user_ids])
         .includes(
           :photo_attachment,
           :saves,
@@ -28,7 +26,6 @@ class Api::PostsController < ApplicationController
         .where(post_id: [@posts.pluck(:id)])
         .includes(:author, :likes)
 
-      
       @notifications = current_user.notifications.newest_first
 
       return render :index
@@ -58,7 +55,7 @@ class Api::PostsController < ApplicationController
       return render json: ["Only the post's creator can edit a post"], status: 401
     end
 
-    if @post.update_attributes(post_params) # use update_attributes. It will return false if unsuccessful, or save it if successful
+    if @post.update_attributes(post_params)
       render :show
     else
       render json: @post.errors.full_messages, status: 422

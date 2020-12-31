@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
   validate :valid_email
-  # Eager load associations that are ALWAYS fetched with the user
+  # Eager load associations that are always fetched with the user
   # public: username, name, image_url, num_posts, num_following, num_followers, follower_ids
   # private: saved_post_ids, liked_post_ids, liked_comment_ids, followed_user_ids
 
@@ -101,6 +101,14 @@ class User < ApplicationRecord
 
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
+  end
+
+  def associated_user_ids
+    associated_user_ids = []
+    associated_user_ids.concat(self.followed_users.pluck(:id))
+    associated_user_ids << self.id
+
+    associated_user_ids
   end
 
   private
