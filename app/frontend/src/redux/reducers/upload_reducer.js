@@ -67,6 +67,9 @@ export default (state = _defaultState, action) => {
         case RESET_UPLOAD_STATE:
             return _defaultState
 
+        case RECEIVE_POST || RECEIVE_POST_ERRORS:
+            return _defaultState
+
         default:
             return state
     }

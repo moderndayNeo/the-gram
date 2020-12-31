@@ -6,18 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createPost } from '../../../redux/actions/post_actions';
 import stateSelectors from '../../../util/state_selectors';
 import { dataURItoBlob } from '../../../util/upload_utils';
-import { resetUploadState } from '../../../redux/actions/upload_actions';
 
 export default function PostDetails() {
     const [caption, setCaption] = useState('');
     const history = useHistory();
     const dispatch = useDispatch();
     const editedImage = useSelector(stateSelectors.editedImage());
-
-    React.useEffect(() => {
-        if (!editedImage) history.push('/');
-    });
-
     const imgSrc = editedImage ? editedImage.toDataURL() : '';
     const currentUser = useSelector(stateSelectors.currentUser());
 
@@ -31,10 +25,9 @@ export default function PostDetails() {
 
         dispatch(createPost(formData))
             .then(() => {
-                dispatch(resetUploadState());
+                history.push('/');
             });
     };
-
 
     return (
         <div className="post-details">

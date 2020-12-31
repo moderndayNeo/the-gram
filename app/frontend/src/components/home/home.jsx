@@ -15,8 +15,6 @@ export default function Home() {
         dispatch(getFeed());
     }
 
-    console.log('home posts:', posts);
-
     return (
         <section className="home">
             <HomeTopNav />
@@ -29,3 +27,4 @@ export default function Home() {
         </section>
     );
 }
+
