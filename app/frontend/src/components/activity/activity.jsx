@@ -14,8 +14,7 @@ import { Link } from 'react-router-dom';
 export default function Activity() {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const notifications = []
-    // const notifications = useSelector(stateSelectors.allNotifications());
+    const notifications = useSelector(stateSelectors.allNotifications());
 
     useEffect(() => {
         if (!notifications.length)
@@ -29,7 +28,6 @@ export default function Activity() {
             <header><h3>Activity</h3></header>
             {
                 loading ? <LoadingPlaceholder /> :
-
                     notifications.length > 0 ?
                         <Notifications notifications={notifications} /> :
                         <ActivityPlaceholder />
