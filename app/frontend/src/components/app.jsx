@@ -26,7 +26,8 @@ export default function App() {
     const dmModal = useSelector(stateSelectors.dmModal());
 
     return (
-        <div className="app">
+        // <div className="app">
+        <div className={`app ${dmModal || postModalId && "position-fixed"}`}>
             <AuthRoute exact path="/signup" component={SignupPage} />
             <AuthRoute exact path="/login" component={LoginPage} />
             <ProtectedRoute exact path="/" component={Home} />

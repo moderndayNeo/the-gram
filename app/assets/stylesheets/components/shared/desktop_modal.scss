@@ -43,9 +43,10 @@
 @media screen and (min-width: 450px) {
     .desktop-modal {
         display: block;
+        overflow-y: hidden;
     }
 
     .app {
-        // scroll: none;
+       position: fixed;
     }
 }
