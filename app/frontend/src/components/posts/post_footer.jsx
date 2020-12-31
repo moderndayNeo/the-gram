@@ -5,7 +5,7 @@ import icons from '../shared/icons/svg-icons';
 import { Link } from 'react-router-dom';
 import CommentLikeButton from './comment_like_button';
 import { displayDirectMessageModal } from '../../redux/actions/ui_actions';
-import {RotateButton} from './post_creation/image_editor'
+import { RotateButton } from './post_creation/image_editor';
 
 export default function PostFooter({ post, isLiked, comments, isSaved }) {
 

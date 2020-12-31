@@ -63,7 +63,6 @@
         min-height: 185px;
         padding: 0 16px;
         margin-top: 4px;
-        // border: 1px solid red;
 
         .footer-icons {
             display: flex;
@@ -75,6 +74,7 @@
                 display: flex;
                 justify-content: space-between;
                 width: 30%;
+
             }
         }
 
@@ -139,11 +139,6 @@
                     color: black;
                     font-weight: 600;
                     font-size: inherit;
-                    // overflow: hidden;
-                    // text-overflow: ellipsis;
-                    // white-space: nowrap;
-                    // padding-left: 5px;
-                    // margin-left: -5px;
                 }
             }
 
