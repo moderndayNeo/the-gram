@@ -5,13 +5,21 @@
 
     .overlay {
         background-color: rgba(0, 0, 0, 0.8);
-
+        
         .modal {
             width: 500px;
-
+            padding-bottom: 23px;
+            
             .title {
                 display: flex;
                 flex-direction: column;
+                color: var(--blue);
+                font-weight: 600;
+                font-size: 18px;
+
+                span {
+                    padding: 3px 0;
+                }
             }
 
             p {

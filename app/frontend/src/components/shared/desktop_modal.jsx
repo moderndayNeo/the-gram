@@ -9,7 +9,8 @@ export default function DesktopModal() {
                         <img className="main-logo" src={window.mainLogoUrl} alt="logo" />
                         <p className="title">
                             <span>
-                                The Gram is designed to be used on mobile devices.
+                                The Gram is designed to be used on mobile devices. Please open this app on a mobile
+                                or use mobile view in your desktop browser.
                             </span>
                             <span>
                                 To access mobile view from a desktop device:
@@ -17,11 +18,11 @@ export default function DesktopModal() {
                         </p>
 
                         <div className="instructions-container">
-                            <p>1. Please open your browser's DevTools:
-                            <span> (right-click + 'Inspect'). </span>
+                            <p>1. Please open your browser's DevTools.
+                            <span> (Right-click + 'Inspect')</span>
                             </p>
-                            <p>2. Toggle the device toolbar:
-                            <span>Command + Shift + M</span>
+                            <p>2. Toggle the device toolbar.
+                            <span>(Command + Shift + M)</span>
                             </p>
                         </div>
                     </div>
