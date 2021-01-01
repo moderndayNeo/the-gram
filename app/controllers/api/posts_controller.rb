@@ -2,25 +2,29 @@ class Api::PostsController < ApplicationController
   def index
     case params[:type]
     when "feed"
-      @posts = Post
-        .where(author_id: [current_user.associated_user_ids])
-        .includes(:author, :likes, :likers)
-        .with_eager_loaded_photo
-        .newest_first
 
-      @users = User
-        .where(id: [current_user.associated_user_ids])
-        .includes(
-          :photo_attachment,
-          :saves,
-          :saved_posts,
-          :follows,
-          :liked_posts,
-          :posts,
-          :followers,
-          :followed_users,
-          :liked_comments
-        )
+      # @posts = Post
+      #   .where(author_id: [current_user.associated_user_ids])
+      #   .includes(:author, :likes, :likers)
+      #   .with_eager_loaded_photo
+      #   .newest_first
+
+      @posts = Post.all
+      @users = User.all
+
+      # @users = User
+      #   .where(id: [current_user.associated_user_ids])
+      #   .includes(
+      #     :photo_attachment,
+      #     :saves,
+      #     :saved_posts,
+      #     :follows,
+      #     :liked_posts,
+      #     :posts,
+      #     :followers,
+      #     :followed_users,
+      #     :liked_comments
+      #   )
 
       @comments = Comment
         .where(post_id: [@posts.pluck(:id)])
