@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserAvatar from '../shared/user_avatar';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import icons from '../shared/icons/svg-icons';
 import { useParams, useHistory, Link } from 'react-router-dom';
@@ -20,6 +20,10 @@ export default function CommentsPage() {
         dispatch(commentOnPost(postId, { body }))
             .then(() => setBody(''));
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="comments-page">
