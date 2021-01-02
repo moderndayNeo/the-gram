@@ -93,6 +93,21 @@ const FeedPostComments = ({ post, comments, }) => {
 };
 
 const FeedComment = ({ comment, post, }) => {
+    const charsTotal = comment.author_username.length + comment.body.length;
+    const [commentRevealed, setCommentRevealed] = useState(false);
+
+    const commentDisplayed = () => {
+        if (charsTotal <= 128) {
+            return <p>{comment.body}</p>;
+        } else if (commentRevealed) {
+            return <p>{comment.body}</p>;
+        } else {
+            return <div className="reveal-caption">
+                <p>{comment.body.slice(0, 128 - comment.author_username.length)}</p>...
+            <button className="expand-caption" onClick={() => setCommentRevealed(true)}>more</button>
+            </div>;
+        }
+    };
 
     return (
         <div className="feed-comment">
@@ -102,7 +117,7 @@ const FeedComment = ({ comment, post, }) => {
                     className="username-link">
                     {comment.author_username}
                 </Link>
-                <p>{comment.body}</p>
+                {commentDisplayed()}
             </div>
             <CommentLikeButton postId={post.id} commentId={comment.id} />
         </div>

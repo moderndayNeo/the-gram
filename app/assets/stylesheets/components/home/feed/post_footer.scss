@@ -37,21 +37,22 @@
         }
 
         .caption {
-            display: flex;
+            display: inline;
             p {
                 margin: 0;
             }
 
-            .reveal-caption {
-                display: flex;
-                align-items: center;
+        }
+        
+        .reveal-caption {
+            display: inline;
+            align-items: center;
 
-                .expand-caption {
-                    color: var(--dark-grey);
-                }
+            .expand-caption {
+                color: var(--dark-grey);
             }
         }
-
+        
         .date-posted {
             color: var(--dark-grey);
             font-weight: 400;
@@ -67,8 +68,6 @@
         justify-content: space-between;
 
         .text {
-            display: flex;
-            align-items: flex-start;
 
             p {
                 margin: 0;
