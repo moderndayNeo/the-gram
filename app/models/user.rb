@@ -15,6 +15,7 @@ class User < ApplicationRecord
   # private: saved_post_ids, liked_post_ids, liked_comment_ids, followed_user_ids
 
   after_initialize :ensure_session_token
+  after_initialize :lowercase_username
 
   has_one_attached :photo, dependent: :destroy
   scope :with_eager_loaded_photo, -> { eager_load(photo_attachment: :blob) }
@@ -121,5 +122,9 @@ class User < ApplicationRecord
     unless self.email =~ EMAIL_REGEX
       errors[:email] << "must be in a valid format"
     end
+  end
+
+  def lowercase_username
+    self.username = self.username.downcase
   end
 end
