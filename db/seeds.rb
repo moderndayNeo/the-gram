@@ -141,8 +141,9 @@ end
 # create_guest_account
 # create_users
 # create_posts
+
+# create_post_likes(100)
 # create_follows(100)
 # create_saves(50)
-create_comments(50)
-# create_post_likes(100)
+# create_comments(50)
 # create_comment_likes(100)
