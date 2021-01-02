@@ -14,31 +14,50 @@ def create_guest_account
   )
 end
 
-def create_users
-  10.times {
+def create_users(num_users)
+  last_user_id = User.last.id
+
+  # num_users.times {
+  (last_user_id + 1..last_user_id + 20).each do |id|
     name = Faker::Name.unique.name
 
-    User.create!(
+    User.create({
+      id: id,
       name: name,
       username: name.split(" ").join("").downcase(),
       bio: Faker::GreekPhilosophers.quote,
       email: Faker::Internet.email,
       password: name.split(" ").join(""),
-    )
-  }
+    })
+  end
+
+  # user = User.new({
+  #   name: name,
+  #   username: name.split(" ").join("").downcase(),
+  #   bio: Faker::GreekPhilosophers.quote,
+  #   email: Faker::Internet.email,
+  #   password: name.split(" ").join(""),
+  # })
+
+  # get img_url from sample user data
+  # img_url = Faker::Placeholdit.image(size: "200x200", format: "png", background_color: "000000", text_color: "651fff", text: "Test")
+  # img = URI.open(img_url)
+  # user.photo.attach(io: img, filename: "user.png")
+  # user.save
+  # }
 end
 
-def create_posts
+def create_posts(num_posts)
   user_ids = User.pluck :id
 
-  3.times {
+  num_posts.times {
     post = Post.new(
       author_id: user_ids.sample,
       caption: Faker::Quote.matz,
       location: Faker::Address.city,
     )
 
-    img_url = Faker::Placeholdit.image(size: "200x200", format: "png", background_color: "000000", text_color: "651fff", text: "Test")
+    img_url = Faker::Placeholdit.image(size: "100x100", format: "png", background_color: "000000", text_color: "651fff", text: "Test")
     img = URI.open(img_url)
     post.photo.attach(io: img, filename: "text.png")
     post.save!
@@ -139,11 +158,15 @@ def create_comment_likes(num_likes)
 end
 
 # create_guest_account
-# create_users
-# create_posts
+create_users(50)
+create_posts(100)
 
-# create_post_likes(100)
-# create_follows(100)
-# create_saves(50)
-# create_comments(50)
-# create_comment_likes(100)
+create_post_likes(100)
+create_comments(50)
+create_follows(100)
+create_saves(50)
+create_comment_likes(100)
+
+50.times { puts Faker::Movies::LordOfTheRings.unique.quote }
+50.times { p Faker::Movies::BackToTheFuture.unique.quote }
+50.times { p Faker::Quote.unique.matz }
