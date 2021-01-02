@@ -1,12 +1,14 @@
 import React from 'react';
+import LoadingSpinner from './loading_spinner';
 
-export default function LoadingPlaceholder() {
+export default function LoadingPlaceholder(props) {
     return (
         <div className="loading-placeholder">
-            <img src={window.cameraLoader} alt="" />
+            {
+                props.spinner ?
+                    <LoadingSpinner /> :
+                    <img src={window.cameraLoader} alt="" />
+            }
         </div>
     );
 }
-
-// LoadingIcon
-// LoadingSpinner

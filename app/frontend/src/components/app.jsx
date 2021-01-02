@@ -20,13 +20,13 @@ import DirectMessageModal from './shared/direct_message_modal';
 import EditProfile from './profile/edit_profile';
 import ChangePassword from './profile/change_password';
 import DesktopModal from './shared/desktop_modal';
+import LoadingPlaceholder from './shared/loading_placeholder';
 
 export default function App() {
     const postModalId = useSelector(stateSelectors.postModalId());
     const dmModal = useSelector(stateSelectors.dmModal());
 
     return (
-        // <div className="app">
         <div className={`app ${dmModal || postModalId && "position-fixed"}`}>
             <AuthRoute exact path="/signup" component={SignupPage} />
             <AuthRoute exact path="/login" component={LoginPage} />
@@ -46,6 +46,7 @@ export default function App() {
             {postModalId && <PostModal postId={postModalId} />}
             {dmModal && <DirectMessageModal />}
             <DesktopModal />
+            {/* <LoadingPlaceholder spinner={true} /> */}
         </div>
     );
 }
