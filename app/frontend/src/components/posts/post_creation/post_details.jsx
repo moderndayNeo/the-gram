@@ -6,9 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createPost } from '../../../redux/actions/post_actions';
 import stateSelectors from '../../../util/state_selectors';
 import { dataURItoBlob } from '../../../util/upload_utils';
+import { beginUpload } from '../../../redux/actions/upload_actions';
+import LoadingPlaceholder from '../../shared/loading_placeholder'
 
 export default function PostDetails() {
     const [caption, setCaption] = useState('');
+    const uploading = useSelector(stateSelectors.postUploading());
     const history = useHistory();
     const dispatch = useDispatch();
     const editedImage = useSelector(stateSelectors.editedImage());
@@ -23,13 +26,15 @@ export default function PostDetails() {
         formData.append('post[photo]', blob);
         formData.append('post[caption]', caption);
 
+        dispatch(beginUpload());
         dispatch(createPost(formData))
             .then(() => {
                 history.push('/');
             });
     };
 
-    return (
+    return uploading ?
+        <LoadingPlaceholder spinner={true} /> :
         <div className="post-details">
             <PostDetailsHeader submitPost={submitPost} />
             <Caption
@@ -38,8 +43,7 @@ export default function PostDetails() {
                 caption={caption}
                 imgSrc={imgSrc}
             />
-        </div>
-    );
+        </div>;
 }
 
 const PostDetailsHeader = ({ submitPost }) => (

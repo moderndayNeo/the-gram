@@ -7,6 +7,7 @@ import {
     ROTATE_UPLOADED_IMAGE,
     FIT_TO_SQUARE,
     RESET_UPLOAD_STATE,
+    BEGIN_UPLOAD,
 } from '../actions/upload_actions'
 
 import { RECEIVE_POST } from '../actions/post_actions'
@@ -22,6 +23,7 @@ const _defaultState = {
         fitWidth: false,
     },
     postSubmissionReceived: false,
+    uploading: false,
 }
 
 export default (state = _defaultState, action) => {
@@ -66,6 +68,9 @@ export default (state = _defaultState, action) => {
 
         case RESET_UPLOAD_STATE:
             return _defaultState
+
+        case BEGIN_UPLOAD:
+            return Object.assign({}, state, { uploading: true })
 
         case RECEIVE_POST || RECEIVE_POST_ERRORS:
             return _defaultState

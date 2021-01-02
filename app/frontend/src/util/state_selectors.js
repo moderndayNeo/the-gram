@@ -75,4 +75,5 @@ export default {
     imageFor: () => (state) => state.upload.imageFor,
     postSubmissionReceived: () => (state) =>
         state.upload.postSubmissionReceived,
+    postUploading: () => (state) => state.upload.uploading,
 }
