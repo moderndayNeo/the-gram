@@ -6,6 +6,8 @@ export const DISPLAY_DIRECT_MESSAGE_MODAL = 'DISPLAY_DIRECT_MESSAGE_MODAL'
 export const HIDE_DIRECT_MESSAGE_MODAL = 'HIDE_DIRECT_MESSAGE_MODAL'
 export const DISPLAY_POPUP = 'DISPLAY_POPUP'
 export const HIDE_POPUP = 'HIDE_POPUP'
+export const DISPLAY_COMMENT_MODAL = 'DISPLAY_COMMENT_MODAL'
+export const HIDE_COMMENT_MODAL = 'HIDE_COMMENT_MODAL'
 
 export const displayPostModal = (postId) => ({
     type: DISPLAY_POST_MODAL,
@@ -14,6 +16,15 @@ export const displayPostModal = (postId) => ({
 
 export const hidePostModal = () => ({
     type: HIDE_POST_MODAL,
+})
+
+export const displayCommentModal = (postId) => ({
+    type: DISPLAY_COMMENT_MODAL,
+    postId
+})
+
+export const hideCommentModal = () => ({
+    type: HIDE_COMMENT_MODAL,
 })
 
 export const displayClipboardPopup = () => ({

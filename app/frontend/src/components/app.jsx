@@ -20,14 +20,16 @@ import DirectMessageModal from './shared/direct_message_modal';
 import EditProfile from './profile/edit_profile';
 import ChangePassword from './profile/change_password';
 import DesktopModal from './shared/desktop_modal';
-import LoadingPlaceholder from './shared/loading_placeholder';
+import CommentModal from './shared/comment_modal';
 
 export default function App() {
     const postModalId = useSelector(stateSelectors.postModalId());
+    const commentModalPostId = useSelector(stateSelectors.commentModalPostId());
     const dmModal = useSelector(stateSelectors.dmModal());
+    const modalDisplayed = dmModal || postModalId || commentModalPostId;
 
     return (
-        <div className={`app ${dmModal || postModalId && "position-fixed"}`}>
+        <div className={`app ${modalDisplayed && "position-fixed"}`}>
             <AuthRoute exact path="/signup" component={SignupPage} />
             <AuthRoute exact path="/login" component={LoginPage} />
             <ProtectedRoute exact path="/" component={Home} />
@@ -45,8 +47,8 @@ export default function App() {
             <ProtectedRoute exact path="/users/:userId/following" component={Following} />
             {postModalId && <PostModal postId={postModalId} />}
             {dmModal && <DirectMessageModal />}
+            {commentModalPostId && <CommentModal postId={commentModalPostId} />}
             <DesktopModal />
-            {/* <LoadingPlaceholder spinner={true} /> */}
         </div>
     );
 }

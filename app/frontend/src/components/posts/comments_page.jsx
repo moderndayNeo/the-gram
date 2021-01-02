@@ -7,6 +7,7 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import { commentOnPost } from '../../redux/actions/comment_actions';
 import BottomNav from '../shared/bottom_nav';
 import CommentLikeButton from './comment_like_button';
+import { displayCommentModal } from '../../redux/actions/ui_actions';
 
 export default function CommentsPage() {
     const currentUserImg = useSelector(stateSelectors.currentUserImageUrl());
@@ -32,7 +33,9 @@ export default function CommentsPage() {
                     {icons.chevron}
                 </div>
                 <h3>Comments</h3>
-                {icons.paperPlane}
+                <button onClick={() => dispatch(displayCommentModal(postId))}>
+                    {icons.paperPlane}
+                </button>
             </header>
 
             <section className="form-container">

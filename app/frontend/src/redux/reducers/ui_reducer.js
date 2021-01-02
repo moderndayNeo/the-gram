@@ -5,12 +5,15 @@ import {
     HIDE_CLIPBOARD_POPUP,
     DISPLAY_DIRECT_MESSAGE_MODAL,
     HIDE_DIRECT_MESSAGE_MODAL,
+    DISPLAY_COMMENT_MODAL,
+    HIDE_COMMENT_MODAL,
     DISPLAY_POPUP,
     HIDE_POPUP,
 } from '../actions/ui_actions'
 
 const _defaultState = {
     postModal: null,
+    commentModal: null,
     clipboardPopup: false,
     dmModal: false,
     editProfilePopup: false,
@@ -26,6 +29,12 @@ export default (state = _defaultState, action) => {
 
         case HIDE_POST_MODAL:
             return Object.assign({}, state, { postModal: null })
+
+        case DISPLAY_COMMENT_MODAL:
+            return Object.assign({}, state, { commentModal: action.postId })
+
+        case HIDE_COMMENT_MODAL:
+            return Object.assign({}, state, { commentModal: null })
 
         case DISPLAY_CLIPBOARD_POPUP:
             return Object.assign({}, state, { clipboardPopup: true })
