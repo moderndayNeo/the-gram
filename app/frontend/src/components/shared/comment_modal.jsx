@@ -4,8 +4,11 @@ import { hideCommentModal, showClipboardPopup } from '../../redux/actions/ui_act
 export default function CommentModal({ postId }) {
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(`http://localhost:3000/#/posts/${postId}`);
-        // in PROD: use the heroku address
+        const path = (process.env.NODE_ENV === 'development') ?
+            "http://localhost:3000/#/posts" :
+            "https://adamjz-the-gram.herokuapp.com/#/posts";
+        navigator.clipboard.writeText(`${path}/${postId}`);
+
         dispatch(hideCommentModal());
         dispatch(showClipboardPopup());
     };
