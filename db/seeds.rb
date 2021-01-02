@@ -20,7 +20,7 @@ def create_users
 
     User.create!(
       name: name,
-      username: name.split(" ").join(""),
+      username: name.split(" ").join("").downcase(),
       bio: Faker::GreekPhilosophers.quote,
       email: Faker::Internet.email,
       password: name.split(" ").join(""),

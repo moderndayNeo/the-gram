@@ -1,14 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deletePost } from '../../redux/actions/post_actions';
 import { hidePostModal, showClipboardPopup } from '../../redux/actions/ui_actions';
+import { useHistory } from 'react-router-dom';
+import stateSelectors from '../../util/state_selectors';
 
-export default function PostModal({ postId }) {
+export default function PostModal() {
+    const postId = useSelector(stateSelectors.postModalId());
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    if (!postId) history.push('/');
 
     const handleDelete = () => {
         dispatch(deletePost(postId));
-        dispatch(hidePostModal());
     };
 
     const handleCopy = () => {

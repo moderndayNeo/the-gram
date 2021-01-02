@@ -11,6 +11,8 @@ import {
     HIDE_POPUP,
 } from '../actions/ui_actions'
 
+import { DELETE_POST } from '../actions/post_actions'
+
 const _defaultState = {
     postModal: null,
     commentModal: null,
@@ -53,6 +55,9 @@ export default (state = _defaultState, action) => {
 
         case HIDE_POPUP:
             return Object.assign({}, state, { [action.popupType]: false })
+
+        case DELETE_POST:
+            return Object.assign({}, state, { postModal: null })
 
         default:
             return _defaultState

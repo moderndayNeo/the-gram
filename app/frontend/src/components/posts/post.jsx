@@ -3,13 +3,19 @@ import UserAvatar from '../shared/user_avatar';
 import icons from '../shared/icons/svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PostFooter from './post_footer';
 import { likePost } from '../../redux/actions/post_actions';
 import { displayPostModal } from '../../redux/actions/ui_actions';
 
 
 export default function Post({ post }) {
+    const history = useHistory();
+
+    React.useEffect(() => {
+        if (!post) history.push('/');
+    });
+
     let { id, author_id, image_url } = post;
     const author = useSelector(stateSelectors.userById(author_id));
     const comments = useSelector(stateSelectors.commentsByPostId(post.id));
@@ -17,6 +23,7 @@ export default function Post({ post }) {
     const likedPostIds = useSelector(stateSelectors.currentUserLikedPostIds());
     const isSaved = savedPostIds.includes(id);
     const isLiked = likedPostIds.includes(id);
+
 
     return (
         <article className="post">
