@@ -87,3 +87,8 @@ export const deletePost = (postId) => (dispatch) =>
     APIUtil.deletePost(postId)
         .then(() => dispatch(removePost(postId)))
         .catch((errors) => console.log(errors))
+
+export const getPost = (postId) => (dispatch) =>
+    APIUtil.fetchPost(postId)
+        .then(({ data: { post } }) => dispatch(receivePost(post)))
+        .catch((errors) => dispatch(receivePostErrors(errors)))

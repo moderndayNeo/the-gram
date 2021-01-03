@@ -19,6 +19,7 @@ export const updatePassword = (userId, passwords) =>
 
 export const createPost = (post) => axiosPostRequest(`/api/posts`, post)
 export const fetchPosts = () => axiosGetRequest(`/api/posts`)
+export const fetchPost = (postId) => axiosGetRequest(`/api/posts/${postId}`)
 export const deletePost = (postId) => axiosDeleteRequest(`/api/posts/${postId}`)
 export const updatePost = (postId, formData) =>
     axiosPutRequest(`/api/posts/${postId}`, formData)
