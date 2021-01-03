@@ -1,5 +1,7 @@
 require "faker"
 require "open-uri"
+require "net/http"
+require "json"
 
 EMOJIS = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "☺️", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "😘", "😗", "😙", "😚", "😋", "😜", "😝", "😛", "🤑", "🤗", "🤓", "😎", "🤡", "🤠", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "😤", "😠", "😡", "😶", "😐", "😑", "😯", "😦", "😧", "😮", "😲", "😵", "😳", "😱", "😨", "😰", "😢", "😥", "🤤", "😭", "😓", "😪", "😴", "🙄", "🤔", "🤥", "😬", "🤐", "🤢", "🤧", "😷", "🤒", "🤕", "😈", "👿", "👹", "👺", "💩", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾", "👐", "🙌", "👏", "🙏", "🤝", "👍", "👎", "👊", "✊", "🤛", "🤜", "🤞", "✌️", "🤘", "👌", "👈", "👉", "👆", "👇", "☝️", "✋", "🤚", "🖐", "🖖", "👋", "🤙", "💪", "🖕", "✍️", "🤳", "💅", "💍", "💄", "💋", "👄", "👅", "👂", "👃", "👣", "👁", "👀", "🧠", "🗣", "👤", "👥", "👶", "👦", "👧", "👨", "👩", "👱‍♀", "👱", "👴", "👵", "👲", "👳‍♀", "👳", "👮‍♀", "👮", "👷‍♀", "👷", "💂‍♀", "💂", "🕵️‍♀️", "🕵", "👩‍⚕", "👨‍⚕", "👩‍🌾", "👨‍🌾", "👩‍🍳", "👨‍🍳", "👩‍🎓", "👨‍🎓", "👩‍🎤", "👨‍🎤", "👩‍🏫", "👨‍🏫", "👩‍🏭", "👨‍🏭", "👩‍💻", "👨‍💻", "👩‍💼", "👨‍💼", "👩‍🔧", "👨‍🔧", "👩‍🔬", "👨‍🔬", "👩‍🎨", "👨‍🎨", "👩‍🚒", "👨‍🚒", "👩‍✈", "👨‍✈", "👩‍🚀", "👨‍🚀", "👩‍⚖", "👨‍⚖", "🤶", "🎅", "👸", "🤴", "👰", "🤵", "👼", "🤰", "🙇‍♀", "🙇", "💁", "💁‍♂", "🙅", "🙅‍♂", "🙆", "🙆‍♂", "🙋", "🙋‍♂", "🤦‍♀", "🤦‍♂", "🤷‍♀", "🤷‍♂", "🙎", "🙎‍♂", "🙍", "🙍‍♂", "💇", "💇‍♂", "💆", "💆‍♂", "🕴", "💃", "🕺", "👯", "👯‍♂", "🚶‍♀", "🚶", "🏃‍♀", "🏃", "👫", "👭", "👬", "💑", "👩‍❤️‍👩", "👨‍❤️‍👨", "💏", "👩‍❤️‍💋‍👩", "👨‍❤️‍💋‍👨", "👪", "👨‍👩‍👧", "👨‍👩‍👧‍👦", "👨‍👩‍👦‍👦", "👨‍👩‍👧‍👧", "👩‍👩‍👦", "👩‍👩‍👧", "👩‍👩‍👧‍👦", "👩‍👩‍👦‍👦", "👩‍👩‍👧‍👧", "👨‍👨‍👦", "👨‍👨‍👧", "👨‍👨‍👧‍👦", "👨‍👨‍👦‍👦", "👨‍👨‍👧‍👧", "👩‍👦", "👩‍👧", "👩‍👧‍👦", "👩‍👦‍👦", "👩‍👧‍👧", "👨‍👦", "👨‍👧", "👨‍👧‍👦", "👨‍👦‍👦", "👨‍👧‍👧", "👚", "👕", "👖", "👔", "👗", "👙", "👘", "👠", "👡", "👢", "👞", "👟", "🧣", "🧤", "🧥", "🧦", "🧢", "👒", "🎩", "🎓", "👑", "⛑", "🎒", "👝", "👛", "👜", "💼", "👓", "🕶", "🌂", "☂️"]
 
@@ -15,36 +17,23 @@ def create_guest_account
 end
 
 def create_users(num_users)
-  last_user_id = User.last.id
+  url = "https://randomuser.me/api/?results=#{num_users}&password=upper,lower,7-10&format=pretty&inc=name,email,login,picture"
+  uri = URI(url)
+  response = Net::HTTP.get(uri)
+  randomusers = JSON.parse(response)
 
-  # num_users.times {
-  (last_user_id + 1..last_user_id + 20).each do |id|
-    name = Faker::Name.unique.name
+  randomusers["results"].each { |data|
+    user = User.new
+    user.name = data["name"]["first"] + " " + data["name"]["last"]
+    user.email = data["email"]
+    user.username = data["login"]["username"]
+    user.password = data["login"]["password"]
+    user.bio = Faker::GreekPhilosophers.quote
+    img = URI.open(data["picture"]["large"])
+    user.photo.attach(io: img, filename: "user.png")
 
-    User.create({
-      id: id,
-      name: name,
-      username: name.split(" ").join("").downcase(),
-      bio: Faker::GreekPhilosophers.quote,
-      email: Faker::Internet.email,
-      password: name.split(" ").join(""),
-    })
-  end
-
-  # user = User.new({
-  #   name: name,
-  #   username: name.split(" ").join("").downcase(),
-  #   bio: Faker::GreekPhilosophers.quote,
-  #   email: Faker::Internet.email,
-  #   password: name.split(" ").join(""),
-  # })
-
-  # get img_url from sample user data
-  # img_url = Faker::Placeholdit.image(size: "200x200", format: "png", background_color: "000000", text_color: "651fff", text: "Test")
-  # img = URI.open(img_url)
-  # user.photo.attach(io: img, filename: "user.png")
-  # user.save
-  # }
+    user.save!
+  }
 end
 
 def create_posts(num_posts)
@@ -157,19 +146,19 @@ def create_comment_likes(num_likes)
   }
 end
 
+
+# 50.times { puts Faker::Movies::LordOfTheRings.unique.quote }
+# 50.times { p Faker::Movies::BackToTheFuture.unique.quote }
+# 50.times { p Faker::Quote.unique.matz } - 23
+# 50.times { p Faker::GreekPhilosophers.unique.quote }
+# Faker::GreekPhilosophers.unique.quote - bio, 21
+# Faker::UniqueGenerator.clear
+
 # create_guest_account
-create_users(50)
-create_posts(100)
-
-create_post_likes(100)
-create_comments(50)
-create_follows(100)
-create_saves(50)
-create_comment_likes(100)
-
-50.times { puts Faker::Movies::LordOfTheRings.unique.quote }
-50.times { p Faker::Movies::BackToTheFuture.unique.quote }
-50.times { p Faker::Quote.unique.matz }
-
-
-Faker::Movies::HarryPotter.unique.quote(number: 50)
+# create_users(50)
+# create_posts(400)
+# create_post_likes(2000)
+# create_comments(2400)
+# create_follows(600)
+# create_saves(400)
+# create_comment_likes(1000)
