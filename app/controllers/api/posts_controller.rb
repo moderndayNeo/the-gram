@@ -22,6 +22,9 @@ class Api::PostsController < ApplicationController
           :liked_comments
         )
 
+        @posts = Post.all
+        @users = User.all
+
       @comments = Comment
         .where(post_id: [@posts.pluck(:id)])
         .includes(:author, :likes)

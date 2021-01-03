@@ -46,7 +46,7 @@ def create_posts(num_posts)
       location: Faker::Address.city,
     )
 
-    img_url = Faker::Placeholdit.image(size: "100x100", format: "png", background_color: "000000", text_color: "651fff", text: "Test")
+    # img_url = Faker::Placeholdit.image(size: "100x100", format: "png", background_color: "000000", text_color: "651fff", text: "Test")
     img = URI.open(img_url)
     post.photo.attach(io: img, filename: "text.png")
     post.save!
@@ -146,7 +146,6 @@ def create_comment_likes(num_likes)
   }
 end
 
-
 # 50.times { puts Faker::Movies::LordOfTheRings.unique.quote }
 # 50.times { p Faker::Movies::BackToTheFuture.unique.quote }
 # 50.times { p Faker::Quote.unique.matz } - 23
@@ -162,3 +161,58 @@ end
 # create_follows(600)
 # create_saves(400)
 # create_comment_likes(1000)
+
+# Unsplash
+
+# https://api.unsplash.com/topics/wallpapers/photos
+# ?orientation=squarish
+# &client_id=GbalAluCsSlrC4n4E0xRoTsOWKRMWjxPej76tw8ROJg
+# &page=1
+# &per_page=50
+
+def create_posts_with_unsplash
+  unsplash_url = "https://api.unsplash.com/topics/wallpapers/photos?orientation=squarish&client_id=GbalAluCsSlrC4n4E0xRoTsOWKRMWjxPej76tw8ROJg&page=1&per_page=50"
+  uri = URI(unsplash_url)
+  response = Net::HTTP.get(uri)
+  images = JSON.parse(response)
+
+  images.each do |img|
+    regular = img["urls"]["regular"]
+    base = regular.split("?")[0]
+    img_url = base + "?w=400"
+
+    post = Post.new({
+      author_id: User.pluck(:id).sample,
+      caption: Faker::Quote.matz,
+      location: Faker::Address.city,
+    })
+
+    img = URI.open(img_url)
+    post.photo.attach(io: img, filename: "text.png")
+    post.save!
+  end
+end
+
+create_posts_with_unsplash
+
+# regular = 'https://images.unsplash.com/photo-1598804186557-95e302c7b0a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxOTU1ODd8MHwxfHRvcGljfHxibzhqUUtUYUUwWXx8fHx8Mnw&ixlib=rb-1.2.1&q=80&w=1080'
+# base = regular.split('?')[0]
+# width = '?w=400'
+# img_url = base + width
+
+# API call for urls
+# Take regular url, add width parameter,
+
+# https://images.unsplash.com/photo
+# &ar=1:1
+
+# Options:
+# Make an unsplash api call, open the URL.
+# Map over the photo data returned, for each photo, create a Post,
+# attach the photo, save it.
+# Drawbacks: May hit API limit.
+
+# Have a folder of mid-quality images. Map over each photo, create a Post,
+# attach the photo, save it.
+# Drawbacks: Creating a big file. Where to store the file so that my production seeds file
+# can access it publicly?
