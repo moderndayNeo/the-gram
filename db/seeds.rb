@@ -55,7 +55,7 @@ def create_posts_by_category(category, page)
   data["results"].each do |img|
     regular = img["urls"]["regular"]
     base = regular.split("?")[0]
-    img_url = base + "?w=400&h=400"
+    img_url = base + "?w=300&h=300"
 
     post = Post.new({
       author_id: user_ids.sample,

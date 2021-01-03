@@ -2,15 +2,17 @@ class Api::PostsController < ApplicationController
   def index
     case params[:type]
     when "feed"
+      associated_user_ids = current_user.associated_user_ids
+
       @posts = Post
-        .where(author_id: [current_user.associated_user_ids])
+        .where(author_id: [associated_user_ids])
         .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
         .newest_first
-        # .limit(50)
+        .limit(10)
 
       @users = User
-        .where(id: [current_user.associated_user_ids])
+        .where(id: [associated_user_ids])
         .includes(
           :photo_attachment,
           :saves,
@@ -25,10 +27,10 @@ class Api::PostsController < ApplicationController
 
       # @posts = Post.all
       # @users = User.all
-      # Post.where(author_id: [User.first.associated_user_ids]).limit(50)
 
+      post_ids = @posts.pluck(:id)
       @comments = Comment
-        .where(post_id: [@posts.pluck(:id)])
+        .where(post_id: [post_ids])
         .includes(:author, :likes)
 
       @notifications = current_user.notifications.newest_first
