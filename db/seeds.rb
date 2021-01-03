@@ -2,6 +2,7 @@ require "faker"
 require "open-uri"
 require "net/http"
 require "json"
+require "unsplash"
 
 EMOJIS = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "☺️", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "😘", "😗", "😙", "😚", "😋", "😜", "😝", "😛", "🤑", "🤗", "🤓", "😎", "🤡", "🤠", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "😤", "😠", "😡", "😶", "😐", "😑", "😯", "😦", "😧", "😮", "😲", "😵", "😳", "😱", "😨", "😰", "😢", "😥", "🤤", "😭", "😓", "😪", "😴", "🙄", "🤔", "🤥", "😬", "🤐", "🤢", "🤧", "😷", "🤒", "🤕", "😈", "👿", "👹", "👺", "💩", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾", "👐", "🙌", "👏", "🙏", "🤝", "👍", "👎", "👊", "✊", "🤛", "🤜", "🤞", "✌️", "🤘", "👌", "👈", "👉", "👆", "👇", "☝️", "✋", "🤚", "🖐", "🖖", "👋", "🤙", "💪", "🖕", "✍️", "🤳", "💅", "💍", "💄", "💋", "👄", "👅", "👂", "👃", "👣", "👁", "👀", "🧠", "🗣", "👤", "👥", "👶", "👦", "👧", "👨", "👩", "👱‍♀", "👱", "👴", "👵", "👲", "👳‍♀", "👳", "👮‍♀", "👮", "👷‍♀", "👷", "💂‍♀", "💂", "🕵️‍♀️", "🕵", "👩‍⚕", "👨‍⚕", "👩‍🌾", "👨‍🌾", "👩‍🍳", "👨‍🍳", "👩‍🎓", "👨‍🎓", "👩‍🎤", "👨‍🎤", "👩‍🏫", "👨‍🏫", "👩‍🏭", "👨‍🏭", "👩‍💻", "👨‍💻", "👩‍💼", "👨‍💼", "👩‍🔧", "👨‍🔧", "👩‍🔬", "👨‍🔬", "👩‍🎨", "👨‍🎨", "👩‍🚒", "👨‍🚒", "👩‍✈", "👨‍✈", "👩‍🚀", "👨‍🚀", "👩‍⚖", "👨‍⚖", "🤶", "🎅", "👸", "🤴", "👰", "🤵", "👼", "🤰", "🙇‍♀", "🙇", "💁", "💁‍♂", "🙅", "🙅‍♂", "🙆", "🙆‍♂", "🙋", "🙋‍♂", "🤦‍♀", "🤦‍♂", "🤷‍♀", "🤷‍♂", "🙎", "🙎‍♂", "🙍", "🙍‍♂", "💇", "💇‍♂", "💆", "💆‍♂", "🕴", "💃", "🕺", "👯", "👯‍♂", "🚶‍♀", "🚶", "🏃‍♀", "🏃", "👫", "👭", "👬", "💑", "👩‍❤️‍👩", "👨‍❤️‍👨", "💏", "👩‍❤️‍💋‍👩", "👨‍❤️‍💋‍👨", "👪", "👨‍👩‍👧", "👨‍👩‍👧‍👦", "👨‍👩‍👦‍👦", "👨‍👩‍👧‍👧", "👩‍👩‍👦", "👩‍👩‍👧", "👩‍👩‍👧‍👦", "👩‍👩‍👦‍👦", "👩‍👩‍👧‍👧", "👨‍👨‍👦", "👨‍👨‍👧", "👨‍👨‍👧‍👦", "👨‍👨‍👦‍👦", "👨‍👨‍👧‍👧", "👩‍👦", "👩‍👧", "👩‍👧‍👦", "👩‍👦‍👦", "👩‍👧‍👧", "👨‍👦", "👨‍👧", "👨‍👧‍👦", "👨‍👦‍👦", "👨‍👧‍👧", "👚", "👕", "👖", "👔", "👗", "👙", "👘", "👠", "👡", "👢", "👞", "👟", "🧣", "🧤", "🧥", "🧦", "🧢", "👒", "🎩", "🎓", "👑", "⛑", "🎒", "👝", "👛", "👜", "💼", "👓", "🕶", "🌂", "☂️"]
 
@@ -168,18 +169,47 @@ end
 # ?orientation=squarish
 # &client_id=GbalAluCsSlrC4n4E0xRoTsOWKRMWjxPej76tw8ROJg
 # &page=1
-# &per_page=50
+
+# https://api.unsplash.com/photos?query=london
+# https://api.unsplash.com/photos?topic=wallpapers
+
+# https://api.unsplash.com/search/photos?query=nature
+# &client_id=GbalAluCsSlrC4n4E0xRoTsOWKRMWjxPej76tw8ROJg
+# &per_page=30
+
+# Hit the api with 13 different queries.
+# Or access the different pages available e.g. travel has ten pages
+
+# https://api.unsplash.com/search/photos?query=travel&client_id=GbalAluCsSlrC4n4E0xRoTsOWKRMWjxPej76tw8ROJg&per_page=30&page=10
 
 def create_posts_with_unsplash
-  unsplash_url = "https://api.unsplash.com/topics/wallpapers/photos?orientation=squarish&client_id=GbalAluCsSlrC4n4E0xRoTsOWKRMWjxPej76tw8ROJg&page=1&per_page=50"
+  # categories = %w( Travel Sports Food Nature Beautiful Model )
+  categories = %w( Travel ) # <- test
+  client_id = "GbalAluCsSlrC4n4E0xRoTsOWKRMWjxPej76tw8ROJg"
+  page = 1
+  # per_page = 3
+  per_page = 5 # <- test
+
+  categories.each do |category|
+    create_posts_by_category(category, client_id, per_page, page)
+  end
+
+  # page = page + 1
+  # categories.each do |category|
+  #   create_posts_by_category(category, client_id, per_page, page)
+  # end
+end
+
+def create_posts_by_category(category, client_id, per_page, page)
+  unsplash_url = "https://api.unsplash.com/search/photos?query=#{category}&client_id=#{client_id}&per_page=#{per_page}&page=#{page}"
   uri = URI(unsplash_url)
   response = Net::HTTP.get(uri)
-  images = JSON.parse(response)
+  data = JSON.parse(response)
 
-  images.each do |img|
+  data["results"].each do |img|
     regular = img["urls"]["regular"]
     base = regular.split("?")[0]
-    img_url = base + "?w=400"
+    img_url = base + "?w=400?h=400"
 
     post = Post.new({
       author_id: User.pluck(:id).sample,
@@ -195,24 +225,8 @@ end
 
 create_posts_with_unsplash
 
-# regular = 'https://images.unsplash.com/photo-1598804186557-95e302c7b0a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxOTU1ODd8MHwxfHRvcGljfHxibzhqUUtUYUUwWXx8fHx8Mnw&ixlib=rb-1.2.1&q=80&w=1080'
-# base = regular.split('?')[0]
-# width = '?w=400'
-# img_url = base + width
-
-# API call for urls
-# Take regular url, add width parameter,
-
-# https://images.unsplash.com/photo
-# &ar=1:1
-
 # Options:
 # Make an unsplash api call, open the URL.
 # Map over the photo data returned, for each photo, create a Post,
 # attach the photo, save it.
 # Drawbacks: May hit API limit.
-
-# Have a folder of mid-quality images. Map over each photo, create a Post,
-# attach the photo, save it.
-# Drawbacks: Creating a big file. Where to store the file so that my production seeds file
-# can access it publicly?
