@@ -27,7 +27,11 @@ export default function Post({ post }) {
 
     return (
         <article className="post">
-            <PostHeader author={author} displayPostModal={displayPostModal} id={id} />
+            <PostHeader
+                post={post}
+                displayPostModal={displayPostModal}
+                author={author}
+            />
             <PostImage
                 id={id}
                 imageUrl={image_url}
@@ -44,16 +48,17 @@ export default function Post({ post }) {
     );
 }
 
-const PostHeader = ({ author, displayPostModal, id }) => {
+const PostHeader = ({ post, displayPostModal, author }) => {
     return (
         <header className="post-header">
             <UserAvatar imageUrl={author.image_url} />
-            <div className="author-name">
+            <div className="name-and-location">
                 <Link to={`/users/${author.id}`}>
-                    {author.username}
+                    <p className="username-link">{author.username}</p>
+                    {post.location && <p className="location">{post.location}</p>}
                 </Link>
             </div>
-            <button onClick={() => dispatch(displayPostModal(id))}>
+            <button onClick={() => dispatch(displayPostModal(post.id))}>
                 {icons.threeDots}
             </button>
         </header>

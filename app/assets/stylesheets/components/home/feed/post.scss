@@ -3,22 +3,29 @@
 
     .post-header {
         height: 60px;
-        // border: 1px solid red;
 
-        .author-name {
+        .name-and-location {
             width: 80%;
             text-align: left;
+            padding-left: 10px;
         }
 
         a {
             font-weight: 600;
             color: black;
             font-size: inherit;
+
+            .location {
+                margin: 0;
+                font-size: 12px;
+                font-weight: 400;
+            }
+
+
         }
     }
 
     .image-container {
-        // border: 1px solid red;
         display: flex;
         justify-content: center;
         align-items: center;
