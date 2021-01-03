@@ -39,7 +39,7 @@ end
 
 def create_posts
   [1, 2].each do |page|
-    categories = %w( Travel Sports Food Nature Beautiful Model )
+    categories = %w( Model Sports Nature Food Beautiful Travel )
     categories.each { |category| create_posts_by_category(category, page) }
   end
 end

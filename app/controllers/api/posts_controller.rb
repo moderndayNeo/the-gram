@@ -7,6 +7,7 @@ class Api::PostsController < ApplicationController
         .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
         .newest_first
+        # .limit(50)
 
       @users = User
         .where(id: [current_user.associated_user_ids])
@@ -24,6 +25,7 @@ class Api::PostsController < ApplicationController
 
       # @posts = Post.all
       # @users = User.all
+      # Post.where(author_id: [User.first.associated_user_ids]).limit(50)
 
       @comments = Comment
         .where(post_id: [@posts.pluck(:id)])
