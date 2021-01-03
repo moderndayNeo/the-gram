@@ -11,7 +11,7 @@ def create_guest_account
     id: 1,
     name: "Guest",
     username: "Guest",
-    bio: null,
+    bio: "Guest Account",
     email: "guest@example.com",
     password: "guestaccount",
   )
@@ -65,7 +65,7 @@ def create_posts_by_category(category, page)
 
     img = URI.open(img_url)
     post.photo.attach(io: img, filename: "text.png")
-    post.save!
+    post.save
   end
 end
 
@@ -80,7 +80,7 @@ def create_comments(num_comments)
       Faker::Movies::BackToTheFuture.quote,
     ]
 
-    Comment.create!(
+    Comment.create(
       author_id: user_ids.sample,
       post_id: post_ids.sample,
       body: quote_options.sample + " " + EMOJIS.sample,
@@ -159,11 +159,13 @@ def create_comment_likes(num_likes)
   }
 end
 
-create_guest_account
-create_users(50)
-create_posts
-create_post_likes(4800)
-create_comments(2400)
+# create_guest_account
+# create_users(50)
+# create_posts
+# create_post_likes(4000)
+# create_comments(2400)
+
+create_comments(1500)
 create_follows(750)
 create_saves(300)
 create_comment_likes(1000)

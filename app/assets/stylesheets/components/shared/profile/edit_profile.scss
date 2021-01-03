@@ -3,6 +3,18 @@
         margin-top: 20px;
     }
 
+    .subtext {
+        font-size: 12px;
+        color: var(--dark-grey);
+        line-height: 14px;
+    }
+
+    .text {
+        .subtext {
+            margin: 2px 0 -10px;
+        }
+    }
+
     .edit-image {
         padding: 0 20px;
         display: flex;
@@ -56,11 +68,6 @@
             width: 100%;
         }
 
-        .subtext {
-            font-size: 12px;
-            color: var(--dark-grey);
-            line-height: 14px;
-        }
 
         .blue-button {
             width: 70px;

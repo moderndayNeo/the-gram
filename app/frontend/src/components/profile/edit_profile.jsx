@@ -53,7 +53,16 @@ export default function EditProfile() {
                     <UserAvatar imageUrl={currentUser.image_url} />
                     <div className="text">
                         <h3>{currentUser.username}</h3>
-                        <NewPostButton text="Change Profile Photo" imageFor="profile" />
+                        <NewPostButton
+                            disabled
+                            text="Change Profile Photo"
+                            imageFor="profile"
+                            onClick={(e) => preventDefault(e)}
+                        />
+                        {isGuestAccount &&
+                            <p className="subtext">The guest account may not be edited.</p>
+                        }
+
                     </div>
                 </div>
 
