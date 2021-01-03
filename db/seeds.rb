@@ -170,3 +170,6 @@ create_comment_likes(100)
 50.times { puts Faker::Movies::LordOfTheRings.unique.quote }
 50.times { p Faker::Movies::BackToTheFuture.unique.quote }
 50.times { p Faker::Quote.unique.matz }
+
+
+Faker::Movies::HarryPotter.unique.quote(number: 50)
