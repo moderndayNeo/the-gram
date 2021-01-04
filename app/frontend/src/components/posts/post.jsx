@@ -11,6 +11,7 @@ import { displayPostModal } from '../../redux/actions/ui_actions';
 
 export default function Post({ post }) {
     const history = useHistory();
+    const dispatch = useDispatch()
 
     React.useEffect(() => {
         if (!post) history.push('/');
@@ -49,6 +50,8 @@ export default function Post({ post }) {
 }
 
 const PostHeader = ({ post, displayPostModal, author }) => {
+    const dispatch = useDispatch()
+
     return (
         <header className="post-header">
             <UserAvatar imageUrl={author.image_url} />
