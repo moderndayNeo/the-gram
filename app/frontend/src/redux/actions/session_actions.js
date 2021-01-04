@@ -2,7 +2,6 @@ import { batch } from 'react-redux'
 import * as APIUtil from '../../util/api_util'
 import {
     receiveNotification,
-    receiveNotifications,
 } from './notification_actions'
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER'

@@ -30,6 +30,18 @@ class Api::PostsController < ApplicationController
         .includes(:author, :likes)
 
       return render :index
+    when "new_user"
+      @posts = Post.limit(20).newest_first.includes(:comments)
+      post_ids = @posts.pluck(:id)
+      @comments = Comment.where(post_id: [post_ids])
+      author_ids = []
+      author_ids.concat(@comments.pluck(:author_id))
+      author_ids.concat(@posts.pluck(:author_id))
+
+      @users = User.where(id: [author_ids.uniq])
+      @users << user
+
+      return render :index
     else
       return render json: ["Error: No type provided to posts index"], status: 422
     end
