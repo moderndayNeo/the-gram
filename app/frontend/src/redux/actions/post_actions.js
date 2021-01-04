@@ -73,12 +73,12 @@ export const unlikePost = (postId) => (dispatch) =>
         })
         .catch((errors) => dispatch(receivePostErrors(errors)))
 
-export const savePost = (postId) => dispatch =>
+export const savePost = (postId) => (dispatch) =>
     APIUtil.savePost(postId)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receivePostErrors(errors)))
 
-export const unsavePost = (postId) => dispatch =>
+export const unsavePost = (postId) => (dispatch) =>
     APIUtil.unsavePost(postId)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receivePostErrors(errors)))
@@ -92,3 +92,12 @@ export const getPost = (postId) => (dispatch) =>
     APIUtil.fetchPost(postId)
         .then(({ data: { post } }) => dispatch(receivePost(post)))
         .catch((errors) => dispatch(receivePostErrors(errors)))
+
+export const getNewUserFeed = () => (dispatch) =>
+    APIUtil.getNewUserFeed().then(({ data: { users, posts, comments } }) => {
+        batch(() => {
+            dispatch(receiveUsers(users))
+            dispatch(receivePosts(posts))
+            dispatch(receiveComments(comments))
+        })
+    })

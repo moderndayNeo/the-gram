@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { createNewUser } from '../../../redux/actions/session_actions';
+import { useDispatch } from 'react-redux';
 
 export default function SignupForm() {
+    const dispatch = useDispatch();
     const [info, setInfo] = useState({
         name: '',
         username: '',

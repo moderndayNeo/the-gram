@@ -25,6 +25,8 @@ export const updatePost = (postId, formData) =>
     axiosPutRequest(`/api/posts/${postId}`, formData)
 
 export const getFeed = () => axiosGetRequest(`/api/posts`, { type: 'feed' })
+export const getNewUserFeed = () =>
+    axiosGetRequest(`/api/posts`, { type: 'new_user' })
 
 export const likePost = (postId) =>
     axiosPostRequest(`/api/posts/${postId}/likes`)

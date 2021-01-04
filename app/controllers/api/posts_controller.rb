@@ -37,9 +37,9 @@ class Api::PostsController < ApplicationController
       author_ids = []
       author_ids.concat(@comments.pluck(:author_id))
       author_ids.concat(@posts.pluck(:author_id))
+      author_ids << current_user.id
 
-      @users = User.where(id: [author_ids.uniq])
-      @users << user
+      @users = User.where(id: [author_ids.uniq]).all
 
       return render :index
     else
