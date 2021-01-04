@@ -7,8 +7,6 @@ export default function GuestLoginButton() {
 
     const loginGuest = () => (
         dispatch(loginUser({
-            // username: 'arnie85',
-            // password: 'mrolympia85'
             username: 'guest',
             password: 'guestaccount'
         }))
@@ -21,6 +19,5 @@ export default function GuestLoginButton() {
         >
             Continue as guest
         </button>
-        // <button className="blue-button">Log in with Facebook</button>
     );
 }

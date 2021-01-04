@@ -6,7 +6,7 @@ import UserErrors from '../shared/user_errors';
 export default function ImageForm({ currentUserId }) {
     const [photoUrl, setPhotoUrl] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleUpload = (e) => {
         const reader = new FileReader();
@@ -41,7 +41,12 @@ export default function ImageForm({ currentUserId }) {
                 <input type="file" onChange={(e) => handleUpload(e)} />
                 {preview}
 
-                <button disabled={photoFile ? false : true} onClick={(e) => handleSubmit(e)}>Upload Image</button>
+                <button
+                    disabled={photoFile ? false : true}
+                    onClick={(e) => handleSubmit(e)}
+                >
+                    Upload Image
+                </button>
             </form>
             <UserErrors />
         </div>

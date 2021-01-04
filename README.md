@@ -36,13 +36,57 @@ If you don't feel like signing up, simply browse the app using the Guest account
 
 ## Technologies
 
+-   AWS
 -   Rails 6.0.3.4
 -   Ruby 2.7.0
--   Node v12.14.0
 -   Postgres (PostgreSQL) 12.5
 
 -   React 17.0.1
 -   Redux 4.0.5
--   AWS
+-   Node v12.14.0
 
 ## Some Snippets From The Code
+
+-   N+1 buster
+-   Separation of concerns
+-   AWS
+-   React hooks
+-   Modern redux with hooks, thunks
+-   Sass styling, variables, classes, indentation
+
+### All API functions are held in a single file using axios requests I custom-made for this project.
+
+```js
+//...
+export const followUser = (userId) =>
+    axiosPostRequest(`/api/users/${userId}/follows`)
+
+export const unfollowUser = (userId) =>
+    axiosDeleteRequest(`/api/users/${userId}/follows/1`)
+
+export const savePost = (postId) =>
+    axiosPostRequest(`/api/posts/${postId}/saves`)
+//...
+```
+
+### Custom-made axios requests attach the CSRF token before the request is made, allowing me to use CSRF protection for the entire project.
+
+```js
+import axios from 'axios'
+
+const token = document.querySelector('[name=csrf-token]').content
+axios.defaults.headers.common['X-CSRF-TOKEN'] = token
+
+export const axiosGetRequest = (url, data = null) =>
+    axios({ method: 'get', url, params: data })
+```
+
+### Redux thunks asynchronously make requests then update state
+
+```js
+export const createPost = (post) => (dispatch) =>
+    APIUtil.createPost(post)
+        .then(({ data: { post } }) => dispatch(receivePost(post)))
+        .catch((errors) => dispatch(receivePostErrors(errors)))
+```
+
