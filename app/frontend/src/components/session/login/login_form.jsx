@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { loginUser } from '../../../redux/actions/session_actions';
-// import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export default function LoginForm() {
-    // const history = useHistory();
+    const dispatch = useDispatch();
     const [info, setInfo] = useState({
         username: '',
         password: ''
@@ -12,7 +12,6 @@ export default function LoginForm() {
     const handleSubmit = e => {
         e.preventDefault();
         dispatch(loginUser(info));
-        // .then(() => history.push('/'));
     };
 
     const updateValue = type => {
