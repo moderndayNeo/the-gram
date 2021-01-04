@@ -50,7 +50,7 @@ export const getFeed = () => (dispatch) =>
                 dispatch(receiveNotifications(notifications))
             })
         })
-        .catch((errors) => console.log(errors))
+        .catch((errors) => dispatch(receivePostErrors(errors)))
 
 export const likePost = (postId) => (dispatch) =>
     APIUtil.likePost(postId)
@@ -61,7 +61,7 @@ export const likePost = (postId) => (dispatch) =>
                 if (notification) dispatch(receiveNotification(notification))
             })
         })
-        .catch((errors) => console.log(errors))
+        .catch((errors) => dispatch(receivePostErrors(errors)))
 
 export const unlikePost = (postId) => (dispatch) =>
     APIUtil.unlikePost(postId)
@@ -71,22 +71,22 @@ export const unlikePost = (postId) => (dispatch) =>
                 dispatch(receivePost(post))
             })
         })
-        .catch((errors) => console.log(errors))
+        .catch((errors) => dispatch(receivePostErrors(errors)))
 
 export const savePost = (postId) =>
     APIUtil.savePost(postId)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
-        .catch((errors) => console.log(errors))
+        .catch((errors) => dispatch(receivePostErrors(errors)))
 
 export const unsavePost = (postId) =>
     APIUtil.unsavePost(postId)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
-        .catch((errors) => console.log(errors))
+        .catch((errors) => dispatch(receivePostErrors(errors)))
 
 export const deletePost = (postId) => (dispatch) =>
     APIUtil.deletePost(postId)
         .then(() => dispatch(removePost(postId)))
-        .catch((errors) => console.log(errors))
+        .catch((errors) => dispatch(receivePostErrors(errors)))
 
 export const getPost = (postId) => (dispatch) =>
     APIUtil.fetchPost(postId)

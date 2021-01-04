@@ -22,29 +22,25 @@ export const loginUser = (user) => (dispatch) =>
         .catch((errors) => dispatch(receiveSessionErrors(errors)))
 
 export const logoutUser = () => (dispatch) =>
-    APIUtil.logoutUser()
-        .then(() => dispatch(logoutCurrentUser()))
-        .catch((errors) => console.log(errors))
+    APIUtil.logoutUser().then(() => dispatch(logoutCurrentUser()))
 
 export const followUser = (userId) => (dispatch) =>
-    APIUtil.followUser(userId)
-        .then(({ data: { users, notification } }) => {
-            batch(() => {
-                dispatch(receiveUsers(users))
-                if (notification) dispatch(receiveNotification(notification))
-            })
+    APIUtil.followUser(userId).then(({ data: { users, notification } }) => {
+        batch(() => {
+            dispatch(receiveUsers(users))
+            if (notification) dispatch(receiveNotification(notification))
         })
-        .catch((errors) => console.log(errors))
+    })
 
 export const unfollowUser = (userId) => (dispatch) =>
-    APIUtil.unfollowUser(userId)
-        .then(({ data: { users } }) => dispatch(receiveUsers(users)))
-        .catch((errors) => console.log(errors))
+    APIUtil.unfollowUser(userId).then(({ data: { users } }) =>
+        dispatch(receiveUsers(users))
+    )
 
 export const fetchUsersNotFollowed = () => (dispatch) =>
-    APIUtil.fetchUsersNotFollowed()
-        .then(({ data: { users } }) => dispatch(receiveUsers(users)))
-        .catch((errors) => console.log(errors))
+    APIUtil.fetchUsersNotFollowed().then(({ data: { users } }) =>
+        dispatch(receiveUsers(users))
+    )
 
 const receiveSessionErrors = (errors) => ({
     type: RECEIVE_SESSION_ERRORS,

@@ -6,12 +6,10 @@ export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 
 export const commentOnPost = (postId, body) => (dispatch) =>
-    APIUtil.commentOnPost(postId, body)
-        .then(({ data: { post, comment } }) => {
-            dispatch(receiveComment(comment))
-            dispatch(receivePost(post))
-        })
-        .catch((errors) => console.log(errors))
+    APIUtil.commentOnPost(postId, body).then(({ data: { post, comment } }) => {
+        dispatch(receiveComment(comment))
+        dispatch(receivePost(post))
+    })
 
 export const receiveComment = (comment) => ({
     type: RECEIVE_COMMENT,
@@ -24,21 +22,21 @@ export const receiveComments = (comments) => ({
 })
 
 export const likeComment = (postId, commentId) => (dispatch) =>
-    APIUtil.likeComment(postId, commentId)
-        .then(({ data: { user, comment } }) => {
+    APIUtil.likeComment(postId, commentId).then(
+        ({ data: { user, comment } }) => {
             batch(() => {
                 dispatch(receiveCurrentUser(user))
                 dispatch(receiveComment(comment))
             })
-        })
-        .catch((errors) => console.log(errors))
+        }
+    )
 
 export const unlikeComment = (postId, commentId) => (dispatch) =>
-    APIUtil.unlikeComment(postId, commentId)
-        .then(({ data: { user, comment } }) => {
+    APIUtil.unlikeComment(postId, commentId).then(
+        ({ data: { user, comment } }) => {
             batch(() => {
                 dispatch(receiveCurrentUser(user))
                 dispatch(receiveComment(comment))
             })
-        })
-        .catch((errors) => console.log(errors))
+        }
+    )
