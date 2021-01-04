@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { updateFilter, updateUploadPageType, setEditedImage, rotateUploadedImage, fitToSquare } from '../../../redux/actions/upload_actions';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../../util/state_selectors';
 import * as Transformations from '../../../util/transformations';
 import { presetsMapping, applyPresetOnCanvas } from 'instagram-filters';
 
 export default function ImageEditor(props) {
+    const dispatch = useDispatch()
     const pageTypeSelected = useSelector(stateSelectors.uploadPageType());
     const { rotation: selectedRotation, filter: selectedFilter, fitWidth: selectedFitWidth } = useSelector(stateSelectors.imageAdjustments());
     const fitWidth = props.forceSquareImage ? true : selectedFitWidth;
@@ -81,6 +82,8 @@ const EditButton = ({ toggleFitToSquare }) => (
 
 
 const PostStyleFooter = ({ pageTypeSelected }) => {
+    const dispatch = useDispatch()
+
     return (
         <footer>
             {
@@ -119,6 +122,7 @@ const Filters = ({ selectedFilter }) => {
 };
 
 const FilterButton = (props) => {
+    const dispatch = useDispatch()
 
     return (
         <button

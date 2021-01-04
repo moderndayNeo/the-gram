@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { setOriginalImage, setImageFor } from '../../redux/actions/upload_actions';
 import stateSelectors from '../../util/state_selectors';
-import { useSelector } from 'react-redux';
-import { fetchImageFromFile} from '../../util/upload_utils';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchImageFromFile } from '../../util/upload_utils';
 
 export default function NewPostButton(props) {
+    const dispatch = useDispatch();
     const history = useHistory();
     const originalImage = useSelector(stateSelectors.originalImage());
     const newCanvas = React.useRef();

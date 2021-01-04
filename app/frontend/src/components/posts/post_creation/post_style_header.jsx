@@ -2,12 +2,13 @@ import React from 'react';
 import icons from '../../shared/icons/svg-icons';
 import { updateUser } from '../../../redux/actions/user_actions';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../../util/state_selectors';
 import { dataURItoBlob } from '../../../util/upload_utils';
 import { resetUploadState } from '../../../redux/actions/upload_actions';
 
 export default function PostStyleHeader({ imageFor }) {
+    const dispatch = useDispatch();
     const editedImage = useSelector(stateSelectors.editedImage());
     const currentUserId = useSelector(stateSelectors.currentUserId());
     const history = useHistory();
@@ -24,8 +25,8 @@ export default function PostStyleHeader({ imageFor }) {
     };
 
     const redirect = () => {
-        dispatch(resetUploadState())
-        history.push('/')
+        dispatch(resetUploadState());
+        history.push('/');
     };
 
     return (

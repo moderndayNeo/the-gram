@@ -4,12 +4,14 @@ import icons from '../shared/icons/svg-icons';
 import BottomNav from '../shared/bottom_nav';
 import UserAvatar from '../shared/user_avatar';
 import stateSelectors from '../../util/state_selectors';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateUser } from '../../redux/actions/user_actions';
 import { showEditProfilePopup } from '../../redux/actions/ui_actions';
 import NewPostButton from '../shared/new_post_button';
 
 export default function EditProfile() {
+    const dispatch = useDispatch()
+
     const history = useHistory();
     const currentUser = useSelector(stateSelectors.currentUser());
     const [hasChanged, setHasChanged] = useState(false);
@@ -72,7 +74,6 @@ export default function EditProfile() {
                         <input className="grey-input" type="text" value={info.name} placeholder="Full Name" onChange={updateValue("name")} />
                         <div className="subtext">
                             <p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name</p>
-                            {/* <p>You can only change your name twice within 14 days.</p> */}
                         </div>
                     </section>
 
