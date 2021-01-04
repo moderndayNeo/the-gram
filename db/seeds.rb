@@ -38,16 +38,14 @@ def create_users(num_users)
 end
 
 def create_posts
-  [1, 2].each do |page|
-    categories = %w( Model Sports Nature Food Beautiful Travel )
-    categories.each { |category| create_posts_by_category(category, page) }
-  end
+  categories = %w( Model Sports Restaurant Nature Food Beautiful Travel )
+  categories.each { |category| create_posts_by_category(category) }
 end
 
-def create_posts_by_category(category, page)
+def create_posts_by_category(category)
   user_ids = User.pluck :id
   client_id = Rails.application.credentials.unsplash[:client_id]
-  unsplash_url = "https://api.unsplash.com/search/photos?query=#{category}&client_id=#{client_id}&per_page=30&page=#{page}"
+  unsplash_url = "https://api.unsplash.com/search/photos?query=#{category}&client_id=#{client_id}&per_page=30&page=1"
   uri = URI(unsplash_url)
   response = Net::HTTP.get(uri)
   data = JSON.parse(response)
@@ -159,13 +157,11 @@ def create_comment_likes(num_likes)
   }
 end
 
-# create_guest_account
-# create_users(50)
-# create_posts
-# create_post_likes(4000)
-# create_comments(2400)
-
-create_comments(1500)
-create_follows(750)
-create_saves(300)
-create_comment_likes(1000)
+create_guest_account
+create_users(30)
+create_posts # 210 posts
+create_post_likes(2000)
+create_comments(600)
+create_follows(180)
+create_saves(180)
+create_comment_likes(1200)
