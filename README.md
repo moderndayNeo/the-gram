@@ -6,7 +6,7 @@
 
 A fullstack clone of Instagram. This project is designed for mobile devices; please open it on a mobile or use mobile view in your browser's devtools.
 
--   Live app: https://adamjz-the-gram.herokuapp.com/
+-   Live app: https://adamjz-the-gram.herokuapp.com
 
 ## Preview
 

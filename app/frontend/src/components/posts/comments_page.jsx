@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserAvatar from '../shared/user_avatar';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import icons from '../shared/icons/svg-icons';
 import { useParams, useHistory, Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { displayCommentModal } from '../../redux/actions/ui_actions';
 import { modifyTime } from '../../util/helpers';
 
 export default function CommentsPage() {
+    const dispatch = useDispatch();
     const currentUserImg = useSelector(stateSelectors.currentUserImageUrl());
     const [body, setBody] = useState('');
     const { postId } = useParams();
