@@ -8,6 +8,7 @@ import { commentOnPost } from '../../redux/actions/comment_actions';
 import BottomNav from '../shared/bottom_nav';
 import CommentLikeButton from './comment_like_button';
 import { displayCommentModal } from '../../redux/actions/ui_actions';
+import { modifyTime } from '../../util/helpers';
 
 export default function CommentsPage() {
     const currentUserImg = useSelector(stateSelectors.currentUserImageUrl());
@@ -79,7 +80,7 @@ const Comment = ({ comment, postId }) => {
 };
 
 const TextBlock = ({ comment }) => {
-    const timeAgo = comment.time_ago.toUpperCase();
+    const timeAgo = modifyTime(comment.time_ago);
 
     return (
         <div className="text-block">

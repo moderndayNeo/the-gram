@@ -160,8 +160,8 @@ end
 create_guest_account
 create_users(30)
 create_posts # 210 posts
-create_post_likes(2000)
+create_post_likes(4000)
 create_comments(600)
 create_follows(180)
 create_saves(180)
-create_comment_likes(1200)
+create_comment_likes(2000)
