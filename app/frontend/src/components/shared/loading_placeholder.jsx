@@ -6,8 +6,11 @@ export default function LoadingPlaceholder(props) {
         <div className="loading-placeholder">
             {
                 props.spinner ?
-                    <LoadingSpinner /> :
-                    <img src={window.cameraLoader} alt="" />
+                    <div>
+                        <img className="camera-loading-icon" src={window.cameraLoader} alt="" />
+                        <LoadingSpinner />
+                    </div> :
+                    <img className="camera-loading-icon" src={window.cameraLoader} alt="" />
             }
         </div>
     );
