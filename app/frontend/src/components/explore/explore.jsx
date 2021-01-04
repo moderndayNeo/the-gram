@@ -21,8 +21,8 @@ export default function Explore() {
         if (!usersNotFollowed.length) {
             fetchUsersNotFollowed()
                 .then(({ data: { users } }) => {
-                    dispatch(receiveUsers(users));
                     setUsersNotFollowed(Object.values(users));
+                    dispatch(receiveUsers(users));
                 });
         }
     }), [];
