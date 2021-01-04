@@ -58,3 +58,5 @@ export const unlikeComment = (postId, commentId) =>
 
 export const fetchFollowers = () =>
     axiosGetRequest(`/api/users`, { type: 'followers' })
+
+export const fetchNotifications = () => axiosGetRequest(`/api/notifications`)

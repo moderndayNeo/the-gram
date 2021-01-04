@@ -25,9 +25,6 @@ class Api::PostsController < ApplicationController
           :liked_comments
         )
 
-      # @posts = Post.all
-      # @users = User.all
-
       post_ids = @posts.pluck(:id)
       @comments = Comment
         .where(post_id: [post_ids])
