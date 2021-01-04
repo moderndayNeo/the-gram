@@ -1,7 +1,10 @@
 import React from 'react';
 import { hideCommentModal, showClipboardPopup } from '../../redux/actions/ui_actions';
+import { useDispatch } from 'react-redux';
+
 
 export default function CommentModal({ postId }) {
+    const dispatch = useDispatch();
 
     const handleCopy = () => {
         const path = (process.env.NODE_ENV === 'development') ?
