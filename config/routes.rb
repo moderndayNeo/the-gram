@@ -15,8 +15,6 @@ Rails.application.routes.draw do
     end
 
     resources :notifications, only: [:index, :create]
-    resources :hashtags, only: [:create]
-    resources :taggings, only: [:create, :destroy]
   end
 
   root "static_pages#root"

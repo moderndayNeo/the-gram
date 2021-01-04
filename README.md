@@ -1,26 +1,35 @@
 ![logo](https://github.com/moderndayNeo/the-gram/blob/master/app/assets/images/the-gram-logo.png)
 
-# README
+<img src="src/media/shield.svg">
+# The Gram
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A fullstack clone of Instagram
 
-Things you may want to cover:
+-   Live app: https://adamjz-the-gram.herokuapp.com/
 
-* Ruby version
+## Preview
 
-* System dependencies
+-- Screenshot/video here
 
-* Configuration
+# Table of contents
 
-* Database creation
+-   [Outline](#outline)
+-   [Technologies](#technologies-used)
+-   [The Code](#some-snippets-from-the-code)
 
-* Database initialization
+## Outline
 
-* How to run the test suite
+The Gram is a fullstack clone of Instagram build with a React frontend and a Rails backend API. It uses a Postresql database combined with AWS S3 for hosting images.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Technologies
 
-* Deployment instructions
+Rails 6.0.3.4
+Ruby 2.7.0
+Node v12.14.0
+Postgres (PostgreSQL) 12.5
 
-* ...
+React 17.0.1
+Redux 4.0.5
+AWS
+
+## Some Snippets From The Code
