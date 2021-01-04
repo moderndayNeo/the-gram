@@ -10,7 +10,7 @@ A fullstack clone of Instagram. This project is designed for mobile devices; ple
 
 ## Preview
 
-![video1](https://user-images.githubusercontent.com/57966028/103547905-e512a080-4e9c-11eb-8dd2-45346e63cf6e.gif)
+![gif](https://user-images.githubusercontent.com/57966028/103548689-18096400-4e9e-11eb-9e49-c60ba870d831.gif)
 
 # Table of contents
 
