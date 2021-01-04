@@ -142,9 +142,11 @@ const DatePosted = ({ post }) => (
 );
 
 const SaveIcon = ({ isSaved, postId }) => {
+    const dispatch = useDispatch();
+
     const buttonDisplayed = isSaved ?
-        <button onClick={() => unsavePost(postId)}>{icons.filledSave}</button> :
-        <button onClick={() => savePost(postId)}>{icons.unfilledSave}</button>;
+        <button onClick={() => dispatch(unsavePost(postId))}>{icons.filledSave}</button> :
+        <button onClick={() => dispatch(savePost(postId))}>{icons.unfilledSave}</button>;
 
     return buttonDisplayed;
 };

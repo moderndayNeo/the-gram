@@ -73,12 +73,12 @@ export const unlikePost = (postId) => (dispatch) =>
         })
         .catch((errors) => dispatch(receivePostErrors(errors)))
 
-export const savePost = (postId) =>
+export const savePost = (postId) => dispatch =>
     APIUtil.savePost(postId)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receivePostErrors(errors)))
 
-export const unsavePost = (postId) =>
+export const unsavePost = (postId) => dispatch =>
     APIUtil.unsavePost(postId)
         .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
         .catch((errors) => dispatch(receivePostErrors(errors)))

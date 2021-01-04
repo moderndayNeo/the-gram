@@ -1,6 +1,6 @@
 ![logo](https://github.com/moderndayNeo/the-gram/blob/master/app/assets/images/the-gram-logo.png)
 
-<img src="media/shield.svg">
+<img src="public/media/shield.svg">
 
 # The Gram
 
@@ -14,13 +14,14 @@ A fullstack clone of Instagram. This project is designed for mobile devices; ple
 
 # Table of contents
 
+-   [Design Docs](/wiki)
 -   [Outline](#outline)
 -   [Technologies](#technologies-used)
 -   [The Code](#some-snippets-from-the-code)
 
 ## Outline
 
-The Gram is a fullstack clone of Instagram build with a React frontend and a Rails backend API. It uses a PostgreSQL database combined with AWS S3 buckets for hosting images.
+The Gram is a fullstack clone of Instagram built with a React frontend and a Rails backend API. It uses a PostgreSQL database with AWS S3 buckets for image hosting.
 
 ### Features
 
@@ -35,13 +36,13 @@ If you don't feel like signing up, simply browse the app using the Guest account
 
 ## Technologies
 
-Rails 6.0.3.4
-Ruby 2.7.0
-Node v12.14.0
-Postgres (PostgreSQL) 12.5
+-   Rails 6.0.3.4
+-   Ruby 2.7.0
+-   Node v12.14.0
+-   Postgres (PostgreSQL) 12.5
 
-React 17.0.1
-Redux 4.0.5
-AWS
+-   React 17.0.1
+-   Redux 4.0.5
+-   AWS
 
 ## Some Snippets From The Code
