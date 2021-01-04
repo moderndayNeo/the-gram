@@ -14,7 +14,7 @@ A fullstack clone of Instagram. This project is designed for mobile devices; ple
 
 # Table of contents
 
--   [Design Docs](/wiki)
+-   [Design Docs](https://github.com/moderndayNeo/the-gram/wiki)
 -   [Outline](#outline)
 -   [Technologies](#technologies-used)
 -   [The Code](#some-snippets-from-the-code)
