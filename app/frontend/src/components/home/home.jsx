@@ -21,7 +21,7 @@ export default function Home() {
             {
                 posts.length > 0 ?
                     <Feed posts={posts} /> :
-                    <LoadingPlaceholder />
+                    <LoadingPlaceholder spinner={true} />
             }
             <BottomNav />
         </section>
