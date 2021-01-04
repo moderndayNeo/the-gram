@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BottomNav from '../shared/bottom_nav';
 import stateSelectors from '../../util/state_selectors';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFeed } from '../../redux/actions/post_actions';
+import { fetchNotifications } from '../../redux/actions/notification_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import UserAvatar from '../shared/user_avatar';
 import DynamicFollowButton from '../shared/dynamic_follow_button';
@@ -19,7 +19,7 @@ export default function Activity() {
     useEffect(() => {
         if (!notifications.length)
             setLoading(true);
-        dispatch(getFeed())
+        dispatch(fetchNotifications())
             .then(() => setLoading(false));
     }, []);
 
