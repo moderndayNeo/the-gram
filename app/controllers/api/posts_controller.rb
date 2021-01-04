@@ -9,7 +9,6 @@ class Api::PostsController < ApplicationController
         .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
         .newest_first
-        .limit(10)
 
       @users = User
         .where(id: [associated_user_ids])
@@ -29,8 +28,6 @@ class Api::PostsController < ApplicationController
       @comments = Comment
         .where(post_id: [post_ids])
         .includes(:author, :likes)
-
-      @notifications = current_user.notifications.newest_first
 
       return render :index
     else
