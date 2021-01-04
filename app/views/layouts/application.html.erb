@@ -6,6 +6,9 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
       <meta name="description" content="The Gram is a clone of instagram">
+      <% if Rails.env.production? %>
+        <link rel="icon" href="https://adamjz-the-gram.herokuapp.com/favicon.ico" />
+      <% end %>
       <%= csrf_meta_tags %>
       <%= csp_meta_tag %>
       <%= stylesheet_link_tag "application", media: "all" %>

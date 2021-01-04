@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from '../src/root';
 import configureStore from '../src/redux/store/store';
-import { axiosGetRequest, axiosPostRequest, axiosPutRequest, axiosDeleteRequest } from '../src/util/axios_requests';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -18,13 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.axiosGetRequest = axiosGetRequest;
-  window.axiosPostRequest = axiosPostRequest;
-  window.axiosPutRequest = axiosPutRequest;
-  window.axiosDeleteRequest = axiosDeleteRequest;
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
