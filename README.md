@@ -8,6 +8,8 @@ A fullstack clone of Instagram. This project is designed for mobile devices; ple
 
 -   Live app: https://adamjz-the-gram.herokuapp.com
 
+The Gram is hosted on the Heroku. Please allow some time for the first request to load.
+
 ## Preview
 
 ![gif](https://user-images.githubusercontent.com/57966028/103548689-18096400-4e9e-11eb-9e49-c60ba870d831.gif)
@@ -33,6 +35,12 @@ The Gram is a fullstack clone of Instagram built with a React frontend and a Rai
 -   Get notifications when another user follows your or likes one of your photos
 
 If you don't feel like signing up, simply browse the app using the Guest account.
+
+<img width="563" alt="Screen Shot 2021-01-05 at 08 29 41" src="https://user-images.githubusercontent.com/57966028/103624044-e42b4e80-4f30-11eb-87b4-3ee6ddb46810.png">
+<img width="563" alt="Screen Shot 2021-01-05 at 08 32 31" src="https://user-images.githubusercontent.com/57966028/103624055-e8f00280-4f30-11eb-97e1-1ebae47ecb5b.png">
+<img width="563" alt="Screen Shot 2021-01-05 at 08 28 19" src="https://user-images.githubusercontent.com/57966028/103624058-e9889900-4f30-11eb-843e-a63ab3b333b7.png">
+<img width="563" alt="Screen Shot 2021-01-05 at 08 29 45" src="https://user-images.githubusercontent.com/57966028/103624060-ea212f80-4f30-11eb-8ca1-5c3619019131.png">
+<img width="563" alt="Screen Shot 2021-01-05 at 08 29 50" src="https://user-images.githubusercontent.com/57966028/103624061-eab9c600-4f30-11eb-9651-f7e6788d2bb5.png">
 
 ## Technologies Used
 
