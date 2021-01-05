@@ -45,12 +45,40 @@ If you don't feel like signing up, simply browse the app using the Guest account
 -   Redux 4.0.5
 -   Node v12.14.0
 
-## Some Snippets From The Code=
+## Some Snippets From The Code
+
+#### Eliminate N+1 database queries by eager loading data appropriately
+
+```rb
+  @posts = Post
+        .where(author_id: [associated_user_ids])
+        .includes(:author, :likes, :likers)
+        .with_eager_loaded_photo
+        .newest_first
+```
+
+#### React Hooks combine with Redux hooks APIs. A useEffect restores Redux state when necessary, such as when a user refreshes a page.
+
+```js
+export default function Activity() {
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const notifications = useSelector(stateSelectors.allNotifications());
+
+    useEffect(() => {
+        if (!notifications.length)
+            setLoading(true);
+        dispatch(fetchNotifications())
+            .then(() => setLoading(false));
+    }, []);
+
+    return (
+        <div className="activity">
+```
 
 #### API functions held in a single file using axios requests I custom-made for this project.
 
 ```js
-//...
 export const followUser = (userId) =>
     axiosPostRequest(`/api/users/${userId}/follows`)
 
@@ -59,7 +87,6 @@ export const unfollowUser = (userId) =>
 
 export const savePost = (postId) =>
     axiosPostRequest(`/api/posts/${postId}/saves`)
-//...
 ```
 
 #### Custom-made axios requests attach the CSRF token to the request, allowing me to enable CSRF protection for the app.
@@ -81,25 +108,6 @@ export const createPost = (post) => (dispatch) =>
     APIUtil.createPost(post)
         .then(({ data: { post } }) => dispatch(receivePost(post)))
         .catch((errors) => dispatch(receivePostErrors(errors)))
-```
-
-#### React Hooks combine with Redux hooks APIs. A useEffect restores Redux state when necessary, such as when a user refreshes a page.
-
-```js
-export default function Activity() {
-    const [loading, setLoading] = useState(false);
-    const dispatch = useDispatch();
-    const notifications = useSelector(stateSelectors.allNotifications());
-
-    useEffect(() => {
-        if (!notifications.length)
-            setLoading(true);
-        dispatch(fetchNotifications())
-            .then(() => setLoading(false));
-    }, []);
-
-    return (
-        <div className="activity">
 ```
 
 #### Separation of concerns
@@ -126,16 +134,6 @@ export default function SignupPage() {
         </div>
     )
 }
-```
-
-#### Eliminate N+1 database queries by eager loading data appropriately
-
-```rb
-  @posts = Post
-        .where(author_id: [associated_user_ids])
-        .includes(:author, :likes, :likers)
-        .with_eager_loaded_photo
-        .newest_first
 ```
 
 #### Clear error messages returned from the server
