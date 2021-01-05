@@ -159,16 +159,3 @@ const Stats = ({ user }) => {
         </ul>
     );
 };
-
-
-
-    // if (!posts.length) {
-    //     let retrievedObject = localStorage.getItem('developmentPosts');
-    //     posts = Object.values(JSON.parse(retrievedObject));
-    // }
-
-        // localStorage.setItem('devtUser', JSON.stringify(user))
-    // if (!user) {
-    //     let retrievedObject = localStorage.getItem('devtUser');
-    //     user = JSON.parse(retrievedObject);
-    // }

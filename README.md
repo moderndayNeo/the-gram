@@ -34,7 +34,7 @@ The Gram is a fullstack clone of Instagram built with a React frontend and a Rai
 
 If you don't feel like signing up, simply browse the app using the Guest account.
 
-## Technologies
+## Technologies Used
 
 -   AWS
 -   Rails 6.0.3.4
@@ -45,14 +45,7 @@ If you don't feel like signing up, simply browse the app using the Guest account
 -   Redux 4.0.5
 -   Node v12.14.0
 
-## Some Snippets From The Code
-
--   N+1 buster
--   Separation of concerns
--   AWS
--   React hooks
--   Modern redux with hooks, thunks
--   Sass styling, variables, classes, indentation
+## Some Snippets From The Code=
 
 #### API functions held in a single file using axios requests I custom-made for this project.
 
@@ -69,7 +62,7 @@ export const savePost = (postId) =>
 //...
 ```
 
-#### Custom-made axios requests attach the CSRF token before the request is made, allowing me to enable CSRF protection for the app.
+#### Custom-made axios requests attach the CSRF token to the request, allowing me to enable CSRF protection for the app.
 
 ```js
 import axios from 'axios'
@@ -91,6 +84,7 @@ export const createPost = (post) => (dispatch) =>
 ```
 
 #### React Hooks combine with Redux hooks APIs. A useEffect restores Redux state when necessary, such as when a user refreshes a page.
+
 ```js
 export default function Activity() {
     const [loading, setLoading] = useState(false);
@@ -108,3 +102,48 @@ export default function Activity() {
         <div className="activity">
 ```
 
+#### Separation of concerns
+
+```js
+export default function SignupPage() {
+    return (
+        <div className="auth-page signup-page">
+            <MainLogo />
+            <p className="subtext">
+                Sign up to see photos and videos from your friends.
+            </p>
+            <GuestLoginButton />
+            <OrSeparator />
+            <SignupForm />
+            <SessionErrors />
+            <SignupTerms />
+            <SignupLoginLink
+                text="Have an account?"
+                linkText="Log in"
+                href="/login"
+            />
+            <AppLinks />
+        </div>
+    )
+}
+```
+
+#### Eliminate N+1 database queries by eager loading data appropriately
+
+```rb
+  @posts = Post
+        .where(author_id: [associated_user_ids])
+        .includes(:author, :likes, :likers)
+        .with_eager_loaded_photo
+        .newest_first
+```
+
+#### Clear error messages returned from the server
+
+```rb
+    if @user.username == "guest"
+      return render json: ["The guest account cannot be edited"], status: 401
+    elsif @user != current_user
+      return render json: ["Users may only edit their own account"], status: 401
+    end
+```
