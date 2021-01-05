@@ -8,7 +8,7 @@ A fullstack clone of Instagram. This project is designed for mobile devices; ple
 
 -   Live app: https://adamjz-the-gram.herokuapp.com
 
-The Gram is hosted on the Heroku. Please allow some time for the first request to load.
+The Gram is hosted on Heroku. Please allow some time for the first request to load.
 
 ## Preview
 
