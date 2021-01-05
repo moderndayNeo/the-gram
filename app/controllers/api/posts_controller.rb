@@ -9,6 +9,7 @@ class Api::PostsController < ApplicationController
         .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
         .newest_first
+        # .limit(30)
 
       @users = User
         .where(id: [associated_user_ids])

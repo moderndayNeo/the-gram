@@ -54,7 +54,7 @@ If you don't feel like signing up, simply browse the app using the Guest account
 -   Modern redux with hooks, thunks
 -   Sass styling, variables, classes, indentation
 
-### All API functions are held in a single file using axios requests I custom-made for this project.
+#### API functions held in a single file using axios requests I custom-made for this project.
 
 ```js
 //...
@@ -69,7 +69,7 @@ export const savePost = (postId) =>
 //...
 ```
 
-### Custom-made axios requests attach the CSRF token before the request is made, allowing me to use CSRF protection for the entire project.
+#### Custom-made axios requests attach the CSRF token before the request is made, allowing me to enable CSRF protection for the app.
 
 ```js
 import axios from 'axios'
@@ -81,12 +81,30 @@ export const axiosGetRequest = (url, data = null) =>
     axios({ method: 'get', url, params: data })
 ```
 
-### Redux thunks asynchronously make requests then update state
+#### Redux thunks asynchronously make requests then update state
 
 ```js
 export const createPost = (post) => (dispatch) =>
     APIUtil.createPost(post)
         .then(({ data: { post } }) => dispatch(receivePost(post)))
         .catch((errors) => dispatch(receivePostErrors(errors)))
+```
+
+#### React Hooks combine with Redux hooks APIs. A useEffect restores Redux state when necessary, such as when a user refreshes a page.
+```js
+export default function Activity() {
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const notifications = useSelector(stateSelectors.allNotifications());
+
+    useEffect(() => {
+        if (!notifications.length)
+            setLoading(true);
+        dispatch(fetchNotifications())
+            .then(() => setLoading(false));
+    }, []);
+
+    return (
+        <div className="activity">
 ```
 
