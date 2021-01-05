@@ -56,7 +56,8 @@ const SelectedPosts = ({ posts, selected }) => {
                 if (!authoredPosts.length) return <NoContentPlaceholder selected={selected} />;
                 return <GridView posts={authoredPosts} />;
             case 'feed':
-                return <FeedView posts={posts} />; // posts by author
+                const ownPosts = useSelector(stateSelectors.currentUsersPosts());
+                return <FeedView posts={ownPosts} />;
             case 'saved':
                 const savedPosts = useSelector(stateSelectors.currentUserSavedPosts());
                 if (!savedPosts.length) return <NoContentPlaceholder selected={selected} />;

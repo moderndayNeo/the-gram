@@ -6,13 +6,10 @@ class Api::PostsController < ApplicationController
 
       @posts = Post
         .where(author_id: [associated_user_ids])
-        .includes(:author, :likes, :likers)
         .with_eager_loaded_photo
+        .includes(:author, :likes, :likers)
         .newest_first
-
-
-        
-        # .limit(30)
+        .limit(30)
 
       @users = User
         .where(id: [associated_user_ids])
@@ -20,9 +17,9 @@ class Api::PostsController < ApplicationController
           :photo_attachment,
           :saves,
           :saved_posts,
-          :follows,
           :liked_posts,
           :posts,
+          :follows,
           :followers,
           :followed_users,
           :liked_comments
@@ -32,6 +29,7 @@ class Api::PostsController < ApplicationController
       @comments = Comment
         .where(post_id: [post_ids])
         .includes(:author, :likes)
+        .all
 
       return render :index
     when "new_user"
