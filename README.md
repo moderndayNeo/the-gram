@@ -8,7 +8,9 @@ A fullstack clone of Instagram. This project is designed for mobile devices; ple
 
 -   Live app: https://adamjz-the-gram.herokuapp.com
 
-The Gram is hosted on Heroku. Please allow some time for the first request to load.
+If you don't feel like signing up, simply browse the app using the Guest account.
+
+Note: The Gram is hosted on Heroku. Please allow some time for the first request to load.
 
 ## Preview
 
@@ -26,22 +28,11 @@ The Gram is hosted on Heroku. Please allow some time for the first request to lo
 
 The Gram is a fullstack clone of Instagram built with a React frontend and a Rails backend API. It uses a PostgreSQL database with AWS S3 buckets for image hosting.
 
-### Features
+## Features
 
--   Signup
--   Create posts; apply filters, cropping and rotation to photos
--   Like posts and leave comments
--   Save posts, then view your saved posts in your profile
--   Follow other users and receive a feed personalised to you
--   Get notifications when another user follows your or likes one of your photos
-
-If you don't feel like signing up, simply browse the app using the Guest account.
-
-<img width="120" alt="Screen Shot 2021-01-05 at 08 29 41" src="https://user-images.githubusercontent.com/57966028/103624044-e42b4e80-4f30-11eb-87b4-3ee6ddb46810.png">
-<img width="120" alt="Screen Shot 2021-01-05 at 08 32 31" src="https://user-images.githubusercontent.com/57966028/103624055-e8f00280-4f30-11eb-97e1-1ebae47ecb5b.png">
-<img width="120" alt="Screen Shot 2021-01-05 at 08 28 19" src="https://user-images.githubusercontent.com/57966028/103624058-e9889900-4f30-11eb-843e-a63ab3b333b7.png">
-<img width="120" alt="Screen Shot 2021-01-05 at 08 29 45" src="https://user-images.githubusercontent.com/57966028/103624060-ea212f80-4f30-11eb-8ca1-5c3619019131.png">
-<img width="120" alt="Screen Shot 2021-01-05 at 08 29 50" src="https://user-images.githubusercontent.com/57966028/103624061-eab9c600-4f30-11eb-9651-f7e6788d2bb5.png">
+|                                                                                Profile                                                                                 |                                                                                Filters                                                                                 |                                                                             Notifications                                                                              |                                                                                Discover                                                                                |                                                                              Edit Profile                                                                              |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="120" alt="Screen Shot 2021-01-05 at 08 29 41" src="https://user-images.githubusercontent.com/57966028/103624044-e42b4e80-4f30-11eb-87b4-3ee6ddb46810.png"> | <img width="120" alt="Screen Shot 2021-01-05 at 08 32 31" src="https://user-images.githubusercontent.com/57966028/103624055-e8f00280-4f30-11eb-97e1-1ebae47ecb5b.png"> | <img width="120" alt="Screen Shot 2021-01-05 at 08 28 19" src="https://user-images.githubusercontent.com/57966028/103624058-e9889900-4f30-11eb-843e-a63ab3b333b7.png"> | <img width="120" alt="Screen Shot 2021-01-05 at 08 29 45" src="https://user-images.githubusercontent.com/57966028/103624060-ea212f80-4f30-11eb-8ca1-5c3619019131.png"> | <img width="120" alt="Screen Shot 2021-01-05 at 08 29 50" src="https://user-images.githubusercontent.com/57966028/103624061-eab9c600-4f30-11eb-9651-f7e6788d2bb5.png"> |
 
 ## Technologies Used
 
@@ -54,9 +45,10 @@ If you don't feel like signing up, simply browse the app using the Guest account
 -   Redux 4.0.5
 -   Node v12.14.0
 
-
 ---
+
 # Security
+
 ## Bcrypt Hashing
 
 #### User passwords are hashed using Bcrypt, then stored as a password_digest in the database
@@ -100,7 +92,9 @@ export const axiosGetRequest = (url, data = null) =>
 ```
 
 ---
+
 ## Some Snippets From The Code
+
 #### Eliminate N+1 database queries by eager loading data appropriately
 
 ```rb
@@ -128,41 +122,6 @@ export default function Activity() {
 
     return (
         <div className="activity">
-```
-
-#### Redux thunks asynchronously make requests then update state
-
-```js
-export const createPost = (post) => (dispatch) =>
-    APIUtil.createPost(post)
-        .then(({ data: { post } }) => dispatch(receivePost(post)))
-        .catch((errors) => dispatch(receivePostErrors(errors)))
-```
-
-#### Separation of concerns
-
-```js
-export default function SignupPage() {
-    return (
-        <div className="auth-page signup-page">
-            <MainLogo />
-            <p className="subtext">
-                Sign up to see photos and videos from your friends.
-            </p>
-            <GuestLoginButton />
-            <OrSeparator />
-            <SignupForm />
-            <SessionErrors />
-            <SignupTerms />
-            <SignupLoginLink
-                text="Have an account?"
-                linkText="Log in"
-                href="/login"
-            />
-            <AppLinks />
-        </div>
-    )
-}
 ```
 
 #### Descriptive error messages returned from the server
