@@ -42,12 +42,12 @@ export const fetchPosts = () => (dispatch) =>
 
 export const getFeed = () => (dispatch) =>
     APIUtil.getFeed()
-        .then(({ data: { posts, users, comments, notifications } }) => {
+        .then(({ data: { posts, users, comments, current_user } }) => {
             batch(() => {
                 dispatch(receiveUsers(users))
                 dispatch(receivePosts(posts))
                 dispatch(receiveComments(comments))
-                dispatch(receiveNotifications(notifications))
+                dispatch(receiveCurrentUser(current_user))
             })
         })
         .catch((errors) => dispatch(receivePostErrors(errors)))
