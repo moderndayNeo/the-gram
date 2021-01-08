@@ -1,5 +1,1 @@
-json.user do
-  json.partial! "user", user: @user
-end
-
-# private user info 
+json.partial! "api/users/current_user", user: @user
