@@ -5,6 +5,8 @@ class Api::UsersController < ApplicationController
     case params[:type]
     when "explore"
       followed_users_ids = current_user.followed_users.pluck(:id)
+      followed_users_ids << current_user.id
+
       not_followed_users =
         User
           .where.not(id: [followed_users_ids])

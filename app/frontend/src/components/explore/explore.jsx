@@ -15,6 +15,11 @@ export default function Explore() {
     const [usersNotFollowed, setUsersNotFollowed] = useState([]);
     const dispatch = useDispatch();
 
+    // API call for suggested users (not followed)
+    // Listen to REDUX state,
+    // Use suggestedUsers stateSelector
+    // 
+
     useEffect(() => {
         window.scrollTo(0, 0);
 
