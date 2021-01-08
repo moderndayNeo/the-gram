@@ -1,12 +1,8 @@
 class Post < ApplicationRecord
   has_one_attached :photo
 
-  # Eager load oft-fetched associations:
-  # photo_attachment, author, likes, likers
-
   validates :author_id, presence: true
   validates :caption, length: { maximum: 2200 }
-
   validate :has_photo_attached
   scope :with_eager_loaded_photo, -> { eager_load(photo_attachment: :blob) }
   scope :newest_first, -> { order(created_at: :desc) }
@@ -26,12 +22,28 @@ class Post < ApplicationRecord
            foreign_key: :post_id,
            dependent: :destroy
 
-  # has_many :taggings,
-  #          class_name: :Tagging,
-  #          foreign_key: :post_id,
-  #          dependent: :destroy
+  def self.get_associated_details(posts)
+    post_comment_ids = []
+    associated_user_ids = []
+    post_ids = []
 
-  # has_many :hashtags, through: :taggings, source: :hashtag
+    posts.each do |post|
+      post_ids << post.id
+
+      associated_user_ids << post.author_id
+
+      post.likes.each do |like|
+        associated_user_ids << like.liker_id
+      end
+
+      post.comments.each do |comment|
+        post_comment_ids << comment.id
+        associated_user_ids << comment.author_id
+      end
+    end
+
+    return post_ids, post_comment_ids, associated_user_ids
+  end
 
   private
 
