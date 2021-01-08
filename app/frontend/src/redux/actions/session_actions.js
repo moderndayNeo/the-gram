@@ -7,7 +7,7 @@ export const RECEIVE_USERS = 'RECEIVE_USERS'
 
 export const createNewUser = (user) => (dispatch) =>
     APIUtil.createUser(user)
-        .then(({ data: { user } }) => dispatch(receiveCurrentUser(user)))
+        .then(({ data: { current_user } }) => dispatch(receiveCurrentUser(current_user)))
         .catch((errors) => dispatch(receiveSessionErrors(errors)))
 
 export const loginUser = (user) => (dispatch) =>
