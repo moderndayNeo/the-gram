@@ -51,13 +51,15 @@ export default {
         )
     },
     suggestedUsers: () => (state) => {
-        const followedUserIds = state.entities.users[
-            state.session.id
-        ].followed_user_ids.concat(state.session.id)
+        const followedUserIds =
+            state.entities.users[state.session.id].followed_user_ids
+        // .concat(state.session.id) || []
 
-        return Object.values(state.entities.users).filter(
-            (user) => !followedUserIds.includes(user.id)
-        )
+        return followedUserIds
+            ? Object.values(state.entities.users).filter(
+                  (user) => !followedUserIds.includes(user.id)
+              )
+            : []
     },
     postModalId: () => (state) => state.ui.postModal,
     commentModalPostId: () => (state) => state.ui.commentModal,

@@ -34,8 +34,8 @@ export const fetchUsersNotFollowed = () => (dispatch) =>
     APIUtil.fetchUsersNotFollowed().then(
         ({ data: { users, current_user } }) => {
             batch(() => {
-                dispatch(receiveUsers(users))
                 dispatch(receiveCurrentUser(current_user))
+                dispatch(receiveUsers(users))
             })
         }
     )
