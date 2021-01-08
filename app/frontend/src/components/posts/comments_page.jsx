@@ -86,7 +86,7 @@ const TextBlock = ({ comment }) => {
     return (
         <div className="text-block">
             <div className="author-and-body">
-                <Link className="username-link" to={`/users/1`}>{comment.author_username}</Link>
+                <Link className="username-link" to={`/users/${comment.author_id}`}>{comment.author_username}</Link>
                 <p className="body text-after-username">{comment.body}</p>
             </div>
             <div className="comment-stats">
