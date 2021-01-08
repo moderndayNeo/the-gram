@@ -50,6 +50,8 @@ export default {
             followedUserIds.includes(user.id)
         )
     },
+    followedUserIds: () => (state) =>
+        state.entities.users[state.session.id].followed_user_ids,
     suggestedUsers: () => (state) => {
         const followedUserIds =
             state.entities.users[state.session.id].followed_user_ids
@@ -60,6 +62,7 @@ export default {
               )
             : []
     },
+
     postModalId: () => (state) => state.ui.postModal,
     commentModalPostId: () => (state) => state.ui.commentModal,
     clipboardPopup: () => (state) => state.ui.clipboardPopup,
