@@ -2,34 +2,23 @@ class Api::PostsController < ApplicationController
   def index
     case params[:type]
     when "feed"
-      associated_user_ids = current_user.associated_user_ids
+      followed_user_ids = current_user.followed_users.pluck(:id)
+      followed_user_ids << current_user.id
 
       @posts = Post
-        .where(author_id: [associated_user_ids])
-        .with_eager_loaded_photo
-        .includes(:author, :likes, :likers)
+        .where(author_id: [followed_user_ids])
+        .limit(10)
         .newest_first
-        .limit(30)
+        .includes(:likes, :comments, :photo_attachment)
+
+      @post_ids, post_comment_ids, associated_user_ids = Post.get_associated_details(@posts)
+      @post_comments = Comment
+        .where(id: [post_comment_ids])
+        .includes(:likes)
 
       @users = User
         .where(id: [associated_user_ids])
-        .includes(
-          :photo_attachment,
-          :saves,
-          :saved_posts,
-          :liked_posts,
-          :posts,
-          :follows,
-          :followers,
-          :followed_users,
-          :liked_comments
-        )
-
-      post_ids = @posts.pluck(:id)
-      @comments = Comment
-        .where(post_id: [post_ids])
-        .includes(:author, :likes)
-        .all
+        .includes(:photo_attachment)
 
       return render :index
     when "new_user"
