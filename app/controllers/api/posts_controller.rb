@@ -12,13 +12,15 @@ class Api::PostsController < ApplicationController
         .includes(:likes, :comments, :photo_attachment)
 
       @post_ids, post_comment_ids, associated_user_ids = Post.get_associated_details(@posts)
-      @post_comments = Comment
+      @comments = Comment
         .where(id: [post_comment_ids])
         .includes(:likes)
 
       @users = User
         .where(id: [associated_user_ids])
         .includes(:photo_attachment)
+
+      @current_user = current_user
 
       return render :index
     when "new_user"
