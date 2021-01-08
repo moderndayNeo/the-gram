@@ -22,8 +22,6 @@ export default function Explore() {
             fetchUsersNotFollowed()
                 .then(({ data: { users, current_user } }) => {
                     setUsersNotFollowed(Object.values(users));
-                    // Why store users in state?
-                    // 
                     dispatch(receiveUsers(users));
                     dispatch(receiveCurrentUser(current_user));
                 });

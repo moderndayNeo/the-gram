@@ -106,7 +106,6 @@ class Api::UsersController < ApplicationController
     if @user.username == "guest"
       return render json: ["The guest account cannot be deleted"], status: 401
     end
-    # Note, need to seed data before adding this condition.
 
     if !@user
       render json: { errors: ["User not found"] }, status: 404
