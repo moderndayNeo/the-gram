@@ -1,37 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import BottomNav from '../shared/bottom_nav';
 import icons from '../shared/icons/svg-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import UserAvatar from '../shared/user_avatar';
-import { receiveUsers, receiveCurrentUser } from '../../redux/actions/session_actions';
+import { fetchUsersNotFollowed } from '../../redux/actions/session_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
-import { fetchUsersNotFollowed } from '../../util/api_util';
 import { substrings } from '../../util/helpers';
+import stateSelectors from '../../util/state_selectors';
 
 export default function Explore() {
     const [selected, setSelected] = useState(false);
     const [filter, setFilter] = useState('');
-    const [usersNotFollowed, setUsersNotFollowed] = useState([]);
+    const usersNotFollowed = useSelector(stateSelectors.suggestedUsers());
     const dispatch = useDispatch();
-
-    // API call for suggested users (not followed)
-    // Listen to REDUX state,
-    // Use suggestedUsers stateSelector
-    // 
 
     useEffect(() => {
         window.scrollTo(0, 0);
 
-        if (!usersNotFollowed.length) {
-            fetchUsersNotFollowed()
-                .then(({ data: { users, current_user } }) => {
-                    setUsersNotFollowed(Object.values(users));
-                    dispatch(receiveUsers(users));
-                    dispatch(receiveCurrentUser(current_user));
-                });
-        }
-    }), [];
+        if (!usersNotFollowed.length) dispatch(fetchUsersNotFollowed());
+    }, []);
 
     return (
         <div className="explore scroll-page">

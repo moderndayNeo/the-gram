@@ -6,13 +6,13 @@ export default {
     postById: (id) => (state) => state.entities.posts[id],
     userById: (id) => (state) => state.entities.users[id],
     postsByAuthorId: (id) => (state) =>
-        Object.values(state.entities.posts).filter(
-            (post) => post.author_id == id
-        ),
+        Object.values(state.entities.posts)
+            .filter((post) => post.author_id == id)
+            .reverse(),
     currentUsersPosts: () => (state) =>
-        Object.values(state.entities.posts).filter(
-            (post) => post.author_id == state.session.id
-        ),
+        Object.values(state.entities.posts)
+            .filter((post) => post.author_id == state.session.id)
+            .reverse(),
     currentUserLikedPostIds: () => (state) =>
         state.entities.users[state.session.id].liked_post_ids,
     currentUserImageUrl: () => (state) =>
@@ -25,9 +25,9 @@ export default {
         state.entities.users[state.session.id].saved_post_ids,
     currentUserSavedPosts: () => (state) => {
         let postIds = state.entities.users[state.session.id].saved_post_ids
-        return Object.values(state.entities.posts).filter((post) =>
-            postIds.includes(post.id)
-        )
+        return Object.values(state.entities.posts)
+            .filter((post) => postIds.includes(post.id))
+            .reverse()
     },
     currentUsedLikedCommentIds: () => (state) =>
         state.entities.users[state.session.id].liked_comment_ids,
@@ -50,6 +50,7 @@ export default {
             followedUserIds.includes(user.id)
         )
     },
+    usersNotFollowed: () => (state) => {},
     followedUserIds: () => (state) =>
         state.entities.users[state.session.id].followed_user_ids,
     suggestedUsers: () => (state) => {
