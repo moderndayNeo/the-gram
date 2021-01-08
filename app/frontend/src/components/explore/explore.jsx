@@ -4,7 +4,7 @@ import icons from '../shared/icons/svg-icons';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import UserAvatar from '../shared/user_avatar';
-import { receiveUsers } from '../../redux/actions/session_actions';
+import { receiveUsers, receiveCurrentUser } from '../../redux/actions/session_actions';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import { fetchUsersNotFollowed } from '../../util/api_util';
 import { substrings } from '../../util/helpers';
@@ -20,9 +20,12 @@ export default function Explore() {
 
         if (!usersNotFollowed.length) {
             fetchUsersNotFollowed()
-                .then(({ data: { users } }) => {
+                .then(({ data: { users, current_user } }) => {
                     setUsersNotFollowed(Object.values(users));
+                    // Why store users in state?
+                    // 
                     dispatch(receiveUsers(users));
+                    dispatch(receiveCurrentUser(current_user));
                 });
         }
     }), [];
