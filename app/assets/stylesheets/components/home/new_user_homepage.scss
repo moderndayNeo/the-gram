@@ -1,0 +1,19 @@
+.new-user-homepage {
+    header {
+        height: 110px;
+        flex-direction: column;
+        padding: 24px 32px;
+        margin-top: 8px;
+        border-bottom: none;
+
+        h2 {
+            font-weight: 300;
+            margin: 0;
+        }
+
+        p {
+            text-align: center;
+            color: var(--dark-grey);
+        }
+    }
+}

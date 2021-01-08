@@ -3,9 +3,9 @@ import SuggestedUsersList from '../shared/suggested_users_list';
 
 export default function NewUserHomepage() {
     return (
-        <div className="new-user-homepage">
+        <div className="new-user-homepage user-list-page scroll-page">
             <header>
-                <h3>Welcome to The Gram</h3>
+                <h2>Welcome to The Gram</h2>
                 <p>When you follow people, you'll see the photos and videos they post here</p>
             </header>
 
