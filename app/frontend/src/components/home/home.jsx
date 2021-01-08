@@ -13,12 +13,12 @@ export default function Home() {
 
     React.useEffect(() => {
         if (!posts.length) {
-            dispatch(getFeed())
-                .then(() => {
-                    if (!posts.length) {
-                        dispatch(getNewUserFeed());
-                    }
-                });
+            dispatch(getFeed());
+            // .then(() => {
+            // if (!posts.length) {
+            // dispatch(getNewUserFeed());
+            // }
+            // });
         }
     }, []);
 
