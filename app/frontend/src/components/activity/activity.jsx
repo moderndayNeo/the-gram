@@ -12,7 +12,7 @@ import { modifyTime } from '../../util/helpers';
 import { Link } from 'react-router-dom';
 
 export default function Activity() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const notifications = useSelector(stateSelectors.allNotifications());
 

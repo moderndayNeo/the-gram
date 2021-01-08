@@ -1,5 +1,5 @@
 import * as APIUtil from '../../util/api_util'
-import { receiveUsers } from './session_actions'
+import { receiveCurrentUser, receiveUsers } from './session_actions'
 import { receivePosts } from './post_actions'
 import { batch } from 'react-redux'
 
@@ -17,9 +17,10 @@ export const receiveNotifications = (notifications) => ({
 
 export const fetchNotifications = () => (dispatch) =>
     APIUtil.fetchNotifications().then(
-        ({ data: { notifications, users, posts } }) => {
+        ({ data: { notifications, users, posts, current_user } }) => {
             batch(() => {
                 dispatch(receiveUsers(users))
+                dispatch(receiveCurrentUser(current_user))
                 dispatch(receivePosts(posts))
                 dispatch(receiveNotifications(notifications))
             })
