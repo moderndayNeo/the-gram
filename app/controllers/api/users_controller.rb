@@ -7,18 +7,9 @@ class Api::UsersController < ApplicationController
       followed_users_ids = current_user.followed_users.pluck(:id)
       not_followed_users =
         User
-          .where.not(id: followed_users_ids)
-          .includes(
-            :photo_attachment,
-            :saves,
-            :saved_posts,
-            :follows,
-            :liked_posts,
-            :posts,
-            :followers,
-            :followed_users,
-            :liked_comments
-          )
+          .where.not(id: [followed_users_ids])
+          .includes(:photo_attachment)
+          .limit(30)
 
       @users = not_followed_users
       render :index
@@ -26,17 +17,7 @@ class Api::UsersController < ApplicationController
       follower_ids = current_user.followers.pluck(:id)
       @users = User
         .where(id: follower_ids)
-        .includes(
-          :photo_attachment,
-          :saves,
-          :saved_posts,
-          :follows,
-          :liked_posts,
-          :posts,
-          :followers,
-          :followed_users,
-          :liked_comments
-        )
+        .includes(:photo_attachment)
 
       render :index
     else

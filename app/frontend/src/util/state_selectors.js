@@ -55,10 +55,13 @@ export default {
     suggestedUsers: () => (state) => {
         const followedUserIds =
             state.entities.users[state.session.id].followed_user_ids
+        const currentUserId = state.session.id
 
         return followedUserIds
             ? Object.values(state.entities.users).filter(
-                  (user) => !followedUserIds.includes(user.id)
+                  (user) =>
+                      !followedUserIds.includes(user.id) &&
+                      user.id !== currentUserId
               )
             : []
     },

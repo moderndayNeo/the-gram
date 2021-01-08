@@ -8,12 +8,13 @@ import LoadingPlaceholder from './loading_placeholder';
 export default function SuggestedUsersList() {
     const dispatch = useDispatch();
     const suggestedUsers = useSelector(stateSelectors.suggestedUsers());
+    
 
     useEffect(() => {
         dispatch(fetchSuggestedUsers());
     }, []);
 
-    return suggestedUsers.length > 0 ?
+    return suggestedUsers.length > 1 ?
         <ul className="user-list">
             {
                 suggestedUsers.map(user => (
