@@ -9,16 +9,17 @@ class Api::PostsController < ApplicationController
         .where(author_id: [followed_user_ids])
         .limit(10)
         .newest_first
-        .includes(:likes, :comments, :photo_attachment)
+        .includes(:likes, :likers, :comments, :author)
+        .with_eager_loaded_photo
 
       @post_ids, post_comment_ids, associated_user_ids = Post.get_associated_details(@posts)
       @comments = Comment
         .where(id: [post_comment_ids])
-        .includes(:likes)
+        .includes(:likes, :author)
 
       @users = User
         .where(id: [associated_user_ids])
-        .includes(:photo_attachment)
+        .with_eager_loaded_photo
 
       @current_user = current_user
 
