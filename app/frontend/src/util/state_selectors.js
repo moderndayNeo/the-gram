@@ -13,6 +13,14 @@ export default {
         Object.values(state.entities.posts)
             .filter((post) => post.author_id == state.session.id)
             .reverse(),
+    postsSavedByUser: (id) => (state) => {
+        const savedPostIds = state.entities.users[id].saved_post_ids
+        if (!savedPostIds) return []
+
+        return Object.values(state.entities.posts)
+            .filter((post) => savedPostIds.includes(post.id))
+            .reverse()
+    },
     currentUserLikedPostIds: () => (state) =>
         state.entities.users[state.session.id].liked_post_ids,
     currentUserImageUrl: () => (state) =>
@@ -25,6 +33,7 @@ export default {
         state.entities.users[state.session.id].saved_post_ids,
     currentUserSavedPosts: () => (state) => {
         let postIds = state.entities.users[state.session.id].saved_post_ids
+
         return Object.values(state.entities.posts)
             .filter((post) => postIds.includes(post.id))
             .reverse()

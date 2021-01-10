@@ -39,7 +39,7 @@ const SelectedProfile = ({ userId, currentUser, posts }) => {
 
 };
 
-const OwnProfile = ({ user, posts }) => {
+const OwnProfile = ({ user }) => {
     const [optionsModal, setOptionsModal] = useState(false);
 
     return (
@@ -52,24 +52,15 @@ const OwnProfile = ({ user, posts }) => {
                 <ImageAndName user={user} isOwnProfile={true} />
                 <Bio user={user} />
                 <Stats user={user} />
-                <PostCollections user={user} isOwnProfile={true} posts={posts} />
+                <PostCollections isOwnProfile={true} user={user} />
             </main>
             <BottomNav />
         </div>
     );
 };
 
-
-
-const ForeignProfile = ({ user, posts }) => {
+const ForeignProfile = ({ user }) => {
     const history = useHistory();
-
-    if (user) {
-        localStorage.setItem('devtUser', JSON.stringify(user));
-    } else {
-        let retrievedObject = localStorage.getItem('devtUser');
-        user = JSON.parse(retrievedObject);
-    }
 
     return (
         <div className="foreign-profile">
@@ -77,9 +68,7 @@ const ForeignProfile = ({ user, posts }) => {
                 <div onClick={() => history.goBack()}>
                     {icons.chevron}
                 </div>
-                <p>
-                    {user.username}
-                </p>
+                <p>{user.username}</p>
                 <div className="blank-div"></div>
             </header>
 
@@ -87,7 +76,7 @@ const ForeignProfile = ({ user, posts }) => {
                 <ImageAndName user={user} isOwnProfile={false} />
                 <Bio user={user} />
                 <Stats user={user} />
-                <PostCollections user={user} isOwnProfile={false} posts={posts} />
+                <PostCollections isOwnProfile={false} user={user} />
             </main>
             <BottomNav />
         </div>

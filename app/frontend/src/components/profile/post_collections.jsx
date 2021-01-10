@@ -6,7 +6,7 @@ import icons from '../shared/icons/svg-icons';
 import Post from '../posts/post';
 
 
-export default function PostCollections({ isOwnProfile, posts }) {
+export default function PostCollections({ isOwnProfile, user }) {
     const [selected, setSelected] = useState('posts');
 
     return (
@@ -16,7 +16,7 @@ export default function PostCollections({ isOwnProfile, posts }) {
                 selected={selected}
                 setSelected={setSelected} />
             <SelectedPosts
-                posts={posts}
+                user={user}
                 selected={selected}
             />
         </div>
@@ -46,28 +46,30 @@ const PostSelectorButtons = ({ isOwnProfile, selected, setSelected }) => {
     );
 };
 
-const SelectedPosts = ({ posts, selected }) => {
+const SelectedPosts = ({ selected, user }) => {
     const contentDisplayed = () => {
-        if (!posts.length) return <NoContentPlaceholder selected={selected} />;
 
         switch (selected) {
             case 'posts':
-                const authoredPosts = useSelector(stateSelectors.currentUsersPosts());
+                let authoredPosts = useSelector(stateSelectors.postsByAuthorId(user.id));
                 if (!authoredPosts.length) return <NoContentPlaceholder selected={selected} />;
                 return <GridView posts={authoredPosts} />;
             case 'feed':
-                const ownPosts = useSelector(stateSelectors.currentUsersPosts());
-                return <FeedView posts={ownPosts} />;
+                authoredPosts = useSelector(stateSelectors.postsByAuthorId(user.id));
+                if (!authoredPosts.length) return <NoContentPlaceholder selected={selected} />;
+                return <FeedView posts={authoredPosts} />;
             case 'saved':
-                const savedPosts = useSelector(stateSelectors.currentUserSavedPosts());
+                const savedPosts = useSelector(stateSelectors.postsSavedByUser(user.id));
                 if (!savedPosts.length) return <NoContentPlaceholder selected={selected} />;
                 return <div>
                     <div className="saved-posts-message">Only you can see what you've saved</div>
                     <GridView posts={savedPosts} />
                 </div>;
             case 'tagged':
+                const taggedPosts = [];
+                if (!taggedPosts.length) return <NoContentPlaceholder selected={selected} />;
                 return <GridView
-                    posts={posts}
+                    posts={taggedPosts}
                 />;
         }
     };
