@@ -11,12 +11,13 @@ import { getPost } from '../../redux/actions/post_actions';
 export default function PostShow() {
     const [loading, setLoading] = useState(true);
     const history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const { postId } = useParams();
     const post = useSelector(stateSelectors.postById(postId));
+    const author = post ? useSelector(stateSelectors.userById(post.author_id)) : null;
 
     React.useEffect(() => {
-        if (!post) {
+        if (!post || !author) {
             setLoading(true);
             dispatch(getPost(postId))
                 .then(() => setLoading(false));
@@ -34,7 +35,8 @@ export default function PostShow() {
                 <h3>Photo</h3>
                 <div></div>
             </header>
-            {loading ? <LoadingPlaceholder /> : <Post post={post} />}
+
+            {!author ? <LoadingPlaceholder /> : <Post post={post} />}
             <BottomNav />
         </div>
     );

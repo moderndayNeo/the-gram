@@ -8,10 +8,9 @@ import PostFooter from './post_footer';
 import { likePost } from '../../redux/actions/post_actions';
 import { displayPostModal } from '../../redux/actions/ui_actions';
 
-
 export default function Post({ post }) {
     const history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     React.useEffect(() => {
         if (!post) history.push('/');
@@ -49,7 +48,7 @@ export default function Post({ post }) {
 }
 
 const PostHeader = ({ post, displayPostModal, author }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     return (
         <header className="post-header">

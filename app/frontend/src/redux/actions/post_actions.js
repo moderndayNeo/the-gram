@@ -6,6 +6,7 @@ import {
     receiveNotification,
     receiveNotifications,
 } from './notification_actions'
+import { receiveUser } from './user_actions'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const DELETE_POST = 'DELETE_POST'
@@ -90,7 +91,12 @@ export const deletePost = (postId) => (dispatch) =>
 
 export const getPost = (postId) => (dispatch) =>
     APIUtil.fetchPost(postId)
-        .then(({ data: { post } }) => dispatch(receivePost(post)))
+        .then(({ data: { post, user } }) => {
+            batch(() => {
+                dispatch(receivePost(post))
+                dispatch(receiveUser(user))
+            })
+        })
         .catch((errors) => dispatch(receivePostErrors(errors)))
 
 export const getNewUserFeed = () => (dispatch) =>
