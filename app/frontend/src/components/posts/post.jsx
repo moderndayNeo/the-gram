@@ -25,7 +25,6 @@ export default function Post({ post }) {
     const isSaved = savedPostIds.includes(id);
     const isLiked = likedPostIds.includes(id);
 
-
     return (
         <article className="post">
             <PostHeader

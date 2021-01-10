@@ -5,22 +5,24 @@ import stateSelectors from '../../util/state_selectors';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import icons from '../shared/icons/svg-icons';
 import UserAvatar from '../shared/user_avatar';
-import { getFeed } from '../../redux/actions/post_actions';
 import DynamicFollowButton from '../shared/dynamic_follow_button';
 import PostCollections from './post_collections';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import OptionsModal from './options_modal';
+import { fetchUserProfileData } from '../../redux/actions/user_actions';
 
 export default function Profile() {
     const dispatch = useDispatch();
     const currentUser = useSelector(stateSelectors.currentUser());
+    const posts = useSelector(stateSelectors.allPosts());
     const { userId } = useParams();
-    let posts = useSelector(stateSelectors.allPosts());
 
     useEffect(() => {
-        if (!posts.length) {
-            dispatch(getFeed());
-        }
+        // if (!posts.length) {
+
+        // dispatch(getFeed());
+        // }
+        dispatch(fetchUserProfileData(userId));
     }, []);
 
     return <SelectedProfile userId={userId} currentUser={currentUser} posts={posts} />;
@@ -30,11 +32,11 @@ const SelectedProfile = ({ userId, currentUser, posts }) => {
     if (!posts.length) {
         return <LoadingPlaceholder />;
     } else if (currentUser.id == userId) {
-        return <OwnProfile user={currentUser} posts={posts} />;
+        return <OwnProfile user={currentUser} />;
     }
     else {
         const otherUser = useSelector(stateSelectors.userById(userId));
-        return <ForeignProfile user={otherUser} posts={posts} />;
+        return <ForeignProfile user={otherUser} />;
     }
 
 };

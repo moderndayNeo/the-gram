@@ -112,6 +112,13 @@ class User < ApplicationRecord
     associated_user_ids
   end
 
+  def associated_posts
+    associated_posts = []
+    associated_posts.concat(self.saved_posts)
+    associated_posts.concat(self.posts)
+    associated_posts.uniq
+  end
+
   private
 
   def ensure_session_token

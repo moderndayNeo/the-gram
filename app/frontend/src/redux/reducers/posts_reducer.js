@@ -6,16 +6,18 @@ import {
 
 export default (state = {}, action) => {
     Object.freeze(state)
+    let nextState
 
     switch (action.type) {
         case RECEIVE_POSTS:
-            return Object.assign({}, state, action.posts)
+            nextState = { ...state, ...action.posts }
+            return nextState
 
         case RECEIVE_POST:
             return Object.assign({}, state, { [action.post.id]: action.post })
 
         case DELETE_POST:
-            let nextState = Object.assign({}, state)
+            nextState = Object.assign({}, state)
             delete nextState[action.postId]
             return nextState
 
@@ -23,4 +25,3 @@ export default (state = {}, action) => {
             return state
     }
 }
-

@@ -1,5 +1,6 @@
 import { batch } from 'react-redux'
 import * as APIUtil from '../../util/api_util'
+import { receivePosts } from './post_actions'
 import { receiveUsers, receiveCurrentUser } from './session_actions'
 export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS'
 export const RECEIVE_USER = 'RECEIVE_USER'
@@ -36,7 +37,22 @@ export const updatePassword = (userId, passwords) => (dispatch) =>
         )
         .catch((errors) => dispatch(receiveUserErrors(errors)))
 
+export const fetchUserProfileData = (userId) => (dispatch) =>
+    APIUtil.fetchUserProfileData(userId)
+        .then(({ data: { current_user, posts } }) => {
+            batch(() => {
+                dispatch(receiveUser(current_user))
+                dispatch(receivePosts(posts))
+            })
+        })
+        .catch((errors) => dispatch(receiveUserErrors(errors)))
+
 const receiveUserErrors = (errors) => ({
     type: RECEIVE_USER_ERRORS,
     errors,
+})
+
+const receiveUser = user => ({
+    type: RECEIVE_USER,
+    user
 })

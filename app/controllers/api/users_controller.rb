@@ -28,17 +28,9 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
-    # @posts = @user.posts
-    # render :show
-
-    # if @user.id !== current_user.id
-    #     render json: { errors: "You cannot view another user's information" }, status: 401
-    # else
-    #     render :show
-    # end
-
-    # can render private user info if requested user id is current_user's id
+    @user = User.find(params[:id])
+    @posts = @user.associated_posts
+    render :show
   end
 
   def create

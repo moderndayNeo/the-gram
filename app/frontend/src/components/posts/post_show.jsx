@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import stateSelectors from '../../util/state_selectors';
 import Post from './post';
 import icons from '../shared/icons/svg-icons';
@@ -11,6 +11,7 @@ import { getPost } from '../../redux/actions/post_actions';
 export default function PostShow() {
     const [loading, setLoading] = useState(true);
     const history = useHistory();
+    const dispatch = useDispatch()
     const { postId } = useParams();
     const post = useSelector(stateSelectors.postById(postId));
 
