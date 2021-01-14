@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Feed from '../posts/feed';
 import HomeTopNav from './home_top_nav';
 import BottomNav from '../shared/bottom_nav';
-import { getFeed, getNewUserFeed } from '../../redux/actions/post_actions';
+import { getFeed } from '../../redux/actions/post_actions';
 import stateSelectors from '../../util/state_selectors';
 import LoadingPlaceholder from '../shared/loading_placeholder';
 import NewUserHomepage from './new_user_homepage';
