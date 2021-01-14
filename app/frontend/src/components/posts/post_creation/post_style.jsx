@@ -4,7 +4,7 @@ import stateSelectors from '../../../util/state_selectors';
 import PostStyleHeader from './post_style_header';
 import ImageEditor from './image_editor';
 import { useHistory } from 'react-router-dom';
-import LoadingPlaceholder from '../../shared/loading_placeholder'
+import LoadingPlaceholder from '../../shared/loading_placeholder';
 
 
 export default function PostStyle() {

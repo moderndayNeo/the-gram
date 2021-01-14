@@ -7,7 +7,7 @@ import { createPost } from '../../../redux/actions/post_actions';
 import stateSelectors from '../../../util/state_selectors';
 import { dataURItoBlob } from '../../../util/upload_utils';
 import { beginUpload } from '../../../redux/actions/upload_actions';
-import LoadingPlaceholder from '../../shared/loading_placeholder'
+import LoadingPlaceholder from '../../shared/loading_placeholder';
 
 export default function PostDetails() {
     const [caption, setCaption] = useState('');
