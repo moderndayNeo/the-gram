@@ -4,9 +4,9 @@
 
 # The Gram
 
-A fullstack clone of Instagram. This project is designed for mobile devices; please open it on a mobile or use mobile view in your browser's devtools.
+A fullstack reproduction of Instagram. This project is designed for mobile devices; please open it on a mobile or use mobile view in your browser's devtools.
 
--   Live app: https://adamjz-the-gram.herokuapp.com
+-   Access The Gram: https://adamjz-the-gram.herokuapp.com
 
 If you don't feel like signing up, simply browse the app using the Guest account.
 
@@ -26,7 +26,7 @@ Note: The Gram is hosted on Heroku. Please allow some time for the first request
 
 ## Outline
 
-The Gram is a fullstack clone of Instagram built with a React frontend and a Rails backend API. It uses a PostgreSQL database with AWS S3 buckets for image hosting.
+The Gram is a fullstack reproduction of Instagram built with a React frontend and a Rails backend API. It uses a PostgreSQL database with AWS S3 buckets for image hosting.
 
 ## Features
 
@@ -79,7 +79,7 @@ export const savePost = (postId) =>
     axiosPostRequest(`/api/posts/${postId}/saves`)
 ```
 
-#### Custom-made axios requests attach the CSRF token to the request, allowing me to enable CSRF protection for the app.
+#### Custom-made axios requests attach the CSRF token to the request, allowing me to enable CSRF protection for The Gram.
 
 ```js
 import axios from 'axios'
