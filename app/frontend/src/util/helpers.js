@@ -33,6 +33,6 @@ export const modifyTime = (time) => {
     ) {
         return digit ? `${digit}s` : `1s`
     } else {
-        return 'not working'
+        return ''
     }
 }
