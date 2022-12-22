@@ -6,7 +6,7 @@
 
 A fullstack reproduction of Instagram. This project is designed for mobile devices; please open it on a mobile or use mobile view in your browser's devtools.
 
--   Access The Gram: https://adamjz-the-gram.herokuapp.com
+-   Access The Gram: https://adamjz-the-gram.herokuapp.com ⛔️ Update 22/12/22 The Gram is deployed on Heroku. As Heroku have deprecated some core features of their free tier, The Gram is no longer accessible ⛔️
 
 If you don't feel like signing up, simply browse the app using the Guest account.
 
